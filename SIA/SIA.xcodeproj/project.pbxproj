@@ -7,8 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		690036EE20A9CB4F0007E825 /* TPULoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 690036ED20A9CB4F0007E825 /* TPULoginViewController.swift */; };
+		699BDAF520A2EB870088E0E9 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699BDAF420A2EB870088E0E9 /* UIViewExtension.swift */; };
+		699BDAF720A2EDEF0088E0E9 /* MCLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699BDAF620A2EDEF0088E0E9 /* MCLoginViewController.swift */; };
+		699BDAF920A308D00088E0E9 /* EPLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699BDAF820A308D00088E0E9 /* EPLoginViewController.swift */; };
+		699BDAFB20A334130088E0E9 /* SECUserLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699BDAFA20A334130088E0E9 /* SECUserLoginViewController.swift */; };
 		69BBE8DD209B0A69008F1913 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69BBE8DC209B0A69008F1913 /* AppDelegate.swift */; };
-		69BBE8DF209B0A69008F1913 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69BBE8DE209B0A69008F1913 /* ViewController.swift */; };
 		69BBE8E2209B0A69008F1913 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69BBE8E0209B0A69008F1913 /* Main.storyboard */; };
 		69BBE8E5209B0A69008F1913 /* SIA.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 69BBE8E3209B0A69008F1913 /* SIA.xcdatamodeld */; };
 		69BBE8E7209B0A69008F1913 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 69BBE8E6209B0A69008F1913 /* Assets.xcassets */; };
@@ -45,6 +49,12 @@
 		69BBE94C209B0F34008F1913 /* TestMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69BBE948209B0F34008F1913 /* TestMain.swift */; };
 		69BBE94D209B0F34008F1913 /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69BBE949209B0F34008F1913 /* AppConstants.swift */; };
 		69BBE94F209B11AF008F1913 /* NoInternetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69BBE94E209B11AF008F1913 /* NoInternetViewController.swift */; };
+		69BC0ABF20AC39DD00560AB6 /* IDDLogin1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69BC0ABE20AC39DD00560AB6 /* IDDLogin1ViewController.swift */; };
+		69BC0AC120AC3D6A00560AB6 /* IDDLogin2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69BC0AC020AC3D6A00560AB6 /* IDDLogin2ViewController.swift */; };
+		69E814FB20A45C4B0076A118 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E814FA20A45C4B0076A118 /* ForgotPasswordViewController.swift */; };
+		69E814FD20A460AB0076A118 /* SECForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E814FC20A460AB0076A118 /* SECForgotPasswordViewController.swift */; };
+		69E814FF20A47A240076A118 /* TPUForgotUsernameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E814FE20A47A240076A118 /* TPUForgotUsernameViewController.swift */; };
+		69E8150120A47C630076A118 /* TPUForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E8150020A47C630076A118 /* TPUForgotPasswordViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,9 +75,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		690036ED20A9CB4F0007E825 /* TPULoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TPULoginViewController.swift; sourceTree = "<group>"; };
+		699BDAF420A2EB870088E0E9 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
+		699BDAF620A2EDEF0088E0E9 /* MCLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCLoginViewController.swift; sourceTree = "<group>"; };
+		699BDAF820A308D00088E0E9 /* EPLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EPLoginViewController.swift; sourceTree = "<group>"; };
+		699BDAFA20A334130088E0E9 /* SECUserLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SECUserLoginViewController.swift; sourceTree = "<group>"; };
 		69BBE8D9209B0A69008F1913 /* SIA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SIA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		69BBE8DC209B0A69008F1913 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		69BBE8DE209B0A69008F1913 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		69BBE8E1209B0A69008F1913 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		69BBE8E4209B0A69008F1913 /* SIA.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SIA.xcdatamodel; sourceTree = "<group>"; };
 		69BBE8E6209B0A69008F1913 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -109,6 +123,12 @@
 		69BBE948209B0F34008F1913 /* TestMain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestMain.swift; sourceTree = "<group>"; };
 		69BBE949209B0F34008F1913 /* AppConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
 		69BBE94E209B11AF008F1913 /* NoInternetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoInternetViewController.swift; sourceTree = "<group>"; };
+		69BC0ABE20AC39DD00560AB6 /* IDDLogin1ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDDLogin1ViewController.swift; sourceTree = "<group>"; };
+		69BC0AC020AC3D6A00560AB6 /* IDDLogin2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDDLogin2ViewController.swift; sourceTree = "<group>"; };
+		69E814FA20A45C4B0076A118 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
+		69E814FC20A460AB0076A118 /* SECForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SECForgotPasswordViewController.swift; sourceTree = "<group>"; };
+		69E814FE20A47A240076A118 /* TPUForgotUsernameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TPUForgotUsernameViewController.swift; sourceTree = "<group>"; };
+		69E8150020A47C630076A118 /* TPUForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TPUForgotPasswordViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,7 +186,6 @@
 				69BBE912209B0DEC008F1913 /* Utilities */,
 				69BBE913209B0E03008F1913 /* Views */,
 				69BBE8DC209B0A69008F1913 /* AppDelegate.swift */,
-				69BBE8DE209B0A69008F1913 /* ViewController.swift */,
 				69BBE8E6209B0A69008F1913 /* Assets.xcassets */,
 				69BBE8EB209B0A69008F1913 /* Info.plist */,
 				69BBE8E3209B0A69008F1913 /* SIA.xcdatamodeld */,
@@ -221,6 +240,16 @@
 			isa = PBXGroup;
 			children = (
 				69BBE94E209B11AF008F1913 /* NoInternetViewController.swift */,
+				699BDAF620A2EDEF0088E0E9 /* MCLoginViewController.swift */,
+				699BDAF820A308D00088E0E9 /* EPLoginViewController.swift */,
+				699BDAFA20A334130088E0E9 /* SECUserLoginViewController.swift */,
+				69E814FA20A45C4B0076A118 /* ForgotPasswordViewController.swift */,
+				69E814FC20A460AB0076A118 /* SECForgotPasswordViewController.swift */,
+				69E814FE20A47A240076A118 /* TPUForgotUsernameViewController.swift */,
+				69E8150020A47C630076A118 /* TPUForgotPasswordViewController.swift */,
+				690036ED20A9CB4F0007E825 /* TPULoginViewController.swift */,
+				69BC0ABE20AC39DD00560AB6 /* IDDLogin1ViewController.swift */,
+				69BC0AC020AC3D6A00560AB6 /* IDDLogin2ViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -230,6 +259,7 @@
 			children = (
 				69BBE915209B0EBE008F1913 /* DesignableUITextField.swift */,
 				69BBE914209B0EBE008F1913 /* UITextFieldExtension.swift */,
+				699BDAF420A2EB870088E0E9 /* UIViewExtension.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -329,7 +359,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0920;
-				LastUpgradeCheck = 0920;
+				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = "Piyush Panchal";
 				TargetAttributes = {
 					69BBE8D8209B0A69008F1913 = {
@@ -418,20 +448,30 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				699BDAF520A2EB870088E0E9 /* UIViewExtension.swift in Sources */,
 				69BBE917209B0EBE008F1913 /* DesignableUITextField.swift in Sources */,
+				69E814FD20A460AB0076A118 /* SECForgotPasswordViewController.swift in Sources */,
 				69BBE945209B0F20008F1913 /* LocationDetails.swift in Sources */,
+				69BC0AC120AC3D6A00560AB6 /* IDDLogin2ViewController.swift in Sources */,
 				69BBE943209B0F20008F1913 /* UserDetails.swift in Sources */,
 				69BBE94F209B11AF008F1913 /* NoInternetViewController.swift in Sources */,
-				69BBE8DF209B0A69008F1913 /* ViewController.swift in Sources */,
 				69BBE94B209B0F34008F1913 /* ValidationUtils.swift in Sources */,
+				699BDAFB20A334130088E0E9 /* SECUserLoginViewController.swift in Sources */,
+				69E814FB20A45C4B0076A118 /* ForgotPasswordViewController.swift in Sources */,
+				690036EE20A9CB4F0007E825 /* TPULoginViewController.swift in Sources */,
 				69BBE944209B0F20008F1913 /* APIResponseMessage.swift in Sources */,
 				69BBE94A209B0F34008F1913 /* ApplicationUtils.swift in Sources */,
 				69BBE941209B0F20008F1913 /* SearchDVIRDetailsResponse.swift in Sources */,
+				69E814FF20A47A240076A118 /* TPUForgotUsernameViewController.swift in Sources */,
 				69BBE942209B0F20008F1913 /* Pagination.swift in Sources */,
+				69E8150120A47C630076A118 /* TPUForgotPasswordViewController.swift in Sources */,
+				699BDAF920A308D00088E0E9 /* EPLoginViewController.swift in Sources */,
 				69BBE916209B0EBE008F1913 /* UITextFieldExtension.swift in Sources */,
+				69BC0ABF20AC39DD00560AB6 /* IDDLogin1ViewController.swift in Sources */,
 				69BBE8DD209B0A69008F1913 /* AppDelegate.swift in Sources */,
 				69BBE94D209B0F34008F1913 /* AppConstants.swift in Sources */,
 				69BBE94C209B0F34008F1913 /* TestMain.swift in Sources */,
+				699BDAF720A2EDEF0088E0E9 /* MCLoginViewController.swift in Sources */,
 				69BBE8E5209B0A69008F1913 /* SIA.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -501,6 +541,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -508,6 +549,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -535,12 +577,13 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -558,6 +601,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -565,6 +609,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -586,10 +631,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.0;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
