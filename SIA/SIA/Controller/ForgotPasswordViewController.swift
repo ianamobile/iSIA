@@ -50,8 +50,137 @@ class ForgotPasswordViewController: UIViewController, UITextFieldDelegate {
         dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func SubmitOnButtonTapped(_ sender: Any) {
+    func validateForgotPasswordFields() -> String {
         
+        var retMsg : String = ""
+        
+        if vu.isNotEmptyString(stringToCheck: txtScac.text!)
+        {
+            //both are not empty case
+            if !txtScac.text!.isCharactersOnly
+            {
+                retMsg = "SCAC should contains characters only."
+                
+            }else if txtScac.text!.count < 4
+            {
+                retMsg = "SCAC should be 4 characters long."
+            }
+            
+        }else
+        {
+            retMsg = "Please enter scac code."
+        }
+        return retMsg
+    }
+    @IBAction func SubmitOnButtonTapped(_ sender: Any) {
+        if txtScac.isFirstResponder
+        {
+            txtScac.resignFirstResponder();
+        }
+        
+        let resMsg : String = validateForgotPasswordFields()
+        if !au.isInternetAvailable() {
+            au.redirectToNoInternetConnectionView(target: self)
+        }
+        else if resMsg.isEmpty
+        {
+            
+            let applicationUtils : ApplicationUtils = ApplicationUtils()
+            applicationUtils.showActivityIndicator(uiView: view)
+            
+            let jsonRequestObject: [String : Any] =
+                [
+                    "scac" : au.trim(stringToTrim: txtScac.text!),
+                    "role" : role!,
+                    
+                ]
+            
+            //print(jsonRequestObject)
+            
+            if let paramString = try? JSONSerialization.data(withJSONObject: jsonRequestObject)
+            {
+                let urlToRequest = ac.BASE_URL + ac.FORGOT_PASSWORD_URI
+                let url = URL(string: urlToRequest)!
+                
+                let session = URLSession.shared
+                let request = NSMutableURLRequest(url: url)
+                
+                request.httpMethod = "POST"
+                request.httpBody = paramString
+                request.setValue(ac.CONTENT_TYPE_JSON, forHTTPHeaderField: ac.CONTENT_TYPE_KEY)
+                request.cachePolicy = NSURLRequest.CachePolicy.reloadIgnoringCacheData
+                
+                
+                let task = session.dataTask(with: request as URLRequest) { (data, response, error) in
+                    guard let _: Data = data, let _: URLResponse = response, error == nil else {
+                        print("*****error")
+                          DispatchQueue.main.sync {
+                            applicationUtils.hideActivityIndicator(uiView: self.view)
+                            au.showAlert(target: self, alertTitle: "FORGOT PASSWORD", message: "Opp! An error has occured, please try after some time.",[UIAlertAction(title: "OK", style: .default, handler: nil)], completion: nil)
+                        }
+                        return
+                    }
+                    do{
+                        let nsResponse =  response as! HTTPURLResponse
+                        let parsedData = try JSONSerialization.jsonObject(with: data!)
+                        
+                        
+                        if let forgotPasswordData:[String: Any]   = parsedData as? [String : Any]
+                        {
+                            
+                            if nsResponse.statusCode == 200
+                            {
+                                let apiResponseMessageSuccess: APIResponseMessage  = APIResponseMessage(forgotPasswordData)
+                                
+                                DispatchQueue.main.sync {
+                                    
+                                    applicationUtils.hideActivityIndicator(uiView: self.view)
+                                    au.showAlert(target: self, alertTitle: "FORGOT PASSWORD", message: apiResponseMessageSuccess.message!,[UIAlertAction(title: "OK", style: .default, handler: nil)], completion: nil)
+                                    
+                                    
+                                }
+                                
+                                
+                            }else{
+                                
+                                //handle other response ..
+                                let apiResponseMessage: APIResponseMessage  = APIResponseMessage(forgotPasswordData)
+                                
+                                DispatchQueue.main.sync {
+                                    applicationUtils.hideActivityIndicator(uiView: self.view)
+                                    au.showAlert(target: self, alertTitle: "FORGOT PASSWORD", message: apiResponseMessage.errors.errorMessage!,[UIAlertAction(title: "OK", style: .default, handler: nil)], completion: nil)
+                                    
+                                }
+                                
+                            }
+                            
+                        }
+                        
+                        
+                    } catch let error as NSError {
+                        print("NSError ::",error)
+                        DispatchQueue.main.sync {
+                            applicationUtils.hideActivityIndicator(uiView: self.view)
+                            au.showAlert(target: self, alertTitle: "FORGOT PASSWORD", message: "Opp! An error has occured, please try after some time.",[UIAlertAction(title: "OK", style: .default, handler: nil)], completion: nil)
+                        }
+                        
+                    }
+                    
+                    
+                }
+                task.resume()
+                
+            }
+            
+            
+            
+            
+        }else{
+            
+            //display toast message to the user.
+            au.showAlert(target: self, alertTitle: "FORGOT PASSWORD", message: resMsg,[UIAlertAction(title: "OK", style: .default, handler: nil)], completion: nil)
+            
+        }
     }
     
  

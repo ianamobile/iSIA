@@ -59,7 +59,6 @@
 		69E8150120A47C630076A118 /* TPUForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E8150020A47C630076A118 /* TPUForgotPasswordViewController.swift */; };
 		69FD8C9120BBEA5900D076E4 /* DashboardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69FD8C9020BBEA5800D076E4 /* DashboardTableViewCell.swift */; };
 		69FD8C9320BBEA6300D076E4 /* DashboardTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69FD8C9220BBEA6300D076E4 /* DashboardTableViewController.swift */; };
-		69FD8C9520BBEA8900D076E4 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69FD8C9420BBEA8900D076E4 /* CardView.swift */; };
 		69FD8C9720BC381C00D076E4 /* DashboardTableViewCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69FD8C9620BC381C00D076E4 /* DashboardTableViewCellDelegate.swift */; };
 /* End PBXBuildFile section */
 
@@ -139,7 +138,6 @@
 		69E8150020A47C630076A118 /* TPUForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TPUForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		69FD8C9020BBEA5800D076E4 /* DashboardTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardTableViewCell.swift; sourceTree = "<group>"; };
 		69FD8C9220BBEA6300D076E4 /* DashboardTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardTableViewController.swift; sourceTree = "<group>"; };
-		69FD8C9420BBEA8900D076E4 /* CardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CardView.swift; path = ../../../../AnimatedMenu/AnimatedMenu/CardView.swift; sourceTree = "<group>"; };
 		69FD8C9620BC381C00D076E4 /* DashboardTableViewCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardTableViewCellDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -271,7 +269,6 @@
 		69BBE910209B0DD5008F1913 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				69FD8C9420BBEA8900D076E4 /* CardView.swift */,
 				69FD8C9020BBEA5800D076E4 /* DashboardTableViewCell.swift */,
 				6972B88520B5A26E009B1BEC /* CircleView.swift */,
 				69BBE915209B0EBE008F1913 /* DesignableUITextField.swift */,
@@ -469,7 +466,6 @@
 				699BDAF520A2EB870088E0E9 /* UIViewExtension.swift in Sources */,
 				69BBE917209B0EBE008F1913 /* DesignableUITextField.swift in Sources */,
 				69E814FD20A460AB0076A118 /* SECForgotPasswordViewController.swift in Sources */,
-				69FD8C9520BBEA8900D076E4 /* CardView.swift in Sources */,
 				69BBE945209B0F20008F1913 /* LocationDetails.swift in Sources */,
 				69BC0AC120AC3D6A00560AB6 /* IDDLogin2ViewController.swift in Sources */,
 				69FD8C9120BBEA5900D076E4 /* DashboardTableViewCell.swift in Sources */,
