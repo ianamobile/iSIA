@@ -3333,7 +3333,7 @@
                     <connections>
                         <outlet property="dashboardTableView" destination="oQs-Wu-dVn" id="LIL-jS-RSz"/>
                         <segue destination="1Cm-VB-8v5" kind="show" identifier="NotifAvailSegue" id="mcF-Wo-QvO"/>
-                        <segue destination="46v-6c-s1h" kind="show" id="pQK-Gv-6na"/>
+                        <segue destination="46v-6c-s1h" kind="show" identifier="streetTurnSegue" id="pQK-Gv-6na"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZQf-C1-Ise" userLabel="First Responder" sceneMemberID="firstResponder"/>
