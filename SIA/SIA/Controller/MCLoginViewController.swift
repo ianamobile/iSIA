@@ -40,7 +40,7 @@ class MCLoginViewController: UIViewController, UITextFieldDelegate {
         //set up the UI
         loginSecView.roundCorners([.topRight, .bottomRight], radius: 20)
         
-        let loginGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(MCLoginViewController.loginSecViewTapDetected))
+        let loginGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.loginSecViewTapDetected))
         loginSecView.addGestureRecognizer(loginGestureRecognizer)
         
     }
@@ -67,45 +67,49 @@ class MCLoginViewController: UIViewController, UITextFieldDelegate {
     func validateLoginFields() -> String {
         
         var retMsg : String = ""
-        /*
+        
         if vu.isNotEmptyString(stringToCheck: txtScac.text!) && vu.isNotEmptyString(stringToCheck: txtPassword.text!)
         {
             //both are not empty case
-            if !txtUserName.text!.isAlphanumeric
+            if !txtScac.text!.isCharactersOnly
             {
-                retMsg = "Username should contains alpanumeric only."
+                retMsg = "SCAC should contains characters only."
+                
+            }else if txtScac.text!.count < 4 {
+                
+                retMsg = "SCAC should be 4 characters long."
             }
             
-        }else if vu.isNotEmptyString(stringToCheck: txtUserName.text!) && !vu.isNotEmptyString(stringToCheck: txtPassword.text!){
+        }else if vu.isNotEmptyString(stringToCheck: txtScac.text!) && !vu.isNotEmptyString(stringToCheck: txtPassword.text!){
             retMsg = "Please enter password."
             
-        }else if !vu.isNotEmptyString(stringToCheck: txtUserName.text!) && vu.isNotEmptyString(stringToCheck: txtPassword.text!){
-            retMsg = "Please enter username."
+        }else if !vu.isNotEmptyString(stringToCheck: txtScac.text!) && vu.isNotEmptyString(stringToCheck: txtPassword.text!){
+            retMsg = "Please enter scac."
             
         }else
         {
             // either or empty
-            retMsg = "Please enter username & password."
+            retMsg = "Please enter scac & password."
             
             
         }
-      */
         return retMsg
  
     }
     
     @IBAction func SignOnButtonTapped(_ sender: Any) {
-        /*
+        
         // resign first responder if any.
-        if txtUserName.isFirstResponder
+        if txtScac.isFirstResponder
         {
-            txtUserName.resignFirstResponder();
+            txtScac.resignFirstResponder();
         }else if txtPassword.isFirstResponder
         {
             txtPassword.resignFirstResponder();
         }
         // validate Login fields..
         let resMsg : String = validateLoginFields()
+        
         if !au.isInternetAvailable() {
             au.redirectToNoInternetConnectionView(target: self)
         }
@@ -117,7 +121,7 @@ class MCLoginViewController: UIViewController, UITextFieldDelegate {
             
             let jsonRequestObject: [String : Any] =
                 [
-                    "userName" : au.trim(stringToTrim: txtUserName.text!),
+                    "scac" : au.trim(stringToTrim: txtScac.text!),
                     "password" : au.trim(stringToTrim: txtPassword.text!),
                     "role": "MC"
             ]
@@ -141,8 +145,11 @@ class MCLoginViewController: UIViewController, UITextFieldDelegate {
                 let task = session.dataTask(with: request as URLRequest) { (data, response, error) in
                     guard let _: Data = data, let _: URLResponse = response, error == nil else {
                         print("*****error")
-                        applicationUtils.hideActivityIndicator(uiView: self.view)
-                        au.showAlert(target: self, alertTitle: "MC LOGIN", message: "Opp! An error has occured, please try after some time.",[UIAlertAction(title: "OK", style: .default, handler: nil)], completion: nil)
+                         DispatchQueue.main.sync {
+                            applicationUtils.hideActivityIndicator(uiView: self.view)
+                            au.showAlert(target: self, alertTitle: "MC LOGIN", message: "Opp! An error has occured, please try after some time.",[UIAlertAction(title: "OK", style: .default, handler: nil)], completion: nil)
+                        }
+                        
                         
                         return
                     }
@@ -159,16 +166,14 @@ class MCLoginViewController: UIViewController, UITextFieldDelegate {
                             {
                                 let userDetails: UserDetails  = UserDetails(loginData)
                                 //print(userDetails.accessToken!)
-                                
-                                UserDefaults.standard.set(userDetails.accessToken!, forKey: "accessToken")
-                                UserDefaults.standard.set(userDetails.firstName!, forKey: "firstName")
-                                UserDefaults.standard.set(userDetails.lastName!, forKey: "lastName")
-                                UserDefaults.standard.set(userDetails.role!, forKey: "role")
-                                UserDefaults.standard.set(userDetails.userId, forKey: "userId")
-                                UserDefaults.standard.set(userDetails.scac, forKey: "scac")
-                                UserDefaults.standard.set(userDetails.originFrom, forKey: self.ac.MC_LOGIN)
-                                
                                 DispatchQueue.main.sync {
+                                    
+                                    UserDefaults.standard.set(userDetails.accessToken!, forKey: "accessToken")
+                                    UserDefaults.standard.set(userDetails.companyName!, forKey: "companyName")
+                                    UserDefaults.standard.set(userDetails.role!, forKey: "role")
+                                    UserDefaults.standard.set(userDetails.scac, forKey: "scac")
+                                    UserDefaults.standard.set(userDetails.role!, forKey: "originFrom")
+                                    
                                     applicationUtils.hideActivityIndicator(uiView: self.view)
                                     self.performSegue(withIdentifier: "dashboardSegue", sender: self)
                                     
@@ -192,8 +197,12 @@ class MCLoginViewController: UIViewController, UITextFieldDelegate {
                         
                     } catch let error as NSError {
                         print("NSError ::",error)
-                        applicationUtils.hideActivityIndicator(uiView: self.view)
-                        au.showAlert(target: self, alertTitle: "MC LOGIN", message: "Opp! An error has occured, please try after some time.",[UIAlertAction(title: "OK", style: .default, handler: nil)], completion: nil)
+                        DispatchQueue.main.sync {
+                            applicationUtils.hideActivityIndicator(uiView: self.view)
+                            au.showAlert(target: self, alertTitle: "MC LOGIN", message: "Opp! An error has occured, please try after some time.",[UIAlertAction(title: "OK", style: .default, handler: nil)], completion: nil)
+                        }
+                            
+                        
                         
                         
                     }
@@ -212,7 +221,7 @@ class MCLoginViewController: UIViewController, UITextFieldDelegate {
             
             
         }
-        */
+ 
     }
     
     override func didReceiveMemoryWarning() {

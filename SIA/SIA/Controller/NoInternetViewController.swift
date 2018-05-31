@@ -23,11 +23,11 @@ class NoInternetViewController: UIViewController {
       
         if ApplicationUtils.isInternetAvailable()
         {
-            /*
+            
             let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
             let loginUITabBarController = storyboard.instantiateViewController(withIdentifier: "LoginUITabBarController") as! LoginUITabBarController
             self.present(loginUITabBarController, animated: true, completion: nil)
-       */
+       
         }
         
     }

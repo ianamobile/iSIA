@@ -87,7 +87,124 @@ class TPULoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func SignOnButtonTapped(_ sender: UIButton) {
-         
+        // resign first responder if any.
+        if txtUserName.isFirstResponder
+        {
+            txtUserName.resignFirstResponder();
+        }else if txtPassword.isFirstResponder
+        {
+            txtPassword.resignFirstResponder();
+        }
+        // validate Login fields..
+        let resMsg : String = validateLoginFields()
+        
+        if !au.isInternetAvailable() {
+            au.redirectToNoInternetConnectionView(target: self)
+        }
+        else if resMsg.isEmpty
+        {
+            
+            let applicationUtils : ApplicationUtils = ApplicationUtils()
+            applicationUtils.showActivityIndicator(uiView: view)
+            
+            let jsonRequestObject: [String : Any] =
+                [
+                    "userName" : au.trim(stringToTrim: txtUserName.text!),
+                    "password" : au.trim(stringToTrim: txtPassword.text!),
+                    "role": "TPU"
+            ]
+            
+            //print(jsonRequestObject)
+            
+            if let paramString = try? JSONSerialization.data(withJSONObject: jsonRequestObject)
+            {
+                let urlToRequest = ac.BASE_URL + ac.LOGIN_URI
+                let url = URL(string: urlToRequest)!
+                
+                let session = URLSession.shared
+                let request = NSMutableURLRequest(url: url)
+                
+                request.httpMethod = "POST"
+                request.httpBody = paramString
+                request.setValue(ac.CONTENT_TYPE_JSON, forHTTPHeaderField: ac.CONTENT_TYPE_KEY)
+                request.cachePolicy = NSURLRequest.CachePolicy.reloadIgnoringCacheData
+                
+                
+                let task = session.dataTask(with: request as URLRequest) { (data, response, error) in
+                    guard let _: Data = data, let _: URLResponse = response, error == nil else {
+                        print("*****error")
+                        DispatchQueue.main.sync {
+                            applicationUtils.hideActivityIndicator(uiView: self.view)
+                            au.showAlert(target: self, alertTitle: "TPU LOGIN", message: "Opp! An error has occured, please try after some time.",[UIAlertAction(title: "OK", style: .default, handler: nil)], completion: nil)
+                        }
+                        
+                        
+                        return
+                    }
+                    do{
+                        let nsResponse =  response as! HTTPURLResponse
+                        let parsedData = try JSONSerialization.jsonObject(with: data!)
+                        
+                        print(parsedData)
+                        
+                        if let loginData:[String: Any]   = parsedData as? [String : Any]
+                        {
+                            
+                            if nsResponse.statusCode == 200
+                            {
+                                let userDetails: UserDetails  = UserDetails(loginData)
+                                //print(userDetails.accessToken!)
+                                DispatchQueue.main.sync {
+                                    
+                                    UserDefaults.standard.set(userDetails.accessToken!, forKey: "accessToken")
+                                    UserDefaults.standard.set(userDetails.companyName!, forKey: "companyName")
+                                    UserDefaults.standard.set(userDetails.role!, forKey: "role")
+                                    UserDefaults.standard.set(userDetails.scac, forKey: "scac")
+                                    UserDefaults.standard.set(userDetails.role!, forKey: "originFrom")
+                                    
+                                    applicationUtils.hideActivityIndicator(uiView: self.view)
+                                    self.performSegue(withIdentifier: "dashboardSegue", sender: self)
+                                    
+                                }
+                                
+                            }else{
+                                
+                                //handle other response ..
+                                let apiResponseMessage: APIResponseMessage  = APIResponseMessage(loginData)
+                                
+                                DispatchQueue.main.sync {
+                                    applicationUtils.hideActivityIndicator(uiView: self.view)
+                                    au.showAlert(target: self, alertTitle: "TPU LOGIN", message: apiResponseMessage.errors.errorMessage!,[UIAlertAction(title: "OK", style: .default, handler: nil)], completion: nil)
+                                    
+                                }
+                                
+                            }
+                            
+                        }
+                        
+                        
+                    } catch let error as NSError {
+                        print("NSError ::",error)
+                        DispatchQueue.main.sync {
+                            applicationUtils.hideActivityIndicator(uiView: self.view)
+                            au.showAlert(target: self, alertTitle: "TPU LOGIN", message: "Opp! An error has occured, please try after some time.",[UIAlertAction(title: "OK", style: .default, handler: nil)], completion: nil)
+                        }
+                        
+                    }
+                    
+                }
+                task.resume()
+                
+            }
+            
+            
+        }else{
+            
+            //display toast message to the user.
+            au.showAlert(target: self, alertTitle: "TPU LOGIN", message: resMsg,[UIAlertAction(title: "OK", style: .default, handler: nil)], completion: nil)
+            
+            
+        }
         
     }
     

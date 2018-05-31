@@ -40,7 +40,7 @@ class EPLoginViewController: UIViewController, UITextFieldDelegate {
         //set up the UI
         loginSecView.roundCorners([.topRight, .bottomRight], radius: 20)
         
-        let loginGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(MCLoginViewController.loginSecViewTapDetected))
+        let loginGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.loginSecViewTapDetected))
         loginSecView.addGestureRecognizer(loginGestureRecognizer)
        
     }
@@ -59,7 +59,7 @@ class EPLoginViewController: UIViewController, UITextFieldDelegate {
         }else if segue.identifier == "forgotPasswordEPSegue"
         {
             let vc = segue.destination as! ForgotPasswordViewController
-            vc.role = "MC"
+            vc.role = "EP"
         }
         
         
@@ -67,152 +67,159 @@ class EPLoginViewController: UIViewController, UITextFieldDelegate {
     func validateLoginFields() -> String {
         
         var retMsg : String = ""
-        /*
-         if vu.isNotEmptyString(stringToCheck: txtScac.text!) && vu.isNotEmptyString(stringToCheck: txtPassword.text!)
-         {
-         //both are not empty case
-         if !txtUserName.text!.isAlphanumeric
-         {
-         retMsg = "Username should contains alpanumeric only."
-         }
-         
-         }else if vu.isNotEmptyString(stringToCheck: txtUserName.text!) && !vu.isNotEmptyString(stringToCheck: txtPassword.text!){
-         retMsg = "Please enter password."
-         
-         }else if !vu.isNotEmptyString(stringToCheck: txtUserName.text!) && vu.isNotEmptyString(stringToCheck: txtPassword.text!){
-         retMsg = "Please enter username."
-         
-         }else
-         {
-         // either or empty
-         retMsg = "Please enter username & password."
-         
-         
-         }
-         */
+        
+        if vu.isNotEmptyString(stringToCheck: txtScac.text!) && vu.isNotEmptyString(stringToCheck: txtPassword.text!)
+        {
+            //both are not empty case
+            if !txtScac.text!.isCharactersOnly
+            {
+                retMsg = "SCAC should contains characters only."
+                
+            }else if txtScac.text!.count < 2 {
+                
+                retMsg = "SCAC should be at-least 2 characters long."
+            }
+            
+        }else if vu.isNotEmptyString(stringToCheck: txtScac.text!) && !vu.isNotEmptyString(stringToCheck: txtPassword.text!){
+            retMsg = "Please enter password."
+            
+        }else if !vu.isNotEmptyString(stringToCheck: txtScac.text!) && vu.isNotEmptyString(stringToCheck: txtPassword.text!){
+            retMsg = "Please enter scac."
+            
+        }else
+        {
+            // either or empty
+            retMsg = "Please enter scac & password."
+            
+            
+        }
         return retMsg
         
     }
     
     @IBAction func SignOnButtonTapped(_ sender: Any) {
-        /*
-         // resign first responder if any.
-         if txtUserName.isFirstResponder
-         {
-         txtUserName.resignFirstResponder();
-         }else if txtPassword.isFirstResponder
-         {
-         txtPassword.resignFirstResponder();
-         }
-         // validate Login fields..
-         let resMsg : String = validateLoginFields()
-         if !au.isInternetAvailable() {
-         au.redirectToNoInternetConnectionView(target: self)
-         }
-         else if resMsg.isEmpty
-         {
-         
-         let applicationUtils : ApplicationUtils = ApplicationUtils()
-         applicationUtils.showActivityIndicator(uiView: view)
-         
-         let jsonRequestObject: [String : Any] =
-         [
-         "userName" : au.trim(stringToTrim: txtUserName.text!),
-         "password" : au.trim(stringToTrim: txtPassword.text!),
-         "role": "MC"
-         ]
-         
-         //print(jsonRequestObject)
-         
-         if let paramString = try? JSONSerialization.data(withJSONObject: jsonRequestObject)
-         {
-         let urlToRequest = ac.BASE_URL + ac.LOGIN_URI
-         let url = URL(string: urlToRequest)!
-         
-         let session = URLSession.shared
-         let request = NSMutableURLRequest(url: url)
-         
-         request.httpMethod = "POST"
-         request.httpBody = paramString
-         request.setValue(ac.CONTENT_TYPE_JSON, forHTTPHeaderField: ac.CONTENT_TYPE_KEY)
-         request.cachePolicy = NSURLRequest.CachePolicy.reloadIgnoringCacheData
-         
-         
-         let task = session.dataTask(with: request as URLRequest) { (data, response, error) in
-         guard let _: Data = data, let _: URLResponse = response, error == nil else {
-         print("*****error")
-         applicationUtils.hideActivityIndicator(uiView: self.view)
-         au.showAlert(target: self, alertTitle: "MC LOGIN", message: "Opp! An error has occured, please try after some time.",[UIAlertAction(title: "OK", style: .default, handler: nil)], completion: nil)
-         
-         return
-         }
-         do{
-         let nsResponse =  response as! HTTPURLResponse
-         let parsedData = try JSONSerialization.jsonObject(with: data!)
-         
-         print(parsedData)
-         
-         if let loginData:[String: Any]   = parsedData as? [String : Any]
-         {
-         
-         if nsResponse.statusCode == 200
-         {
-         let userDetails: UserDetails  = UserDetails(loginData)
-         //print(userDetails.accessToken!)
-         
-         UserDefaults.standard.set(userDetails.accessToken!, forKey: "accessToken")
-         UserDefaults.standard.set(userDetails.firstName!, forKey: "firstName")
-         UserDefaults.standard.set(userDetails.lastName!, forKey: "lastName")
-         UserDefaults.standard.set(userDetails.role!, forKey: "role")
-         UserDefaults.standard.set(userDetails.userId, forKey: "userId")
-         UserDefaults.standard.set(userDetails.scac, forKey: "scac")
-         UserDefaults.standard.set(userDetails.originFrom, forKey: self.ac.MC_LOGIN)
-         
-         DispatchQueue.main.sync {
-         applicationUtils.hideActivityIndicator(uiView: self.view)
-         self.performSegue(withIdentifier: "dashboardSegue", sender: self)
-         
-         }
-         
-         }else{
-         
-         //handle other response ..
-         let apiResponseMessage: APIResponseMessage  = APIResponseMessage(loginData)
-         
-         DispatchQueue.main.sync {
-         applicationUtils.hideActivityIndicator(uiView: self.view)
-         au.showAlert(target: self, alertTitle: "MC LOGIN", message: apiResponseMessage.errors.errorMessage!,[UIAlertAction(title: "OK", style: .default, handler: nil)], completion: nil)
-         
-         }
-         
-         }
-         
-         }
-         
-         
-         } catch let error as NSError {
-         print("NSError ::",error)
-         applicationUtils.hideActivityIndicator(uiView: self.view)
-         au.showAlert(target: self, alertTitle: "MC LOGIN", message: "Opp! An error has occured, please try after some time.",[UIAlertAction(title: "OK", style: .default, handler: nil)], completion: nil)
-         
-         
-         }
-         
-         
-         }
-         task.resume()
-         
-         }
-         
-         
-         }else{
-         
-         //display toast message to the user.
-         au.showAlert(target: self, alertTitle: "MC LOGIN", message: resMsg,[UIAlertAction(title: "OK", style: .default, handler: nil)], completion: nil)
-         
-         
-         }
-         */
+        // resign first responder if any.
+        if txtScac.isFirstResponder
+        {
+            txtScac.resignFirstResponder();
+        }else if txtPassword.isFirstResponder
+        {
+            txtPassword.resignFirstResponder();
+        }
+        // validate Login fields..
+        let resMsg : String = validateLoginFields()
+        
+        if !au.isInternetAvailable() {
+            au.redirectToNoInternetConnectionView(target: self)
+        }
+        else if resMsg.isEmpty
+        {
+            
+            let applicationUtils : ApplicationUtils = ApplicationUtils()
+            applicationUtils.showActivityIndicator(uiView: view)
+            
+            let jsonRequestObject: [String : Any] =
+                [
+                    "scac" : au.trim(stringToTrim: txtScac.text!),
+                    "password" : au.trim(stringToTrim: txtPassword.text!),
+                    "role": "EP"
+            ]
+            
+            //print(jsonRequestObject)
+            
+            if let paramString = try? JSONSerialization.data(withJSONObject: jsonRequestObject)
+            {
+                let urlToRequest = ac.BASE_URL + ac.LOGIN_URI
+                let url = URL(string: urlToRequest)!
+                
+                let session = URLSession.shared
+                let request = NSMutableURLRequest(url: url)
+                
+                request.httpMethod = "POST"
+                request.httpBody = paramString
+                request.setValue(ac.CONTENT_TYPE_JSON, forHTTPHeaderField: ac.CONTENT_TYPE_KEY)
+                request.cachePolicy = NSURLRequest.CachePolicy.reloadIgnoringCacheData
+                
+                
+                let task = session.dataTask(with: request as URLRequest) { (data, response, error) in
+                    guard let _: Data = data, let _: URLResponse = response, error == nil else {
+                        print("*****error")
+                        DispatchQueue.main.sync {
+                            applicationUtils.hideActivityIndicator(uiView: self.view)
+                            au.showAlert(target: self, alertTitle: "EP LOGIN", message: "Opp! An error has occured, please try after some time.",[UIAlertAction(title: "OK", style: .default, handler: nil)], completion: nil)
+                        }
+                        
+                        
+                        return
+                    }
+                    do{
+                        let nsResponse =  response as! HTTPURLResponse
+                        let parsedData = try JSONSerialization.jsonObject(with: data!)
+                        
+                        print(parsedData)
+                        
+                        if let loginData:[String: Any]   = parsedData as? [String : Any]
+                        {
+                            
+                            if nsResponse.statusCode == 200
+                            {
+                                let userDetails: UserDetails  = UserDetails(loginData)
+                                //print(userDetails.accessToken!)
+                                
+                                DispatchQueue.main.sync {
+                                    UserDefaults.standard.set(userDetails.accessToken!, forKey: "accessToken")
+                                    UserDefaults.standard.set(userDetails.companyName!, forKey: "companyName")
+                                    UserDefaults.standard.set(userDetails.role!, forKey: "role")
+                                    UserDefaults.standard.set(userDetails.scac, forKey: "scac")
+                                    UserDefaults.standard.set(userDetails.role!, forKey: "originFrom")
+                                    
+                                    applicationUtils.hideActivityIndicator(uiView: self.view)
+                                    self.performSegue(withIdentifier: "dashboardSegue", sender: self)
+                                    
+                                }
+                                
+                            }else{
+                                
+                                //handle other response ..
+                                let apiResponseMessage: APIResponseMessage  = APIResponseMessage(loginData)
+                                
+                                DispatchQueue.main.sync {
+                                    applicationUtils.hideActivityIndicator(uiView: self.view)
+                                    au.showAlert(target: self, alertTitle: "EP LOGIN", message: apiResponseMessage.errors.errorMessage!,[UIAlertAction(title: "OK", style: .default, handler: nil)], completion: nil)
+                                    
+                                }
+                                
+                            }
+                            
+                        }
+                        
+                        
+                    } catch let error as NSError {
+                        print("NSError ::",error)
+                        DispatchQueue.main.sync {
+                            applicationUtils.hideActivityIndicator(uiView: self.view)
+                            au.showAlert(target: self, alertTitle: "EP LOGIN", message: "Opp! An error has occured, please try after some time.",[UIAlertAction(title: "OK", style: .default, handler: nil)], completion: nil)
+                        }
+                        
+                        
+                        
+                        
+                    }
+                    
+                    
+                }
+                task.resume()
+                
+            }
+            
+            
+        }else{
+            
+            //display toast message to the user.
+            au.showAlert(target: self, alertTitle: "EP LOGIN", message: resMsg,[UIAlertAction(title: "OK", style: .default, handler: nil)], completion: nil)
+            
+            
+        }
     }
     
     override func didReceiveMemoryWarning() {
