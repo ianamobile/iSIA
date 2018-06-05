@@ -197,8 +197,10 @@ public class ApplicationUtils
         activityIndicator.center = CGPoint(x: loadingView.frame.size.width / 2, y: loadingView.frame.size.height / 2);
         
         loadingView.addSubview(activityIndicator)
+        container.layer.zPosition = 1
         container.addSubview(loadingView)
         uiView.addSubview(container)
+        
         activityIndicator.startAnimating()
     }
     

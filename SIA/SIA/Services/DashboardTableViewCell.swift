@@ -17,7 +17,7 @@ class DashboardTableViewCell: UITableViewCell {
     
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var leftView: CardView!
-    @IBOutlet weak var leftTopImage: UIImageView!
+    //@IBOutlet weak var leftTopImage: UIImageView!
     @IBOutlet weak var leftCircleView: CircleView!
     @IBOutlet weak var leftCircleViewImage: UIImageView!
     @IBOutlet weak var leftViewSeparator: UIView!
@@ -25,7 +25,7 @@ class DashboardTableViewCell: UITableViewCell {
     @IBOutlet weak var leftBottomImage: UIImageView!
     
     @IBOutlet weak var rightView: CardView!
-    @IBOutlet weak var rightTopImage: UIImageView!
+   // @IBOutlet weak var rightTopImage: UIImageView!
     @IBOutlet weak var rightCircleView: CircleView!
     @IBOutlet weak var rightCircleViewImage: UIImageView!
     @IBOutlet weak var rightViewSeparator: UIView!
@@ -42,6 +42,13 @@ class DashboardTableViewCell: UITableViewCell {
         
         let rightViewTap = UITapGestureRecognizer(target: self, action: #selector(self.rightViewTapDetected))
         rightView.addGestureRecognizer(rightViewTap)
+        
+        //leftLabel.numberOfLines = 4
+        //leftLabel.sizeToFit()
+       
+        //rightLabel.numberOfLines = 4
+        //rightLabel.sizeToFit()
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

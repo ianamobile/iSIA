@@ -8,11 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		690036EE20A9CB4F0007E825 /* TPULoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 690036ED20A9CB4F0007E825 /* TPULoginViewController.swift */; };
+		69293B4720C158B30035E24B /* OriginalLocationSearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69293B4620C158B30035E24B /* OriginalLocationSearchTableViewCell.swift */; };
 		6972B88720B5A26E009B1BEC /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6972B88520B5A26E009B1BEC /* CircleView.swift */; };
 		699BDAF520A2EB870088E0E9 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699BDAF420A2EB870088E0E9 /* UIViewExtension.swift */; };
 		699BDAF720A2EDEF0088E0E9 /* MCLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699BDAF620A2EDEF0088E0E9 /* MCLoginViewController.swift */; };
 		699BDAF920A308D00088E0E9 /* EPLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699BDAF820A308D00088E0E9 /* EPLoginViewController.swift */; };
 		699BDAFB20A334130088E0E9 /* SECUserLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699BDAFA20A334130088E0E9 /* SECUserLoginViewController.swift */; };
+		69B374FA20C6C95300D9FB8D /* StreetInterchangeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B374F920C6C95300D9FB8D /* StreetInterchangeViewController.swift */; };
 		69BBE8DD209B0A69008F1913 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69BBE8DC209B0A69008F1913 /* AppDelegate.swift */; };
 		69BBE8E2209B0A69008F1913 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69BBE8E0209B0A69008F1913 /* Main.storyboard */; };
 		69BBE8E5209B0A69008F1913 /* SIA.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 69BBE8E3209B0A69008F1913 /* SIA.xcdatamodeld */; };
@@ -53,6 +55,9 @@
 		69BC0ABF20AC39DD00560AB6 /* IDDLogin1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69BC0ABE20AC39DD00560AB6 /* IDDLogin1ViewController.swift */; };
 		69BC0AC120AC3D6A00560AB6 /* IDDLogin2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69BC0AC020AC3D6A00560AB6 /* IDDLogin2ViewController.swift */; };
 		69C8127020BFF89E00A90081 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C8126F20BFF89E00A90081 /* CardView.swift */; };
+		69C8127220C00F0800A90081 /* OriginalLocationSearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C8127120C00F0800A90081 /* OriginalLocationSearchTableViewController.swift */; };
+		69C8127420C0383F00A90081 /* StreetTurnRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C8127320C0383F00A90081 /* StreetTurnRequestViewController.swift */; };
+		69C8127620C03E1900A90081 /* LocationSearchTableViewCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C8127520C03E1900A90081 /* LocationSearchTableViewCellDelegate.swift */; };
 		69D7DAF120BE9DD100548F5A /* LoginUITabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D7DAF020BE9DD100548F5A /* LoginUITabBarController.swift */; };
 		69E814FB20A45C4B0076A118 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E814FA20A45C4B0076A118 /* ForgotPasswordViewController.swift */; };
 		69E814FD20A460AB0076A118 /* SECForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E814FC20A460AB0076A118 /* SECForgotPasswordViewController.swift */; };
@@ -82,11 +87,13 @@
 
 /* Begin PBXFileReference section */
 		690036ED20A9CB4F0007E825 /* TPULoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TPULoginViewController.swift; sourceTree = "<group>"; };
+		69293B4620C158B30035E24B /* OriginalLocationSearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OriginalLocationSearchTableViewCell.swift; sourceTree = "<group>"; };
 		6972B88520B5A26E009B1BEC /* CircleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
 		699BDAF420A2EB870088E0E9 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		699BDAF620A2EDEF0088E0E9 /* MCLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCLoginViewController.swift; sourceTree = "<group>"; };
 		699BDAF820A308D00088E0E9 /* EPLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EPLoginViewController.swift; sourceTree = "<group>"; };
 		699BDAFA20A334130088E0E9 /* SECUserLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SECUserLoginViewController.swift; sourceTree = "<group>"; };
+		69B374F920C6C95300D9FB8D /* StreetInterchangeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreetInterchangeViewController.swift; sourceTree = "<group>"; };
 		69BBE8D9209B0A69008F1913 /* SIA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SIA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		69BBE8DC209B0A69008F1913 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		69BBE8E1209B0A69008F1913 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -133,6 +140,9 @@
 		69BC0ABE20AC39DD00560AB6 /* IDDLogin1ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDDLogin1ViewController.swift; sourceTree = "<group>"; };
 		69BC0AC020AC3D6A00560AB6 /* IDDLogin2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDDLogin2ViewController.swift; sourceTree = "<group>"; };
 		69C8126F20BFF89E00A90081 /* CardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		69C8127120C00F0800A90081 /* OriginalLocationSearchTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OriginalLocationSearchTableViewController.swift; sourceTree = "<group>"; };
+		69C8127320C0383F00A90081 /* StreetTurnRequestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreetTurnRequestViewController.swift; sourceTree = "<group>"; };
+		69C8127520C03E1900A90081 /* LocationSearchTableViewCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchTableViewCellDelegate.swift; sourceTree = "<group>"; };
 		69D7DAF020BE9DD100548F5A /* LoginUITabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginUITabBarController.swift; sourceTree = "<group>"; };
 		69E814FA20A45C4B0076A118 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		69E814FC20A460AB0076A118 /* SECForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SECForgotPasswordViewController.swift; sourceTree = "<group>"; };
@@ -264,6 +274,10 @@
 				690036ED20A9CB4F0007E825 /* TPULoginViewController.swift */,
 				69BC0ABE20AC39DD00560AB6 /* IDDLogin1ViewController.swift */,
 				69BC0AC020AC3D6A00560AB6 /* IDDLogin2ViewController.swift */,
+				69C8127120C00F0800A90081 /* OriginalLocationSearchTableViewController.swift */,
+				69C8127320C0383F00A90081 /* StreetTurnRequestViewController.swift */,
+				69293B4620C158B30035E24B /* OriginalLocationSearchTableViewCell.swift */,
+				69B374F920C6C95300D9FB8D /* StreetInterchangeViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -278,6 +292,7 @@
 				69BBE914209B0EBE008F1913 /* UITextFieldExtension.swift */,
 				699BDAF420A2EB870088E0E9 /* UIViewExtension.swift */,
 				69FD8C9620BC381C00D076E4 /* DashboardTableViewCellDelegate.swift */,
+				69C8127520C03E1900A90081 /* LocationSearchTableViewCellDelegate.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -469,14 +484,17 @@
 				699BDAF520A2EB870088E0E9 /* UIViewExtension.swift in Sources */,
 				69BBE917209B0EBE008F1913 /* DesignableUITextField.swift in Sources */,
 				69E814FD20A460AB0076A118 /* SECForgotPasswordViewController.swift in Sources */,
+				69C8127620C03E1900A90081 /* LocationSearchTableViewCellDelegate.swift in Sources */,
 				69BBE945209B0F20008F1913 /* LocationDetails.swift in Sources */,
 				69BC0AC120AC3D6A00560AB6 /* IDDLogin2ViewController.swift in Sources */,
 				69FD8C9120BBEA5900D076E4 /* DashboardTableViewCell.swift in Sources */,
 				69FD8C9320BBEA6300D076E4 /* DashboardTableViewController.swift in Sources */,
 				69BBE943209B0F20008F1913 /* UserDetails.swift in Sources */,
 				69BBE94F209B11AF008F1913 /* NoInternetViewController.swift in Sources */,
+				69B374FA20C6C95300D9FB8D /* StreetInterchangeViewController.swift in Sources */,
 				69C8127020BFF89E00A90081 /* CardView.swift in Sources */,
 				69BBE94B209B0F34008F1913 /* ValidationUtils.swift in Sources */,
+				69293B4720C158B30035E24B /* OriginalLocationSearchTableViewCell.swift in Sources */,
 				699BDAFB20A334130088E0E9 /* SECUserLoginViewController.swift in Sources */,
 				69E814FB20A45C4B0076A118 /* ForgotPasswordViewController.swift in Sources */,
 				6972B88720B5A26E009B1BEC /* CircleView.swift in Sources */,
@@ -485,11 +503,13 @@
 				69BBE94A209B0F34008F1913 /* ApplicationUtils.swift in Sources */,
 				69BBE941209B0F20008F1913 /* SearchDVIRDetailsResponse.swift in Sources */,
 				69E814FF20A47A240076A118 /* TPUForgotUsernameViewController.swift in Sources */,
+				69C8127420C0383F00A90081 /* StreetTurnRequestViewController.swift in Sources */,
 				69BBE942209B0F20008F1913 /* Pagination.swift in Sources */,
 				69E8150120A47C630076A118 /* TPUForgotPasswordViewController.swift in Sources */,
 				699BDAF920A308D00088E0E9 /* EPLoginViewController.swift in Sources */,
 				69D7DAF120BE9DD100548F5A /* LoginUITabBarController.swift in Sources */,
 				69BBE916209B0EBE008F1913 /* UITextFieldExtension.swift in Sources */,
+				69C8127220C00F0800A90081 /* OriginalLocationSearchTableViewController.swift in Sources */,
 				69BC0ABF20AC39DD00560AB6 /* IDDLogin1ViewController.swift in Sources */,
 				69BBE8DD209B0A69008F1913 /* AppDelegate.swift in Sources */,
 				69BBE94D209B0F34008F1913 /* AppConstants.swift in Sources */,

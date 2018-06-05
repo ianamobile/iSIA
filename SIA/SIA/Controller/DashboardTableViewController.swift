@@ -18,24 +18,25 @@ class DashboardTableViewController: UITableViewController, DashboardTableViewCel
     let ac :AppConstants  = AppConstants()
     
     //MC Section Start
-    let mcMenuArr:[Int] = [0, 1, 2, 3, 4, 20]
+    let mcMenuArr:[Int] = [4, 2, 3, 0, 1, 20]
     let mcSecDefaultRightsMenuArr:[Int] = [0, 20]
-    let mcSecSingleRightsMenuArr:[Int] = [0, 1, 2,  4, 20]
-    let mcSecFullRightsMenuArr:[Int] = [0, 1, 2, 3, 4, 20]
+    let mcSecSingleRightsMenuArr:[Int] = [4, 2, 0, 1, 20]
+    let mcSecFullRightsMenuArr:[Int] = [4, 2, 3, 0, 1, 20]
+    
    
     //EP Section Start
-    let epMenuArr:[Int] = [0, 1, 2, 3, 20]
+    let epMenuArr:[Int] = [2, 3, 0, 1, 20]
     let epSecDefaultRightsMenuArr:[Int] = [20]
-    let epSecSingleRightsMenuArr:[Int] = [0, 1, 2, 20]
-    let epSecFullRightsMenuArr:[Int] = [0, 1, 2, 3, 20]
+    let epSecSingleRightsMenuArr:[Int] = [2, 0, 1, 20]
+    let epSecFullRightsMenuArr:[Int] = [2, 3, 0, 1, 20]
     
     //IDD Section
-    let iddMenuArr:[Int] = [0, 1, 2, 3, 4, 20]
+    let iddMenuArr:[Int] = [4, 2, 3, 0, 1, 20]
     
     //TPU Section
     let tpuDefaultRightsMenuArr:[Int] = [5, 6, 20]
-    let tpuSingleRightsMenuArr:[Int] = [5, 6, 0, 1, 2, 20]
-    let tpuFullRightsMenuArr:[Int] = [5, 6, 0, 1, 2, 3, 20]
+    let tpuSingleRightsMenuArr:[Int] = [2, 0, 1, 5, 6, 20]
+    let tpuFullRightsMenuArr:[Int] = [2, 3, 0, 1, 5, 6, 20]
     
     //final array which hold run time value from the rights based login.
     var finalArr:[Int] = [];

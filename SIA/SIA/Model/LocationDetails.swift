@@ -36,21 +36,28 @@ class LocationDetails {
 
 class IANALocationInfo{
     
-    var splcId:String?
     var ianaCode :String?
     var splcCode :String?
+    var address :String?
     var facilityName :String?
+    var zip :String?
+    var city :String?
     var state :String?
     
+    init() {
+        
+    }
     init(_ jsonDictionary:[String: Any]) {
         
         if !jsonDictionary.isEmpty
         {
             
-            self.splcId = jsonDictionary["splcId"] as? String
             self.ianaCode = jsonDictionary["ianaCode"] as? String
             self.splcCode       = jsonDictionary["splcCode"] as? String
-            self.facilityName   = jsonDictionary["facilityName"] as? String
+            self.facilityName   = jsonDictionary["locName"] as? String
+            self.address    = jsonDictionary["addr"] as? String
+            self.zip    = jsonDictionary["zip"] as? String
+            self.city    = jsonDictionary["city"] as? String
             self.state    = jsonDictionary["state"] as? String
             
         }

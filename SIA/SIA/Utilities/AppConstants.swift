@@ -24,15 +24,16 @@ public class AppConstants
     
     let LOGIN_URI = "SIA/siaLogin"
     let FORGOT_PASSWORD_URI = "SIA/forgotPassword"
+    let FETCH_ORIGIN_LOCATION_LIST_URI = "SIA/getOriginLocationList"
     
     
     let menuTitleArr :[String]  = [  "Notification of Available Equipment",
-                                     "Search equipment available for interchange",
-                                     "Initiate Interchange Request",
-                                     "Search Interchange Request",
-                                     "Initiate Street Turn Request",
-                                     "Search Interchange Request Submitted By you",
-                                     "List EP User",
+                                     "Search Equipment Availability",
+                                     "Initiate Street Interchange",
+                                     "Search Interchange Requests",
+                                     "Initiate Street Turn",
+                                     "Search Interchange Requests Submitted By you",
+                                     "List EP Users",
                                      "",
                                      "",
                                      "",
@@ -49,7 +50,7 @@ public class AppConstants
                                      "Logout"]
     
     let menuIconArr :[String]  = ["plus","search","plus","search","plus","search","search","","","","","","","","","","","","","","logout"]
-    let menuSegueArr :[String]  = ["NotifAvailSegue","NotifAvailSearchSegue", "InitiateInterchangeSegue", "SearchInterchangeReqSegue", "InitiateStreetTurnReqSegue", "WorkDoneByTPUSegue", "ListEPUserSegue" , "", "", "", "", "", "", "", "", "", "", "", "", "", "LogoutSegue"]
+    let menuSegueArr :[String]  = ["notifAvailSegue","notifAvailSearchSegue", "initiateInterchangeSegue", "searchInterchangeReqSegue", "initiateStreetTurnReqSegue", "workDoneByTPUSegue", "listEPUserSegue" , "", "", "", "", "", "", "", "", "", "", "", "", "", "logoutSegue"]
 }
 
 
