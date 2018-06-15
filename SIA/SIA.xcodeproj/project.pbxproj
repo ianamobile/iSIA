@@ -7,8 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		652BFE4F5F4514E6ED445129 /* Pods_SIA.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC20C026AC7CEBF7F8E05004 /* Pods_SIA.framework */; };
 		690036EE20A9CB4F0007E825 /* TPULoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 690036ED20A9CB4F0007E825 /* TPULoginViewController.swift */; };
-		69293B4720C158B30035E24B /* OriginalLocationSearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69293B4620C158B30035E24B /* OriginalLocationSearchTableViewCell.swift */; };
+		690982CD20CFB3B400C122AC /* Company.swift in Sources */ = {isa = PBXBuildFile; fileRef = 690982CC20CFB3B400C122AC /* Company.swift */; };
+		6911461D20C80DEA00E0D82D /* UISearchBarExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6911461C20C80DEA00E0D82D /* UISearchBarExtension.swift */; };
+		6911461F20C81CE700E0D82D /* VerifyStreetTurnDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6911461E20C81CE700E0D82D /* VerifyStreetTurnDetailsViewController.swift */; };
+		69144A9320D2830300894233 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 69144A9220D2830300894233 /* Podfile */; };
+		69293B4720C158B30035E24B /* LocationSearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69293B4620C158B30035E24B /* LocationSearchTableViewCell.swift */; };
+		693CE07320C9466C00736C4E /* SIADetailsDataTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693CE07020C9466C00736C4E /* SIADetailsDataTableViewCell.swift */; };
+		693CE07520C9466C00736C4E /* SIADetailsTitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693CE07220C9466C00736C4E /* SIADetailsTitleTableViewCell.swift */; };
 		6972B88720B5A26E009B1BEC /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6972B88520B5A26E009B1BEC /* CircleView.swift */; };
 		699BDAF520A2EB870088E0E9 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699BDAF420A2EB870088E0E9 /* UIViewExtension.swift */; };
 		699BDAF720A2EDEF0088E0E9 /* MCLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699BDAF620A2EDEF0088E0E9 /* MCLoginViewController.swift */; };
@@ -55,7 +62,7 @@
 		69BC0ABF20AC39DD00560AB6 /* IDDLogin1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69BC0ABE20AC39DD00560AB6 /* IDDLogin1ViewController.swift */; };
 		69BC0AC120AC3D6A00560AB6 /* IDDLogin2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69BC0AC020AC3D6A00560AB6 /* IDDLogin2ViewController.swift */; };
 		69C8127020BFF89E00A90081 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C8126F20BFF89E00A90081 /* CardView.swift */; };
-		69C8127220C00F0800A90081 /* OriginalLocationSearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C8127120C00F0800A90081 /* OriginalLocationSearchTableViewController.swift */; };
+		69C8127220C00F0800A90081 /* LocationSearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C8127120C00F0800A90081 /* LocationSearchTableViewController.swift */; };
 		69C8127420C0383F00A90081 /* StreetTurnRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C8127320C0383F00A90081 /* StreetTurnRequestViewController.swift */; };
 		69C8127620C03E1900A90081 /* LocationSearchTableViewCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C8127520C03E1900A90081 /* LocationSearchTableViewCellDelegate.swift */; };
 		69D7DAF120BE9DD100548F5A /* LoginUITabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D7DAF020BE9DD100548F5A /* LoginUITabBarController.swift */; };
@@ -86,8 +93,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1CF940FA4AE6405EC974AA00 /* Pods-SIA.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SIA.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SIA/Pods-SIA.debug.xcconfig"; sourceTree = "<group>"; };
+		396B337199EBE613B8AE41E4 /* Pods-SIA.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SIA.release.xcconfig"; path = "Pods/Target Support Files/Pods-SIA/Pods-SIA.release.xcconfig"; sourceTree = "<group>"; };
 		690036ED20A9CB4F0007E825 /* TPULoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TPULoginViewController.swift; sourceTree = "<group>"; };
-		69293B4620C158B30035E24B /* OriginalLocationSearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OriginalLocationSearchTableViewCell.swift; sourceTree = "<group>"; };
+		690982CC20CFB3B400C122AC /* Company.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Company.swift; sourceTree = "<group>"; };
+		6911461C20C80DEA00E0D82D /* UISearchBarExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UISearchBarExtension.swift; sourceTree = "<group>"; };
+		6911461E20C81CE700E0D82D /* VerifyStreetTurnDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyStreetTurnDetailsViewController.swift; sourceTree = "<group>"; };
+		69144A9220D2830300894233 /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
+		69293B4620C158B30035E24B /* LocationSearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchTableViewCell.swift; sourceTree = "<group>"; };
+		693CE07020C9466C00736C4E /* SIADetailsDataTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SIADetailsDataTableViewCell.swift; sourceTree = "<group>"; };
+		693CE07220C9466C00736C4E /* SIADetailsTitleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SIADetailsTitleTableViewCell.swift; sourceTree = "<group>"; };
 		6972B88520B5A26E009B1BEC /* CircleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
 		699BDAF420A2EB870088E0E9 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		699BDAF620A2EDEF0088E0E9 /* MCLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCLoginViewController.swift; sourceTree = "<group>"; };
@@ -140,7 +155,7 @@
 		69BC0ABE20AC39DD00560AB6 /* IDDLogin1ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDDLogin1ViewController.swift; sourceTree = "<group>"; };
 		69BC0AC020AC3D6A00560AB6 /* IDDLogin2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDDLogin2ViewController.swift; sourceTree = "<group>"; };
 		69C8126F20BFF89E00A90081 /* CardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
-		69C8127120C00F0800A90081 /* OriginalLocationSearchTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OriginalLocationSearchTableViewController.swift; sourceTree = "<group>"; };
+		69C8127120C00F0800A90081 /* LocationSearchTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchTableViewController.swift; sourceTree = "<group>"; };
 		69C8127320C0383F00A90081 /* StreetTurnRequestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreetTurnRequestViewController.swift; sourceTree = "<group>"; };
 		69C8127520C03E1900A90081 /* LocationSearchTableViewCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchTableViewCellDelegate.swift; sourceTree = "<group>"; };
 		69D7DAF020BE9DD100548F5A /* LoginUITabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginUITabBarController.swift; sourceTree = "<group>"; };
@@ -151,6 +166,7 @@
 		69FD8C9020BBEA5800D076E4 /* DashboardTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardTableViewCell.swift; sourceTree = "<group>"; };
 		69FD8C9220BBEA6300D076E4 /* DashboardTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardTableViewController.swift; sourceTree = "<group>"; };
 		69FD8C9620BC381C00D076E4 /* DashboardTableViewCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardTableViewCellDelegate.swift; sourceTree = "<group>"; };
+		BC20C026AC7CEBF7F8E05004 /* Pods_SIA.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SIA.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,6 +174,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				652BFE4F5F4514E6ED445129 /* Pods_SIA.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -181,10 +198,13 @@
 		69BBE8D0209B0A69008F1913 = {
 			isa = PBXGroup;
 			children = (
+				69144A9220D2830300894233 /* Podfile */,
 				69BBE8DB209B0A69008F1913 /* SIA */,
 				69BBE8F3209B0A69008F1913 /* SIATests */,
 				69BBE8FE209B0A69008F1913 /* SIAUITests */,
 				69BBE8DA209B0A69008F1913 /* Products */,
+				FCBA9F9B716A5AE43C4407DC /* Pods */,
+				961B5A44F942482341CAD198 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -274,10 +294,10 @@
 				690036ED20A9CB4F0007E825 /* TPULoginViewController.swift */,
 				69BC0ABE20AC39DD00560AB6 /* IDDLogin1ViewController.swift */,
 				69BC0AC020AC3D6A00560AB6 /* IDDLogin2ViewController.swift */,
-				69C8127120C00F0800A90081 /* OriginalLocationSearchTableViewController.swift */,
+				69C8127120C00F0800A90081 /* LocationSearchTableViewController.swift */,
 				69C8127320C0383F00A90081 /* StreetTurnRequestViewController.swift */,
-				69293B4620C158B30035E24B /* OriginalLocationSearchTableViewCell.swift */,
 				69B374F920C6C95300D9FB8D /* StreetInterchangeViewController.swift */,
+				6911461E20C81CE700E0D82D /* VerifyStreetTurnDetailsViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -285,6 +305,9 @@
 		69BBE910209B0DD5008F1913 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				69293B4620C158B30035E24B /* LocationSearchTableViewCell.swift */,
+				693CE07020C9466C00736C4E /* SIADetailsDataTableViewCell.swift */,
+				693CE07220C9466C00736C4E /* SIADetailsTitleTableViewCell.swift */,
 				69FD8C9020BBEA5800D076E4 /* DashboardTableViewCell.swift */,
 				6972B88520B5A26E009B1BEC /* CircleView.swift */,
 				69BBE915209B0EBE008F1913 /* DesignableUITextField.swift */,
@@ -293,6 +316,7 @@
 				699BDAF420A2EB870088E0E9 /* UIViewExtension.swift */,
 				69FD8C9620BC381C00D076E4 /* DashboardTableViewCellDelegate.swift */,
 				69C8127520C03E1900A90081 /* LocationSearchTableViewCellDelegate.swift */,
+				6911461C20C80DEA00E0D82D /* UISearchBarExtension.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -305,6 +329,7 @@
 				69BBE93D209B0F20008F1913 /* Pagination.swift */,
 				69BBE93C209B0F1F008F1913 /* SearchDVIRDetailsResponse.swift */,
 				69BBE93E209B0F20008F1913 /* UserDetails.swift */,
+				690982CC20CFB3B400C122AC /* Company.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -329,6 +354,23 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		961B5A44F942482341CAD198 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BC20C026AC7CEBF7F8E05004 /* Pods_SIA.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FCBA9F9B716A5AE43C4407DC /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				1CF940FA4AE6405EC974AA00 /* Pods-SIA.debug.xcconfig */,
+				396B337199EBE613B8AE41E4 /* Pods-SIA.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -336,9 +378,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 69BBE904209B0A69008F1913 /* Build configuration list for PBXNativeTarget "SIA" */;
 			buildPhases = (
+				9C2F1944795973B5EFEEB7D7 /* [CP] Check Pods Manifest.lock */,
 				69BBE8D5209B0A69008F1913 /* Sources */,
 				69BBE8D6209B0A69008F1913 /* Frameworks */,
 				69BBE8D7209B0A69008F1913 /* Resources */,
+				3E7670D0B4DC5C7A871EDFE8 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -446,6 +490,7 @@
 				69BBE92B209B0EFA008F1913 /* RobotoCondensed-Bold.ttf in Resources */,
 				69BBE8E7209B0A69008F1913 /* Assets.xcassets in Resources */,
 				69BBE932209B0EFA008F1913 /* Roboto-Regular.ttf in Resources */,
+				69144A9320D2830300894233 /* Podfile in Resources */,
 				69BBE938209B0EFA008F1913 /* Roboto-Thin.ttf in Resources */,
 				69BBE92F209B0EFA008F1913 /* Roboto-Bold.ttf in Resources */,
 				69BBE92D209B0EFA008F1913 /* Roboto-Italic.ttf in Resources */,
@@ -476,6 +521,51 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		3E7670D0B4DC5C7A871EDFE8 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-SIA/Pods-SIA-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Canvas/Canvas.framework",
+				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/Material/Material.framework",
+				"${BUILT_PRODUCTS_DIR}/Motion/Motion.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Canvas.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Material.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Motion.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SIA/Pods-SIA-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9C2F1944795973B5EFEEB7D7 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SIA-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		69BBE8D5209B0A69008F1913 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -485,17 +575,21 @@
 				69BBE917209B0EBE008F1913 /* DesignableUITextField.swift in Sources */,
 				69E814FD20A460AB0076A118 /* SECForgotPasswordViewController.swift in Sources */,
 				69C8127620C03E1900A90081 /* LocationSearchTableViewCellDelegate.swift in Sources */,
+				6911461D20C80DEA00E0D82D /* UISearchBarExtension.swift in Sources */,
 				69BBE945209B0F20008F1913 /* LocationDetails.swift in Sources */,
+				6911461F20C81CE700E0D82D /* VerifyStreetTurnDetailsViewController.swift in Sources */,
 				69BC0AC120AC3D6A00560AB6 /* IDDLogin2ViewController.swift in Sources */,
 				69FD8C9120BBEA5900D076E4 /* DashboardTableViewCell.swift in Sources */,
 				69FD8C9320BBEA6300D076E4 /* DashboardTableViewController.swift in Sources */,
+				693CE07520C9466C00736C4E /* SIADetailsTitleTableViewCell.swift in Sources */,
 				69BBE943209B0F20008F1913 /* UserDetails.swift in Sources */,
 				69BBE94F209B11AF008F1913 /* NoInternetViewController.swift in Sources */,
 				69B374FA20C6C95300D9FB8D /* StreetInterchangeViewController.swift in Sources */,
 				69C8127020BFF89E00A90081 /* CardView.swift in Sources */,
 				69BBE94B209B0F34008F1913 /* ValidationUtils.swift in Sources */,
-				69293B4720C158B30035E24B /* OriginalLocationSearchTableViewCell.swift in Sources */,
+				69293B4720C158B30035E24B /* LocationSearchTableViewCell.swift in Sources */,
 				699BDAFB20A334130088E0E9 /* SECUserLoginViewController.swift in Sources */,
+				690982CD20CFB3B400C122AC /* Company.swift in Sources */,
 				69E814FB20A45C4B0076A118 /* ForgotPasswordViewController.swift in Sources */,
 				6972B88720B5A26E009B1BEC /* CircleView.swift in Sources */,
 				690036EE20A9CB4F0007E825 /* TPULoginViewController.swift in Sources */,
@@ -509,11 +603,12 @@
 				699BDAF920A308D00088E0E9 /* EPLoginViewController.swift in Sources */,
 				69D7DAF120BE9DD100548F5A /* LoginUITabBarController.swift in Sources */,
 				69BBE916209B0EBE008F1913 /* UITextFieldExtension.swift in Sources */,
-				69C8127220C00F0800A90081 /* OriginalLocationSearchTableViewController.swift in Sources */,
+				69C8127220C00F0800A90081 /* LocationSearchTableViewController.swift in Sources */,
 				69BC0ABF20AC39DD00560AB6 /* IDDLogin1ViewController.swift in Sources */,
 				69BBE8DD209B0A69008F1913 /* AppDelegate.swift in Sources */,
 				69BBE94D209B0F34008F1913 /* AppConstants.swift in Sources */,
 				69BBE94C209B0F34008F1913 /* TestMain.swift in Sources */,
+				693CE07320C9466C00736C4E /* SIADetailsDataTableViewCell.swift in Sources */,
 				699BDAF720A2EDEF0088E0E9 /* MCLoginViewController.swift in Sources */,
 				69BBE8E5209B0A69008F1913 /* SIA.xcdatamodeld in Sources */,
 				69FD8C9720BC381C00D076E4 /* DashboardTableViewCellDelegate.swift in Sources */,
@@ -686,6 +781,7 @@
 		};
 		69BBE905209B0A69008F1913 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1CF940FA4AE6405EC974AA00 /* Pods-SIA.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -701,6 +797,7 @@
 		};
 		69BBE906209B0A69008F1913 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 396B337199EBE613B8AE41E4 /* Pods-SIA.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

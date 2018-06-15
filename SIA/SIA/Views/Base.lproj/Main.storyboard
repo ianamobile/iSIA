@@ -137,6 +137,7 @@
                                                                     <userDefinedRuntimeAttribute type="number" keyPath="topPadding">
                                                                         <real key="value" value="-10"/>
                                                                     </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
                                                                 </userDefinedRuntimeAttributes>
                                                             </textField>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SCAC" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0S6-CM-Syw">
@@ -174,6 +175,7 @@
                                                                     <userDefinedRuntimeAttribute type="number" keyPath="topPadding">
                                                                         <real key="value" value="-10"/>
                                                                     </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
                                                                 </userDefinedRuntimeAttributes>
                                                             </textField>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PASSWORD" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uAn-BX-c4F">
@@ -209,7 +211,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p1V-aI-fmp">
-                                                        <rect key="frame" x="74" y="306" width="140" height="21"/>
+                                                        <rect key="frame" x="74.5" y="306" width="139" height="21"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="21" id="mNR-IA-g5T"/>
                                                         </constraints>
@@ -341,6 +343,7 @@
                                                                     <userDefinedRuntimeAttribute type="number" keyPath="topPadding">
                                                                         <real key="value" value="-10"/>
                                                                     </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
                                                                 </userDefinedRuntimeAttributes>
                                                             </textField>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SCAC" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pSc-nb-2t0">
@@ -378,6 +381,7 @@
                                                                     <userDefinedRuntimeAttribute type="number" keyPath="topPadding">
                                                                         <real key="value" value="-10"/>
                                                                     </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
                                                                 </userDefinedRuntimeAttributes>
                                                             </textField>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="IDD PIN" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vMl-37-vLm">
@@ -532,6 +536,7 @@
                                                                     <userDefinedRuntimeAttribute type="number" keyPath="topPadding">
                                                                         <real key="value" value="-10"/>
                                                                     </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
                                                                 </userDefinedRuntimeAttributes>
                                                             </textField>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="USERNAME" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o9y-fq-BTm">
@@ -569,6 +574,7 @@
                                                                     <userDefinedRuntimeAttribute type="number" keyPath="topPadding">
                                                                         <real key="value" value="-10"/>
                                                                     </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
                                                                 </userDefinedRuntimeAttributes>
                                                             </textField>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PASSWORD" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="664-aw-L6z">
@@ -604,7 +610,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V2g-hT-9k0">
-                                                        <rect key="frame" x="158" y="306" width="130" height="20"/>
+                                                        <rect key="frame" x="160" y="306" width="128" height="20"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="20" id="x51-4E-qkR"/>
                                                         </constraints>
@@ -625,7 +631,7 @@
                                                         </state>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KA6-Hu-s1O">
-                                                        <rect key="frame" x="0.0" y="306" width="140" height="20"/>
+                                                        <rect key="frame" x="0.0" y="306" width="139" height="20"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="20" id="bGp-yS-NiE"/>
                                                         </constraints>
@@ -754,7 +760,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E1W-r6-3LD">
-                                                        <rect key="frame" x="74" y="306" width="140" height="21"/>
+                                                        <rect key="frame" x="74.5" y="306" width="139" height="21"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="21" id="swj-XQ-kFe"/>
                                                         </constraints>
@@ -781,6 +787,7 @@
                                                                     <userDefinedRuntimeAttribute type="number" keyPath="topPadding">
                                                                         <real key="value" value="-10"/>
                                                                     </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
                                                                 </userDefinedRuntimeAttributes>
                                                             </textField>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SCAC" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9ft-Kg-owq">
@@ -818,6 +825,7 @@
                                                                     <userDefinedRuntimeAttribute type="number" keyPath="topPadding">
                                                                         <real key="value" value="-10"/>
                                                                     </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
                                                                 </userDefinedRuntimeAttributes>
                                                             </textField>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PASSWORD" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CSR-LP-tx4">
@@ -981,6 +989,7 @@
                                                                     <userDefinedRuntimeAttribute type="number" keyPath="topPadding">
                                                                         <real key="value" value="-10"/>
                                                                     </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
                                                                 </userDefinedRuntimeAttributes>
                                                             </textField>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SCAC" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iMZ-0d-LKR">
@@ -1018,6 +1027,7 @@
                                                                     <userDefinedRuntimeAttribute type="number" keyPath="topPadding">
                                                                         <real key="value" value="-10"/>
                                                                     </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
                                                                 </userDefinedRuntimeAttributes>
                                                             </textField>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="USERNAME" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fj2-Xq-KfE">
@@ -1055,6 +1065,7 @@
                                                                     <userDefinedRuntimeAttribute type="number" keyPath="topPadding">
                                                                         <real key="value" value="-10"/>
                                                                     </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
                                                                 </userDefinedRuntimeAttributes>
                                                             </textField>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PASSWORD" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1eJ-6L-NPD">
@@ -1090,7 +1101,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yQL-ih-hfV">
-                                                        <rect key="frame" x="74" y="379" width="140" height="15"/>
+                                                        <rect key="frame" x="74.5" y="379" width="139" height="15"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="15" id="fBN-hH-K1U"/>
                                                         </constraints>
@@ -1207,6 +1218,7 @@
                                                                     <userDefinedRuntimeAttribute type="number" keyPath="topPadding">
                                                                         <real key="value" value="-10"/>
                                                                     </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
                                                                 </userDefinedRuntimeAttributes>
                                                             </textField>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SCAC" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pxY-5q-H7J">
@@ -1242,7 +1254,7 @@
                                                         </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Forgot Your Password?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="as2-H3-mrn">
-                                                        <rect key="frame" x="66" y="81" width="157" height="20"/>
+                                                        <rect key="frame" x="66.5" y="81" width="156" height="20"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="20" id="NVi-Fe-pti"/>
                                                         </constraints>
@@ -1403,6 +1415,7 @@
                                                                     <userDefinedRuntimeAttribute type="number" keyPath="topPadding">
                                                                         <real key="value" value="-10"/>
                                                                     </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
                                                                 </userDefinedRuntimeAttributes>
                                                             </textField>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SCAC" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WIo-PF-SlZ">
@@ -1440,6 +1453,7 @@
                                                                     <userDefinedRuntimeAttribute type="number" keyPath="topPadding">
                                                                         <real key="value" value="-10"/>
                                                                     </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
                                                                 </userDefinedRuntimeAttributes>
                                                             </textField>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="USERNAME" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Int-dC-lAm">
@@ -1475,7 +1489,7 @@
                                                         </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Forgot Your Password?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V35-R1-fF0">
-                                                        <rect key="frame" x="66" y="77" width="157" height="20"/>
+                                                        <rect key="frame" x="66.5" y="77" width="156" height="20"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="20" id="TC8-Ci-t0y"/>
                                                         </constraints>
@@ -2434,13 +2448,13 @@
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notification of Available Equipment" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ldm-xB-pxn">
-                                                <rect key="frame" x="41.5" y="17" width="238.5" height="20"/>
+                                                <rect key="frame" x="41.5" y="17" width="237" height="20"/>
                                                 <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="15"/>
                                                 <color key="textColor" red="0.92941176469999998" green="0.39607843139999999" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Original Interchange Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ifS-Pm-Xqa">
-                                                <rect key="frame" x="60.5" y="1429" width="199.5" height="20"/>
+                                                <rect key="frame" x="61.5" y="1429" width="198" height="20"/>
                                                 <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="15"/>
                                                 <color key="textColor" red="0.92941176469999998" green="0.39607843139999999" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -2601,6 +2615,7 @@
                                                                     <userDefinedRuntimeAttribute type="number" keyPath="topPadding">
                                                                         <real key="value" value="-10"/>
                                                                     </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
                                                                 </userDefinedRuntimeAttributes>
                                                             </textField>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="USERNAME" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u1E-rY-SKd">
@@ -2636,7 +2651,7 @@
                                                         </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Forgot Your Password?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C6C-5d-CJM">
-                                                        <rect key="frame" x="66" y="81" width="157" height="20"/>
+                                                        <rect key="frame" x="66.5" y="81" width="156" height="20"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="20" id="bFv-BK-GhY"/>
                                                         </constraints>
@@ -2763,6 +2778,7 @@
                                                                     <userDefinedRuntimeAttribute type="number" keyPath="topPadding">
                                                                         <real key="value" value="-10"/>
                                                                     </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
                                                                 </userDefinedRuntimeAttributes>
                                                             </textField>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="EMAIL" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="39p-RE-qxo">
@@ -2805,7 +2821,7 @@
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Forgot Your Username?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UCN-0z-thx">
-                                                        <rect key="frame" x="65" y="81" width="159" height="20"/>
+                                                        <rect key="frame" x="66" y="81" width="157.5" height="20"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="20" id="dtP-dp-Vhv"/>
                                                         </constraints>
@@ -2946,6 +2962,7 @@
                                                                     <userDefinedRuntimeAttribute type="number" keyPath="topPadding">
                                                                         <real key="value" value="-10"/>
                                                                     </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
                                                                 </userDefinedRuntimeAttributes>
                                                             </textField>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SCAC" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Euu-ws-6Zb">
@@ -2990,6 +3007,7 @@
                                                                     <userDefinedRuntimeAttribute type="number" keyPath="topPadding">
                                                                         <real key="value" value="-10"/>
                                                                     </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
                                                                 </userDefinedRuntimeAttributes>
                                                             </textField>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DRIVER LICENSE NO" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YDP-L6-dqM">
@@ -3041,6 +3059,7 @@
                                                                     <userDefinedRuntimeAttribute type="number" keyPath="topPadding">
                                                                         <real key="value" value="-10"/>
                                                                     </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
                                                                 </userDefinedRuntimeAttributes>
                                                             </textField>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DRIVER LICENSE STATE" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SbT-UH-jA0">
@@ -3303,35 +3322,35 @@
         <!--SEARCH LOCATION-->
         <scene sceneID="D9p-Y9-cZZ">
             <objects>
-                <tableViewController id="jcN-yv-8Gx" customClass="OriginalLocationSearchTableViewController" customModule="SIA" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="jcN-yv-8Gx" customClass="LocationSearchTableViewController" customModule="SIA" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="SrX-Ob-Blw">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <searchBar key="tableHeaderView" contentMode="redraw" searchBarStyle="minimal" placeholder="Search Original Location" id="k4S-OP-LkX">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" searchBarStyle="minimal" placeholder="Search By City, Name, Zip, IANA#, SPLC#" id="k4S-OP-LkX">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="56"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <textInputTraits key="textInputTraits"/>
                         </searchBar>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="reuseIdentifier" rowHeight="152" id="LXp-28-Tzf" customClass="OriginalLocationSearchTableViewCell" customModule="SIA" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="72" width="320" height="152"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="reuseIdentifier" rowHeight="162" id="LXp-28-Tzf" customClass="LocationSearchTableViewCell" customModule="SIA" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="84" width="320" height="162"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="LXp-28-Tzf" id="FvK-Q6-cfD">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="152"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="162"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BjH-UB-JpJ" customClass="CardView" customModule="SIA" customModuleProvider="target">
-                                            <rect key="frame" x="16" y="11" width="288" height="130"/>
+                                            <rect key="frame" x="16" y="11" width="288" height="140"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LOCATION NAME" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qvf-Yk-wfq">
-                                                    <rect key="frame" x="25" y="8" width="255" height="19"/>
+                                                    <rect key="frame" x="25" y="8" width="255" height="18.5"/>
                                                     <fontDescription key="fontDescription" name="Roboto-Black" family="Roboto" pointSize="14"/>
                                                     <color key="textColor" red="0.38039215686274508" green="0.41176470588235292" blue="0.45490196078431372" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CITY :" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7su-4h-v7c">
-                                                    <rect key="frame" x="8" y="57" width="29.5" height="16"/>
+                                                    <rect key="frame" x="8" y="56.5" width="29.5" height="16"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="16" id="fD9-48-I7p"/>
                                                     </constraints>
@@ -3339,7 +3358,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ZIP CODE :" textAlignment="justified" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WPg-8H-UoE">
-                                                    <rect key="frame" x="25" y="31" width="54" height="16"/>
+                                                    <rect key="frame" x="25" y="30.5" width="54" height="16"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="16" id="Lvq-BF-rfl"/>
                                                     </constraints>
@@ -3347,7 +3366,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ADDRESS" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WYJ-5E-CAQ">
-                                                    <rect key="frame" x="70" y="97" width="210" height="16"/>
+                                                    <rect key="frame" x="70" y="96.5" width="210" height="16"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="210" id="uoI-fG-Is9"/>
                                                     </constraints>
@@ -3356,7 +3375,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ZIP CODE" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B1l-GE-OX4">
-                                                    <rect key="frame" x="86" y="31" width="48" height="16"/>
+                                                    <rect key="frame" x="86" y="30.5" width="48" height="16"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="16" id="kmL-cb-6KP"/>
                                                     </constraints>
@@ -3365,7 +3384,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CITY" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="miz-2H-932">
-                                                    <rect key="frame" x="46" y="57" width="234" height="16"/>
+                                                    <rect key="frame" x="46" y="56.5" width="234" height="16"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="16" id="PJ6-4y-Fy5"/>
                                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="234" id="dRE-Qa-AuC"/>
@@ -3375,7 +3394,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ADDRESS :" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mtV-Eb-qW8">
-                                                    <rect key="frame" x="8" y="97" width="55" height="16"/>
+                                                    <rect key="frame" x="8" y="96.5" width="55" height="16"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="16" id="J6m-0Q-Fdy"/>
                                                     </constraints>
@@ -3391,7 +3410,7 @@
                                                     </constraints>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="STATE :" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sCg-2g-8hK">
-                                                    <rect key="frame" x="221.5" y="31" width="38.5" height="16"/>
+                                                    <rect key="frame" x="221.5" y="30.5" width="38.5" height="16"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="16" id="LzS-Vp-XN6"/>
                                                     </constraints>
@@ -3399,7 +3418,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CA" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wy8-kW-bsj">
-                                                    <rect key="frame" x="265.5" y="31" width="14.5" height="16"/>
+                                                    <rect key="frame" x="265.5" y="30.5" width="14.5" height="16"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="16" id="L8Q-iB-Bl1"/>
                                                     </constraints>
@@ -3407,17 +3426,16 @@
                                                     <color key="textColor" red="0.92941176469999998" green="0.39607843139999999" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="IANA # :" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DQF-PE-t7m">
-                                                    <rect key="frame" x="8" y="77" width="40.5" height="16"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="IANA # :" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DQF-PE-t7m">
+                                                    <rect key="frame" x="8" y="76.5" width="40.5" height="16"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="40.5" id="5e3-9H-emL"/>
                                                         <constraint firstAttribute="height" constant="16" id="A19-fs-1Ng"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="11"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12345678910" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jXd-qz-ywD">
-                                                    <rect key="frame" x="204" y="77" width="76" height="16"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="12345678910" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jXd-qz-ywD">
+                                                    <rect key="frame" x="206.5" y="76.5" width="73.5" height="16"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="16" id="t3a-Rp-0yP"/>
                                                     </constraints>
@@ -3425,16 +3443,16 @@
                                                     <color key="textColor" red="0.92941176469999998" green="0.39607843139999999" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SPLC # :" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KIM-4X-ehR">
-                                                    <rect key="frame" x="155" y="77" width="42" height="16"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="SPLC # :" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KIM-4X-ehR">
+                                                    <rect key="frame" x="155.5" y="76.5" width="44" height="16"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="16" id="tLQ-U5-f9W"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="11"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12345678901" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lZ1-F7-vxf">
-                                                    <rect key="frame" x="55.5" y="77" width="76" height="16"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="12345678901" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lZ1-F7-vxf">
+                                                    <rect key="frame" x="55.5" y="76.5" width="76" height="16"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="16" id="7N0-Sj-hyn"/>
                                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="76" id="ero-E5-jhk"/>
@@ -3467,7 +3485,7 @@
                                                 <constraint firstItem="WYJ-5E-CAQ" firstAttribute="leading" secondItem="mtV-Eb-qW8" secondAttribute="trailing" constant="7" id="OrR-FX-h0e"/>
                                                 <constraint firstItem="sCg-2g-8hK" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="B1l-GE-OX4" secondAttribute="trailing" constant="87.5" id="Raj-IM-8GS"/>
                                                 <constraint firstItem="B1l-GE-OX4" firstAttribute="top" secondItem="Qvf-Yk-wfq" secondAttribute="bottom" constant="4" id="V2D-3T-uwH"/>
-                                                <constraint firstAttribute="height" constant="130" id="YFC-sv-575"/>
+                                                <constraint firstAttribute="height" constant="140" id="YFC-sv-575"/>
                                                 <constraint firstItem="miz-2H-932" firstAttribute="top" secondItem="WPg-8H-UoE" secondAttribute="bottom" constant="10" id="ZNM-Lv-B38"/>
                                                 <constraint firstAttribute="trailing" secondItem="Qvf-Yk-wfq" secondAttribute="trailing" constant="8" id="cnP-aV-n0E"/>
                                                 <constraint firstItem="DQF-PE-t7m" firstAttribute="top" secondItem="7su-4h-v7c" secondAttribute="bottom" constant="4" id="dGB-cb-O26"/>
@@ -3559,8 +3577,8 @@
                                 <rect key="frame" x="0.0" y="1264" width="320" height="49"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <items>
-                                    <tabBarItem title="NEXT" image="next_tab" id="0y1-Tm-l3f"/>
-                                    <tabBarItem title="CANCEL" image="cancel" id="wxk-fT-zcy"/>
+                                    <tabBarItem tag="1" title="NEXT" image="next_tab" id="0y1-Tm-l3f"/>
+                                    <tabBarItem tag="2" title="CANCEL" image="cancel" id="wxk-fT-zcy"/>
                                 </items>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="unselectedItemTintColor">
@@ -3573,6 +3591,9 @@
                                         <color key="value" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <outlet property="delegate" destination="46v-6c-s1h" id="cRY-bG-gFM"/>
+                                </connections>
                             </tabBar>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="504-ra-QGI">
                                 <rect key="frame" x="0.0" y="64" width="320" height="1200"/>
@@ -3597,6 +3618,7 @@
                                                             <userDefinedRuntimeAttribute type="number" keyPath="topPadding">
                                                                 <real key="value" value="-10"/>
                                                             </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MOTOR CARRIER NAME" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ugM-bd-Dwy">
@@ -3634,6 +3656,7 @@
                                                             <userDefinedRuntimeAttribute type="number" keyPath="topPadding">
                                                                 <real key="value" value="-10"/>
                                                             </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MOTOR CARRIER SCAC" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1m0-BW-HfA">
@@ -3671,6 +3694,7 @@
                                                             <userDefinedRuntimeAttribute type="number" keyPath="topPadding">
                                                                 <real key="value" value="-10"/>
                                                             </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CONTAINER PROVIDER NAME" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7u3-UM-d9g">
@@ -3708,6 +3732,7 @@
                                                             <userDefinedRuntimeAttribute type="number" keyPath="topPadding">
                                                                 <real key="value" value="-10"/>
                                                             </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CONTAINER PROVIDER SCAC" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RTd-BN-mtC">
@@ -3745,6 +3770,7 @@
                                                             <userDefinedRuntimeAttribute type="number" keyPath="topPadding">
                                                                 <real key="value" value="-10"/>
                                                             </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CONTAINER NUMBER" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9mw-Ue-pxZ">
@@ -3782,6 +3808,7 @@
                                                             <userDefinedRuntimeAttribute type="number" keyPath="topPadding">
                                                                 <real key="value" value="-10"/>
                                                             </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CHASSIS NUMBER" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="07J-yO-D4O">
@@ -3819,6 +3846,7 @@
                                                             <userDefinedRuntimeAttribute type="number" keyPath="topPadding">
                                                                 <real key="value" value="-10"/>
                                                             </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CHASSIS IEP SCAC" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hff-jw-9F2">
@@ -3840,7 +3868,7 @@
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Street Turn Details" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eDt-fr-pei">
-                                                <rect key="frame" x="97" y="14" width="126" height="20"/>
+                                                <rect key="frame" x="98.5" y="14" width="124.5" height="20"/>
                                                 <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="15"/>
                                                 <color key="textColor" red="0.92941176469999998" green="0.39607843139999999" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -3862,6 +3890,7 @@
                                                             <userDefinedRuntimeAttribute type="number" keyPath="topPadding">
                                                                 <real key="value" value="-10"/>
                                                             </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="EXPORT BOOKING NUMBER" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vVe-vA-tAh">
@@ -3899,6 +3928,7 @@
                                                             <userDefinedRuntimeAttribute type="number" keyPath="topPadding">
                                                                 <real key="value" value="-10"/>
                                                             </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="IMPORT B/L" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ICs-o4-dxd">
@@ -3936,6 +3966,7 @@
                                                             <userDefinedRuntimeAttribute type="number" keyPath="topPadding">
                                                                 <real key="value" value="-10"/>
                                                             </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ZIP CODE" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SrR-cm-XJi">
@@ -3974,6 +4005,7 @@
                                                             <userDefinedRuntimeAttribute type="number" keyPath="topPadding">
                                                                 <real key="value" value="-10"/>
                                                             </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LOCATION NAME" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3jt-tD-NeI">
@@ -4011,6 +4043,7 @@
                                                             <userDefinedRuntimeAttribute type="number" keyPath="topPadding">
                                                                 <real key="value" value="-10"/>
                                                             </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LOCATION ADDRESS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ggQ-By-zqG">
@@ -4048,6 +4081,7 @@
                                                             <userDefinedRuntimeAttribute type="number" keyPath="topPadding">
                                                                 <real key="value" value="-10"/>
                                                             </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CITY" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f9J-dt-aeF">
@@ -4085,6 +4119,7 @@
                                                             <userDefinedRuntimeAttribute type="number" keyPath="topPadding">
                                                                 <real key="value" value="-10"/>
                                                             </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="STATE" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RvP-UX-HE0">
@@ -4106,7 +4141,7 @@
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Original Interchange Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DmX-OP-Alh">
-                                                <rect key="frame" x="61" y="720" width="199.5" height="20"/>
+                                                <rect key="frame" x="61.5" y="720" width="198" height="20"/>
                                                 <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="15"/>
                                                 <color key="textColor" red="0.92941176469999998" green="0.39607843139999999" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -4124,7 +4159,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
-                                                    <action selector="searchButtonTapped:" destination="46v-6c-s1h" eventType="touchUpInside" id="71l-V5-OE6"/>
+                                                    <action selector="searchButtonTapped:" destination="46v-6c-s1h" eventType="touchUpInside" id="Mmj-7Z-oum"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -4214,6 +4249,7 @@
                     </navigationItem>
                     <size key="freeformSize" width="320" height="1313"/>
                     <connections>
+                        <outlet property="streetTurnTabBar" destination="1bl-jw-k1T" id="hIz-7z-rYK"/>
                         <outlet property="txtChassisIEPScac" destination="gMp-Vx-bmt" id="ZUd-mu-XW6"/>
                         <outlet property="txtChassisNum" destination="ct5-ua-hkG" id="U79-S3-P7m"/>
                         <outlet property="txtCity" destination="Rfx-Hb-Gma" id="9GG-co-i1v"/>
@@ -4229,6 +4265,7 @@
                         <outlet property="txtState" destination="66A-h2-RGp" id="qxg-bU-B3q"/>
                         <outlet property="txtZipCode" destination="4OM-P8-pby" id="0pn-by-86q"/>
                         <segue destination="jcN-yv-8Gx" kind="show" identifier="searchOriginalLocSegue" id="H6h-Uj-1kV"/>
+                        <segue destination="0AY-lC-jOY" kind="show" identifier="streetTurnVerifyPageSegue" id="2qJ-M4-6Ds"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TQ3-w5-Gfb" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -4285,6 +4322,7 @@
                                                             <userDefinedRuntimeAttribute type="number" keyPath="topPadding">
                                                                 <real key="value" value="-10"/>
                                                             </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CONTAINER PROVIDER NAME" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KDy-f5-k3A">
@@ -4322,6 +4360,7 @@
                                                             <userDefinedRuntimeAttribute type="number" keyPath="topPadding">
                                                                 <real key="value" value="-10"/>
                                                             </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CONTAINER PROVIDER SCAC" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0S7-cv-hOe">
@@ -4359,6 +4398,7 @@
                                                             <userDefinedRuntimeAttribute type="number" keyPath="topPadding">
                                                                 <real key="value" value="-10"/>
                                                             </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MOTOR CARRIER A'S NAME" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cgf-Ub-PNb">
@@ -4396,6 +4436,7 @@
                                                             <userDefinedRuntimeAttribute type="number" keyPath="topPadding">
                                                                 <real key="value" value="-10"/>
                                                             </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MOTOR CARRIER A'S SCAC" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dE0-Eb-aYj">
@@ -4433,6 +4474,7 @@
                                                             <userDefinedRuntimeAttribute type="number" keyPath="topPadding">
                                                                 <real key="value" value="-10"/>
                                                             </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TYPE OF INTERCHANGE" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GYw-dY-ybi">
@@ -4470,6 +4512,7 @@
                                                             <userDefinedRuntimeAttribute type="number" keyPath="topPadding">
                                                                 <real key="value" value="-10"/>
                                                             </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CONTAINER TYPE" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uxz-Kr-3fo">
@@ -4507,6 +4550,7 @@
                                                             <userDefinedRuntimeAttribute type="number" keyPath="topPadding">
                                                                 <real key="value" value="-10"/>
                                                             </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CONTAINER SIZE" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Usk-mn-ew6">
@@ -4528,7 +4572,7 @@
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="INITIATE INTERCHANGE REQUEST" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yS8-T0-WTa">
-                                                <rect key="frame" x="43.5" y="17" width="234.5" height="20"/>
+                                                <rect key="frame" x="43.5" y="17" width="233" height="20"/>
                                                 <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="15"/>
                                                 <color key="textColor" red="0.92941176469999998" green="0.39607843139999999" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -4550,6 +4594,7 @@
                                                             <userDefinedRuntimeAttribute type="number" keyPath="topPadding">
                                                                 <real key="value" value="-10"/>
                                                             </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MOTOR CARRIER B'S NAME" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K7X-Pt-iOb">
@@ -4587,6 +4632,7 @@
                                                             <userDefinedRuntimeAttribute type="number" keyPath="topPadding">
                                                                 <real key="value" value="-10"/>
                                                             </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MOTOR CARRIER B'S SCAC" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qeZ-1Q-Sv3">
@@ -4624,6 +4670,7 @@
                                                             <userDefinedRuntimeAttribute type="number" keyPath="topPadding">
                                                                 <real key="value" value="-10"/>
                                                             </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CONTAINER NUMBER" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ozg-pq-r6D">
@@ -4661,6 +4708,7 @@
                                                             <userDefinedRuntimeAttribute type="number" keyPath="topPadding">
                                                                 <real key="value" value="-10"/>
                                                             </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="EXPORT BOOKING NUMBER" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bDd-5u-WTF">
@@ -4698,6 +4746,7 @@
                                                             <userDefinedRuntimeAttribute type="number" keyPath="topPadding">
                                                                 <real key="value" value="-10"/>
                                                             </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="IMPORT B/L" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gzn-GK-iIm">
@@ -4735,6 +4784,7 @@
                                                             <userDefinedRuntimeAttribute type="number" keyPath="topPadding">
                                                                 <real key="value" value="-10"/>
                                                             </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CHASSIS NUMBER" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9ia-iw-PaI">
@@ -4772,6 +4822,7 @@
                                                             <userDefinedRuntimeAttribute type="number" keyPath="topPadding">
                                                                 <real key="value" value="-10"/>
                                                             </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CHASSIS IEP SCAC" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9K8-Lt-GiK">
@@ -4809,6 +4860,7 @@
                                                             <userDefinedRuntimeAttribute type="number" keyPath="topPadding">
                                                                 <real key="value" value="-10"/>
                                                             </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CHASSIS TYPE" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ltm-KW-GMb">
@@ -4846,6 +4898,7 @@
                                                             <userDefinedRuntimeAttribute type="number" keyPath="topPadding">
                                                                 <real key="value" value="-10"/>
                                                             </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CHASSIS SIZE" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kvi-6G-Gnw">
@@ -4883,6 +4936,7 @@
                                                             <userDefinedRuntimeAttribute type="number" keyPath="topPadding">
                                                                 <real key="value" value="-10"/>
                                                             </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GENSET NUMBER" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="slr-uJ-Rvs">
@@ -4920,6 +4974,7 @@
                                                             <userDefinedRuntimeAttribute type="number" keyPath="topPadding">
                                                                 <real key="value" value="-10"/>
                                                             </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ZIP CODE" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mCI-yS-qbo">
@@ -4957,6 +5012,7 @@
                                                             <userDefinedRuntimeAttribute type="number" keyPath="topPadding">
                                                                 <real key="value" value="-10"/>
                                                             </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LOCATION NAME" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NFG-i7-X4C">
@@ -4994,6 +5050,7 @@
                                                             <userDefinedRuntimeAttribute type="number" keyPath="topPadding">
                                                                 <real key="value" value="-10"/>
                                                             </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LOCATION ADDRESS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SC9-Y8-KIx">
@@ -5031,6 +5088,7 @@
                                                             <userDefinedRuntimeAttribute type="number" keyPath="topPadding">
                                                                 <real key="value" value="-10"/>
                                                             </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CITY" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MVZ-nH-Cyv">
@@ -5068,10 +5126,11 @@
                                                             <userDefinedRuntimeAttribute type="number" keyPath="topPadding">
                                                                 <real key="value" value="-10"/>
                                                             </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="STATE" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="URd-KV-QV8">
-                                                        <rect key="frame" x="40" y="16" width="32.5" height="15"/>
+                                                        <rect key="frame" x="40" y="16" width="32" height="15"/>
                                                         <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="11"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
@@ -5105,6 +5164,7 @@
                                                             <userDefinedRuntimeAttribute type="number" keyPath="topPadding">
                                                                 <real key="value" value="-10"/>
                                                             </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ZIP CODE" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l7i-M4-Xfa">
@@ -5142,6 +5202,7 @@
                                                             <userDefinedRuntimeAttribute type="number" keyPath="topPadding">
                                                                 <real key="value" value="-10"/>
                                                             </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LOCATION NAME" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hBU-9e-r8M">
@@ -5179,6 +5240,7 @@
                                                             <userDefinedRuntimeAttribute type="number" keyPath="topPadding">
                                                                 <real key="value" value="-10"/>
                                                             </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LOCATION ADDRESS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DLK-pt-mVp">
@@ -5216,6 +5278,7 @@
                                                             <userDefinedRuntimeAttribute type="number" keyPath="topPadding">
                                                                 <real key="value" value="-10"/>
                                                             </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CITY" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="evY-OY-AWS">
@@ -5253,10 +5316,11 @@
                                                             <userDefinedRuntimeAttribute type="number" keyPath="topPadding">
                                                                 <real key="value" value="-10"/>
                                                             </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="STATE" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MQm-eG-a6y">
-                                                        <rect key="frame" x="40" y="16" width="32.5" height="15"/>
+                                                        <rect key="frame" x="40" y="16" width="32" height="15"/>
                                                         <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="11"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
@@ -5274,13 +5338,13 @@
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Original Interchange Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mgq-g0-40k">
-                                                <rect key="frame" x="60.5" y="1716" width="199.5" height="20"/>
+                                                <rect key="frame" x="61.5" y="1716" width="198" height="20"/>
                                                 <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="15"/>
                                                 <color key="textColor" red="0.92941176469999998" green="0.39607843139999999" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Equipment Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PEk-U1-y5f">
-                                                <rect key="frame" x="92.5" y="1305" width="135.5" height="20"/>
+                                                <rect key="frame" x="93" y="1305" width="135" height="20"/>
                                                 <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="15"/>
                                                 <color key="textColor" red="0.92941176469999998" green="0.39607843139999999" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -5298,7 +5362,6 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
-                                                    <action selector="searchButtonTapped:" destination="46v-6c-s1h" eventType="touchUpInside" id="fvx-Gz-kFO"/>
                                                     <action selector="searchButtonTapped:" destination="YnB-Na-0hZ" eventType="touchUpInside" id="hlB-zN-lOh"/>
                                                 </connections>
                                             </button>
@@ -5315,7 +5378,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
-                                                    <action selector="searchButtonTapped:" destination="46v-6c-s1h" eventType="touchUpInside" id="PS9-2z-l4l"/>
+                                                    <action selector="searchEquipLocationButtonTapped:" destination="YnB-Na-0hZ" eventType="touchUpInside" id="uF5-sb-OL7"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -5477,11 +5540,156 @@
                         <outlet property="txtOriginZipCode" destination="eXn-HT-8rN" id="5Mn-rS-phU"/>
                         <outlet property="txtTypeOfInterchange" destination="4zj-9a-3D1" id="Mvi-AA-H6S"/>
                         <segue destination="jcN-yv-8Gx" kind="show" identifier="searchOriginalLocSegue" id="MWC-jj-D2z"/>
+                        <segue destination="jcN-yv-8Gx" kind="show" identifier="searchEquipmentLocSegue" id="uIC-xP-K7g"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kxQ-Nh-j8f" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1597.5" y="2951.9366197183099"/>
+            <point key="canvasLocation" x="1618" y="2882"/>
+        </scene>
+        <!--VERIFY DETAILS-->
+        <scene sceneID="Led-EJ-20d">
+            <objects>
+                <viewController storyboardIdentifier="VerifyStreetTurnDetailsViewController" id="0AY-lC-jOY" customClass="VerifyStreetTurnDetailsViewController" customModule="SIA" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="XUs-Nw-kWw">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tabBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gJE-2c-vFL">
+                                <rect key="frame" x="0.0" y="519" width="320" height="49"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <items>
+                                    <tabBarItem title="EDIT" image="cancel" id="XUh-Ru-27V"/>
+                                    <tabBarItem title="SUBMIT" image="next_tab" id="xv6-sS-8AG"/>
+                                </items>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="unselectedItemTintColor">
+                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
+                                        <color key="value" red="0.98926466700000004" green="0.48536032439999999" blue="0.25880664590000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="barTintColor">
+                                        <color key="value" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </tabBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" directionalLockEnabled="YES" alwaysBounceVertical="YES" alwaysBounceHorizontal="YES" pagingEnabled="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="YbE-Jc-qgb">
+                                <rect key="frame" x="0.0" y="64" width="320" height="455"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="titleReuseIdentifier" rowHeight="43" id="yNh-up-FOn" customClass="SIADetailsTitleTableViewCell" customModule="SIA" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="320" height="43"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="yNh-up-FOn" id="hVW-TH-YdQ">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="42.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pp6-cg-VnV">
+                                                    <rect key="frame" x="0.0" y="0.0" width="9" height="42.5"/>
+                                                    <color key="backgroundColor" red="0.27450980390000002" green="0.69411764710000001" blue="0.38823529410000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="9" id="Znz-6R-sFX"/>
+                                                    </constraints>
+                                                </view>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Original Interchange Location" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cdq-Gk-Lju">
+                                                    <rect key="frame" x="17" y="11" width="288" height="21"/>
+                                                    <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="17"/>
+                                                    <color key="textColor" red="0.3803921569" green="0.41176470590000003" blue="0.4549019608" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="cdq-Gk-Lju" firstAttribute="trailing" secondItem="hVW-TH-YdQ" secondAttribute="trailingMargin" id="CA7-16-lei"/>
+                                                <constraint firstItem="Pp6-cg-VnV" firstAttribute="top" secondItem="hVW-TH-YdQ" secondAttribute="top" id="DAZ-J1-BNb"/>
+                                                <constraint firstItem="cdq-Gk-Lju" firstAttribute="bottom" secondItem="hVW-TH-YdQ" secondAttribute="bottomMargin" id="Mdc-lp-Dx7"/>
+                                                <constraint firstItem="cdq-Gk-Lju" firstAttribute="top" secondItem="hVW-TH-YdQ" secondAttribute="topMargin" id="XN4-lJ-aJm"/>
+                                                <constraint firstAttribute="bottom" secondItem="Pp6-cg-VnV" secondAttribute="bottom" id="lgr-J3-Itz"/>
+                                                <constraint firstItem="cdq-Gk-Lju" firstAttribute="leading" secondItem="Pp6-cg-VnV" secondAttribute="trailing" constant="8" id="r6j-as-jbT"/>
+                                                <constraint firstItem="Pp6-cg-VnV" firstAttribute="leading" secondItem="hVW-TH-YdQ" secondAttribute="leading" id="tQ5-DO-b0I"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="lblTitle" destination="cdq-Gk-Lju" id="GVH-xH-18Z"/>
+                                            <outlet property="leftView" destination="Pp6-cg-VnV" id="MHd-Py-ziz"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="dataReuseIdentifier" id="NDk-ni-dHe" customClass="SIADetailsDataTableViewCell" customModule="SIA" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="71" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="NDk-ni-dHe" id="MON-iW-XTh">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="Dh5-Qo-JFX">
+                                                    <rect key="frame" x="16" y="8" width="288" height="27.5"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MOTOR CARRIER NAME: " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pa5-V2-br8">
+                                                            <rect key="frame" x="0.0" y="0.0" width="143" height="27.5"/>
+                                                            <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="11"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MC NAME" textAlignment="right" lineBreakMode="characterWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yJ0-YN-9dE">
+                                                            <rect key="frame" x="145" y="0.0" width="143" height="27.5"/>
+                                                            <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="12"/>
+                                                            <color key="textColor" red="0.92941176469999998" green="0.39607843139999999" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstAttribute="trailing" secondItem="yJ0-YN-9dE" secondAttribute="trailing" id="9M6-CG-3wX"/>
+                                                        <constraint firstAttribute="bottom" secondItem="Pa5-V2-br8" secondAttribute="bottom" id="eSc-mZ-27l"/>
+                                                        <constraint firstItem="yJ0-YN-9dE" firstAttribute="top" secondItem="Dh5-Qo-JFX" secondAttribute="top" id="hjJ-w4-f9B"/>
+                                                        <constraint firstItem="Pa5-V2-br8" firstAttribute="leading" secondItem="Dh5-Qo-JFX" secondAttribute="leading" id="i9K-Fu-T3s"/>
+                                                        <constraint firstAttribute="bottom" secondItem="yJ0-YN-9dE" secondAttribute="bottom" id="pGM-Us-grL"/>
+                                                        <constraint firstItem="Pa5-V2-br8" firstAttribute="top" secondItem="Dh5-Qo-JFX" secondAttribute="top" id="vRl-Lb-6eX"/>
+                                                    </constraints>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="Dh5-Qo-JFX" secondAttribute="trailing" constant="16" id="EwR-cd-wFD"/>
+                                                <constraint firstAttribute="bottom" secondItem="Dh5-Qo-JFX" secondAttribute="bottom" constant="8" id="JYl-ff-GZ7"/>
+                                                <constraint firstItem="Dh5-Qo-JFX" firstAttribute="top" secondItem="MON-iW-XTh" secondAttribute="top" constant="8" id="l9r-s9-3QT"/>
+                                                <constraint firstItem="Dh5-Qo-JFX" firstAttribute="leading" secondItem="MON-iW-XTh" secondAttribute="leading" constant="16" id="paM-Ji-jMa"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="lblFieldData" destination="yJ0-YN-9dE" id="Tsl-bJ-oDu"/>
+                                            <outlet property="lblFieldName" destination="Pa5-V2-br8" id="83E-YA-WmE"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="0AY-lC-jOY" id="mf1-TP-Fph"/>
+                                    <outlet property="delegate" destination="0AY-lC-jOY" id="A8N-Pm-PDY"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.94509803920000002" green="0.96078431369999995" blue="0.97254901959999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="YbE-Jc-qgb" firstAttribute="top" secondItem="ca2-cA-ylU" secondAttribute="top" id="0TH-Wp-e4Z"/>
+                            <constraint firstItem="YbE-Jc-qgb" firstAttribute="leading" secondItem="ca2-cA-ylU" secondAttribute="leading" id="292-54-WhP"/>
+                            <constraint firstItem="gJE-2c-vFL" firstAttribute="leading" secondItem="ca2-cA-ylU" secondAttribute="leading" id="JKu-yk-JjO"/>
+                            <constraint firstItem="gJE-2c-vFL" firstAttribute="top" secondItem="YbE-Jc-qgb" secondAttribute="bottom" id="SPc-WB-26U"/>
+                            <constraint firstItem="YbE-Jc-qgb" firstAttribute="trailing" secondItem="ca2-cA-ylU" secondAttribute="trailing" id="lO7-Jx-9Sc"/>
+                            <constraint firstItem="gJE-2c-vFL" firstAttribute="bottom" secondItem="ca2-cA-ylU" secondAttribute="bottom" id="pNe-cW-BTg"/>
+                            <constraint firstItem="gJE-2c-vFL" firstAttribute="trailing" secondItem="ca2-cA-ylU" secondAttribute="trailing" id="zks-wN-Rhz"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="ca2-cA-ylU"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="VERIFY DETAILS" id="ysA-6R-QHt">
+                        <barButtonItem key="leftBarButtonItem" title="BACK" id="73j-5V-O1F">
+                            <color key="tintColor" red="0.92941176469999998" green="0.39607843139999999" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="backButtonTapped:" destination="0AY-lC-jOY" id="jb5-sN-RP1"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nwJ-s7-ls4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-225" y="4137.6760563380285"/>
         </scene>
     </scenes>
     <resources>
@@ -5511,9 +5719,9 @@
         <image name="user" width="20" height="21"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="3nU-uv-6fG"/>
-        <segue reference="MWC-jj-D2z"/>
-        <segue reference="AfH-nZ-kYf"/>
-        <segue reference="3FF-JX-D0J"/>
+        <segue reference="tqE-L4-b7g"/>
+        <segue reference="H6h-Uj-1kV"/>
+        <segue reference="aqN-Nj-VGv"/>
+        <segue reference="Rmz-mP-bBd"/>
     </inferredMetricsTieBreakers>
 </document>

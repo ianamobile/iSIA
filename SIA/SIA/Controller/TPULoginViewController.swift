@@ -26,11 +26,6 @@ class TPULoginViewController: UIViewController, UITextFieldDelegate {
         txtUserName.delegate = self
         txtPassword.delegate = self
         
-        
-        //dismiss the keyboard
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        view.addGestureRecognizer(tap)
-        
         //Go to next field on return key
         UITextField.connectFields(fields: [txtUserName,txtPassword])
         

@@ -1,5 +1,5 @@
 //
-//  OriginalLocationSearchTableViewCell.swift
+//  LocationSearchTableViewCell.swift
 //  SIA
 //
 //  Created by Piyush Panchal on 6/1/18.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class OriginalLocationSearchTableViewCell: UITableViewCell {
+class LocationSearchTableViewCell: UITableViewCell {
 
     
     @IBOutlet weak var leftColoredView: UIView!

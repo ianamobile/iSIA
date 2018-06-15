@@ -8,7 +8,7 @@
 
 import UIKit
 
-class OriginalLocationSearchTableViewController: UITableViewController, UISearchBarDelegate {
+class LocationSearchTableViewController: UITableViewController, UISearchBarDelegate {
    
     // variables which are necessory for all the controllers
     typealias au = ApplicationUtils
@@ -22,11 +22,13 @@ class OriginalLocationSearchTableViewController: UITableViewController, UISearch
     var searchArr : [IANALocationInfo] = []
     
     var epScac :String?
+    var originFrom :String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         searchBar.delegate = self
-        callSearchLocationAPI(searchValue: "dummy")
+        self.searchBar.addRobotoFontToSearchBar(targetSearchBar: searchBar)
+        callSearchLocationAPI(searchValue: "dummy", originFrom: originFrom!)
         
         
     }
@@ -38,7 +40,7 @@ class OriginalLocationSearchTableViewController: UITableViewController, UISearch
         view.endEditing(true)
     }
     
-    func callSearchLocationAPI(searchValue:String){
+    func callSearchLocationAPI(searchValue:String, originFrom:String){
         
         if ((vu.isNotEmptyString(stringToCheck: searchValue)  && searchValue.count >= 3)  || searchValue == "dummy")
         {
@@ -58,7 +60,13 @@ class OriginalLocationSearchTableViewController: UITableViewController, UISearch
                 let applicationUtils : ApplicationUtils = ApplicationUtils()
                 applicationUtils.showActivityIndicator(uiView: view)
                 
-                let urlToRequest = ac.BASE_URL + ac.FETCH_ORIGIN_LOCATION_LIST_URI + "?epScac=\(epScac!)&location=\(txtValue)"
+                var urlToRequest = ""
+                if originFrom == ac.ORIGINAL_LOCATION {
+                    urlToRequest = ac.BASE_URL + ac.FETCH_ORIGIN_LOCATION_LIST_URI + "?epScac=\(epScac!)&location=\(txtValue)"
+                }else if originFrom == ac.EQUIPMENT_LOCATION {
+                    urlToRequest = ac.BASE_URL + ac.FETCH_EQUIP_LOCATION_LIST_URI + "?location=\(txtValue)"
+                }
+                
                 //print(urlToRequest)
                 
                 
@@ -165,10 +173,10 @@ class OriginalLocationSearchTableViewController: UITableViewController, UISearch
         print("didchange: \(searchText)")
         if (vu.isNotEmptyString(stringToCheck: searchText)  && searchText.count >= 3)
         {
-            callSearchLocationAPI(searchValue: searchText)
+            callSearchLocationAPI(searchValue: searchText, originFrom: self.originFrom!)
             
         }else if vu.isEmptyString(stringToCheck: searchText){
-            callSearchLocationAPI(searchValue: "dummy")
+            callSearchLocationAPI(searchValue: "dummy", originFrom: self.originFrom!)
         }
         
     }
@@ -183,7 +191,7 @@ class OriginalLocationSearchTableViewController: UITableViewController, UISearch
 
   
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as! OriginalLocationSearchTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as! LocationSearchTableViewCell
         
         cell.selectionStyle = .none //table cell row lines removed.
       
@@ -201,7 +209,7 @@ class OriginalLocationSearchTableViewController: UITableViewController, UISearch
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("tapped..")
-        delegate?.findAndNavigateToTappedView(selectedLocation: searchArr[indexPath.row], originFrom: "OriginalLocation")
+        delegate?.findAndNavigateToTappedView(selectedLocation: searchArr[indexPath.row], originFrom: self.originFrom!)
         
         self.navigationController?.popViewController(animated: true)
         

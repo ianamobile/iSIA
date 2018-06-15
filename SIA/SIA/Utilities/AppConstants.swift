@@ -25,7 +25,12 @@ public class AppConstants
     let LOGIN_URI = "SIA/siaLogin"
     let FORGOT_PASSWORD_URI = "SIA/forgotPassword"
     let FETCH_ORIGIN_LOCATION_LIST_URI = "SIA/getOriginLocationList"
+    let FETCH_EQUIP_LOCATION_LIST_URI = "SIA/getEquipmentLocationList"
+    let GET_LIST_COMPANYNAME_SCAC = "SIA/getCompanyNameAndSCACByCompanyName"
     
+    
+    let ORIGINAL_LOCATION = "OriginalLocation"
+    let EQUIPMENT_LOCATION = "EquipmentLocation"
     
     let menuTitleArr :[String]  = [  "Notification of Available Equipment",
                                      "Search Equipment Availability",

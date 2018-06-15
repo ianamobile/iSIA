@@ -30,10 +30,6 @@ class IDDLogin1ViewController: UIViewController, UITextFieldDelegate {
         
         self.loginViewLeadingConstraint.constant = -self.loginView.frame.width
         
-        //dismiss the keyboard
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        view.addGestureRecognizer(tap)
-        
         //Go to next field on return key
         UITextField.connectFields(fields: [txtScac,txtIddPin])
         

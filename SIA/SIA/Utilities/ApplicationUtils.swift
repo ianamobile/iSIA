@@ -252,14 +252,14 @@ public class ApplicationUtils
     }
 
    class func focusTextField(uiView: UIView,textField: UITextField) {
-        self.animateTextField(uiView:  uiView, textField: textField, up:true)
+        //self.animateTextField(uiView:  uiView, textField: textField, up:true)
         //textField.layer.shadowColor = UIColor.orange.cgColor
         textField.textColor = UIColor.orange
 
     }
     
     class func blurTextField(uiView: UIView,textField: UITextField) {
-        self.animateTextField(uiView:  uiView, textField: textField, up:false)
+       // self.animateTextField(uiView:  uiView, textField: textField, up:false)
         //textField.layer.shadowColor = UIColor.gray.cgColor
         textField.textColor = UIColor.gray
         

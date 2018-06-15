@@ -30,11 +30,6 @@ class MCLoginViewController: UIViewController, UITextFieldDelegate {
         
         self.loginSecViewLeadingConstraint.constant = -self.loginSecView.frame.width
         
-        //dismiss the keyboard
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        view.addGestureRecognizer(tap)
-        
-        
         //Go to next field on return key
         UITextField.connectFields(fields: [txtScac,txtPassword])
         

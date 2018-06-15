@@ -100,27 +100,44 @@ class StreetInterchangeViewController: UIViewController , UITextFieldDelegate, L
     
     func findAndNavigateToTappedView(selectedLocation: IANALocationInfo, originFrom: String) {
         print("request came here..")
-        txtOriginZipCode.text = selectedLocation.zip
-        txtOriginLocationName.text = selectedLocation.facilityName
-        txtOriginLocationAddress.text = selectedLocation.address
-        txtOriginCity.text = selectedLocation.city
-        txtOriginState.text = selectedLocation.state
+        if originFrom  == ac.ORIGINAL_LOCATION
+        {
+            txtOriginZipCode.text = selectedLocation.zip
+            txtOriginLocationName.text = selectedLocation.facilityName
+            txtOriginLocationAddress.text = selectedLocation.address
+            txtOriginCity.text = selectedLocation.city
+            txtOriginState.text = selectedLocation.state
+        }else if originFrom == ac.EQUIPMENT_LOCATION
+        {
+            txtEquipZipCode.text = selectedLocation.zip
+            txtEquipLocationName.text = selectedLocation.facilityName
+            txtEquipLocationAddress.text = selectedLocation.address
+            txtEquipCity.text = selectedLocation.city
+            txtEquipState.text = selectedLocation.state
+        }
         
     }
     
+    @IBAction func searchEquipLocationButtonTapped(_ sender: Any) {
+        self.performSegue(withIdentifier: "searchEquipmentLocSegue", sender: self)
+    }
     @IBAction func searchButtonTapped(_ sender: Any) {
-        
         self.performSegue(withIdentifier: "searchOriginalLocSegue", sender: self)
-        
         
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "searchOriginalLocSegue"
         {
-            let vc = segue.destination as! OriginalLocationSearchTableViewController
+            let vc = segue.destination as! LocationSearchTableViewController
             vc.delegate = self
             vc.epScac = "MSCU"
-            
+            vc.originFrom = ac.ORIGINAL_LOCATION
+       
+        }else if segue.identifier == "searchEquipmentLocSegue"
+        {
+            let vc = segue.destination as! LocationSearchTableViewController
+            vc.delegate = self
+            vc.originFrom = ac.EQUIPMENT_LOCATION
         }
         
     }
