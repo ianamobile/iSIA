@@ -173,6 +173,20 @@ public class ApplicationUtils
         actInd.startAnimating()
     }
     
+    class func resignTextFieldResponder(textField :UITextField){
+        if textField.isFirstResponder{
+            textField.resignFirstResponder()
+        }
+    }
+    
+    class func resignAllTextFieldResponder(textFieldsArray: [UITextField]){
+        for sender in textFieldsArray {
+            if sender.isFirstResponder{
+                sender.resignFirstResponder()
+            }
+        }
+        
+    }
     
     
     /*

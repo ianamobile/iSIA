@@ -53,9 +53,9 @@ class AddNotifAvailRequestVC: UIViewController , UITextFieldDelegate, UITabBarDe
     var contSizeArray = [String]()
     var chassisTypeArray = [String]()
     var chassisSizeArray = [String]()
+   
     var picker = UIPickerView()
     var loadStatusPicker = UIPickerView()
-    
     var contTypePicker = UIPickerView()
     var contSizePicker = UIPickerView()
     var chassisTypePicker = UIPickerView()
@@ -64,6 +64,8 @@ class AddNotifAvailRequestVC: UIViewController , UITextFieldDelegate, UITabBarDe
     let alertTitle :String = "ADD EQUIPMENT TO POOL"
     var nextScreenMessage :String = ""
     var tabBarItemImageView: UIImageView!
+    
+    var inputTextFieldsArray = [UITextField]()
     
     
     override func viewDidLoad() {
@@ -118,6 +120,14 @@ class AddNotifAvailRequestVC: UIViewController , UITextFieldDelegate, UITabBarDe
         txtOriginCity.delegate = self
         txtOriginState.delegate = self
         
+        //if logged in user as MC
+        /*
+        let role =  UserDefaults.standard.string(forKey: "role")
+        let loggedInUserCompanyName =  UserDefaults.standard.string(forKey: "companyName")
+        let loggedInUserScac =  UserDefaults.standard.string(forKey: "scac")
+        let memType = UserDefaults.standard.string(forKey: "memType")
+        print(loggedInUserCompanyName ?? "dd")
+        */
         txtMCCompanyName.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         txtMCCompanyName.keyboardToolbar.doneBarButton.setTarget(self, action: #selector(doneButtonClicked))
         
@@ -127,13 +137,16 @@ class AddNotifAvailRequestVC: UIViewController , UITextFieldDelegate, UITabBarDe
         txtChassisNum.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         txtChassisNum.keyboardToolbar.doneBarButton.setTarget(self, action: #selector(doneButtonClicked))
         
+        inputTextFieldsArray = [txtEPCompanyName, txtMCCompanyName,
+                                txtLoadStatus, txtContNum, txtContType, txtContSize, txtChassisNum, txtChassisType, txtChassisSize,txtGensetNum, txtEquipZipCode, txtEquipLocationName, txtEquipLocationAddress, txtEquipCity, txtEquipState]
         
         //Go to next field on return key
-        UITextField.connectFields(fields: [txtEPCompanyName, txtMCCompanyName,
-                                           txtLoadStatus, txtContNum, txtContType, txtContSize, txtChassisNum, txtChassisType, txtChassisSize,txtGensetNum, txtEquipZipCode, txtEquipLocationName, txtEquipLocationAddress, txtEquipCity, txtEquipState])
+        UITextField.connectFields(fields: inputTextFieldsArray)
         
         //Setup page API call.
         setupPage()
+        
+        
         
         
     }
@@ -171,8 +184,14 @@ class AddNotifAvailRequestVC: UIViewController , UITextFieldDelegate, UITabBarDe
         
         originFrom = ""
         companyInfoArray  = []
+        /*
         picker = UIPickerView()
-        //TODO:: clear all picker view.
+        loadStatusPicker = UIPickerView()
+        contTypePicker = UIPickerView()
+        contSizePicker = UIPickerView()
+        chassisTypePicker = UIPickerView()
+        chassisSizePicker = UIPickerView()
+        */
         nextScreenMessage = ""
         
     }
@@ -827,8 +846,8 @@ class AddNotifAvailRequestVC: UIViewController , UITextFieldDelegate, UITabBarDe
         
         if item.tag == 1 {
             //next button tapped
-            // sendValidationRequestForStreetInterchange()
-            self.performSegue(withIdentifier: "verifyDetailsSegue", sender: self)
+            sendValidationRequestForNotificationAvail()
+            
         }else if item.tag == 2 {
             //cancel button tapped
             self.navigationController?.popViewController(animated: true)
@@ -900,6 +919,242 @@ class AddNotifAvailRequestVC: UIViewController , UITextFieldDelegate, UITabBarDe
         }
         
     }
+    
+    func validateNotifAvailFields() -> String {
+        
+        var retMsg : String = ""
+        if vu.isEmptyString(stringToCheck: txtEPCompanyName.text!){
+            retMsg = "Container Provider Name should not be blank."
+            
+        }else if vu.isEmptyString(stringToCheck: txtEPScac.text!){
+            retMsg = "Please select valid Container Provider Name to populate SCAC."
+            
+        }else if txtEPScac.text!.count > 2  && txtEPScac.text!.count < 4 {
+            retMsg = "Container Provider SCAC should be 2-4 characters long."
+            
+        }else if !txtEPScac.text!.isCharactersOnly{
+            retMsg = "Container Provider SCAC should contains characters only."
+            
+        }else if vu.isEmptyString(stringToCheck: txtMCCompanyName.text!){
+            retMsg = "Motor Carrier Name should not be blank."
+            
+        }else if vu.isEmptyString(stringToCheck: txtMCScac.text!){
+            retMsg = "Please select valid Motor Carrier Name to populate SCAC."
+            
+        }else if txtMCScac.text!.count < 4 {
+            retMsg = "Motor Carrier SCAC should be 4 characters long."
+            
+        }else if !txtMCScac.text!.isCharactersOnly{
+            retMsg = "Motor Carrier SCAC should contains characters only."
+            
+        }else if vu.isEmptyString(stringToCheck: txtLoadStatus.text!){
+            retMsg = "Please select valid Load Status details."
+            
+        }else if vu.isEmptyString(stringToCheck: txtContNum.text!){
+            retMsg = "Container Number should not be blank."
+            
+        }else if !txtContNum.text!.isAlphanumeric{
+            retMsg = "Container Number should contains alphanumeric only."
+            
+        }else if vu.isEmptyString(stringToCheck: txtContType.text!){
+            retMsg = "Please select valid Container Type"
+            
+        }else if vu.isEmptyString(stringToCheck: txtContSize.text!){
+            retMsg = "Please select valid Container Size"
+            
+        }else if vu.isEmptyString(stringToCheck: txtChassisNum.text!){
+            retMsg = "Chassis Number should not be blank."
+            
+        }else if !txtChassisNum.text!.isAlphanumeric{
+            retMsg = "Chassis Number should contains alphanumeric only."
+            
+        }else if vu.isNotEmptyString(stringToCheck: txtChassisNum.text!) && vu.isEmptyString(stringToCheck: txtChassisType.text!){
+            retMsg = "Please select valid Chassis Type"
+            
+        }else if vu.isNotEmptyString(stringToCheck: txtChassisNum.text!) && vu.isEmptyString(stringToCheck: txtChassisSize.text!){
+            retMsg = "Please select valid Chassis Size"
+            
+        }else if vu.isNotEmptyString(stringToCheck: txtGensetNum.text!) && !txtGensetNum.text!.isAlphanumeric{
+           retMsg = "Genset Number should contains alphanumeric only."
+    
+        }else if vu.isEmptyString(stringToCheck: txtEquipZipCode.text!){
+            retMsg = "Please select valid Equipment Location from the list"
+            
+        }else if vu.isEmptyString(stringToCheck: txtEquipLocationName.text!){
+            retMsg = "Equipment Location Name should not be blank."
+            
+        }else if vu.isEmptyString(stringToCheck: txtEquipLocationAddress.text!){
+            retMsg = "Equipment Location Address should not be blank."
+            
+        }else if vu.isEmptyString(stringToCheck: txtEquipCity.text!){
+            retMsg = "Equipment City should not be blank."
+            
+        }else if vu.isEmptyString(stringToCheck: txtEquipState.text!){
+            retMsg = "Equipment State should not be blank."
+            
+        }else if txtEquipState.text!.count != 2 {
+            retMsg = "Equipment State should be 2 characters long."
+            
+        }else if vu.isEmptyString(stringToCheck: txtOriginZipCode.text!){
+            retMsg = "Please select valid Original Location from the list"
+            
+        }else if vu.isEmptyString(stringToCheck: txtOriginLocationName.text!){
+            retMsg = "Original Location Name should not be blank."
+            
+        }else if vu.isEmptyString(stringToCheck: txtOriginLocationAddress.text!){
+            retMsg = "Original Location Address should not be blank."
+            
+        }else if vu.isEmptyString(stringToCheck: txtOriginCity.text!){
+            retMsg = "Original City should not be blank."
+            
+        }else if vu.isEmptyString(stringToCheck: txtOriginState.text!){
+            retMsg = "Original State should not be blank."
+            
+        }else if txtOriginState.text!.count != 2 {
+            retMsg = "Original State should be 2 characters long."
+            
+        }
+        
+        return retMsg
+        
+    }
+    
+    func sendValidationRequestForNotificationAvail() {
+        
+        // resign first responder if any.
+        au.resignAllTextFieldResponder(textFieldsArray: inputTextFieldsArray)
+        
+        // validate Login fields..
+        let resMsg : String = validateNotifAvailFields()
+        
+        if !au.isInternetAvailable() {
+            au.redirectToNoInternetConnectionView(target: self)
+        }
+        else if resMsg.isEmpty
+        {
+            
+            let accessToken =  UserDefaults.standard.string(forKey: "accessToken")
+            let applicationUtils : ApplicationUtils = ApplicationUtils()
+            applicationUtils.showActivityIndicator(uiView: view)
+            
+            let jsonRequestObject: [String : Any] =
+                [
+                    "epScac": au.trim(stringToTrim: txtEPScac.text!),
+                    "loadStatus": au.trim(stringToTrim: txtLoadStatus.text!),
+                    "contNum": au.trim(stringToTrim: txtContNum.text!),
+                    "contSize": au.trim(stringToTrim: txtContSize.text!),
+                    "contType": au.trim(stringToTrim: txtContType.text!),
+                    "chassisSize": au.trim(stringToTrim: txtChassisSize.text!),
+                    "chassisType": au.trim(stringToTrim: txtChassisType.text!),
+                    "chassisNum": au.trim(stringToTrim: txtChassisNum.text!),
+                    "gensetNum": au.trim(stringToTrim: txtGensetNum.text!),
+                    
+                    "equipLocZip": au.trim(stringToTrim: txtEquipZipCode.text!),
+                    "equipLocNm": au.trim(stringToTrim: txtEquipLocationName.text!),
+                    "equipLocAddr": au.trim(stringToTrim: txtEquipLocationAddress.text!),
+                    "equipLocCity": au.trim(stringToTrim: txtEquipCity.text!),
+                    "equipLocState": au.trim(stringToTrim: txtEquipState.text!),
+                    
+                    "originLocZip": au.trim(stringToTrim: txtOriginZipCode.text!),
+                    "originLocNm": au.trim(stringToTrim: txtOriginLocationName.text!),
+                    "originLocAddr": au.trim(stringToTrim: txtOriginLocationAddress.text!),
+                    "originLocCity": au.trim(stringToTrim: txtOriginCity.text!),
+                    "originLocState": au.trim(stringToTrim: txtOriginState.text!),
+                    "accessToken": accessToken!
+                    
+            ]
+            
+            print(jsonRequestObject)
+            
+            if let paramString = try? JSONSerialization.data(withJSONObject: jsonRequestObject)
+            {
+                let urlToRequest = ac.BASE_URL + ac.VALIDATE_NOTIF_AVAIL_DETAILS
+                let url = URL(string: urlToRequest)!
+                
+                let session = URLSession.shared
+                let request = NSMutableURLRequest(url: url)
+                
+                request.httpMethod = "POST"
+                request.httpBody = paramString
+                request.setValue(ac.CONTENT_TYPE_JSON, forHTTPHeaderField: ac.CONTENT_TYPE_KEY)
+                request.cachePolicy = NSURLRequest.CachePolicy.reloadIgnoringCacheData
+                
+                
+                let task = session.dataTask(with: request as URLRequest) { (data, response, error) in
+                    guard let _: Data = data, let _: URLResponse = response, error == nil else {
+                        print("*****error")
+                        DispatchQueue.main.sync {
+                            applicationUtils.hideActivityIndicator(uiView: self.view)
+                            au.showAlert(target: self, alertTitle: self.alertTitle, message: self.ac.ERROR_MSG,[UIAlertAction(title: "OK", style: .default, handler: nil)], completion: nil)
+                        }
+                        
+                        
+                        return
+                    }
+                    do{
+                        let nsResponse =  response as! HTTPURLResponse
+                        let parsedData = try JSONSerialization.jsonObject(with: data!)
+                        
+                        print(parsedData)
+                        
+                        if let stValidationData:[String: Any]   = parsedData as? [String : Any]
+                        {
+                            
+                            if nsResponse.statusCode == 200
+                            {
+                                //handle other response ..
+                                let apiResponseMessage: APIResponseMessage  = APIResponseMessage(stValidationData)
+                                
+                                DispatchQueue.main.sync {
+                                    applicationUtils.hideActivityIndicator(uiView: self.view)
+                                    self.performSegue(withIdentifier: "verifyDetailsSegue", sender: self)
+                                    if apiResponseMessage.message != nil && vu.isNotEmptyString(stringToCheck: apiResponseMessage.message!){
+                                        self.nextScreenMessage = apiResponseMessage.message!
+                                    }
+                                    
+                                }
+                                
+                            }else{
+                                
+                                //handle other response ..
+                                let apiResponseMessage: APIResponseMessage  = APIResponseMessage(stValidationData)
+                                
+                                DispatchQueue.main.sync {
+                                    applicationUtils.hideActivityIndicator(uiView: self.view)
+                                    au.showAlert(target: self, alertTitle: self.alertTitle, message: apiResponseMessage.errors.errorMessage!,[UIAlertAction(title: "OK", style: .default, handler: nil)], completion: nil)
+                                    
+                                }
+                                
+                            }
+                            
+                        }
+                        
+                    } catch let error as NSError {
+                        print("NSError ::",error)
+                        DispatchQueue.main.sync {
+                            applicationUtils.hideActivityIndicator(uiView: self.view)
+                            au.showAlert(target: self, alertTitle: self.alertTitle, message: self.ac.ERROR_MSG,[UIAlertAction(title: "OK", style: .default, handler: nil)], completion: nil)
+                        }
+                        
+                    }
+                    
+                }
+                task.resume()
+                
+            }
+            
+            
+        }else{
+            
+            //display toast message to the user.
+            au.showAlert(target: self, alertTitle: self.alertTitle, message: resMsg,[UIAlertAction(title: "OK", style: .default, handler: nil)], completion: nil)
+            
+            
+        }
+        
+    }
+    
+    
     //Find GIER IEP from the chassis Number provided by User
     func setIEPSCACBasedOnChassisNum() {
         //make a web service call to fetch boes location based on user.

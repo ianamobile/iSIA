@@ -34,6 +34,8 @@ public class AppConstants
     let GET_EQUIP_LIST                  = "SIA/getEquipmentList"
     let DELETE_NOTIFAVAILREQUEST_BY_ID  = "SIA/deleteNotifAvailRequestByNaId"
     let SETUP_PAGE                      = "SIA/setupPage"
+    let VALIDATE_NOTIF_AVAIL_DETAILS    = "SIA/validateNotifAvailEquipDetails"
+    
     
     
     let ORIGINAL_LOCATION = "OriginalLocation"

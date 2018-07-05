@@ -2655,6 +2655,7 @@
                         <outlet property="txtOriginZipCode" destination="Aj1-qn-7Hs" id="mvD-kn-rVj"/>
                         <segue destination="jcN-yv-8Gx" kind="show" identifier="searchOriginalLocSegue" id="mxd-iz-oi8"/>
                         <segue destination="jcN-yv-8Gx" kind="show" identifier="searchEquipmentLocSegue" id="iHh-3o-MFl"/>
+                        <segue destination="0AY-lC-jOY" kind="show" identifier="verifyDetailsSegue" id="nId-5q-G1a"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iDm-Xr-e5c" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -4189,7 +4190,7 @@
                                                         </userDefinedRuntimeAttributes>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="STATE" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RvP-UX-HE0">
-                                                        <rect key="frame" x="40" y="16" width="33" height="15"/>
+                                                        <rect key="frame" x="40" y="16" width="32" height="15"/>
                                                         <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="11"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
@@ -5760,7 +5761,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WmF-GF-bmQ">
                                 <rect key="frame" x="16" y="72" width="288" height="447"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LOCATION ADDRESS" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Ho-6v-val">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RESPONSE MESSAGE" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Ho-6v-val">
                                         <rect key="frame" x="0.0" y="176" width="288" height="20"/>
                                         <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="15"/>
                                         <color key="textColor" red="0.98926466700000004" green="0.48536032439999999" blue="0.25880664590000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -7861,7 +7862,7 @@
         <segue reference="W6h-ga-Cas"/>
         <segue reference="XJY-ZV-lvh"/>
         <segue reference="4Oc-um-flX"/>
-        <segue reference="SEO-M7-wu7"/>
+        <segue reference="nId-5q-G1a"/>
         <segue reference="ldH-eP-wn6"/>
         <segue reference="tqE-L4-b7g"/>
         <segue reference="iHh-3o-MFl"/>
