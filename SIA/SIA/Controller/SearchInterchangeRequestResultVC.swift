@@ -156,7 +156,7 @@ class SearchInterchangeRequestResultVC: UITableViewController {
                 memType =  UserDefaults.standard.string(forKey: "memType")
             }
             
-            var urlToRequest = ac.BASE_URL + ac.SIA_LOOKUP + "?accessToken=\(accessToken!)&containerNo=\(contNum ?? "")&bookingNo=\(exportBookingNum ?? "")&startDate=\(fromDate ?? "")&endDate=\(toDate ?? "")&status=\(status ?? "")&offset=\(offset)&limit=\(limit)"
+            var urlToRequest = ac.BASE_URL + ac.SIA_LOOKUP_URI + "?accessToken=\(accessToken!)&containerNo=\(contNum ?? "")&bookingNo=\(exportBookingNum ?? "")&startDate=\(fromDate ?? "")&endDate=\(toDate ?? "")&status=\(status ?? "")&offset=\(offset)&limit=\(limit)"
             
             if role == "MC" || (role == "SEC" && memType == "MC") || role == "IDD"{
                 urlToRequest = urlToRequest + "&epSCAC=\(scac ?? "")"

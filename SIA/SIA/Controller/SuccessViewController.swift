@@ -24,12 +24,18 @@ class SuccessViewController: UIViewController,UITabBarDelegate {
         
         self.successViewTabBar.delegate = self
         self.navigationItem.hidesBackButton = true
+        self.addNewTab.title = "CREATE NEW REQUEST"
         
+        /*
         if originFrom == "StreetTurn"{
             self.addNewTab.title = "ADD NEW STREET TURN REQUEST"
+            
+        }else if originFrom == "AddNotifAvailRequest"{
+            self.addNewTab.title = "ADD NEW REQUEST TO POOL"
+            
         }else{
             self.addNewTab.title = "ADD NEW STREET INTERCHANGE REQUEST"
-        }
+        }*/
         
         lblMessage.text = message
         lblMessage.numberOfLines = 0
@@ -43,9 +49,16 @@ class SuccessViewController: UIViewController,UITabBarDelegate {
             
             if originFrom == "StreetTurn"{
                 
-                let streetTurnRequestViewController = self.navigationController?.viewControllers[1] as! StreetTurnRequestViewController
-                streetTurnRequestViewController.originFrom = self.originFrom
-                self.navigationController?.popToViewController(streetTurnRequestViewController, animated: true)
+                let vc = self.navigationController?.viewControllers[1] as! StreetTurnRequestViewController
+                vc.originFrom = self.originFrom
+                self.navigationController?.popToViewController(vc, animated: true)
+            
+            }else if originFrom == "AddNotifAvailRequest"{
+               
+                let vc = self.navigationController?.viewControllers[1] as! AddNotifAvailRequestVC
+                vc.originFrom = "AddNewNotifAvailRequest"
+                self.navigationController?.popToViewController(vc, animated: true)
+                
             }else{
                 
                 let vc = self.navigationController?.viewControllers[1] as! StreetInterchangeViewController

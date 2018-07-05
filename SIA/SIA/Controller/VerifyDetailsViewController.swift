@@ -32,6 +32,9 @@ class VerifyDetailsViewController: UIViewController, UITableViewDataSource,
             if originFrom == "StreetTurn"{
                 
                 alertTitle = "STREET TURN"
+            }else if(originFrom == "AddNotifAvailRequest"){
+                
+                alertTitle = "ADD EQUIPMENT TO POOL"
             }else{
                 alertTitle = "STREET INTERCHANGE"
             }
@@ -48,6 +51,9 @@ class VerifyDetailsViewController: UIViewController, UITableViewDataSource,
             //submit button tapped
             if originFrom == "StreetTurn"{
                  submitStreetTurnRequest()
+            }else if(originFrom == "AddNotifAvailRequest"){
+                 submitNotifAvailRequest()
+                
             }else{
                  submitStreetInterchangeRequest()
             }
@@ -65,6 +71,132 @@ class VerifyDetailsViewController: UIViewController, UITableViewDataSource,
         }
         
     }
+    
+    
+    //Submit Notification of available equipment Request
+    func submitNotifAvailRequest() {
+        if !au.isInternetAvailable() {
+            au.redirectToNoInternetConnectionView(target: self)
+        }
+        else
+        {
+            
+            let accessToken =  UserDefaults.standard.string(forKey: "accessToken")
+            let applicationUtils : ApplicationUtils = ApplicationUtils()
+            applicationUtils.showActivityIndicator(uiView: view)
+            
+            let jsonRequestObject: [String : Any] =
+                [
+                    "mcScac": au.trim(stringToTrim: fieldDataArr[4].fieldData!),
+                    "epScac": au.trim(stringToTrim: fieldDataArr[2].fieldData!),
+                    "loadStatus": au.trim(stringToTrim: fieldDataArr[5].fieldData!),
+                    "contNum": au.trim(stringToTrim: fieldDataArr[6].fieldData!),
+                    "contType": au.trim(stringToTrim: fieldDataArr[7].fieldData!),
+                    "contSize": au.trim(stringToTrim: fieldDataArr[8].fieldData!),
+                    "chassisNum": au.trim(stringToTrim: fieldDataArr[9].fieldData!),
+                    "chassisType": au.trim(stringToTrim: fieldDataArr[11].fieldData!),
+                    "chassisSize": au.trim(stringToTrim: fieldDataArr[12].fieldData!),
+                    
+                    
+                    "gensetNum": au.trim(stringToTrim: fieldDataArr[13].fieldData!),
+                    
+                    "equipLocNm": au.trim(stringToTrim: fieldDataArr[16].fieldData!),
+                    "equipLocAddr": au.trim(stringToTrim: fieldDataArr[17].fieldData!),
+                    "equipLocZip": au.trim(stringToTrim: fieldDataArr[18].fieldData!),
+                    "equipLocCity": au.trim(stringToTrim: fieldDataArr[19].fieldData!),
+                    "equipLocState": au.trim(stringToTrim: fieldDataArr[20].fieldData!),
+                    
+                    
+                    "originLocNm": au.trim(stringToTrim: fieldDataArr[23].fieldData!),
+                    "originLocAddr": au.trim(stringToTrim: fieldDataArr[24].fieldData!),
+                    "originLocZip": au.trim(stringToTrim: fieldDataArr[25].fieldData!),
+                    "originLocCity": au.trim(stringToTrim: fieldDataArr[26].fieldData!),
+                    "originLocState": au.trim(stringToTrim: fieldDataArr[27].fieldData!),
+                    "accessToken": accessToken!
+                    
+            ]
+            
+            print(jsonRequestObject)
+            
+            if let paramString = try? JSONSerialization.data(withJSONObject: jsonRequestObject)
+            {
+                let urlToRequest = ac.BASE_URL + ac.SAVE_NOTIF_AVAIL_URI
+                let url = URL(string: urlToRequest)!
+                
+                let session = URLSession.shared
+                let request = NSMutableURLRequest(url: url)
+                
+                request.httpMethod = "POST"
+                request.httpBody = paramString
+                request.setValue(ac.CONTENT_TYPE_JSON, forHTTPHeaderField: ac.CONTENT_TYPE_KEY)
+                request.cachePolicy = NSURLRequest.CachePolicy.reloadIgnoringCacheData
+                
+                
+                let task = session.dataTask(with: request as URLRequest) { (data, response, error) in
+                    guard let _: Data = data, let _: URLResponse = response, error == nil else {
+                        print("*****error")
+                        DispatchQueue.main.sync {
+                            applicationUtils.hideActivityIndicator(uiView: self.view)
+                            au.showAlert(target: self, alertTitle: self.alertTitle!, message: self.ac.ERROR_MSG,[UIAlertAction(title: "OK", style: .default, handler: nil)], completion: nil)
+                        }
+                        
+                        
+                        return
+                    }
+                    do{
+                        let nsResponse =  response as! HTTPURLResponse
+                        let parsedData = try JSONSerialization.jsonObject(with: data!)
+                        
+                        print(parsedData)
+                        
+                        if let stSubmittedData:[String: Any]   = parsedData as? [String : Any]
+                        {
+                            
+                            if nsResponse.statusCode == 200
+                            {
+                                //handle other response ..
+                                let apiResponseMessage: APIResponseMessage  = APIResponseMessage(stSubmittedData)
+                                
+                                DispatchQueue.main.sync {
+                                    applicationUtils.hideActivityIndicator(uiView: self.view)
+                                    self.nextScreenMessage = apiResponseMessage.message!
+                                    self.performSegue(withIdentifier: "successViewSegue", sender: self)
+                                }
+                                
+                            }else{
+                                
+                                //handle other response ..
+                                let apiResponseMessage: APIResponseMessage  = APIResponseMessage(stSubmittedData)
+                                
+                                DispatchQueue.main.sync {
+                                    applicationUtils.hideActivityIndicator(uiView: self.view)
+                                    au.showAlert(target: self, alertTitle: self.alertTitle!, message: apiResponseMessage.errors.errorMessage!,[UIAlertAction(title: "OK", style: .default, handler: nil)], completion: nil)
+                                    
+                                }
+                                
+                            }
+                            
+                        }
+                        
+                    } catch let error as NSError {
+                        print("NSError ::",error)
+                        DispatchQueue.main.sync {
+                            applicationUtils.hideActivityIndicator(uiView: self.view)
+                            au.showAlert(target: self, alertTitle: self.alertTitle!, message: self.ac.ERROR_MSG,[UIAlertAction(title: "OK", style: .default, handler: nil)], completion: nil)
+                        }
+                        
+                    }
+                    
+                }
+                task.resume()
+                
+            }
+            
+            
+        }
+    }
+    
+    
     //Submit Street Turn Request
     
     func submitStreetTurnRequest() {

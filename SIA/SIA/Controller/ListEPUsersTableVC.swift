@@ -107,7 +107,7 @@ class ListEPUsersTableVC: UITableViewController {
             
             let accessToken =  UserDefaults.standard.string(forKey: "accessToken")
             
-            let urlToRequest = ac.BASE_URL + ac.LIST_EP_USERS + "?accessToken=\(accessToken!)&offset=\(offset)&limit=\(limit)"
+            let urlToRequest = ac.BASE_URL + ac.LIST_EP_USERS_URI + "?accessToken=\(accessToken!)&offset=\(offset)&limit=\(limit)"
             
             print(urlToRequest)
             

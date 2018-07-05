@@ -207,7 +207,7 @@ class StreetInterchangeViewController: UIViewController , UITextFieldDelegate, U
             let applicationUtils : ApplicationUtils = ApplicationUtils()
             applicationUtils.showActivityIndicator(uiView: view)
             
-            let urlToRequest = ac.BASE_URL + ac.SETUP_PAGE
+            let urlToRequest = ac.BASE_URL + ac.SETUP_PAGE_URI
             
             print(urlToRequest)
             
@@ -467,7 +467,7 @@ class StreetInterchangeViewController: UIViewController , UITextFieldDelegate, U
                 let applicationUtils : ApplicationUtils = ApplicationUtils()
                 applicationUtils.showActivityIndicator(uiView: view)
                 
-                let urlToRequest = ac.BASE_URL + ac.GET_LIST_COMPANYNAME_SCAC + "?requestType=IR_REQUEST&role=\(role)&companyName=\(txtValue)"
+                let urlToRequest = ac.BASE_URL + ac.GET_LIST_COMPANYNAME_SCAC_URI + "?requestType=IR_REQUEST&role=\(role)&companyName=\(txtValue)"
                 print(urlToRequest)
                 
                 
@@ -987,7 +987,7 @@ class StreetInterchangeViewController: UIViewController , UITextFieldDelegate, U
             applicationUtils.showActivityIndicator(uiView: view)
             
             let txtValue: String = au.replaceWhiteSpaces(au.trimSpaceAndNewLine(stringToTrimIncludingNewLine: (txtChassisNum.text!)))
-            let urlToRequest = ac.BASE_URL + ac.GET_IPESCAC_BY_CHASSIS_ID + "?chassisId=\(txtValue)"
+            let urlToRequest = ac.BASE_URL + ac.GET_IPESCAC_BY_CHASSIS_ID_URI + "?chassisId=\(txtValue)"
             
             
             let url = URL(string: urlToRequest)!

@@ -67,6 +67,11 @@ class AddNotifAvailRequestVC: UIViewController , UITextFieldDelegate, UITabBarDe
     
     var inputTextFieldsArray = [UITextField]()
     
+    //logged in users information
+    var role :String?
+    var loggedInUserCompanyName :String?
+    var loggedInUserScac :String?
+    var memType :String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -120,19 +125,29 @@ class AddNotifAvailRequestVC: UIViewController , UITextFieldDelegate, UITabBarDe
         txtOriginCity.delegate = self
         txtOriginState.delegate = self
         
-        //if logged in user as MC
-        /*
-        let role =  UserDefaults.standard.string(forKey: "role")
-        let loggedInUserCompanyName =  UserDefaults.standard.string(forKey: "companyName")
-        let loggedInUserScac =  UserDefaults.standard.string(forKey: "scac")
-        let memType = UserDefaults.standard.string(forKey: "memType")
-        print(loggedInUserCompanyName ?? "dd")
-        */
-        txtMCCompanyName.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
-        txtMCCompanyName.keyboardToolbar.doneBarButton.setTarget(self, action: #selector(doneButtonClicked))
         
-        txtEPCompanyName.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
-        txtEPCompanyName.keyboardToolbar.doneBarButton.setTarget(self, action: #selector(doneButtonClicked))
+        
+        //if logged in user as MC
+        role =  UserDefaults.standard.string(forKey: "role")
+        loggedInUserCompanyName =  UserDefaults.standard.string(forKey: "companyName")
+        loggedInUserScac =  UserDefaults.standard.string(forKey: "scac")
+        if role == "SEC"{
+            memType =  UserDefaults.standard.string(forKey: "memType")
+        }
+        if role == "MC" || (role == "SEC" && memType == "MC") || role == "IDD"{
+            txtMCCompanyName.text = loggedInUserCompanyName
+            txtMCScac.text = loggedInUserScac
+            
+            txtEPCompanyName.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+            txtEPCompanyName.keyboardToolbar.doneBarButton.setTarget(self, action: #selector(doneButtonClicked))
+            
+        }else if role == "EP" || (role == "SEC" && memType == "EP"){
+            txtEPCompanyName.text = loggedInUserCompanyName
+            txtEPScac.text = loggedInUserScac
+            
+            txtMCCompanyName.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+            txtMCCompanyName.keyboardToolbar.doneBarButton.setTarget(self, action: #selector(doneButtonClicked))
+        }
         
         txtChassisNum.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         txtChassisNum.keyboardToolbar.doneBarButton.setTarget(self, action: #selector(doneButtonClicked))
@@ -153,10 +168,17 @@ class AddNotifAvailRequestVC: UIViewController , UITextFieldDelegate, UITabBarDe
     func resetFields(){
         print("reset form field.....")
         
-        txtEPCompanyName.text = ""
-        txtEPScac.text = ""
-        txtMCCompanyName.text = ""
-        txtMCScac.text = ""
+        if role == "MC" || (role == "SEC" && memType == "MC") || role == "IDD"{
+            txtEPCompanyName.text = ""
+            txtEPScac.text = ""
+            
+            txtEPCompanyName.inputView = nil
+            
+        }else if role == "EP" || (role == "SEC" && memType == "EP") || role == "TPU"{
+            txtMCCompanyName.text = ""
+            txtMCScac.text = ""
+            txtMCCompanyName.inputView = nil
+        }
         
         txtLoadStatus.text = ""
         txtContNum.text = ""
@@ -184,14 +206,14 @@ class AddNotifAvailRequestVC: UIViewController , UITextFieldDelegate, UITabBarDe
         
         originFrom = ""
         companyInfoArray  = []
-        /*
-        picker = UIPickerView()
-        loadStatusPicker = UIPickerView()
-        contTypePicker = UIPickerView()
-        contSizePicker = UIPickerView()
-        chassisTypePicker = UIPickerView()
-        chassisSizePicker = UIPickerView()
-        */
+        
+        //set picker value to first position when tried to create new request from success (3)page.
+        loadStatusPicker.selectRow(0, inComponent: 0, animated: true)
+        contTypePicker.selectRow(0, inComponent: 0, animated: true)
+        contSizePicker.selectRow(0, inComponent: 0, animated: true)
+        chassisTypePicker.selectRow(0, inComponent: 0, animated: true)
+        chassisSizePicker.selectRow(0, inComponent: 0, animated: true)
+        
         nextScreenMessage = ""
         
     }
@@ -206,7 +228,7 @@ class AddNotifAvailRequestVC: UIViewController , UITextFieldDelegate, UITabBarDe
             let applicationUtils : ApplicationUtils = ApplicationUtils()
             applicationUtils.showActivityIndicator(uiView: view)
             
-            let urlToRequest = ac.BASE_URL + ac.SETUP_PAGE
+            let urlToRequest = ac.BASE_URL + ac.SETUP_PAGE_URI
             
             print(urlToRequest)
             
@@ -296,9 +318,8 @@ class AddNotifAvailRequestVC: UIViewController , UITextFieldDelegate, UITabBarDe
     
     func createLoadStatusDropDown(_ sender: DesignableUITextField){
         
-        self.loadStatusArray.append("LOAD/LOAD")
-        self.loadStatusArray.append("LOAD/EMPTY")
-        self.loadStatusArray.append("EMPTY/LOAD")
+        self.loadStatusArray.append("LOADED")
+        self.loadStatusArray.append("EMPTY")
         
         self.loadStatusPicker.reloadAllComponents()
         
@@ -417,7 +438,7 @@ class AddNotifAvailRequestVC: UIViewController , UITextFieldDelegate, UITabBarDe
                 let applicationUtils : ApplicationUtils = ApplicationUtils()
                 applicationUtils.showActivityIndicator(uiView: view)
                 
-                let urlToRequest = ac.BASE_URL + ac.GET_LIST_COMPANYNAME_SCAC + "?requestType=IR_REQUEST&role=\(role)&companyName=\(txtValue)"
+                let urlToRequest = ac.BASE_URL + ac.GET_LIST_COMPANYNAME_SCAC_URI + "?requestType=IR_REQUEST&role=\(role)&companyName=\(txtValue)"
                 print(urlToRequest)
                 
                 
@@ -879,36 +900,36 @@ class AddNotifAvailRequestVC: UIViewController , UITextFieldDelegate, UITabBarDe
             fieldDataArr.append(FieldInfo(fieldTitle: "MOTOR CARRIER'S NAME", fieldData: txtMCCompanyName.text!)) //3
             fieldDataArr.append(FieldInfo(fieldTitle: "MOTOR CARRIER'S SCAC", fieldData: txtMCScac.text!))  //4
             fieldDataArr.append(FieldInfo(fieldTitle: "LOAD STATUS", fieldData: txtLoadStatus.text!))  //5
-            fieldDataArr.append(FieldInfo(fieldTitle: "CONTAINER #", fieldData: txtContNum.text!)) //7
+            fieldDataArr.append(FieldInfo(fieldTitle: "CONTAINER #", fieldData: txtContNum.text!)) //6
             fieldDataArr.append(FieldInfo(fieldTitle: "CONTAINER TYPE", fieldData: txtContType.text!)) //7
-            fieldDataArr.append(FieldInfo(fieldTitle: "CONTAINER SIZE", fieldData: txtContSize.text!)) //7
+            fieldDataArr.append(FieldInfo(fieldTitle: "CONTAINER SIZE", fieldData: txtContSize.text!)) //8
             
-            fieldDataArr.append(FieldInfo(fieldTitle: "CHASSIS #", fieldData: txtChassisNum.text!)) //8
+            fieldDataArr.append(FieldInfo(fieldTitle: "CHASSIS #", fieldData: txtChassisNum.text!)) //9
             if vu.isNotEmptyString(stringToCheck: nextScreenMessage) && nextScreenMessage.count > 0{
-                fieldDataArr.append(FieldInfo(fieldTitle: "CHASSIS IEP SCAC", fieldData: txtChassisIEPScac.text! + nextScreenMessage)) //9
+                fieldDataArr.append(FieldInfo(fieldTitle: "CHASSIS IEP SCAC", fieldData: txtChassisIEPScac.text! + nextScreenMessage)) //10
             }else{
-                fieldDataArr.append(FieldInfo(fieldTitle: "CHASSIS IEP SCAC", fieldData: txtChassisIEPScac.text!)) //9
+                fieldDataArr.append(FieldInfo(fieldTitle: "CHASSIS IEP SCAC", fieldData: txtChassisIEPScac.text!)) //10
             }
-            fieldDataArr.append(FieldInfo(fieldTitle: "CHASSIS TYPE", fieldData: txtChassisType.text!)) //7
-            fieldDataArr.append(FieldInfo(fieldTitle: "CHASSIS SIZE", fieldData: txtChassisSize.text!)) //7
-            fieldDataArr.append(FieldInfo(fieldTitle: "GENSET #", fieldData: txtGensetNum.text!)) //7
+            fieldDataArr.append(FieldInfo(fieldTitle: "CHASSIS TYPE", fieldData: txtChassisType.text!)) //11
+            fieldDataArr.append(FieldInfo(fieldTitle: "CHASSIS SIZE", fieldData: txtChassisSize.text!)) //12
+            fieldDataArr.append(FieldInfo(fieldTitle: "GENSET #", fieldData: txtGensetNum.text!)) //13
             
-            fieldDataArr.append(FieldInfo(fieldTitle: "empty", fieldData: "")) //10
-            fieldDataArr.append(FieldInfo(fieldTitle: "blank", fieldData: "Equipment Location")) //11
-            fieldDataArr.append(FieldInfo(fieldTitle: "LOCATION NAME", fieldData: txtEquipLocationName.text!)) //12
-            fieldDataArr.append(FieldInfo(fieldTitle: "LOCATION ADDRESS", fieldData: txtEquipLocationAddress.text!)) //13
-            fieldDataArr.append(FieldInfo(fieldTitle: "ZIP CODE", fieldData: txtEquipZipCode.text!)) //14
-            fieldDataArr.append(FieldInfo(fieldTitle: "CITY", fieldData: txtEquipCity.text!)) //15
-            fieldDataArr.append(FieldInfo(fieldTitle: "STATE", fieldData: txtEquipState.text!)) //16
+            fieldDataArr.append(FieldInfo(fieldTitle: "empty", fieldData: "")) //14
+            fieldDataArr.append(FieldInfo(fieldTitle: "blank", fieldData: "Equipment Location")) //15
+            fieldDataArr.append(FieldInfo(fieldTitle: "LOCATION NAME", fieldData: txtEquipLocationName.text!)) //16
+            fieldDataArr.append(FieldInfo(fieldTitle: "LOCATION ADDRESS", fieldData: txtEquipLocationAddress.text!)) //17
+            fieldDataArr.append(FieldInfo(fieldTitle: "ZIP CODE", fieldData: txtEquipZipCode.text!)) //18
+            fieldDataArr.append(FieldInfo(fieldTitle: "CITY", fieldData: txtEquipCity.text!)) //19
+            fieldDataArr.append(FieldInfo(fieldTitle: "STATE", fieldData: txtEquipState.text!)) //20
             
             
-            fieldDataArr.append(FieldInfo(fieldTitle: "empty", fieldData: "")) //17
-            fieldDataArr.append(FieldInfo(fieldTitle: "blank", fieldData: "Original Interchange Location")) //18
-            fieldDataArr.append(FieldInfo(fieldTitle: "LOCATION NAME", fieldData: txtOriginLocationName.text!)) //19
-            fieldDataArr.append(FieldInfo(fieldTitle: "LOCATION ADDRESS", fieldData: txtOriginLocationAddress.text!)) //20
-            fieldDataArr.append(FieldInfo(fieldTitle: "ZIP CODE", fieldData: txtOriginZipCode.text!)) //21
-            fieldDataArr.append(FieldInfo(fieldTitle: "CITY", fieldData: txtOriginCity.text!)) //22
-            fieldDataArr.append(FieldInfo(fieldTitle: "STATE", fieldData: txtOriginState.text!)) //23
+            fieldDataArr.append(FieldInfo(fieldTitle: "empty", fieldData: "")) //21
+            fieldDataArr.append(FieldInfo(fieldTitle: "blank", fieldData: "Original Interchange Location")) //22
+            fieldDataArr.append(FieldInfo(fieldTitle: "LOCATION NAME", fieldData: txtOriginLocationName.text!)) //23
+            fieldDataArr.append(FieldInfo(fieldTitle: "LOCATION ADDRESS", fieldData: txtOriginLocationAddress.text!)) //24
+            fieldDataArr.append(FieldInfo(fieldTitle: "ZIP CODE", fieldData: txtOriginZipCode.text!)) //25
+            fieldDataArr.append(FieldInfo(fieldTitle: "CITY", fieldData: txtOriginCity.text!)) //26
+            fieldDataArr.append(FieldInfo(fieldTitle: "STATE", fieldData: txtOriginState.text!)) //27
             
             
             
@@ -1039,6 +1060,7 @@ class AddNotifAvailRequestVC: UIViewController , UITextFieldDelegate, UITabBarDe
             
             let jsonRequestObject: [String : Any] =
                 [
+                    "mcScac": au.trim(stringToTrim: txtMCScac.text!),
                     "epScac": au.trim(stringToTrim: txtEPScac.text!),
                     "loadStatus": au.trim(stringToTrim: txtLoadStatus.text!),
                     "contNum": au.trim(stringToTrim: txtContNum.text!),
@@ -1068,7 +1090,7 @@ class AddNotifAvailRequestVC: UIViewController , UITextFieldDelegate, UITabBarDe
             
             if let paramString = try? JSONSerialization.data(withJSONObject: jsonRequestObject)
             {
-                let urlToRequest = ac.BASE_URL + ac.VALIDATE_NOTIF_AVAIL_DETAILS
+                let urlToRequest = ac.BASE_URL + ac.VALIDATE_NOTIF_AVAIL_DETAILS_URI
                 let url = URL(string: urlToRequest)!
                 
                 let session = URLSession.shared
@@ -1167,7 +1189,7 @@ class AddNotifAvailRequestVC: UIViewController , UITextFieldDelegate, UITabBarDe
             applicationUtils.showActivityIndicator(uiView: view)
             
             let txtValue: String = au.replaceWhiteSpaces(au.trimSpaceAndNewLine(stringToTrimIncludingNewLine: (txtChassisNum.text!)))
-            let urlToRequest = ac.BASE_URL + ac.GET_IPESCAC_BY_CHASSIS_ID + "?chassisId=\(txtValue)"
+            let urlToRequest = ac.BASE_URL + ac.GET_IPESCAC_BY_CHASSIS_ID_URI + "?chassisId=\(txtValue)"
             
             
             let url = URL(string: urlToRequest)!
@@ -1248,11 +1270,16 @@ class AddNotifAvailRequestVC: UIViewController , UITextFieldDelegate, UITabBarDe
     }
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        if textField == txtOriginZipCode || textField == txtOriginCity  || textField == txtOriginState
+        if (textField == txtOriginZipCode || textField == txtOriginCity  || textField == txtOriginState
             || textField == txtOriginLocationAddress || textField == txtOriginLocationName
-            || textField == txtChassisIEPScac || textField == txtMCScac || textField == txtEPScac
-            
+            || textField == txtChassisIEPScac || textField == txtMCScac || textField == txtEPScac)
         {
+            textField.resignFirstResponder()
+            return false
+        }else if  ((role == "MC" || (role == "SEC" && memType == "MC") || role == "IDD") && textField == txtMCCompanyName){
+            textField.resignFirstResponder()
+            return false
+        }else if ((role == "EP" || (role == "SEC" && memType == "EP") || role == "TPU") && textField == txtEPCompanyName){
             textField.resignFirstResponder()
             return false
         }

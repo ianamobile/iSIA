@@ -131,6 +131,32 @@ class RequestPoolSearchResultVC: UITableViewController, SearchRequestPoolTableVi
     
     func deleteNotificationAvailRecord(sender: SearchRequestPoolTableViewCell, originFrom: String) {
         print("Delete button tapped.")
+        
+        au.showAlert(target: self, alertTitle: "LOGIN", message: "Are you sure want to delete this record?",
+                     [UIAlertAction(title: "OK", style: .default, handler: { action in
+                        switch action.style{
+                        case .default:
+                            self.callDeleteNotifAvailRecordAPI(sender: sender, originFrom: originFrom)
+                            break
+                        case .cancel:
+                            
+                            break
+                            
+                        case .destructive:
+                            
+                            break
+                            
+                        }}),
+                      UIAlertAction(title: "CANCEL", style: .default, handler: nil)
+                        
+            ], completion: nil)
+        
+        
+        
+        
+        
+    }
+    func callDeleteNotifAvailRecordAPI(sender: SearchRequestPoolTableViewCell, originFrom: String) {
         let naId = sender.leftView.tag
         
         if !au.isInternetAvailable() {
@@ -143,7 +169,7 @@ class RequestPoolSearchResultVC: UITableViewController, SearchRequestPoolTableVi
             
             let accessToken =  UserDefaults.standard.string(forKey: "accessToken")
             
-            let urlToRequest = ac.BASE_URL + ac.DELETE_NOTIFAVAILREQUEST_BY_ID + "?accessToken=\(accessToken!)&naId=\(naId)"
+            let urlToRequest = ac.BASE_URL + ac.DELETE_NOTIFAVAILREQUEST_BY_ID_URI + "?accessToken=\(accessToken!)&naId=\(naId)"
             
             print(urlToRequest)
             
@@ -233,8 +259,6 @@ class RequestPoolSearchResultVC: UITableViewController, SearchRequestPoolTableVi
             task.resume()
             
         }
-        
-        
     }
     
     func loadMore(){
@@ -251,7 +275,7 @@ class RequestPoolSearchResultVC: UITableViewController, SearchRequestPoolTableVi
             
             let accessToken =  UserDefaults.standard.string(forKey: "accessToken")
            
-            let urlToRequest = ac.BASE_URL + ac.GET_EQUIP_LIST + "?accessToken=\(accessToken!)&containerNo=\(contNum ?? "")&epSCAC=\(epScac ?? "")&mcSCAC=\(mcScac ?? "")&startDate=\(fromDate ?? "")&endDate=\(toDate ?? "")&offset=\(offset)&limit=\(limit)"
+            let urlToRequest = ac.BASE_URL + ac.GET_EQUIP_LIST_URI + "?accessToken=\(accessToken!)&containerNo=\(contNum ?? "")&epSCAC=\(epScac ?? "")&mcSCAC=\(mcScac ?? "")&startDate=\(fromDate ?? "")&endDate=\(toDate ?? "")&offset=\(offset)&limit=\(limit)"
             
             print(urlToRequest)
             
@@ -331,7 +355,7 @@ class RequestPoolSearchResultVC: UITableViewController, SearchRequestPoolTableVi
                             au.showAlert(target: self, alertTitle: self.alertTitle, message: apiResponseMessage.errors.errorMessage!,[UIAlertAction(title: "OK", style: .default, handler: { action in
                                 switch action.style{
                                 case .default:
-                                    self.dismiss(animated: true, completion: nil)
+                                    self.navigationController?.popViewController(animated: true)
                                     break
                                     
                                 case .cancel:

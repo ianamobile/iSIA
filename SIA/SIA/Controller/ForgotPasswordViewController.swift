@@ -134,7 +134,8 @@ class ForgotPasswordViewController: UIViewController, UITextFieldDelegate {
                                     applicationUtils.hideActivityIndicator(uiView: self.view)
                                     au.showAlert(target: self, alertTitle: "FORGOT PASSWORD", message: apiResponseMessageSuccess.message!,[UIAlertAction(title: "OK", style: .default, handler: nil)], completion: nil)
                                     
-                                    
+                                    self.txtScac.text = ""
+                                 
                                 }
                                 
                                 
