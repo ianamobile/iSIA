@@ -34,11 +34,21 @@ class StreetTurnRequestViewController: UIViewController,  UITextFieldDelegate, U
     @IBOutlet weak var txtCity: DesignableUITextField!
     @IBOutlet weak var txtState: DesignableUITextField!
     
+    var originFrom :String?
     var companyInfoArray  = [CompanyInfo]()
     var picker = UIPickerView()
+    var ianaLocationCode : String?
+    var splcLocationCode : String?
+    let alertTitle :String = "STREET TURN"
+    var nextScreenMessage :String = ""
+    var tabBarItemImageView: UIImageView!
     
-    override func viewDidLoad() {
+    override func viewDidLoad(){
+        
         super.viewDidLoad()
+        
+        picker.delegate = self
+        picker.dataSource = self
         
         streetTurnTabBar.delegate = self
         
@@ -61,24 +71,98 @@ class StreetTurnRequestViewController: UIViewController,  UITextFieldDelegate, U
         txtCity.delegate = self
         txtState.delegate = self
         
-        txtMCCompanyName.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        //txtMCCompanyName.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        //txtMCCompanyName.keyboardToolbar.doneBarButton.setTarget(self, action: #selector(doneButtonClicked))
+        
         txtEPCompanyName.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        txtEPCompanyName.keyboardToolbar.doneBarButton.setTarget(self, action: #selector(doneButtonClicked))
+        
+        txtChassisNum.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        txtChassisNum.keyboardToolbar.doneBarButton.setTarget(self, action: #selector(doneButtonClicked))
         
         //Go to next field on return key
-        UITextField.connectFields(fields: [txtMCCompanyName, txtEPCompanyName, txtContNum, txtExportBookingNum, txtImportBookingNum, txtChassisNum])
+        UITextField.connectFields(fields: [txtEPCompanyName, txtContNum, txtExportBookingNum, txtImportBookingNum, txtChassisNum])
        
-    }
-    
-    @objc func textFieldDidChange(_ textField: UITextField) {
+        //if logged in user as MC
+        let role =  UserDefaults.standard.string(forKey: "role")
+        let loggedInUserCompanyName =  UserDefaults.standard.string(forKey: "companyName")
+        let loggedInUserScac =  UserDefaults.standard.string(forKey: "scac")
+        var memType :String? = ""
+        if role == "SEC"{
+            memType =  UserDefaults.standard.string(forKey: "memType")
+        }
         
-        if textField == txtMCCompanyName
-        {
-            loadListCompanyNameAndSCACByInput(textField)
+        if role == "MC" || (role == "SEC" && memType == "MC"){
+            txtMCCompanyName.text = loggedInUserCompanyName
+            txtMCScac.text = loggedInUserScac
+        }else if role == "EP"{
+            //txtEPCompanyName.text = loggedInUserCompanyName
+            //txtEPScac.text = loggedInUserScac
         }
         
     }
     
-    func loadListCompanyNameAndSCACByInput(_ textField: UITextField){
+    //method that check user has internet connected in mobile or not.
+    override func viewDidAppear(_ animated: Bool)
+    {
+        if !au.isInternetAvailable()
+        {
+            au.redirectToNoInternetConnectionView(target: self)
+        }else{
+            super.viewDidAppear(animated)
+            if(originFrom != nil && vu.isNotEmptyString(stringToCheck: originFrom!)){
+                resetFields();
+            }
+           
+        }
+    }
+    func resetFields(){
+        print("reset form field.....")
+        
+        txtMCCompanyName.text = ""
+        txtMCScac.text = ""
+        txtEPCompanyName.text = ""
+        txtEPScac.text = ""
+        txtContNum.text = ""
+        
+        txtExportBookingNum.text = ""
+        txtImportBookingNum.text = ""
+        txtChassisNum.text = ""
+        txtChassisIEPScac.text = ""
+        
+        
+        txtZipCode.text = ""
+        txtLocationName.text = ""
+        txtLocationAddress.text = ""
+        txtCity.text = ""
+        txtState.text = ""
+        
+        originFrom = ""
+        companyInfoArray  = []
+        
+        picker = UIPickerView()
+        
+        ianaLocationCode = ""
+        splcLocationCode = ""
+        nextScreenMessage = ""
+       
+        
+    }
+    
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        
+        if textField == txtMCCompanyName || textField == txtEPCompanyName
+        {
+            loadListCompanyNameAndSCACAsInput(textField)
+            
+        }else if textField == txtChassisNum {
+            txtChassisIEPScac.text = ""
+        }
+        
+    }
+    
+    
+    func loadListCompanyNameAndSCACAsInput(_ textField: UITextField){
         var role :String = ""
         if textField == txtMCCompanyName{
              self.txtMCScac.text = ""
@@ -89,7 +173,7 @@ class StreetTurnRequestViewController: UIViewController,  UITextFieldDelegate, U
         }
         
         let txtValue: String = au.replaceWhiteSpaces(au.trimSpaceAndNewLine(stringToTrimIncludingNewLine: (textField.text!)))
-        if vu.isNotEmptyString(stringToCheck: txtValue)  && txtValue.count >= 3
+        if vu.isNotEmptyString(stringToCheck: txtValue)  && txtValue.count >= 2
         {
             //make a web service call to fetch boes location based on user.
             if !au.isInternetAvailable() {
@@ -100,8 +184,8 @@ class StreetTurnRequestViewController: UIViewController,  UITextFieldDelegate, U
                 let applicationUtils : ApplicationUtils = ApplicationUtils()
                 applicationUtils.showActivityIndicator(uiView: view)
                 
-                let urlToRequest = ac.BASE_URL + ac.GET_LIST_COMPANYNAME_SCAC + "?requestType=IR_REQUEST&role=\(role)&comapanyName=\(txtValue)"
-                //print(urlToRequest)
+                let urlToRequest = ac.BASE_URL + ac.GET_LIST_COMPANYNAME_SCAC + "?requestType=IR_REQUEST&role=\(role)&companyName=\(txtValue)"
+                print(urlToRequest)
                 
                 
                 let url = URL(string: urlToRequest)!
@@ -117,8 +201,26 @@ class StreetTurnRequestViewController: UIViewController,  UITextFieldDelegate, U
                     guard let _: Data = data, let _: URLResponse = response, error == nil else {
                         print("*****error")
                         DispatchQueue.main.sync {
+                            
+                            self.companyInfoArray = [CompanyInfo]()
+                            //self.picker.reloadAllComponents()
+                            textField.inputView = nil;
+                            textField.resignFirstResponder()
+                            
                             applicationUtils.hideActivityIndicator(uiView: self.view)
-                            au.showAlert(target: self, alertTitle: "STREET TURN", message: "Opp! An error has occured, please try after some time.",[UIAlertAction(title: "OK", style: .default, handler: nil)], completion: nil)
+                            au.showAlert(target: self, alertTitle: self.alertTitle, message: self.ac.ERROR_MSG,[UIAlertAction(title: "OK", style: .default, handler: { action in
+                                switch action.style{
+                                case .default:
+                                    // below 1 lines are to set inputview as default keyboard
+                                    textField.becomeFirstResponder()
+                                    break
+                                case .cancel:
+                                    break
+                                    
+                                case .destructive:
+                                    break
+                                    
+                                }})], completion: nil)
                         }
                         
                         
@@ -128,7 +230,7 @@ class StreetTurnRequestViewController: UIViewController,  UITextFieldDelegate, U
                         let nsResponse =  response as! HTTPURLResponse
                         let parsedData = try JSONSerialization.jsonObject(with: data!)
                         
-                        //print(parsedData)
+                        print(parsedData)
                         
                         if nsResponse.statusCode == 200
                         {
@@ -136,6 +238,7 @@ class StreetTurnRequestViewController: UIViewController,  UITextFieldDelegate, U
                             if let _data:NSArray   = parsedData as? NSArray
                             {
                                 let companyDetails: Company  = Company(_data)
+                                //print(companyDetails.companyInfoArray)
                                 DispatchQueue.main.sync {
                                     self.companyInfoArray = [CompanyInfo]()
                                     for company in companyDetails.companyInfoArray
@@ -152,14 +255,14 @@ class StreetTurnRequestViewController: UIViewController,  UITextFieldDelegate, U
                                         textField.inputView = self.picker
                                         textField.resignFirstResponder()
                                         textField.becomeFirstResponder()
-                                    }
+                                    }/*
                                     else {
                                         
                                         // below 3 lines are to set inputview as default keyboard
                                         textField.inputView = nil;
                                         textField.resignFirstResponder()
                                         textField.becomeFirstResponder()
-                                    }
+                                    }*/
                                     //print("self.companyInfoArray : \(self.companyInfoArray.count)")
                                     applicationUtils.hideActivityIndicator(uiView: self.view)
                                 }
@@ -173,8 +276,27 @@ class StreetTurnRequestViewController: UIViewController,  UITextFieldDelegate, U
                             let apiResponseMessage: APIResponseMessage  = APIResponseMessage(_data)
                             
                             DispatchQueue.main.sync {
+                                
+                                self.companyInfoArray = [CompanyInfo]()
+                                //self.picker.reloadAllComponents()
+                                textField.inputView = nil;
+                                textField.resignFirstResponder()
+                                
                                 applicationUtils.hideActivityIndicator(uiView: self.view)
-                                au.showAlert(target: self, alertTitle: "STREET TURN", message: apiResponseMessage.errors.errorMessage!,[UIAlertAction(title: "OK", style: .default, handler: nil)], completion: nil)
+                                au.showAlert(target: self, alertTitle: self.alertTitle, message: apiResponseMessage.errors.errorMessage!,[UIAlertAction(title: "OK", style: .default, handler: { action in
+                                    switch action.style{
+                                    case .default:
+                                        // below 1 lines are to set inputview as default keyboard
+                                        textField.becomeFirstResponder()
+                                        break
+                                    case .cancel:
+                                        break
+                                        
+                                    case .destructive:
+                                        break
+                                        
+                                    }})], completion:nil )
+                                
                                 
                             }
                             
@@ -184,8 +306,26 @@ class StreetTurnRequestViewController: UIViewController,  UITextFieldDelegate, U
                     } catch let error as NSError {
                         print("NSError ::",error)
                         DispatchQueue.main.sync {
+                            
+                            self.companyInfoArray = [CompanyInfo]()
+                            //self.picker.reloadAllComponents()
+                            textField.inputView = nil;
+                            textField.resignFirstResponder()
+                            
                             applicationUtils.hideActivityIndicator(uiView: self.view)
-                            au.showAlert(target: self, alertTitle: "STREET TURN", message: "Opp! An error has occured, please try after some time.",[UIAlertAction(title: "OK", style: .default, handler: nil)], completion: nil)
+                            au.showAlert(target: self, alertTitle: self.alertTitle, message: self.ac.ERROR_MSG,[UIAlertAction(title: "OK", style: .default, handler: { action in
+                                switch action.style{
+                                case .default:
+                                    // below 1 lines are to set inputview as default keyboard
+                                    textField.becomeFirstResponder()
+                                    break
+                                case .cancel:
+                                    break
+                                    
+                                case .destructive:
+                                    break
+                                    
+                                }})], completion: nil)
                         }
                         
                     }
@@ -204,6 +344,40 @@ class StreetTurnRequestViewController: UIViewController,  UITextFieldDelegate, U
             textField.inputView = nil;
             textField.resignFirstResponder()
             textField.becomeFirstResponder()
+            
+        }
+    }
+    
+    @objc func doneButtonClicked(_ sender: DesignableUITextField) {
+        sender.resignFirstResponder()
+        
+        if sender == txtMCCompanyName{
+            //picker selected row
+            if self.companyInfoArray.count > 0 {
+                let selectedRow: Int  = self.picker.selectedRow(inComponent: 0)
+                if selectedRow >= 0{
+                    txtMCCompanyName.text = self.companyInfoArray[selectedRow].companyName
+                    txtMCScac.text = self.companyInfoArray[selectedRow].scac
+                }
+            }
+            
+        }else if sender == txtEPCompanyName{
+            //picker selected row
+            if self.companyInfoArray.count > 0 {
+                let selectedRow: Int  = self.picker.selectedRow(inComponent: 0)
+                if selectedRow >= 0{
+                    txtEPCompanyName.text = self.companyInfoArray[selectedRow].companyName
+                    txtEPScac.text = self.companyInfoArray[selectedRow].scac
+                }
+            }
+            
+        }else if sender == txtChassisNum{
+            //populate the IEP SCAC details based on chassisText
+            if vu.isNotEmptyString(stringToCheck: sender.text!) && sender.text != "ZZZZ999999"{
+                //API call to set IEP SCAC
+                setIEPSCACBasedOnChassisNum()
+            }
+            
             
         }
     }
@@ -227,44 +401,78 @@ class StreetTurnRequestViewController: UIViewController,  UITextFieldDelegate, U
         
         label.textColor = .black
         label.textAlignment = .center
-        label.font = UIFont(name: "Roboto", size: 10)
+        label.font = UIFont(name: "Roboto", size: 14)
         label.numberOfLines = 0
         label.sizeToFit()
         
         // where data is an Array of String
-        label.text = companyInfoArray[row].companyName! + "-" + companyInfoArray[row].scac!
-        
+        label.text = companyInfoArray[row].scac! + " - " + companyInfoArray[row].companyName!
+    
         return label
     }
     
     func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
         return 50
     }
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        //print(locationArray[row])
-        txtMCCompanyName.resignFirstResponder()
-        
-        txtMCCompanyName.text = self.companyInfoArray[row].companyName
-        txtMCScac.text = self.companyInfoArray[row].scac
-        
-    }
+   
     
     @IBAction func searchButtonTapped(_ sender: Any) {
-        self.performSegue(withIdentifier: "searchOriginalLocSegue", sender: self)
+        if vu.isNotEmptyString(stringToCheck: txtEPScac.text!){
+              self.performSegue(withIdentifier: "searchOriginalLocSegue", sender: self)
+        }else{
+           au.showAlert(target: self, alertTitle: self.alertTitle, message: "Please enter Container Provider Name First.",[UIAlertAction(title: "OK", style: .default, handler: nil)], completion: nil)
+        }
+        
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
        if segue.identifier == "searchOriginalLocSegue"
         {
             let vc = segue.destination as! LocationSearchTableViewController
             vc.delegate = self
-            vc.epScac = "MSCU"
+            vc.epScac =  self.txtEPScac.text
             vc.originFrom = ac.ORIGINAL_LOCATION
             
+        }
+       else if segue.identifier == "verifyDetailsSegue"{
+        
+            var fieldDataArr = [FieldInfo]()
+        
+            /* Note: Please change index if you add in middle of array otherwise next screen will be disturbed */
+            fieldDataArr.append(FieldInfo(fieldTitle: "blank", fieldData: "Street Turn Details")) //0
+            fieldDataArr.append(FieldInfo(fieldTitle: "CONTAINER PROVIDER NAME", fieldData: txtEPCompanyName.text!)) //1
+            fieldDataArr.append(FieldInfo(fieldTitle: "CONTAINER PROVIDER SCAC", fieldData: txtEPScac.text!)) //2
+            fieldDataArr.append(FieldInfo(fieldTitle: "MOTOR CARRIER'S NAME", fieldData: txtMCCompanyName.text!)) //3
+            fieldDataArr.append(FieldInfo(fieldTitle: "MOTOR CARRIER'S SCAC", fieldData: txtMCScac.text!))  //4
+            fieldDataArr.append(FieldInfo(fieldTitle: "IMPORT B/L", fieldData: txtImportBookingNum.text!))  //5
+            fieldDataArr.append(FieldInfo(fieldTitle: "EXPORT BOOKING#", fieldData: txtExportBookingNum.text!))  //6
+            fieldDataArr.append(FieldInfo(fieldTitle: "CONTAINER #", fieldData: txtContNum.text!)) //7
+            fieldDataArr.append(FieldInfo(fieldTitle: "CHASSIS #", fieldData: txtChassisNum.text!)) //8
+        
+            if vu.isNotEmptyString(stringToCheck: nextScreenMessage) && nextScreenMessage.count > 0{
+                fieldDataArr.append(FieldInfo(fieldTitle: "CHASSIS IEP SCAC", fieldData: txtChassisIEPScac.text! + nextScreenMessage)) //9
+            }else{
+                fieldDataArr.append(FieldInfo(fieldTitle: "CHASSIS IEP SCAC", fieldData: txtChassisIEPScac.text!)) //9
+            }
+            fieldDataArr.append(FieldInfo(fieldTitle: "empty", fieldData: "")) //10
+            fieldDataArr.append(FieldInfo(fieldTitle: "blank", fieldData: "Original Interchange Location")) //11
+            fieldDataArr.append(FieldInfo(fieldTitle: "LOCATION NAME", fieldData: txtLocationName.text!)) //12
+            fieldDataArr.append(FieldInfo(fieldTitle: "LOCATION ADDRESS", fieldData: txtLocationAddress.text!)) //13
+            fieldDataArr.append(FieldInfo(fieldTitle: "ZIP CODE", fieldData: txtZipCode.text!)) //14
+            fieldDataArr.append(FieldInfo(fieldTitle: "CITY", fieldData: txtCity.text!)) //15
+            fieldDataArr.append(FieldInfo(fieldTitle: "STATE", fieldData: txtState.text!)) //16
+        
+        
+            let vc = segue.destination as! VerifyDetailsViewController
+            vc.fieldDataArr = fieldDataArr
+            vc.originFrom = "StreetTurn"
+        
         }
       
     }
     func findAndNavigateToTappedView(selectedLocation: IANALocationInfo, originFrom: String) {
+        
+        ianaLocationCode = selectedLocation.ianaCode
+        splcLocationCode = selectedLocation.splcCode
         
         txtZipCode.text = selectedLocation.zip
         txtLocationName.text = selectedLocation.facilityName
@@ -276,58 +484,27 @@ class StreetTurnRequestViewController: UIViewController,  UITextFieldDelegate, U
     
     func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         
+        //do our animations
+        self.tabBarItemImageView = self.streetTurnTabBar.subviews[item.tag].subviews.first as! UIImageView
+        self.tabBarItemImageView.transform = CGAffineTransform.identity
+        UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseInOut, animations: {
+            
+            let transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
+            
+            // let rotation = CGAffineTransform.init(translationX: oldX, y: oldY - 5)
+            self.tabBarItemImageView.transform = transform
+            
+        }, completion: { (value: Bool) in
+            
+            UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseInOut, animations: {
+                self.tabBarItemImageView.transform = .identity
+            }, completion: nil)
+            
+        })
         
         if item.tag == 1 {
             //next button tapped
-            
-            var fieldDataArr = [String]()
-            var fieldTitleArr = [String]()
-            
-            fieldTitleArr.append("blank")
-            fieldTitleArr.append("CONTAINER PROVIDER NAME")
-            fieldTitleArr.append("CONTAINER PROVIDER SCAC")
-            fieldTitleArr.append("MOTOR CARRIER'S NAME")
-            fieldTitleArr.append("MOTOR CARRIER'S SCAC")
-            fieldTitleArr.append("IMPORT B/L")
-            fieldTitleArr.append("EXPORT BOOKING#")
-            fieldTitleArr.append("CONTAINER #")
-            fieldTitleArr.append("CHASSIS #")
-            fieldTitleArr.append("CHASSIS IEP SCAC")
-            
-            fieldTitleArr.append("empty")
-            fieldTitleArr.append("blank")
-            fieldTitleArr.append("LOCATION NAME")
-            fieldTitleArr.append("LOCATION ADDRESS")
-            fieldTitleArr.append("ZIP CODE")
-            fieldTitleArr.append("CITY")
-            fieldTitleArr.append("STATE")
-            
-            fieldDataArr.append("Street Turn Details")
-            fieldDataArr.append(txtEPCompanyName.text!)
-            fieldDataArr.append(txtEPScac.text!)
-            fieldDataArr.append(txtMCCompanyName.text!)
-            fieldDataArr.append(txtMCScac.text!)
-            fieldDataArr.append(txtImportBookingNum.text!)
-            fieldDataArr.append(txtExportBookingNum.text!)
-            fieldDataArr.append(txtContNum.text!)
-            fieldDataArr.append(txtChassisNum.text!)
-            fieldDataArr.append(txtChassisIEPScac.text!)
-            
-            fieldDataArr.append("")
-            fieldDataArr.append("Original Interchange Location")
-            fieldDataArr.append(txtLocationName.text!)
-            fieldDataArr.append(txtLocationAddress.text!)
-            fieldDataArr.append(txtZipCode.text!)
-            fieldDataArr.append(txtCity.text!)
-            fieldDataArr.append(txtState.text!)
-            
-            
-            let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-            let verifyDetailsVC = storyboard.instantiateViewController(withIdentifier: "VerifyStreetTurnDetailsViewController") as! VerifyStreetTurnDetailsViewController
-            verifyDetailsVC.fieldTitleArr = fieldTitleArr
-            verifyDetailsVC.fieldDataArr = fieldDataArr
-            self.present(verifyDetailsVC, animated: true, completion: nil)
-            
+            sendValidationRequestForStreetTurn()
             
         }else if item.tag == 2 {
             //cancel button tapped
@@ -335,19 +512,321 @@ class StreetTurnRequestViewController: UIViewController,  UITextFieldDelegate, U
         }
     }
     
-    @IBAction func backButtonTapped(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
+    func validateStreetTurnFields() -> String {
+        
+        var retMsg : String = ""
+        if vu.isEmptyString(stringToCheck: txtMCCompanyName.text!){
+               retMsg = "Motor Carrier Name should not be blank."
+        
+        }else if vu.isEmptyString(stringToCheck: txtMCScac.text!){
+            retMsg = "Please select valid Motor Carrier Name to populate SCAC."
+        
+        }else if txtMCScac.text!.count < 4 {
+            retMsg = "Motor Carrier SCAC should be 4 characters long."
+        
+        }else if !txtMCScac.text!.isCharactersOnly{
+            retMsg = "Motor Carrier SCAC should contains characters only."
+            
+        }else if vu.isEmptyString(stringToCheck: txtEPCompanyName.text!){
+            retMsg = "Container Provider Name should not be blank."
+            
+        }else if vu.isEmptyString(stringToCheck: txtEPScac.text!){
+            retMsg = "Please select valid Container Provider Name to populate SCAC."
+            
+        }else if txtEPScac.text!.count > 2  && txtEPScac.text!.count < 4 {
+            retMsg = "Container Provider SCAC should be 2-4 characters long."
+            
+        }else if !txtEPScac.text!.isCharactersOnly{
+            retMsg = "Container Provider SCAC should contains characters only."
+        
+        }else if vu.isEmptyString(stringToCheck: txtContNum.text!){
+            retMsg = "Container Number should not be blank."
+            
+        }else if !txtContNum.text!.isAlphanumeric{
+            retMsg = "Container Number should contains alphanumeric only."
+            
+        }else if vu.isEmptyString(stringToCheck: txtExportBookingNum.text!){
+            retMsg = "Export Booking Number should not be blank."
+            
+        }else if !txtExportBookingNum.text!.isAlphanumeric{
+            retMsg = "Export Booking Number should contains alphanumeric only."
+            
+        }else if vu.isNotEmptyString(stringToCheck: txtImportBookingNum.text!) &&
+                !txtImportBookingNum.text!.isAlphanumeric{
+            retMsg = "Import Booking Number should contains alphanumeric only."
+            
+        }else if vu.isEmptyString(stringToCheck: txtChassisNum.text!){
+            retMsg = "Chassis Number should not be blank."
+            
+        }else if !txtChassisNum.text!.isAlphanumeric{
+            retMsg = "Chassis Number should contains alphanumeric only."
+            
+        }else if vu.isEmptyString(stringToCheck: txtZipCode.text!){
+            retMsg = "Zip Code should not be blank."
+            
+        }else if vu.isEmptyString(stringToCheck: txtLocationName.text!){
+            retMsg = "Location Name should not be blank."
+            
+        }else if vu.isEmptyString(stringToCheck: txtLocationAddress.text!){
+            retMsg = "Location Address should not be blank."
+            
+        }else if vu.isEmptyString(stringToCheck: txtCity.text!){
+            retMsg = "City should not be blank."
+            
+        }else if vu.isEmptyString(stringToCheck: txtState.text!){
+            retMsg = "State should not be blank."
+        
+        }else if txtState.text!.count != 2 {
+            retMsg = "State should be 2 characters long."
+        
+        }else if vu.isEmptyString(stringToCheck: ianaLocationCode!) || vu.isEmptyString(stringToCheck: splcLocationCode!) {
+            retMsg = "Please select valid location from the list"
+       
+        }
+        
+        return retMsg
+        
     }
     
-    @objc func dismissKeyboard(){
-        view.endEditing(true)
+    func sendValidationRequestForStreetTurn() {
+        
+        // resign first responder if any.
+        if txtMCCompanyName.isFirstResponder
+        {
+            txtMCCompanyName.resignFirstResponder();
+        }else if txtEPCompanyName.isFirstResponder
+        {
+            txtEPCompanyName.resignFirstResponder();
+        }else if txtContNum.isFirstResponder
+        {
+            txtContNum.resignFirstResponder();
+        }else if txtExportBookingNum.isFirstResponder
+        {
+            txtExportBookingNum.resignFirstResponder();
+        }else if txtImportBookingNum.isFirstResponder
+        {
+            txtImportBookingNum.resignFirstResponder();
+        }else if txtChassisNum.isFirstResponder
+        {
+            txtChassisNum.resignFirstResponder();
+        }
+        
+        // validate Login fields..
+        let resMsg : String = validateStreetTurnFields()
+        
+        if !au.isInternetAvailable() {
+            au.redirectToNoInternetConnectionView(target: self)
+        }
+        else if resMsg.isEmpty
+        {
+            
+            let accessToken =  UserDefaults.standard.string(forKey: "accessToken")
+            let applicationUtils : ApplicationUtils = ApplicationUtils()
+            applicationUtils.showActivityIndicator(uiView: view)
+            
+            let jsonRequestObject: [String : Any] =
+                [
+                    "irRequestType":"StreetTurn",
+                    "epScacs": au.trim(stringToTrim: txtEPScac.text!),
+                    "contNum": au.trim(stringToTrim: txtContNum.text!),
+                    "chassisNum": au.trim(stringToTrim: txtChassisNum.text!),
+                    "importBookingNum": au.trim(stringToTrim: txtImportBookingNum.text!),
+                    "bookingNum": au.trim(stringToTrim: txtExportBookingNum.text!),
+                    "originLocZip": au.trim(stringToTrim: txtZipCode.text!),
+                    "originLocNm": au.trim(stringToTrim: txtLocationName.text!),
+                    "originLocAddr": au.trim(stringToTrim: txtLocationAddress.text!),
+                    "originLocCity": au.trim(stringToTrim: txtCity.text!),
+                    "originLocState": au.trim(stringToTrim: txtState.text!),
+                    "accessToken": accessToken!
+                    
+            ]
+            
+            print(jsonRequestObject)
+            
+            if let paramString = try? JSONSerialization.data(withJSONObject: jsonRequestObject)
+            {
+                let urlToRequest = ac.BASE_URL + ac.VALIDATE_STREET_TURN_URI
+                let url = URL(string: urlToRequest)!
+                
+                let session = URLSession.shared
+                let request = NSMutableURLRequest(url: url)
+                
+                request.httpMethod = "POST"
+                request.httpBody = paramString
+                request.setValue(ac.CONTENT_TYPE_JSON, forHTTPHeaderField: ac.CONTENT_TYPE_KEY)
+                request.cachePolicy = NSURLRequest.CachePolicy.reloadIgnoringCacheData
+                
+                
+                let task = session.dataTask(with: request as URLRequest) { (data, response, error) in
+                    guard let _: Data = data, let _: URLResponse = response, error == nil else {
+                        print("*****error")
+                        DispatchQueue.main.sync {
+                            applicationUtils.hideActivityIndicator(uiView: self.view)
+                            au.showAlert(target: self, alertTitle: self.alertTitle, message: self.ac.ERROR_MSG,[UIAlertAction(title: "OK", style: .default, handler: nil)], completion: nil)
+                        }
+                        
+                        
+                        return
+                    }
+                    do{
+                        let nsResponse =  response as! HTTPURLResponse
+                        let parsedData = try JSONSerialization.jsonObject(with: data!)
+                        
+                        print(parsedData)
+                        
+                        if let stValidationData:[String: Any]   = parsedData as? [String : Any]
+                        {
+                            
+                            if nsResponse.statusCode == 200
+                            {
+                                //handle other response ..
+                                let apiResponseMessage: APIResponseMessage  = APIResponseMessage(stValidationData)
+                                
+                                DispatchQueue.main.sync {
+                                    applicationUtils.hideActivityIndicator(uiView: self.view)
+                                    self.performSegue(withIdentifier: "verifyDetailsSegue", sender: self)
+                                    if apiResponseMessage.message != nil && vu.isNotEmptyString(stringToCheck: apiResponseMessage.message!){
+                                        self.nextScreenMessage = apiResponseMessage.message!
+                                    }
+                                    
+                                }
+                                
+                            }else{
+                                
+                                //handle other response ..
+                                let apiResponseMessage: APIResponseMessage  = APIResponseMessage(stValidationData)
+                                
+                                DispatchQueue.main.sync {
+                                    applicationUtils.hideActivityIndicator(uiView: self.view)
+                                    au.showAlert(target: self, alertTitle: self.alertTitle, message: apiResponseMessage.errors.errorMessage!,[UIAlertAction(title: "OK", style: .default, handler: nil)], completion: nil)
+                                    
+                                }
+                                
+                            }
+                            
+                        }
+                        
+                    } catch let error as NSError {
+                        print("NSError ::",error)
+                        DispatchQueue.main.sync {
+                            applicationUtils.hideActivityIndicator(uiView: self.view)
+                            au.showAlert(target: self, alertTitle: self.alertTitle, message: self.ac.ERROR_MSG,[UIAlertAction(title: "OK", style: .default, handler: nil)], completion: nil)
+                        }
+                        
+                    }
+                    
+                }
+                task.resume()
+                
+            }
+            
+            
+        }else{
+            
+            //display toast message to the user.
+            au.showAlert(target: self, alertTitle: self.alertTitle, message: resMsg,[UIAlertAction(title: "OK", style: .default, handler: nil)], completion: nil)
+            
+            
+        }
+    }
+    
+    func setIEPSCACBasedOnChassisNum() {
+        //make a web service call to fetch boes location based on user.
+        if !au.isInternetAvailable() {
+            au.redirectToNoInternetConnectionView(target: self)
+        }
+        else
+        {
+            let applicationUtils : ApplicationUtils = ApplicationUtils()
+            applicationUtils.showActivityIndicator(uiView: view)
+            
+            let txtValue: String = au.replaceWhiteSpaces(au.trimSpaceAndNewLine(stringToTrimIncludingNewLine: (txtChassisNum.text!)))
+            let urlToRequest = ac.BASE_URL + ac.GET_IPESCAC_BY_CHASSIS_ID + "?chassisId=\(txtValue)"
+            
+            
+            let url = URL(string: urlToRequest)!
+            
+            let session = URLSession.shared
+            let request = NSMutableURLRequest(url: url)
+            
+            request.httpMethod = "GET"
+            request.cachePolicy = NSURLRequest.CachePolicy.reloadIgnoringCacheData
+            
+            
+            let task = session.dataTask(with: request as URLRequest) { (data, response, error) in
+                guard let _: Data = data, let _: URLResponse = response, error == nil else {
+                    print("*****error")
+                    DispatchQueue.main.sync {
+                        
+                        applicationUtils.hideActivityIndicator(uiView: self.view)
+                        au.showAlert(target: self, alertTitle: self.alertTitle, message: self.ac.ERROR_MSG,[UIAlertAction(title: "OK", style: .default, handler: nil)], completion: nil)
+                        
+                    }
+                    return
+                }
+                do{
+                    let nsResponse =  response as! HTTPURLResponse
+                    let parsedData = try JSONSerialization.jsonObject(with: data!)
+                    
+                    print(parsedData)
+                    
+                    if nsResponse.statusCode == 200
+                    {
+                        
+                        if let _data:[String : String]   = parsedData as? [String : String]
+                        {
+                            DispatchQueue.main.sync {
+                                applicationUtils.hideActivityIndicator(uiView: self.view)
+                                self.txtChassisIEPScac.text = _data["iepScac"]
+                            }
+                            
+                        }
+                        
+                    }else if let _data:[String:Any]   = parsedData as? [String:Any]
+                    {
+                        
+                        //handle other response ..
+                        let apiResponseMessage: APIResponseMessage  = APIResponseMessage(_data)
+                        
+                        DispatchQueue.main.sync {
+                            
+                            applicationUtils.hideActivityIndicator(uiView: self.view)
+                            au.showAlert(target: self, alertTitle: self.alertTitle, message: apiResponseMessage.errors.errorMessage!,[UIAlertAction(title: "OK", style: .default, handler: nil)], completion: nil)
+                            
+                            
+                        }
+                        
+                    }
+                    
+                    
+                } catch let error as NSError {
+                    print("NSError ::",error)
+                    DispatchQueue.main.sync {
+                        
+                        applicationUtils.hideActivityIndicator(uiView: self.view)
+                        au.showAlert(target: self, alertTitle: self.alertTitle, message: self.ac.ERROR_MSG,[UIAlertAction(title: "OK", style: .default, handler: nil)], completion: nil)
+                        
+                    }
+                    
+                }
+                
+                
+            }
+            task.resume()
+            
+        }
+    }
+    
+    
+    @IBAction func backButtonTapped(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
     }
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         if textField == txtZipCode || textField == txtCity  || textField == txtState
                         || textField == txtLocationAddress || textField == txtLocationName
                             || textField == txtChassisIEPScac || textField == txtMCScac
-                                || textField == txtEPScac
+                                || textField == txtEPScac || textField == txtMCCompanyName
             
         {
             textField.resignFirstResponder()
@@ -358,20 +837,34 @@ class StreetTurnRequestViewController: UIViewController,  UITextFieldDelegate, U
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        /*guard let text = textField.text else { return true }
+        guard let text = textField.text else { return true }
         
-        if textField == txtScac
+        if textField == txtMCCompanyName || textField == txtEPCompanyName
+        {
+            let newLength = text.count + string.count - range.length
+            return newLength <= 200
+            
+        }else if textField == txtMCScac || textField == txtEPScac
         {
             let newLength = text.count + string.count - range.length
             return newLength <= 4
             
-        }else if textField == txtPassword
+        }else if textField == txtContNum
         {
             let newLength = text.count + string.count - range.length
-            return newLength <= 100
+            return newLength <= 11
             
-        }*/
-        
+        }else if textField == txtExportBookingNum || textField == txtImportBookingNum
+        {
+            let newLength = text.count + string.count - range.length
+            return newLength <= 45
+            
+        }else if textField == txtChassisNum
+        {
+            let newLength = text.count + string.count - range.length
+            return newLength <= 20
+            
+        }
         return true
         
     }

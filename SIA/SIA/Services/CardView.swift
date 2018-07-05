@@ -13,7 +13,7 @@ import UIKit
     @IBInspectable var cornerradious : CGFloat = 2
     @IBInspectable var shadowOffsetWidth : CGFloat = 0
     @IBInspectable var shadowOffsetHeight : CGFloat = 1
-    @IBInspectable var shadowColor : UIColor = UIColor.black
+    @IBInspectable var cardViewShadowColor : UIColor = UIColor.black
     @IBInspectable var shadowOpacity : CGFloat = 0.5
     //@IBInspectable var enableShadow : Bool = true
     
@@ -22,7 +22,7 @@ import UIKit
         //if(enableShadow){
         
             layer.cornerRadius = cornerradious
-            layer.shadowColor = shadowColor.cgColor
+            layer.shadowColor = cardViewShadowColor.cgColor
             layer.shadowOffset  = CGSize(width: shadowOffsetWidth, height: shadowOffsetHeight)
             let shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: cornerradious)
             layer.shadowPath = shadowPath.cgPath

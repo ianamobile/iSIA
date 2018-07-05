@@ -61,12 +61,11 @@ class LocationSearchTableViewController: UITableViewController, UISearchBarDeleg
                 applicationUtils.showActivityIndicator(uiView: view)
                 
                 var urlToRequest = ""
-                if originFrom == ac.ORIGINAL_LOCATION {
-                    urlToRequest = ac.BASE_URL + ac.FETCH_ORIGIN_LOCATION_LIST_URI + "?epScac=\(epScac!)&location=\(txtValue)"
-                }else if originFrom == ac.EQUIPMENT_LOCATION {
-                    urlToRequest = ac.BASE_URL + ac.FETCH_EQUIP_LOCATION_LIST_URI + "?location=\(txtValue)"
+                if originFrom == ac.ORIGINAL_LOCATION && epScac != nil && vu.isNotEmptyString(stringToCheck: epScac!){
+                    urlToRequest = ac.BASE_URL + ac.FETCH_LOCATION_LIST_URI + "?epScac=\(epScac!)&location=\(txtValue)"
+                }else{
+                    urlToRequest = ac.BASE_URL + ac.FETCH_LOCATION_LIST_URI + "?location=\(txtValue)"
                 }
-                
                 //print(urlToRequest)
                 
                 
@@ -84,7 +83,7 @@ class LocationSearchTableViewController: UITableViewController, UISearchBarDeleg
                         print("*****error")
                         DispatchQueue.main.sync {
                             applicationUtils.hideActivityIndicator(uiView: self.view)
-                            au.showAlert(target: self, alertTitle: "SEARCH LOCATION", message: "Opp! An error has occured, please try after some time.",[UIAlertAction(title: "OK", style: .default, handler: nil)], completion: nil)
+                            au.showAlert(target: self, alertTitle: "SEARCH LOCATION", message: self.ac.ERROR_MSG,[UIAlertAction(title: "OK", style: .default, handler: nil)], completion: nil)
                         }
                         
                         return
@@ -131,7 +130,7 @@ class LocationSearchTableViewController: UITableViewController, UISearchBarDeleg
                         print("NSError ::",error)
                         DispatchQueue.main.sync {
                             applicationUtils.hideActivityIndicator(uiView: self.view)
-                            au.showAlert(target: self, alertTitle: "SEARCH LOCATION", message: "Opp! An error has occured, please try after some time.",[UIAlertAction(title: "OK", style: .default, handler: nil)], completion: nil)
+                            au.showAlert(target: self, alertTitle: "SEARCH LOCATION", message: self.ac.ERROR_MSG,[UIAlertAction(title: "OK", style: .default, handler: nil)], completion: nil)
                         }
                         
                     }

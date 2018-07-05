@@ -113,7 +113,7 @@ class ForgotPasswordViewController: UIViewController, UITextFieldDelegate {
                         print("*****error")
                           DispatchQueue.main.sync {
                             applicationUtils.hideActivityIndicator(uiView: self.view)
-                            au.showAlert(target: self, alertTitle: "FORGOT PASSWORD", message: "Opp! An error has occured, please try after some time.",[UIAlertAction(title: "OK", style: .default, handler: nil)], completion: nil)
+                            au.showAlert(target: self, alertTitle: "FORGOT PASSWORD", message: self.ac.ERROR_MSG,[UIAlertAction(title: "OK", style: .default, handler: nil)], completion: nil)
                         }
                         return
                     }
@@ -158,7 +158,7 @@ class ForgotPasswordViewController: UIViewController, UITextFieldDelegate {
                         print("NSError ::",error)
                         DispatchQueue.main.sync {
                             applicationUtils.hideActivityIndicator(uiView: self.view)
-                            au.showAlert(target: self, alertTitle: "FORGOT PASSWORD", message: "Opp! An error has occured, please try after some time.",[UIAlertAction(title: "OK", style: .default, handler: nil)], completion: nil)
+                            au.showAlert(target: self, alertTitle: "FORGOT PASSWORD", message: self.ac.ERROR_MSG,[UIAlertAction(title: "OK", style: .default, handler: nil)], completion: nil)
                         }
                         
                     }

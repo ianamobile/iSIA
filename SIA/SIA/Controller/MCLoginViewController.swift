@@ -95,6 +95,15 @@ class MCLoginViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func SignOnButtonTapped(_ sender: Any) {
         
+       /* UserDefaults.standard.set("eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJNQzAwNDc5MiIsInNpcElkIjo2MzIsInVzZXJOYW1lIjoiTUMwMDQ3OTIiLCJyb2xlIjoiTUMiLCJzY2FjIjoiUkRTUyIsInVpaWFBY2N0Tm8iOiJNQzAwNDc5MiIsImZpcnN0TmFtZSI6IkdyZWciLCJsYXN0TmFtZSI6IlN0ZWZmbHJlIiwiY29tcGFueU5hbWUiOiJSYWlsIERlbGl2ZXJ5IFNlcnZpY2VzIiwic3RhdHVzIjoiQ0FOQ0VMTEVEIiwiY29uZmlnRGV0YWlsc1NldEZsYWciOmZhbHNlLCJwZXJtaXNzaW9ucyI6eyJpbmlJbnRyY2huZyI6bnVsbCwiaW5pSW50cmNobmdBbmRBcHByb3ZlIjpudWxsfX0.PticVgBld-n6rlgCv0EojrMsmrOa0m6EQ-5Bcb44gSPT-_d-vkWfTorxSJY28tAG9epkjiSAroIvZGRlmQGDjg", forKey: "accessToken")
+        UserDefaults.standard.set("RDSS Company", forKey: "companyName")
+        UserDefaults.standard.set("MC", forKey: "role")
+        UserDefaults.standard.set("RDSS", forKey: "scac")
+        UserDefaults.standard.set("MC", forKey: "originFrom")
+        
+        self.performSegue(withIdentifier: "dashboardSegue", sender: self)
+        */
+        
         // resign first responder if any.
         if txtScac.isFirstResponder
         {
@@ -143,7 +152,7 @@ class MCLoginViewController: UIViewController, UITextFieldDelegate {
                         print("*****error")
                          DispatchQueue.main.sync {
                             applicationUtils.hideActivityIndicator(uiView: self.view)
-                            au.showAlert(target: self, alertTitle: "MC LOGIN", message: "Opp! An error has occured, please try after some time.",[UIAlertAction(title: "OK", style: .default, handler: nil)], completion: nil)
+                            au.showAlert(target: self, alertTitle: "MC LOGIN", message: self.ac.ERROR_MSG,[UIAlertAction(title: "OK", style: .default, handler: nil)], completion: nil)
                         }
                         
                         
@@ -195,7 +204,7 @@ class MCLoginViewController: UIViewController, UITextFieldDelegate {
                         print("NSError ::",error)
                         DispatchQueue.main.sync {
                             applicationUtils.hideActivityIndicator(uiView: self.view)
-                            au.showAlert(target: self, alertTitle: "MC LOGIN", message: "Opp! An error has occured, please try after some time.",[UIAlertAction(title: "OK", style: .default, handler: nil)], completion: nil)
+                            au.showAlert(target: self, alertTitle: "MC LOGIN", message: self.ac.ERROR_MSG,[UIAlertAction(title: "OK", style: .default, handler: nil)], completion: nil)
                         }
                             
                         
@@ -217,6 +226,7 @@ class MCLoginViewController: UIViewController, UITextFieldDelegate {
             
             
         }
+       
  
     }
     

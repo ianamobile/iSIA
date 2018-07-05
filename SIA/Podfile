@@ -22,7 +22,7 @@ pod 'IQKeyboardManagerSwift', '~> 6.0'
 #https://cocoapods.org/pods/Material
 #https://github.com/CosmicMind/Material
 
-pod 'Material', '~> 2.0'
+#pod 'Material', '~> 2.0'
 
 end
 
