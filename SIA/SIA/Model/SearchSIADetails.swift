@@ -35,8 +35,11 @@ class SearchSIADetailsResponse
 
 class SearchSIADetails{
     
+   
     var status :String?
-    var requestType :String?
+    var irId :Int?
+    var requestTypeTitle :String?
+    var irRequestType :String?
     var actionRequired :String?
     var createdDate :String?
     var contNum:String?
@@ -58,13 +61,17 @@ class SearchSIADetails{
         
         if !jsonDictionary.isEmpty
         {
-            let intchgType = jsonDictionary["intchgType"] as? String
             
+            self.irId = jsonDictionary["irId"] as? Int
             self.status = jsonDictionary["status"] as? String ?? ""
+            
+            let intchgType = jsonDictionary["intchgType"] as? String
             if intchgType == nil || intchgType == "" || intchgType == "null"  || vu.isEmptyString(stringToCheck: intchgType!){
-                self.requestType = "STREET TURN REQUEST"
+                self.requestTypeTitle = "STREET TURN"
+                self.irRequestType = "StreetTurn"
             }else {
-                self.requestType = " STREET INTERCHANGE REQUEST"
+                self.requestTypeTitle = " STREET INTERCHANGE"
+                self.irRequestType = "StreetInterchange"
             }
             
             self.actionRequired       = jsonDictionary["actionRequired"] as? String

@@ -73,50 +73,52 @@ class SearchInterchangeRequestResultVC: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "searchInterchangeRequestTableViewCell", for: indexPath) as! SearchInterchangeRequestTableViewCell
         
         cell.selectionStyle = .none //table cell selection style changed to none
-        
-        if searchSIADetailsArray[indexPath.row].status == "PENDING"{
-            cell.leftView.backgroundColor = #colorLiteral(red: 0.9137, green: 0.549, blue: 0.1137, alpha: 1) /* #e98c1d */
+        if searchSIADetailsArray.count > 0 {
             
-        }else if searchSIADetailsArray[indexPath.row].status == "ONHOLD" ||
-            searchSIADetailsArray[indexPath.row].status == "REJECTED" ||
-            searchSIADetailsArray[indexPath.row].status == "CANCELLED" {
-            cell.leftView.backgroundColor = #colorLiteral(red: 0.851, green: 0.3255, blue: 0.3098, alpha: 1) /* #d9534f */
+            if searchSIADetailsArray[indexPath.row].status == "PENDING"{
+                cell.leftView.backgroundColor = #colorLiteral(red: 0.9137, green: 0.549, blue: 0.1137, alpha: 1) /* #e98c1d */
+                
+            }else if searchSIADetailsArray[indexPath.row].status == "ONHOLD" ||
+                searchSIADetailsArray[indexPath.row].status == "REJECTED" ||
+                searchSIADetailsArray[indexPath.row].status == "CANCELLED" {
+                cell.leftView.backgroundColor = #colorLiteral(red: 0.851, green: 0.3255, blue: 0.3098, alpha: 1) /* #d9534f */
+                
+            }else if searchSIADetailsArray[indexPath.row].status == "APPROVED"{
+                cell.leftView.backgroundColor = #colorLiteral(red: 0.3608, green: 0.7216, blue: 0.3608, alpha: 1) /* #5cb85c */
+                
+            }
+            cell.lblRequestType.text = searchSIADetailsArray[indexPath.row].requestTypeTitle
+            cell.lblStatus.text = searchSIADetailsArray[indexPath.row].status
+            cell.lblActionRequired.text = searchSIADetailsArray[indexPath.row].actionRequired
+            cell.lblContNum.text = searchSIADetailsArray[indexPath.row].contNum
+            cell.lblExportBookingNum.text = searchSIADetailsArray[indexPath.row].bookingNum
+            cell.lblEPName.text = searchSIADetailsArray[indexPath.row].epCompanyName
+            cell.lblEPScac.text = searchSIADetailsArray[indexPath.row].epScacs
+            cell.lblMCAName.text = searchSIADetailsArray[indexPath.row].mcACompanyName
+            cell.lblMCAScac.text = searchSIADetailsArray[indexPath.row].mcAScac
+            cell.lblMCBName.text = searchSIADetailsArray[indexPath.row].mcBCompanyName
+            cell.lblMCBScac.text = searchSIADetailsArray[indexPath.row].mcBScac
+            cell.lblActionDate.text = searchSIADetailsArray[indexPath.row].actionDate
             
-        }else if searchSIADetailsArray[indexPath.row].status == "APPROVED"{
-            cell.leftView.backgroundColor = #colorLiteral(red: 0.3608, green: 0.7216, blue: 0.3608, alpha: 1) /* #5cb85c */
+            if searchSIADetailsArray[indexPath.row].status == "PENDING" || searchSIADetailsArray[indexPath.row].status == "APPROVED"{
+               cell.lblActionDateTitle.text = "APPROVAL DATE"
+                
+            }else if searchSIADetailsArray[indexPath.row].status == "ONHOLD"{
+              
+                cell.lblActionDateTitle.text = "ONHOLD DATE"
+                
+            }else if searchSIADetailsArray[indexPath.row].status == "REJECTED"{
+                cell.lblActionDateTitle.text = "REJECTION DATE"
+                
+            }else if searchSIADetailsArray[indexPath.row].status == "CANCELLED"{
+                cell.lblActionDateTitle.text = "CANCELLED DATE"
+                
+            }
             
-        }
-        cell.lblRequestType.text = searchSIADetailsArray[indexPath.row].requestType
-        cell.lblStatus.text = searchSIADetailsArray[indexPath.row].status
-        cell.lblActionRequired.text = searchSIADetailsArray[indexPath.row].actionRequired
-        cell.lblContNum.text = searchSIADetailsArray[indexPath.row].contNum
-        cell.lblExportBookingNum.text = searchSIADetailsArray[indexPath.row].bookingNum
-        cell.lblEPName.text = searchSIADetailsArray[indexPath.row].epCompanyName
-        cell.lblEPScac.text = searchSIADetailsArray[indexPath.row].epScacs
-        cell.lblMCAName.text = searchSIADetailsArray[indexPath.row].mcACompanyName
-        cell.lblMCAScac.text = searchSIADetailsArray[indexPath.row].mcAScac
-        cell.lblMCBName.text = searchSIADetailsArray[indexPath.row].mcBCompanyName
-        cell.lblMCBScac.text = searchSIADetailsArray[indexPath.row].mcBScac
-        cell.lblActionDate.text = searchSIADetailsArray[indexPath.row].actionDate
-        
-        if searchSIADetailsArray[indexPath.row].status == "PENDING" || searchSIADetailsArray[indexPath.row].status == "APPROVED"{
-           cell.lblActionDateTitle.text = "APPROVAL DATE"
-            
-        }else if searchSIADetailsArray[indexPath.row].status == "ONHOLD"{
-          
-            cell.lblActionDateTitle.text = "ONHOLD DATE"
-            
-        }else if searchSIADetailsArray[indexPath.row].status == "REJECTED"{
-            cell.lblActionDateTitle.text = "REJECTION DATE"
-            
-        }else if searchSIADetailsArray[indexPath.row].status == "CANCELLED"{
-            cell.lblActionDateTitle.text = "CANCELLED DATE"
-            
-        }
-         
-        if offset > lastOffsetCalled && indexPath.row == searchSIADetailsArray.count - 1 && totalPages >= offset
-        {
-           self.loadMore()
+            if offset > lastOffsetCalled && indexPath.row == searchSIADetailsArray.count - 1 && totalPages >= offset
+            {
+               self.loadMore()
+            }
         }
         return cell
         
@@ -132,11 +134,26 @@ class SearchInterchangeRequestResultVC: UITableViewController {
         
         if self.originFrom != "searchResultByTPUSegue"
         {
-            self.performSegue(withIdentifier: "viewStreeTurnDetails", sender: self)
+            if searchSIADetailsArray.count > 0
+            {
+                self.performSegue(withIdentifier: "viewStreetTurnDetails", sender: searchSIADetailsArray[indexPath.row])
+            }
         }
         
-        
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "viewStreetTurnDetails" {
+            
+            let vc = segue.destination as! ViewStreetTurnDetailsVC
+            let selectedObject: SearchSIADetails = sender as! SearchSIADetails
+            vc.searchSIADetails = selectedObject
+            vc.originFrom = selectedObject.irRequestType
+            
+        }
+    }
+    
     func loadMore(){
         
         self.lastOffsetCalled = self.offset

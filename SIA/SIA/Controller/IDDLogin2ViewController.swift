@@ -78,17 +78,17 @@ class IDDLogin2ViewController: UIViewController, UITextFieldDelegate {
             
         }else if vu.isNotEmptyString(stringToCheck: txtDriverLicNo.text!) && vu.isNotEmptyString(stringToCheck: txtDriverLicState.text!)
             && !vu.isNotEmptyString(stringToCheck: txtScac.text!){
-            retMsg = "Please enter scac code."
+            retMsg = "Scac should not be blank."
             
         }else if vu.isNotEmptyString(stringToCheck: txtDriverLicNo.text!)
             && !vu.isNotEmptyString(stringToCheck: txtDriverLicState.text!)
             && vu.isNotEmptyString(stringToCheck: txtScac.text!){
-            retMsg = "Please enter driver license state."
+            retMsg = "Driver license state should not be blank."
             
         }else if !vu.isNotEmptyString(stringToCheck: txtDriverLicNo.text!)
             && vu.isNotEmptyString(stringToCheck: txtDriverLicState.text!)
             && vu.isNotEmptyString(stringToCheck: txtScac.text!){
-            retMsg = "Please enter driver license #."
+            retMsg = "Driver license # should not be blank."
             
         }else{
             // either or empty

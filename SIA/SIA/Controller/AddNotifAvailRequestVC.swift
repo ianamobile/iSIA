@@ -749,59 +749,59 @@ class AddNotifAvailRequestVC: UIViewController , UITextFieldDelegate, UITabBarDe
         if pickerView == self.contTypePicker {
             
             if contTypeArray.count > 0 {
-                picker.isHidden = false
+                pickerView.isHidden = false
             }
             else {
-                picker.isHidden = true
+                pickerView.isHidden = true
             }
             return contTypeArray.count
             
         }else if pickerView == self.contSizePicker {
             
             if contSizeArray.count > 0 {
-                picker.isHidden = false
+                pickerView.isHidden = false
             }
             else {
-                picker.isHidden = true
+                pickerView.isHidden = true
             }
             return contSizeArray.count
             
         }else if pickerView == self.chassisTypePicker {
             
             if chassisTypeArray.count > 0 {
-                picker.isHidden = false
+                pickerView.isHidden = false
             }
             else {
-                picker.isHidden = true
+                pickerView.isHidden = true
             }
             return chassisTypeArray.count
             
         }else if pickerView == self.chassisSizePicker {
             
             if chassisSizeArray.count > 0 {
-                picker.isHidden = false
+                pickerView.isHidden = false
             }
             else {
-                picker.isHidden = true
+                pickerView.isHidden = true
             }
             return chassisSizeArray.count
             
         }else if pickerView == self.loadStatusPicker {
             
             if loadStatusArray.count > 0 {
-                picker.isHidden = false
+                pickerView.isHidden = false
             }
             else {
-                picker.isHidden = true
+                pickerView.isHidden = true
             }
             return loadStatusArray.count
         }else{
             
             if companyInfoArray.count > 0 {
-                picker.isHidden = false
+                pickerView.isHidden = false
             }
             else {
-                picker.isHidden = true
+                pickerView.isHidden = true
             }
             return companyInfoArray.count
         }
@@ -871,7 +871,25 @@ class AddNotifAvailRequestVC: UIViewController , UITextFieldDelegate, UITabBarDe
             
         }else if item.tag == 2 {
             //cancel button tapped
-            self.navigationController?.popViewController(animated: true)
+            au.showAlert(target: self, alertTitle: self.alertTitle, message: "Are you sure want to cancel this request?",
+                         [UIAlertAction(title: "OK", style: .default, handler: { action in
+                            switch action.style{
+                            case .default:
+                                self.navigationController?.popViewController(animated: true)
+                                break
+                            case .cancel:
+                                
+                                break
+                                
+                            case .destructive:
+                                
+                                break
+                                
+                            }}),
+                          UIAlertAction(title: "CANCEL", style: .default, handler: nil)
+                            
+                ], completion: nil)
+            
         }
     }
     
@@ -983,10 +1001,7 @@ class AddNotifAvailRequestVC: UIViewController , UITextFieldDelegate, UITabBarDe
         }else if vu.isEmptyString(stringToCheck: txtContSize.text!){
             retMsg = "Please select valid Container Size"
             
-        }else if vu.isEmptyString(stringToCheck: txtChassisNum.text!){
-            retMsg = "Chassis Number should not be blank."
-            
-        }else if !txtChassisNum.text!.isAlphanumeric{
+        }else if vu.isNotEmptyString(stringToCheck: txtChassisNum.text!) && !txtChassisNum.text!.isAlphanumeric{
             retMsg = "Chassis Number should contains alphanumeric only."
             
         }else if vu.isNotEmptyString(stringToCheck: txtChassisNum.text!) && vu.isEmptyString(stringToCheck: txtChassisType.text!){

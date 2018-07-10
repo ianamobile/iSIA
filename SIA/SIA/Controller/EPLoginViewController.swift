@@ -73,19 +73,19 @@ class EPLoginViewController: UIViewController, UITextFieldDelegate {
                 
             }else if txtScac.text!.count < 2 {
                 
-                retMsg = "SCAC should be at-least 2 characters long."
+                retMsg = "SCAC should be 2-4 characters long."
             }
             
         }else if vu.isNotEmptyString(stringToCheck: txtScac.text!) && !vu.isNotEmptyString(stringToCheck: txtPassword.text!){
-            retMsg = "Please enter password."
+            retMsg = "Password should not be blank."
             
         }else if !vu.isNotEmptyString(stringToCheck: txtScac.text!) && vu.isNotEmptyString(stringToCheck: txtPassword.text!){
-            retMsg = "Please enter scac."
+            retMsg = "Scac should not be blank."
             
         }else
         {
             // either or empty
-            retMsg = "Please enter scac & password."
+            retMsg = "Scac & Password should not be blank."
             
             
         }

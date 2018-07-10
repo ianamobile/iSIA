@@ -56,10 +56,14 @@ class SECForgotPasswordViewController: UIViewController, UITextFieldDelegate {
         {
             retMsg = "SCAC should contains characters only."
                 
-        }else if vu.isNotEmptyString(stringToCheck: txtScac.text!) && txtScac.text!.count < 4
+        }else if vu.isNotEmptyString(stringToCheck: txtScac.text!) && memType == "MC" && txtScac.text!.count < 4
         {
                retMsg = "SCAC should be 4 characters long."
         
+        }else if vu.isNotEmptyString(stringToCheck: txtScac.text!) && memType == "EP" && txtScac.text!.count < 2
+        {
+            retMsg = "SCAC should be 2-4 characters long."
+            
         }else if vu.isEmptyString(stringToCheck: txtUsername.text!){
             retMsg = "Username should not be blank."
         

@@ -18,6 +18,7 @@ class SIADetailsTitleTableViewCell: UITableViewCell {
         // Initialization code
         lblTitle.numberOfLines = 0
         lblTitle.sizeToFit()
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

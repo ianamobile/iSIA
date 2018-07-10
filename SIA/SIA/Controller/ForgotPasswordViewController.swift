@@ -58,14 +58,18 @@ class ForgotPasswordViewController: UIViewController, UITextFieldDelegate {
             {
                 retMsg = "SCAC should contains characters only."
                 
-            }else if txtScac.text!.count < 4
+            }else if role == "MC" && txtScac.text!.count < 4
             {
                 retMsg = "SCAC should be 4 characters long."
+            
+            }else if role == "EP" && txtScac.text!.count < 2
+            {
+                retMsg = "SCAC should be 2- 4 characters long."
             }
             
         }else
         {
-            retMsg = "Please enter scac code."
+            retMsg = "Scac should not be blank."
         }
         return retMsg
     }

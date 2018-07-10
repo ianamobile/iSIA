@@ -23,6 +23,8 @@ class VerifyDetailsViewController: UIViewController, UITableViewDataSource,
     var alertTitle :String?
     var nextScreenMessage :String = ""
     var originFrom :String?
+    var isStreetInterchangeInitiatedByMCA :String?
+    var naId :Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,6 +69,9 @@ class VerifyDetailsViewController: UIViewController, UITableViewDataSource,
             let vc = segue.destination as! SuccessViewController
             vc.message =  self.nextScreenMessage
             vc.originFrom = self.originFrom
+            if originFrom == "StreetInterchange"{
+                vc.isStreetInterchangeInitiatedByMCA = self.isStreetInterchangeInitiatedByMCA!
+            }
             
         }
         
@@ -113,6 +118,7 @@ class VerifyDetailsViewController: UIViewController, UITableViewDataSource,
                     "originLocCity": au.trim(stringToTrim: fieldDataArr[26].fieldData!),
                     "originLocState": au.trim(stringToTrim: fieldDataArr[27].fieldData!),
                     "accessToken": accessToken!
+                    
                     
             ]
             
@@ -309,7 +315,132 @@ class VerifyDetailsViewController: UIViewController, UITableViewDataSource,
     
     //Submit Street interchange Request
     func submitStreetInterchangeRequest(){
-        self.performSegue(withIdentifier: "successViewSegue", sender: self)
+        if !au.isInternetAvailable() {
+            au.redirectToNoInternetConnectionView(target: self)
+        }
+        else
+        {
+            
+            let accessToken =  UserDefaults.standard.string(forKey: "accessToken")
+            let applicationUtils : ApplicationUtils = ApplicationUtils()
+            applicationUtils.showActivityIndicator(uiView: view)
+            
+            var jsonRequestObject: [String : Any] =
+                [
+                    "irRequestType":"StreetInterchange",
+                    "epScacs": au.trim(stringToTrim: fieldDataArr[2].fieldData!),
+                    "mcAScac": au.trim(stringToTrim: fieldDataArr[4].fieldData!),
+                    "mcBScac": au.trim(stringToTrim: fieldDataArr[6].fieldData!),
+                    "intchgType": au.trim(stringToTrim: fieldDataArr[7].fieldData!),
+                    
+                   
+                    "contType": au.trim(stringToTrim: fieldDataArr[8].fieldData!),
+                    "contSize": au.trim(stringToTrim: fieldDataArr[9].fieldData!),
+                    "importBookingNum": au.trim(stringToTrim: fieldDataArr[10].fieldData!),
+                    "bookingNum": au.trim(stringToTrim: fieldDataArr[11].fieldData!),
+                    "contNum": au.trim(stringToTrim: fieldDataArr[12].fieldData!),
+                    "chassisNum": au.trim(stringToTrim: fieldDataArr[13].fieldData!),
+                    "chassisType": au.trim(stringToTrim: fieldDataArr[15].fieldData!),
+                    "chassisSize": au.trim(stringToTrim: fieldDataArr[16].fieldData!),
+                    "gensetNum": au.trim(stringToTrim: fieldDataArr[17].fieldData!),
+                    
+                  
+                    "equipLocNm": au.trim(stringToTrim: fieldDataArr[20].fieldData!),
+                    "equipLocAddr": au.trim(stringToTrim: fieldDataArr[21].fieldData!),
+                    "equipLocZip": au.trim(stringToTrim: fieldDataArr[22].fieldData!),
+                    "equipLocCity": au.trim(stringToTrim: fieldDataArr[23].fieldData!),
+                    "equipLocState": au.trim(stringToTrim: fieldDataArr[24].fieldData!),
+                    
+                   
+                    "originLocNm": au.trim(stringToTrim: fieldDataArr[27].fieldData!),
+                    "originLocAddr": au.trim(stringToTrim: fieldDataArr[28].fieldData!),
+                    "originLocZip": au.trim(stringToTrim: fieldDataArr[29].fieldData!),
+                    "originLocCity": au.trim(stringToTrim: fieldDataArr[30].fieldData!),
+                    "originLocState": au.trim(stringToTrim: fieldDataArr[31].fieldData!),
+                    "accessToken": accessToken!
+             
+            ]
+            if(self.naId != nil && self.naId! > 0){
+                jsonRequestObject ["naId"] = self.naId
+            }
+            print(jsonRequestObject)
+            
+            if let paramString = try? JSONSerialization.data(withJSONObject: jsonRequestObject)
+            {
+                let urlToRequest = ac.BASE_URL + ac.SAVE_INTERCHANGE_REQUEST_URL
+                let url = URL(string: urlToRequest)!
+                
+                let session = URLSession.shared
+                let request = NSMutableURLRequest(url: url)
+                
+                request.httpMethod = "POST"
+                request.httpBody = paramString
+                request.setValue(ac.CONTENT_TYPE_JSON, forHTTPHeaderField: ac.CONTENT_TYPE_KEY)
+                request.cachePolicy = NSURLRequest.CachePolicy.reloadIgnoringCacheData
+                
+                
+                let task = session.dataTask(with: request as URLRequest) { (data, response, error) in
+                    guard let _: Data = data, let _: URLResponse = response, error == nil else {
+                        print("*****error")
+                        DispatchQueue.main.sync {
+                            applicationUtils.hideActivityIndicator(uiView: self.view)
+                            au.showAlert(target: self, alertTitle: self.alertTitle!, message: self.ac.ERROR_MSG,[UIAlertAction(title: "OK", style: .default, handler: nil)], completion: nil)
+                        }
+                        
+                        
+                        return
+                    }
+                    do{
+                        let nsResponse =  response as! HTTPURLResponse
+                        let parsedData = try JSONSerialization.jsonObject(with: data!)
+                        
+                        print(parsedData)
+                        
+                        if let stSubmittedData:[String: Any]   = parsedData as? [String : Any]
+                        {
+                            
+                            if nsResponse.statusCode == 200
+                            {
+                                //handle other response ..
+                                let apiResponseMessage: APIResponseMessage  = APIResponseMessage(stSubmittedData)
+                                
+                                DispatchQueue.main.sync {
+                                    applicationUtils.hideActivityIndicator(uiView: self.view)
+                                    self.nextScreenMessage = apiResponseMessage.message!
+                                    self.performSegue(withIdentifier: "successViewSegue", sender: self)
+                                }
+                                
+                            }else{
+                                
+                                //handle other response ..
+                                let apiResponseMessage: APIResponseMessage  = APIResponseMessage(stSubmittedData)
+                                
+                                DispatchQueue.main.sync {
+                                    applicationUtils.hideActivityIndicator(uiView: self.view)
+                                    au.showAlert(target: self, alertTitle: self.alertTitle!, message: apiResponseMessage.errors.errorMessage!,[UIAlertAction(title: "OK", style: .default, handler: nil)], completion: nil)
+                                    
+                                }
+                                
+                            }
+                            
+                        }
+                        
+                    } catch let error as NSError {
+                        print("NSError ::",error)
+                        DispatchQueue.main.sync {
+                            applicationUtils.hideActivityIndicator(uiView: self.view)
+                            au.showAlert(target: self, alertTitle: self.alertTitle!, message: self.ac.ERROR_MSG,[UIAlertAction(title: "OK", style: .default, handler: nil)], completion: nil)
+                        }
+                        
+                    }
+                    
+                }
+                task.resume()
+                
+            }
+            
+            
+        }
              
     }
     
@@ -324,11 +455,15 @@ class VerifyDetailsViewController: UIViewController, UITableViewDataSource,
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if fieldDataArr[indexPath.row].fieldTitle == "blank" || fieldDataArr[indexPath.row].fieldTitle == "empty"{
+        
+        
+        if fieldDataArr.count > 0 && fieldDataArr[indexPath.row].fieldTitle == "blank" || fieldDataArr[indexPath.row].fieldTitle == "empty"{
             let cell = tableView.dequeueReusableCell(withIdentifier: "titleReuseIdentifier", for: indexPath) as! SIADetailsTitleTableViewCell
             cell.lblTitle.text  = fieldDataArr[indexPath.row].fieldData
             if fieldDataArr[indexPath.row].fieldTitle == "empty"{
                 cell.leftView.alpha = 0
+            }else{
+                cell.leftView.alpha = 1
             }
             
             // Configure the cell...

@@ -43,6 +43,13 @@ class StreetTurnRequestViewController: UIViewController,  UITextFieldDelegate, U
     var nextScreenMessage :String = ""
     var tabBarItemImageView: UIImageView!
     
+    
+    //logged in users information
+    var role :String?
+    var loggedInUserCompanyName :String?
+    var loggedInUserScac :String?
+    var memType :String?
+    
     override func viewDidLoad(){
         
         super.viewDidLoad()
@@ -84,10 +91,9 @@ class StreetTurnRequestViewController: UIViewController,  UITextFieldDelegate, U
         UITextField.connectFields(fields: [txtEPCompanyName, txtContNum, txtExportBookingNum, txtImportBookingNum, txtChassisNum])
        
         //if logged in user as MC
-        let role =  UserDefaults.standard.string(forKey: "role")
-        let loggedInUserCompanyName =  UserDefaults.standard.string(forKey: "companyName")
-        let loggedInUserScac =  UserDefaults.standard.string(forKey: "scac")
-        var memType :String? = ""
+        role =  UserDefaults.standard.string(forKey: "role")
+        loggedInUserCompanyName =  UserDefaults.standard.string(forKey: "companyName")
+        loggedInUserScac =  UserDefaults.standard.string(forKey: "scac")
         if role == "SEC"{
             memType =  UserDefaults.standard.string(forKey: "memType")
         }
@@ -118,6 +124,18 @@ class StreetTurnRequestViewController: UIViewController,  UITextFieldDelegate, U
     }
     func resetFields(){
         print("reset form field.....")
+        
+        if role == "MC" || (role == "SEC" && memType == "MC") || role == "IDD"{
+            txtEPCompanyName.text = ""
+            txtEPScac.text = ""
+            
+            txtEPCompanyName.inputView = nil
+            
+        }else if role == "EP" || (role == "SEC" && memType == "EP") || role == "TPU"{
+            txtMCCompanyName.text = ""
+            txtMCScac.text = ""
+            txtMCCompanyName.inputView = nil
+        }
         
         txtMCCompanyName.text = ""
         txtMCScac.text = ""
@@ -508,7 +526,26 @@ class StreetTurnRequestViewController: UIViewController,  UITextFieldDelegate, U
             
         }else if item.tag == 2 {
             //cancel button tapped
-            self.navigationController?.popViewController(animated: true)
+            au.showAlert(target: self, alertTitle: self.alertTitle, message: "Are you sure want to cancel this request?",
+                         [UIAlertAction(title: "OK", style: .default, handler: { action in
+                            switch action.style{
+                            case .default:
+                                 self.navigationController?.popViewController(animated: true)
+                                break
+                            case .cancel:
+                                
+                                break
+                                
+                            case .destructive:
+                                
+                                break
+                                
+                            }}),
+                          UIAlertAction(title: "CANCEL", style: .default, handler: nil)
+                            
+                ], completion: nil)
+            
+           
         }
     }
     
@@ -555,10 +592,7 @@ class StreetTurnRequestViewController: UIViewController,  UITextFieldDelegate, U
                 !txtImportBookingNum.text!.isAlphanumeric{
             retMsg = "Import Booking Number should contains alphanumeric only."
             
-        }else if vu.isEmptyString(stringToCheck: txtChassisNum.text!){
-            retMsg = "Chassis Number should not be blank."
-            
-        }else if !txtChassisNum.text!.isAlphanumeric{
+        }else if vu.isNotEmptyString(stringToCheck: txtChassisNum.text!) && !txtChassisNum.text!.isAlphanumeric{
             retMsg = "Chassis Number should contains alphanumeric only."
             
         }else if vu.isEmptyString(stringToCheck: txtZipCode.text!){

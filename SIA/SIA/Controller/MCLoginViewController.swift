@@ -77,15 +77,15 @@ class MCLoginViewController: UIViewController, UITextFieldDelegate {
             }
             
         }else if vu.isNotEmptyString(stringToCheck: txtScac.text!) && !vu.isNotEmptyString(stringToCheck: txtPassword.text!){
-            retMsg = "Please enter password."
+            retMsg = "Password should not be blank."
             
         }else if !vu.isNotEmptyString(stringToCheck: txtScac.text!) && vu.isNotEmptyString(stringToCheck: txtPassword.text!){
-            retMsg = "Please enter scac."
+            retMsg = "SCAC should not be blank."
             
         }else
         {
             // either or empty
-            retMsg = "Please enter scac & password."
+            retMsg = "Scac & Password should not be blank."
             
             
         }

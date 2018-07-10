@@ -132,7 +132,7 @@ class RequestPoolSearchResultVC: UITableViewController, SearchRequestPoolTableVi
     func deleteNotificationAvailRecord(sender: SearchRequestPoolTableViewCell, originFrom: String) {
         print("Delete button tapped.")
         
-        au.showAlert(target: self, alertTitle: "LOGIN", message: "Are you sure want to delete this record?",
+        au.showAlert(target: self, alertTitle: self.alertTitle, message: "Are you sure want to delete this record?",
                      [UIAlertAction(title: "OK", style: .default, handler: { action in
                         switch action.style{
                         case .default:

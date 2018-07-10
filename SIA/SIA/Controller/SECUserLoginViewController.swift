@@ -77,19 +77,23 @@ class SECUserLoginViewController: UIViewController, UITextFieldDelegate {
             {
                 retMsg = "SCAC should contains characters only."
                 
-            }else if txtScac.text!.count < 4 {
-                
+            }else if memType == "MC" && txtScac.text!.count < 4
+            {
                 retMsg = "SCAC should be 4 characters long."
+                
+            }else if memType == "EP" && txtScac.text!.count < 2
+            {
+                retMsg = "SCAC should be 2- 4 characters long."
             }
             
         }else if vu.isNotEmptyString(stringToCheck: txtScac.text!) && vu.isNotEmptyString(stringToCheck: txtUsername.text!) && !vu.isNotEmptyString(stringToCheck: txtPassword.text!){
-            retMsg = "Please enter password."
+            retMsg = "Password should not be blank."
             
         }else if vu.isNotEmptyString(stringToCheck: txtScac.text!) && !vu.isNotEmptyString(stringToCheck: txtUsername.text!) && vu.isNotEmptyString(stringToCheck: txtPassword.text!){
-            retMsg = "Please enter username."
+            retMsg = "Username should not be blank."
             
         }else if !vu.isNotEmptyString(stringToCheck: txtScac.text!) && vu.isNotEmptyString(stringToCheck: txtUsername.text!) && vu.isNotEmptyString(stringToCheck: txtPassword.text!){
-            retMsg = "Please enter scac."
+            retMsg = "Scac should not be blank."
             
         }else
         {

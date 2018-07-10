@@ -64,17 +64,17 @@ class IDDLogin1ViewController: UIViewController, UITextFieldDelegate {
             }
             
         }else if vu.isNotEmptyString(stringToCheck: txtIddPin.text!) && !vu.isNotEmptyString(stringToCheck: txtScac.text!){
-            retMsg = "Please enter scac code."
+            retMsg = "Scac should not be blank."
             
         }else if !vu.isNotEmptyString(stringToCheck: txtIddPin.text!) && vu.isNotEmptyString(stringToCheck: txtScac.text!){
-            retMsg = "Please enter idd pin #."
+            retMsg = "Idd pin # should not be blank."
             
         }else
         {
             if (txtIddPin.text!.isEmpty) || (txtScac.text!.isEmpty)
             {
                 // either or empty
-                retMsg = "Please enter idd pin # & scac."
+                retMsg = "Idd Pin # & Scac should not be blank."
                 
             }
         }

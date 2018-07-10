@@ -25,11 +25,10 @@ UITableViewDelegate, UIViewControllerTransitioningDelegate{
     var alertTitle :String?
     var nextScreenMessage :String = ""
     var originFrom :String?
+    var searchSIADetails :SearchSIADetails?  //get interchange record from this object.
     
     override func viewDidLoad() {
         super.viewDidLoad()
-      //  siaTableView.delegate = self
-       // siaTableView.dataSource = self
         
         if originFrom != nil && vu.isNotEmptyString(stringToCheck: originFrom!){
             if originFrom == "StreetTurn"{
@@ -40,38 +39,7 @@ UITableViewDelegate, UIViewControllerTransitioningDelegate{
             }
         }
         
-        /* Note: Please change index if you add in middle of array otherwise next screen will be disturbed */
-        fieldDataArr.append(FieldInfo(fieldTitle: "blank", fieldData: "Street Interchange Details"))
-        fieldDataArr.append(FieldInfo(fieldTitle: "CONTAINER PROVIDER NAME", fieldData: "APL Limited"))
-        fieldDataArr.append(FieldInfo(fieldTitle: "CONTAINER PROVIDER SCAC", fieldData: "APLU"))
-        fieldDataArr.append(FieldInfo(fieldTitle: "MOTOR CARRIER'S NAME", fieldData: "Tiger Cool Express LLC"))
-        fieldDataArr.append(FieldInfo(fieldTitle: "MOTOR CARRIER'S SCAC", fieldData: "MSCU"))
-        fieldDataArr.append(FieldInfo(fieldTitle: "IMPORT B/L", fieldData: "IMPORT0001"))
-        fieldDataArr.append(FieldInfo(fieldTitle: "EXPORT BOOKING#", fieldData: "EXPORT001"))
-        fieldDataArr.append(FieldInfo(fieldTitle: "CONTAINER #", fieldData: "CONT001"))
-        fieldDataArr.append(FieldInfo(fieldTitle: "CHASSIS #", fieldData: "CHASSISNO001"))
-        
-        if vu.isNotEmptyString(stringToCheck: nextScreenMessage) && nextScreenMessage.count > 0{
-            fieldDataArr.append(FieldInfo(fieldTitle: "CHASSIS IEP SCAC", fieldData: "CMDU"))
-        }else{
-            fieldDataArr.append(FieldInfo(fieldTitle: "CHASSIS IEP SCAC", fieldData: "CMDU"))
-        }
-        fieldDataArr.append(FieldInfo(fieldTitle: "empty", fieldData: ""))
-        fieldDataArr.append(FieldInfo(fieldTitle: "blank", fieldData: "Equipment Location"))
-        fieldDataArr.append(FieldInfo(fieldTitle: "LOCATION NAME", fieldData: "ABCD1234565"))
-        fieldDataArr.append(FieldInfo(fieldTitle: "LOCATION ADDRESS", fieldData: "ABCDE3434342ERERER"))
-        fieldDataArr.append(FieldInfo(fieldTitle: "ZIP CODE", fieldData: "391440"))
-        fieldDataArr.append(FieldInfo(fieldTitle: "CITY", fieldData: "VADODARA"))
-        fieldDataArr.append(FieldInfo(fieldTitle: "STATE", fieldData: "CA"))
-        
-        
-        fieldDataArr.append(FieldInfo(fieldTitle: "empty", fieldData: "")) //17
-        fieldDataArr.append(FieldInfo(fieldTitle: "blank", fieldData: "Original Interchange Location"))
-        fieldDataArr.append(FieldInfo(fieldTitle: "LOCATION NAME", fieldData: "LOCATIONNAME001"))
-        fieldDataArr.append(FieldInfo(fieldTitle: "LOCATION ADDRESS", fieldData: "ADDRESS001"))
-        fieldDataArr.append(FieldInfo(fieldTitle: "ZIP CODE", fieldData: "ZIP0002"))
-        fieldDataArr.append(FieldInfo(fieldTitle: "CITY", fieldData: "VADODAR"))
-        fieldDataArr.append(FieldInfo(fieldTitle: "STATE", fieldData: "CA"))
+        self.callGetInterchangeRequestAPI()
         
         viewWorkFlowBtn.layer.cornerRadius = viewWorkFlowBtn.frame.size.width / 2
         
@@ -117,6 +85,178 @@ UITableViewDelegate, UIViewControllerTransitioningDelegate{
         floaty.items[4].iconImageView.tintColor = UIColor.white
         
     }
+    
+    func callGetInterchangeRequestAPI() {
+      
+        if !au.isInternetAvailable() {
+            au.redirectToNoInternetConnectionView(target: self)
+        }
+        else
+        {
+            
+            let applicationUtils : ApplicationUtils = ApplicationUtils()
+            applicationUtils.showActivityIndicator(uiView: view)
+            
+            let accessToken =  UserDefaults.standard.string(forKey: "accessToken")
+            
+            let jsonRequestObject: [String : Any] =
+                [
+                    "irId" :  162009, //searchSIADetails?.irId!, //274942, //,
+                    "accessToken" : accessToken!
+            ]
+            
+            //print(jsonRequestObject)
+            
+            if let paramString = try? JSONSerialization.data(withJSONObject: jsonRequestObject)
+            {
+                let urlToRequest = ac.BASE_URL + ac.GET_INTERCHANGE_REQUEST_DETAILS
+                let url = URL(string: urlToRequest)!
+                
+                let session = URLSession.shared
+                let request = NSMutableURLRequest(url: url)
+                
+                request.httpMethod = "POST"
+                request.httpBody = paramString
+                request.setValue(ac.CONTENT_TYPE_JSON, forHTTPHeaderField: ac.CONTENT_TYPE_KEY)
+                request.cachePolicy = NSURLRequest.CachePolicy.reloadIgnoringCacheData
+                
+                
+                let task = session.dataTask(with: request as URLRequest) { (data, response, error) in
+                    guard let _: Data = data, let _: URLResponse = response, error == nil else {
+                        print("*****error")
+                        DispatchQueue.main.sync {
+                            applicationUtils.hideActivityIndicator(uiView: self.view)
+                            au.showAlert(target: self, alertTitle: self.alertTitle!, message: self.ac.ERROR_MSG,[UIAlertAction(title: "OK", style: .default, handler: nil)], completion: nil)
+                        }
+                        
+                        
+                        return
+                    }
+                    do{
+                        let nsResponse =  response as! HTTPURLResponse
+                        let parsedData = try JSONSerialization.jsonObject(with: data!)
+                        
+                        print(parsedData)
+                        
+                        if let data:[String: Any]   = parsedData as? [String : Any]
+                        {
+                            
+                            if nsResponse.statusCode == 200
+                            {
+                                let res: GetInterChangeRequestDetails  = GetInterChangeRequestDetails(data)
+                               
+                                DispatchQueue.main.sync {
+                                    applicationUtils.hideActivityIndicator(uiView: self.view)
+                                    
+                                    /* Note: Please change index if you add in middle of array otherwise next screen will be disturbed */
+                                    self.fieldDataArr.append(FieldInfo(fieldTitle: "blank", fieldData: "Street Interchange Details")) //0
+                                    self.fieldDataArr.append(FieldInfo(fieldTitle: "CONTAINER PROVIDER NAME", fieldData: res.interchangeRequests?.epCompanyName!)) //1
+                                    self.fieldDataArr.append(FieldInfo(fieldTitle: "CONTAINER PROVIDER SCAC", fieldData: res.interchangeRequests?.epScacs!)) //2
+                                    self.fieldDataArr.append(FieldInfo(fieldTitle: "MOTOR CARRIER A'S NAME", fieldData: res.interchangeRequests?.mcACompanyName!)) //3
+                                    self.fieldDataArr.append(FieldInfo(fieldTitle: "MOTOR CARRIER A'S SCAC", fieldData: res.interchangeRequests?.mcAScac!))  //4
+                                    self.fieldDataArr.append(FieldInfo(fieldTitle: "MOTOR CARRIER B'S NAME", fieldData: res.interchangeRequests?.mcBCompanyName!)) //5
+                                    self.fieldDataArr.append(FieldInfo(fieldTitle: "MOTOR CARRIER B'S SCAC", fieldData: res.interchangeRequests?.mcBScac!))  //6
+                                    self.fieldDataArr.append(FieldInfo(fieldTitle: "TYPE OF INTERCHANGE", fieldData: res.interchangeRequests?.intchgType ?? ""))  //7
+                                    
+                                    self.fieldDataArr.append(FieldInfo(fieldTitle: "CONTAINER TYPE", fieldData: res.interchangeRequests?.contType ?? "")) //8
+                                    self.fieldDataArr.append(FieldInfo(fieldTitle: "CONTAINER SIZE", fieldData: res.interchangeRequests?.contSize ?? "")) //9
+                                    
+                                    self.fieldDataArr.append(FieldInfo(fieldTitle: "IMPORT B/L", fieldData: res.interchangeRequests?.importBookingNum  ?? ""))  //10
+                                    self.fieldDataArr.append(FieldInfo(fieldTitle: "EXPORT BOOKING#", fieldData: res.interchangeRequests?.bookingNum!))  //11
+                                    self.fieldDataArr.append(FieldInfo(fieldTitle: "CONTAINER #", fieldData: res.interchangeRequests?.contNum!)) //12
+                                    self.fieldDataArr.append(FieldInfo(fieldTitle: "CHASSIS #", fieldData: res.interchangeRequests?.chassisNum  ?? "")) //13
+                                    
+                                    self.fieldDataArr.append(FieldInfo(fieldTitle: "CHASSIS IEP SCAC", fieldData: res.interchangeRequests?.iepScac ?? "")) //14
+                                    
+                                    self.fieldDataArr.append(FieldInfo(fieldTitle: "CHASSIS TYPE", fieldData: res.interchangeRequests?.chassisType ?? "")) //15
+                                    self.fieldDataArr.append(FieldInfo(fieldTitle: "CHASSIS SIZE", fieldData: res.interchangeRequests?.chassisSize ?? "")) //16
+                                    self.fieldDataArr.append(FieldInfo(fieldTitle: "GENSET #", fieldData: res.interchangeRequests?.gensetNum ?? "")) //17
+                                    
+                                    if self.searchSIADetails?.irRequestType == "StreetInterchange" {
+                                        self.fieldDataArr.append(FieldInfo(fieldTitle: "empty", fieldData: "")) //18
+                                        self.fieldDataArr.append(FieldInfo(fieldTitle: "blank", fieldData: "Equipment Location")) //19
+                                        self.fieldDataArr.append(FieldInfo(fieldTitle: "LOCATION NAME", fieldData: res.interchangeRequests?.equipLocNm ?? "")) //20
+                                        self.fieldDataArr.append(FieldInfo(fieldTitle: "LOCATION ADDRESS", fieldData: res.interchangeRequests?.equipLocAddr ?? "")) //21
+                                        self.fieldDataArr.append(FieldInfo(fieldTitle: "ZIP CODE", fieldData: res.interchangeRequests?.equipLocZip ?? "")) //22
+                                        self.fieldDataArr.append(FieldInfo(fieldTitle: "CITY", fieldData: res.interchangeRequests?.equipLocCity ?? "")) //23
+                                        self.fieldDataArr.append(FieldInfo(fieldTitle: "STATE", fieldData: res.interchangeRequests?.equipLocState ?? "")) //24
+                                        
+                                    
+                                    }
+                                    
+                                    self.fieldDataArr.append(FieldInfo(fieldTitle: "empty", fieldData: "")) //25
+                                    self.fieldDataArr.append(FieldInfo(fieldTitle: "blank", fieldData: "Original Interchange Location")) //26
+                                    self.fieldDataArr.append(FieldInfo(fieldTitle: "LOCATION NAME", fieldData: res.interchangeRequests?.originLocNm!)) //27
+                                    self.fieldDataArr.append(FieldInfo(fieldTitle: "LOCATION ADDRESS", fieldData: res.interchangeRequests?.originLocAddr!)) //28
+                                    self.fieldDataArr.append(FieldInfo(fieldTitle: "ZIP CODE", fieldData: res.interchangeRequests?.originLocZip!)) //29
+                                    self.fieldDataArr.append(FieldInfo(fieldTitle: "CITY", fieldData: res.interchangeRequests?.originLocCity!)) //30
+                                    self.fieldDataArr.append(FieldInfo(fieldTitle: "STATE", fieldData: res.interchangeRequests?.originLocState!)) //31
+                                    
+                                    if self.searchSIADetails?.irRequestType == "StreetInterchange" && res.uiiaExhibitDataList.count > 0{
+                                        self.fieldDataArr.append(FieldInfo(fieldTitle: "empty", fieldData: "")) //32
+                                        self.fieldDataArr.append(FieldInfo(fieldTitle: "blank", fieldData: "Equipment Condition (per UIIA Exhibit A)")) //33
+                                        for uiiaExhibit in res.uiiaExhibitDataList {
+                                             self.fieldDataArr.append(FieldInfo(fieldTitle: uiiaExhibit.item!, fieldData: uiiaExhibit.item_desc!)) //34
+                                        }
+                                    }
+                                    
+                                    if self.searchSIADetails?.irRequestType == "StreetInterchange" && res.interchangeRequests?.remarks != nil
+                                            && vu.isNotEmptyString(stringToCheck: (res.interchangeRequests?.remarks!)!){
+                                        
+                                        if let remarksArray =  res.interchangeRequests?.remarks!.components(separatedBy: "|"){
+                                            self.fieldDataArr.append(FieldInfo(fieldTitle: "empty", fieldData: "")) //32
+                                            self.fieldDataArr.append(FieldInfo(fieldTitle: "blank", fieldData: "Previous Comments")) //33
+                                            for remarks in remarksArray {
+                                                self.fieldDataArr.append(FieldInfo(fieldTitle: "REMARKS", fieldData: remarks)) //34
+                                            }
+                                        }
+                                        
+                                        
+                                    }
+                                    self.siaTableView.reloadData()
+                                   
+                                }
+                                
+                            }else{
+                    
+                                //handle other response ..
+                                let apiResponseMessage: APIResponseMessage  = APIResponseMessage(data)
+                                
+                                DispatchQueue.main.sync {
+                                    applicationUtils.hideActivityIndicator(uiView: self.view)
+                                    au.showAlert(target: self, alertTitle: self.alertTitle!, message: apiResponseMessage.errors.errorMessage!,[UIAlertAction(title: "OK", style: .default, handler: nil)], completion: nil)
+                                    
+                                }
+                                
+                            }
+                            
+                        }
+                        
+                        
+                    } catch let error as NSError {
+                        print("NSError ::",error)
+                        DispatchQueue.main.sync {
+                            applicationUtils.hideActivityIndicator(uiView: self.view)
+                            au.showAlert(target: self, alertTitle: self.alertTitle!, message: self.ac.ERROR_MSG ,[UIAlertAction(title: "OK", style: .default, handler: nil)], completion: nil)
+                        }
+                        
+                        
+                        
+                        
+                    }
+                    
+                    
+                }
+                task.resume()
+                
+            }
+            
+            
+        }
+        
+    
+    }
+    
     @IBAction func backButtonTapped(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }

@@ -37,6 +37,9 @@ public class AppConstants
     let SETUP_PAGE_URI                      = "SIA/setupPage"
     let VALIDATE_NOTIF_AVAIL_DETAILS_URI    = "SIA/validateNotifAvailEquipDetails"
     let SAVE_NOTIF_AVAIL_URI                =  "SIA/addEquipmentToPool"
+    let VALIDATE_STREET_INTERCHANGE_REQUEST_URI = "SIA/validateInitiateInterchangeDetails"
+    let SAVE_INTERCHANGE_REQUEST_URL        = "SIA/saveInitiateInterchangeDetails"
+    let GET_INTERCHANGE_REQUEST_DETAILS     = "SIA/getInterchangeRequestDetails"
     
     
     let ORIGINAL_LOCATION = "OriginalLocation"

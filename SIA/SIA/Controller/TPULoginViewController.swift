@@ -66,15 +66,15 @@ class TPULoginViewController: UIViewController, UITextFieldDelegate {
             }
             
         }else if vu.isNotEmptyString(stringToCheck: txtUserName.text!) && !vu.isNotEmptyString(stringToCheck: txtPassword.text!){
-            retMsg = "Please enter password."
+            retMsg = "Password should not be blank."
             
         }else if !vu.isNotEmptyString(stringToCheck: txtUserName.text!) && vu.isNotEmptyString(stringToCheck: txtPassword.text!){
-            retMsg = "Please enter username."
+            retMsg = "Username should not be blank."
             
         }else
         {
             // either or empty
-            retMsg = "Please enter username & password."
+            retMsg = "Username & Password should not be blank."
             
             
         }

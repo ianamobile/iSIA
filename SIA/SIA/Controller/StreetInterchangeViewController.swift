@@ -73,6 +73,13 @@ class StreetInterchangeViewController: UIViewController , UITextFieldDelegate, U
     var nextScreenMessage :String = ""
     var tabBarItemImageView: UIImageView!
     
+    var inputTextFieldsArray = [UITextField]()
+    
+    //logged in users information
+    var role :String?
+    var loggedInUserCompanyName :String?
+    var loggedInUserScac :String?
+    var memType :String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -142,10 +149,18 @@ class StreetInterchangeViewController: UIViewController , UITextFieldDelegate, U
         txtChassisNum.keyboardToolbar.doneBarButton.setTarget(self, action: #selector(doneButtonClicked))
        
         
-       
+        //if logged in user as MC
+        role =  UserDefaults.standard.string(forKey: "role")
+        loggedInUserCompanyName =  UserDefaults.standard.string(forKey: "companyName")
+        loggedInUserScac =  UserDefaults.standard.string(forKey: "scac")
+        if role == "SEC"{
+            memType =  UserDefaults.standard.string(forKey: "memType")
+        }
+        inputTextFieldsArray = [txtEPCompanyName, txtMCACompanyName, txtMCBCompanyName,
+                                txtTypeOfInterchange, txtContType, txtContSize, txtImportBookingNum, txtExportBookingNum, txtContNum, txtChassisNum, txtChassisType, txtChassisSize,txtGensetNum, txtEquipZipCode, txtEquipLocationName, txtEquipLocationAddress, txtEquipCity, txtEquipState ]
+        
         //Go to next field on return key
-        UITextField.connectFields(fields: [txtEPCompanyName, txtMCACompanyName, txtMCBCompanyName,
-                                           txtTypeOfInterchange, txtContType, txtContSize, txtImportBookingNum, txtExportBookingNum, txtContNum, txtChassisNum, txtChassisType, txtChassisSize,txtGensetNum, txtEquipZipCode, txtEquipLocationName, txtEquipLocationAddress, txtEquipCity, txtEquipState])
+        UITextField.connectFields(fields: inputTextFieldsArray)
         
         //Setup page API call.
         setupPage()
@@ -156,10 +171,13 @@ class StreetInterchangeViewController: UIViewController , UITextFieldDelegate, U
         print("reset form field.....")
         
         txtEPCompanyName.text = ""
+        txtEPCompanyName.inputView = nil
         txtEPScac.text = ""
         txtMCACompanyName.text = ""
+        txtMCACompanyName.inputView = nil
         txtMCAScac.text = ""
         txtMCBCompanyName.text = ""
+        txtMCBCompanyName.inputView = nil
         txtMCBScac.text = ""
         
         txtTypeOfInterchange.text = ""
@@ -189,7 +207,13 @@ class StreetInterchangeViewController: UIViewController , UITextFieldDelegate, U
         
         originFrom = ""
         companyInfoArray  = []
-        picker = UIPickerView()
+        
+        //set picker value to first position when tried to create new request from success (3)page.
+        typeOfInterchangePicker.selectRow(0, inComponent: 0, animated: true)
+        contTypePicker.selectRow(0, inComponent: 0, animated: true)
+        contSizePicker.selectRow(0, inComponent: 0, animated: true)
+        chassisTypePicker.selectRow(0, inComponent: 0, animated: true)
+        chassisSizePicker.selectRow(0, inComponent: 0, animated: true)
         
         nextScreenMessage = ""
         
@@ -298,6 +322,7 @@ class StreetInterchangeViewController: UIViewController , UITextFieldDelegate, U
         }
     }
     
+    
     func createTypeOfInterchangeDropDown(_ sender: DesignableUITextField){
         
         self.typeOfInterchangeArray.append("LOAD/LOAD")
@@ -388,7 +413,7 @@ class StreetInterchangeViewController: UIViewController , UITextFieldDelegate, U
             au.redirectToNoInternetConnectionView(target: self)
         }else{
             super.viewDidAppear(animated)
-            if(originFrom != nil && vu.isNotEmptyString(stringToCheck: originFrom!) && originFrom! == "StreetInterchange"){
+            if(originFrom != nil && vu.isNotEmptyString(stringToCheck: originFrom!) && originFrom! == "AddNewStreetInterchange"){
                 resetFields();
             }
             
@@ -788,59 +813,59 @@ class StreetInterchangeViewController: UIViewController , UITextFieldDelegate, U
         if pickerView == self.contTypePicker {
             
             if contTypeArray.count > 0 {
-                picker.isHidden = false
+                pickerView.isHidden = false
             }
             else {
-                picker.isHidden = true
+                pickerView.isHidden = true
             }
             return contTypeArray.count
             
         }else if pickerView == self.contSizePicker {
             
             if contSizeArray.count > 0 {
-                picker.isHidden = false
+                pickerView.isHidden = false
             }
             else {
-                picker.isHidden = true
+                pickerView.isHidden = true
             }
             return contSizeArray.count
             
         }else if pickerView == self.chassisTypePicker {
             
             if chassisTypeArray.count > 0 {
-                picker.isHidden = false
+                pickerView.isHidden = false
             }
             else {
-                picker.isHidden = true
+                pickerView.isHidden = true
             }
             return chassisTypeArray.count
             
         }else if pickerView == self.chassisSizePicker {
             
             if chassisSizeArray.count > 0 {
-                picker.isHidden = false
+                pickerView.isHidden = false
             }
             else {
-                picker.isHidden = true
+                pickerView.isHidden = true
             }
             return chassisSizeArray.count
             
         }else if pickerView == self.typeOfInterchangePicker {
             
             if typeOfInterchangeArray.count > 0 {
-                picker.isHidden = false
+                pickerView.isHidden = false
             }
             else {
-                picker.isHidden = true
+                pickerView.isHidden = true
             }
             return typeOfInterchangeArray.count
         }else{
             
             if companyInfoArray.count > 0 {
-                picker.isHidden = false
+                pickerView.isHidden = false
             }
             else {
-                picker.isHidden = true
+                pickerView.isHidden = true
             }
             return companyInfoArray.count
         }
@@ -906,14 +931,50 @@ class StreetInterchangeViewController: UIViewController , UITextFieldDelegate, U
         
         if item.tag == 1 {
             //next button tapped
-           // sendValidationRequestForStreetInterchange()
-              self.performSegue(withIdentifier: "verifyDetailsSegue", sender: self)
+            sendValidationRequestForStreetInterchange()
+           
         }else if item.tag == 2 {
             //cancel button tapped
-            self.navigationController?.popViewController(animated: true)
+            au.showAlert(target: self, alertTitle: self.alertTitle, message: "Are you sure want to cancel this request?",
+                         [UIAlertAction(title: "OK", style: .default, handler: { action in
+                            switch action.style{
+                            case .default:
+                                self.navigationController?.popViewController(animated: true)
+                                break
+                            case .cancel:
+                                
+                                break
+                                
+                            case .destructive:
+                                
+                                break
+                                
+                            }}),
+                          UIAlertAction(title: "CANCEL", style: .default, handler: nil)
+                            
+                ], completion: nil)
+            
         }
     }
-    
+    func findInitiater() -> String {
+        if (role?.uppercased() == "MC".uppercased() ||
+            (role?.uppercased() == "SEC".uppercased() && memType?.uppercased() == "MC".uppercased()) ||
+                role?.uppercased() == "IDD".uppercased()) && loggedInUserScac?.uppercased() == txtMCBScac.text?.uppercased(){
+        
+            return "MCB"
+       
+        }else if(role?.uppercased() == "EP".uppercased() ||
+            (role?.uppercased() == "SEC".uppercased() && memType?.uppercased() == "EP".uppercased()) ||
+            role?.uppercased() == "TPU".uppercased()){
+            return "EP"
+        }else if(role?.uppercased() == "MC".uppercased() ||
+            (role?.uppercased() == "SEC".uppercased() && memType?.uppercased() == "MC".uppercased()) ||
+            role?.uppercased() == "IDD".uppercased()){
+            return "MCA"
+        }
+        
+        return ""
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "searchOriginalLocSegue"
@@ -937,44 +998,315 @@ class StreetInterchangeViewController: UIViewController , UITextFieldDelegate, U
             fieldDataArr.append(FieldInfo(fieldTitle: "blank", fieldData: "Street Interchange Details")) //0
             fieldDataArr.append(FieldInfo(fieldTitle: "CONTAINER PROVIDER NAME", fieldData: txtEPCompanyName.text!)) //1
             fieldDataArr.append(FieldInfo(fieldTitle: "CONTAINER PROVIDER SCAC", fieldData: txtEPScac.text!)) //2
-            fieldDataArr.append(FieldInfo(fieldTitle: "MOTOR CARRIER'S NAME", fieldData: txtMCACompanyName.text!)) //3
-            fieldDataArr.append(FieldInfo(fieldTitle: "MOTOR CARRIER'S SCAC", fieldData: txtMCAScac.text!))  //4
-            fieldDataArr.append(FieldInfo(fieldTitle: "IMPORT B/L", fieldData: txtImportBookingNum.text!))  //5
-            fieldDataArr.append(FieldInfo(fieldTitle: "EXPORT BOOKING#", fieldData: txtExportBookingNum.text!))  //6
-            fieldDataArr.append(FieldInfo(fieldTitle: "CONTAINER #", fieldData: txtContNum.text!)) //7
-            fieldDataArr.append(FieldInfo(fieldTitle: "CHASSIS #", fieldData: txtChassisNum.text!)) //8
+            fieldDataArr.append(FieldInfo(fieldTitle: "MOTOR CARRIER A'S NAME", fieldData: txtMCACompanyName.text!)) //3
+            fieldDataArr.append(FieldInfo(fieldTitle: "MOTOR CARRIER A'S SCAC", fieldData: txtMCAScac.text!))  //4
+            fieldDataArr.append(FieldInfo(fieldTitle: "MOTOR CARRIER B'S NAME", fieldData: txtMCBCompanyName.text!)) //5
+            fieldDataArr.append(FieldInfo(fieldTitle: "MOTOR CARRIER B'S SCAC", fieldData: txtMCBScac.text!))  //6
+            fieldDataArr.append(FieldInfo(fieldTitle: "TYPE OF INTERCHANGE", fieldData: txtTypeOfInterchange.text!))  //7
             
-            if vu.isNotEmptyString(stringToCheck: nextScreenMessage) && nextScreenMessage.count > 0{
-                fieldDataArr.append(FieldInfo(fieldTitle: "CHASSIS IEP SCAC", fieldData: txtChassisIEPScac.text! + nextScreenMessage)) //9
+            fieldDataArr.append(FieldInfo(fieldTitle: "CONTAINER TYPE", fieldData: txtContType.text!)) //8
+            fieldDataArr.append(FieldInfo(fieldTitle: "CONTAINER SIZE", fieldData: txtContSize.text!)) //9
+            
+            fieldDataArr.append(FieldInfo(fieldTitle: "IMPORT B/L", fieldData: txtImportBookingNum.text!))  //10
+            fieldDataArr.append(FieldInfo(fieldTitle: "EXPORT BOOKING#", fieldData: txtExportBookingNum.text!))  //11
+            fieldDataArr.append(FieldInfo(fieldTitle: "CONTAINER #", fieldData: txtContNum.text!)) //12
+            fieldDataArr.append(FieldInfo(fieldTitle: "CHASSIS #", fieldData: txtChassisNum.text!)) //13
+            
+            if vu.isNotEmptyString(stringToCheck: nextScreenMessage){
+                fieldDataArr.append(FieldInfo(fieldTitle: "CHASSIS IEP SCAC", fieldData: txtChassisIEPScac.text! + " - " + nextScreenMessage)) //14
             }else{
-                fieldDataArr.append(FieldInfo(fieldTitle: "CHASSIS IEP SCAC", fieldData: txtChassisIEPScac.text!)) //9
+                fieldDataArr.append(FieldInfo(fieldTitle: "CHASSIS IEP SCAC", fieldData: txtChassisIEPScac.text!)) //14
             }
-            fieldDataArr.append(FieldInfo(fieldTitle: "empty", fieldData: "")) //10
-            fieldDataArr.append(FieldInfo(fieldTitle: "blank", fieldData: "Equipment Location")) //11
-            fieldDataArr.append(FieldInfo(fieldTitle: "LOCATION NAME", fieldData: txtEquipLocationName.text!)) //12
-            fieldDataArr.append(FieldInfo(fieldTitle: "LOCATION ADDRESS", fieldData: txtEquipLocationAddress.text!)) //13
-            fieldDataArr.append(FieldInfo(fieldTitle: "ZIP CODE", fieldData: txtEquipZipCode.text!)) //14
-            fieldDataArr.append(FieldInfo(fieldTitle: "CITY", fieldData: txtEquipCity.text!)) //15
-            fieldDataArr.append(FieldInfo(fieldTitle: "STATE", fieldData: txtEquipState.text!)) //16
+            
+            fieldDataArr.append(FieldInfo(fieldTitle: "CHASSIS TYPE", fieldData: txtChassisType.text!)) //15
+            fieldDataArr.append(FieldInfo(fieldTitle: "CHASSIS SIZE", fieldData: txtChassisSize.text!)) //16
+            fieldDataArr.append(FieldInfo(fieldTitle: "GENSET #", fieldData: txtGensetNum.text!)) //17
+            
+            fieldDataArr.append(FieldInfo(fieldTitle: "empty", fieldData: "")) //18
+            fieldDataArr.append(FieldInfo(fieldTitle: "blank", fieldData: "Equipment Location")) //19
+            fieldDataArr.append(FieldInfo(fieldTitle: "LOCATION NAME", fieldData: txtEquipLocationName.text!)) //20
+            fieldDataArr.append(FieldInfo(fieldTitle: "LOCATION ADDRESS", fieldData: txtEquipLocationAddress.text!)) //21
+            fieldDataArr.append(FieldInfo(fieldTitle: "ZIP CODE", fieldData: txtEquipZipCode.text!)) //22
+            fieldDataArr.append(FieldInfo(fieldTitle: "CITY", fieldData: txtEquipCity.text!)) //23
+            fieldDataArr.append(FieldInfo(fieldTitle: "STATE", fieldData: txtEquipState.text!)) //24
             
             
-            fieldDataArr.append(FieldInfo(fieldTitle: "empty", fieldData: "")) //17
-            fieldDataArr.append(FieldInfo(fieldTitle: "blank", fieldData: "Original Interchange Location")) //18
-            fieldDataArr.append(FieldInfo(fieldTitle: "LOCATION NAME", fieldData: txtOriginLocationName.text!)) //19
-            fieldDataArr.append(FieldInfo(fieldTitle: "LOCATION ADDRESS", fieldData: txtOriginLocationAddress.text!)) //20
-            fieldDataArr.append(FieldInfo(fieldTitle: "ZIP CODE", fieldData: txtOriginZipCode.text!)) //21
-            fieldDataArr.append(FieldInfo(fieldTitle: "CITY", fieldData: txtOriginCity.text!)) //22
-            fieldDataArr.append(FieldInfo(fieldTitle: "STATE", fieldData: txtOriginState.text!)) //23
+            fieldDataArr.append(FieldInfo(fieldTitle: "empty", fieldData: "")) //25
+            fieldDataArr.append(FieldInfo(fieldTitle: "blank", fieldData: "Original Interchange Location")) //26
+            fieldDataArr.append(FieldInfo(fieldTitle: "LOCATION NAME", fieldData: txtOriginLocationName.text!)) //27
+            fieldDataArr.append(FieldInfo(fieldTitle: "LOCATION ADDRESS", fieldData: txtOriginLocationAddress.text!)) //28
+            fieldDataArr.append(FieldInfo(fieldTitle: "ZIP CODE", fieldData: txtOriginZipCode.text!)) //29
+            fieldDataArr.append(FieldInfo(fieldTitle: "CITY", fieldData: txtOriginCity.text!)) //30
+            fieldDataArr.append(FieldInfo(fieldTitle: "STATE", fieldData: txtOriginState.text!)) //31
             
     
             
             let vc = segue.destination as! VerifyDetailsViewController
             vc.fieldDataArr = fieldDataArr
             vc.originFrom = "StreetInterchange"
+            if findInitiater() == "MCA"{
+                vc.isStreetInterchangeInitiatedByMCA = "Y"
+            }else{
+                 vc.isStreetInterchangeInitiatedByMCA = "N"
+            }
+            vc.naId = self.naId
+        }
+        
+    }
+    func validateStreetInterchangeFields() -> String {
+        
+        var retMsg : String = ""
+        if vu.isEmptyString(stringToCheck: txtEPCompanyName.text!){
+            retMsg = "Container Provider Name should not be blank."
+            
+        }else if vu.isEmptyString(stringToCheck: txtEPScac.text!){
+            retMsg = "Please select valid Container Provider Name to populate SCAC."
+            
+        }else if txtEPScac.text!.count > 2  && txtEPScac.text!.count < 4 {
+            retMsg = "Container Provider SCAC should be 2-4 characters long."
+            
+        }else if !txtEPScac.text!.isCharactersOnly{
+            retMsg = "Container Provider SCAC should contains characters only."
+            
+        }else if vu.isEmptyString(stringToCheck: txtMCACompanyName.text!){
+            retMsg = "Motor Carrier A'S Name should not be blank."
+            
+        }else if vu.isEmptyString(stringToCheck: txtMCAScac.text!){
+            retMsg = "Please select valid Motor Carrier A'S Name to populate SCAC."
+            
+        }else if txtMCAScac.text!.count < 4 {
+            retMsg = "Motor Carrier A'S SCAC should be 4 characters long."
+            
+        }else if !txtMCAScac.text!.isCharactersOnly{
+            retMsg = "Motor Carrier A'S SCAC should contains characters only."
+            
+        }else if vu.isEmptyString(stringToCheck: txtMCBCompanyName.text!){
+            retMsg = "Motor Carrier B'S Name should not be blank."
+            
+        }else if vu.isEmptyString(stringToCheck: txtMCBScac.text!){
+            retMsg = "Please select valid Motor Carrier B'S Name to populate SCAC."
+            
+        }else if txtMCBScac.text!.count < 4 {
+            retMsg = "Motor Carrier B'S SCAC should be 4 characters long."
+            
+        }else if !txtMCBScac.text!.isCharactersOnly{
+            retMsg = "Motor Carrier B'S SCAC should contains characters only."
+            
+        }else if vu.isEmptyString(stringToCheck: txtTypeOfInterchange.text!){
+            retMsg = "Please select valid Type Of Interchange."
+            
+        }else if vu.isEmptyString(stringToCheck: txtContType.text!){
+            retMsg = "Please select valid Container Type"
+            
+        }else if vu.isEmptyString(stringToCheck: txtContSize.text!){
+            retMsg = "Please select valid Container Size"
+            
+        }else if vu.isEmptyString(stringToCheck: txtExportBookingNum.text!){
+            retMsg = "Export Booking # should not be blank."
+
+        }else if !txtExportBookingNum.text!.isAlphanumeric{
+            retMsg = "Export Booking # should contains alphanumeric only."
+        
+        }else if vu.isEmptyString(stringToCheck: txtContNum.text!){
+            retMsg = "Container Number should not be blank."
+            
+        }else if !txtContNum.text!.isAlphanumeric{
+            retMsg = "Container Number should contains alphanumeric only."
+            
+        }else if vu.isNotEmptyString(stringToCheck: txtChassisNum.text!) && !txtChassisNum.text!.isAlphanumeric{
+            retMsg = "Chassis Number should contains alphanumeric only."
+            
+        }else if vu.isNotEmptyString(stringToCheck: txtChassisNum.text!) && vu.isEmptyString(stringToCheck: txtChassisType.text!){
+            retMsg = "Please select valid Chassis Type"
+            
+        }else if vu.isNotEmptyString(stringToCheck: txtChassisNum.text!) && vu.isEmptyString(stringToCheck: txtChassisSize.text!){
+            retMsg = "Please select valid Chassis Size"
+            
+        }else if vu.isNotEmptyString(stringToCheck: txtGensetNum.text!) && !txtGensetNum.text!.isAlphanumeric{
+            retMsg = "Genset Number should contains alphanumeric only."
+            
+        }else if vu.isEmptyString(stringToCheck: txtEquipZipCode.text!){
+            retMsg = "Please select valid Equipment Location from the list"
+            
+        }else if vu.isEmptyString(stringToCheck: txtEquipLocationName.text!){
+            retMsg = "Equipment Location Name should not be blank."
+            
+        }else if vu.isEmptyString(stringToCheck: txtEquipLocationAddress.text!){
+            retMsg = "Equipment Location Address should not be blank."
+            
+        }else if vu.isEmptyString(stringToCheck: txtEquipCity.text!){
+            retMsg = "Equipment City should not be blank."
+            
+        }else if vu.isEmptyString(stringToCheck: txtEquipState.text!){
+            retMsg = "Equipment State should not be blank."
+            
+        }else if txtEquipState.text!.count != 2 {
+            retMsg = "Equipment State should be 2 characters long."
+            
+        }else if vu.isEmptyString(stringToCheck: txtOriginZipCode.text!){
+            retMsg = "Please select valid Original Location from the list"
+            
+        }else if vu.isEmptyString(stringToCheck: txtOriginLocationName.text!){
+            retMsg = "Original Location Name should not be blank."
+            
+        }else if vu.isEmptyString(stringToCheck: txtOriginLocationAddress.text!){
+            retMsg = "Original Location Address should not be blank."
+            
+        }else if vu.isEmptyString(stringToCheck: txtOriginCity.text!){
+            retMsg = "Original City should not be blank."
+            
+        }else if vu.isEmptyString(stringToCheck: txtOriginState.text!){
+            retMsg = "Original State should not be blank."
+            
+        }else if txtOriginState.text!.count != 2 {
+            retMsg = "Original State should be 2 characters long."
+            
+        }
+        
+        return retMsg
+        
+    }
+    
+    func sendValidationRequestForStreetInterchange() {
+        
+        // resign first responder if any.
+        au.resignAllTextFieldResponder(textFieldsArray: inputTextFieldsArray)
+        
+        // validate Login fields..
+        let resMsg : String = validateStreetInterchangeFields()
+        
+        if !au.isInternetAvailable() {
+            au.redirectToNoInternetConnectionView(target: self)
+        }
+        else if resMsg.isEmpty
+        {
+            
+            let accessToken =  UserDefaults.standard.string(forKey: "accessToken")
+            let applicationUtils : ApplicationUtils = ApplicationUtils()
+            applicationUtils.showActivityIndicator(uiView: view)
+            
+            let jsonRequestObject: [String : Any] =
+                [
+                    "irRequestType":"StreetInterchange",
+                    "epScacs": au.trim(stringToTrim: txtEPScac.text!),
+                    "mcAScac": au.trim(stringToTrim: txtMCAScac.text!),
+                    "mcBScac": au.trim(stringToTrim: txtMCBScac.text!),
+                    "intchgType": au.trim(stringToTrim: txtTypeOfInterchange.text!),
+                    "contSize": au.trim(stringToTrim: txtContSize.text!),
+                    "contType": au.trim(stringToTrim: txtContType.text!),
+                    "contNum": au.trim(stringToTrim: txtContNum.text!),
+                    "chassisSize": au.trim(stringToTrim: txtChassisSize.text!),
+                    "chassisType": au.trim(stringToTrim: txtChassisType.text!),
+                    "chassisNum": au.trim(stringToTrim: txtChassisNum.text!),
+                    "importBookingNum": au.trim(stringToTrim: txtImportBookingNum.text!),
+                    "bookingNum": au.trim(stringToTrim: txtExportBookingNum.text!),
+                    "gensetNum": au.trim(stringToTrim: txtGensetNum.text!),
+                    
+                    "equipLocZip": au.trim(stringToTrim: txtEquipZipCode.text!),
+                    "equipLocNm": au.trim(stringToTrim: txtEquipLocationName.text!),
+                    "equipLocAddr": au.trim(stringToTrim: txtEquipLocationAddress.text!),
+                    "equipLocCity": au.trim(stringToTrim: txtEquipCity.text!),
+                    "equipLocState": au.trim(stringToTrim: txtEquipState.text!),
+                    
+                    "originLocZip": au.trim(stringToTrim: txtOriginZipCode.text!),
+                    "originLocNm": au.trim(stringToTrim: txtOriginLocationName.text!),
+                    "originLocAddr": au.trim(stringToTrim: txtOriginLocationAddress.text!),
+                    "originLocCity": au.trim(stringToTrim: txtOriginCity.text!),
+                    "originLocState": au.trim(stringToTrim: txtOriginState.text!),
+                    "accessToken": accessToken!
+                    
+            ]
+            
+            print(jsonRequestObject)
+            
+            if let paramString = try? JSONSerialization.data(withJSONObject: jsonRequestObject)
+            {
+                let urlToRequest = ac.BASE_URL + ac.VALIDATE_STREET_INTERCHANGE_REQUEST_URI
+                let url = URL(string: urlToRequest)!
+                
+                let session = URLSession.shared
+                let request = NSMutableURLRequest(url: url)
+                
+                request.httpMethod = "POST"
+                request.httpBody = paramString
+                request.setValue(ac.CONTENT_TYPE_JSON, forHTTPHeaderField: ac.CONTENT_TYPE_KEY)
+                request.cachePolicy = NSURLRequest.CachePolicy.reloadIgnoringCacheData
+                
+                
+                let task = session.dataTask(with: request as URLRequest) { (data, response, error) in
+                    guard let _: Data = data, let _: URLResponse = response, error == nil else {
+                        print("*****error")
+                        DispatchQueue.main.sync {
+                            applicationUtils.hideActivityIndicator(uiView: self.view)
+                            au.showAlert(target: self, alertTitle: self.alertTitle, message: self.ac.ERROR_MSG,[UIAlertAction(title: "OK", style: .default, handler: nil)], completion: nil)
+                        }
+                        
+                        
+                        return
+                    }
+                    do{
+                        let nsResponse =  response as! HTTPURLResponse
+                        let parsedData = try JSONSerialization.jsonObject(with: data!)
+                        
+                        print(parsedData)
+                        
+                        if let stValidationData:[String: Any]   = parsedData as? [String : Any]
+                        {
+                            
+                            if nsResponse.statusCode == 200
+                            {
+                                //handle other response ..
+                                let apiResponseMessage: APIResponseMessage  = APIResponseMessage(stValidationData)
+                                
+                                DispatchQueue.main.sync {
+                                    applicationUtils.hideActivityIndicator(uiView: self.view)
+                                    if apiResponseMessage.message != nil && vu.isNotEmptyString(stringToCheck: apiResponseMessage.message!){
+                                        self.nextScreenMessage = apiResponseMessage.message!
+                                    }
+                                    self.performSegue(withIdentifier: "verifyDetailsSegue", sender: self)
+                                    
+                                }
+                                
+                            }else{
+                                
+                                //handle other response ..
+                                let apiResponseMessage: APIResponseMessage  = APIResponseMessage(stValidationData)
+                                
+                                DispatchQueue.main.sync {
+                                    applicationUtils.hideActivityIndicator(uiView: self.view)
+                                    au.showAlert(target: self, alertTitle: self.alertTitle, message: apiResponseMessage.errors.errorMessage!,[UIAlertAction(title: "OK", style: .default, handler: nil)], completion: nil)
+                                    
+                                }
+                                
+                            }
+                            
+                        }
+                        
+                    } catch let error as NSError {
+                        print("NSError ::",error)
+                        DispatchQueue.main.sync {
+                            applicationUtils.hideActivityIndicator(uiView: self.view)
+                            au.showAlert(target: self, alertTitle: self.alertTitle, message: self.ac.ERROR_MSG,[UIAlertAction(title: "OK", style: .default, handler: nil)], completion: nil)
+                        }
+                        
+                    }
+                    
+                }
+                task.resume()
+                
+            }
+            
+            
+        }else{
+            
+            //display toast message to the user.
+            au.showAlert(target: self, alertTitle: self.alertTitle, message: resMsg,[UIAlertAction(title: "OK", style: .default, handler: nil)], completion: nil)
+            
             
         }
         
     }
+    
     //Find GIER IEP from the chassis Number provided by User
     func setIEPSCACBasedOnChassisNum() {
         //make a web service call to fetch boes location based on user.

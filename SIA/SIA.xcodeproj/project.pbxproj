@@ -21,6 +21,7 @@
 		692E5BB820DD0A3200FB3AD4 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692E5BB720DD0A3200FB3AD4 /* Profile.swift */; };
 		693CE07320C9466C00736C4E /* SIADetailsDataTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693CE07020C9466C00736C4E /* SIADetailsDataTableViewCell.swift */; };
 		693CE07520C9466C00736C4E /* SIADetailsTitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693CE07220C9466C00736C4E /* SIADetailsTitleTableViewCell.swift */; };
+		694E163B20F35C1C007AB654 /* GetInterChangeRequestDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694E163A20F35C1C007AB654 /* GetInterChangeRequestDetails.swift */; };
 		6972B88720B5A26E009B1BEC /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6972B88520B5A26E009B1BEC /* CircleView.swift */; };
 		699BDAF520A2EB870088E0E9 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699BDAF420A2EB870088E0E9 /* UIViewExtension.swift */; };
 		699BDAF720A2EDEF0088E0E9 /* MCLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699BDAF620A2EDEF0088E0E9 /* MCLoginViewController.swift */; };
@@ -133,6 +134,7 @@
 		692E5BB720DD0A3200FB3AD4 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		693CE07020C9466C00736C4E /* SIADetailsDataTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SIADetailsDataTableViewCell.swift; sourceTree = "<group>"; };
 		693CE07220C9466C00736C4E /* SIADetailsTitleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SIADetailsTitleTableViewCell.swift; sourceTree = "<group>"; };
+		694E163A20F35C1C007AB654 /* GetInterChangeRequestDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetInterChangeRequestDetails.swift; sourceTree = "<group>"; };
 		6972B88520B5A26E009B1BEC /* CircleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
 		699BDAF420A2EB870088E0E9 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		699BDAF620A2EDEF0088E0E9 /* MCLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCLoginViewController.swift; sourceTree = "<group>"; };
@@ -430,6 +432,7 @@
 				692E5BB720DD0A3200FB3AD4 /* Profile.swift */,
 				69FBD17A20EC75B80030FBF1 /* SearchRequestPoolDetailsResponse.swift */,
 				69FBD18020ECC6800030FBF1 /* SetupPageResponse.swift */,
+				694E163A20F35C1C007AB654 /* GetInterChangeRequestDetails.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -699,6 +702,7 @@
 				69BC0ABF20AC39DD00560AB6 /* IDDLogin1ViewController.swift in Sources */,
 				69BAA54420DBA84E00961BB9 /* SearchSIADetails.swift in Sources */,
 				69BAA54220DBA6B500961BB9 /* SearchInterchangeRequestTableViewCell.swift in Sources */,
+				694E163B20F35C1C007AB654 /* GetInterChangeRequestDetails.swift in Sources */,
 				69BBE8DD209B0A69008F1913 /* AppDelegate.swift in Sources */,
 				69BBE94D209B0F34008F1913 /* AppConstants.swift in Sources */,
 				69BBE94C209B0F34008F1913 /* TestMain.swift in Sources */,

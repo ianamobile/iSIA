@@ -91,7 +91,7 @@ class ListEPUsersTableVC: UITableViewController {
         if epUsersArray[indexPath.row].status == "ACTIVE"{
              print("tapped..")
         }
-        //self.performSegue(withIdentifier: "viewStreeTurnDetails", sender: self)
+        //self.performSegue(withIdentifier: "viewStreetTurnDetails", sender: self)
         
     }
     func loadMore(){

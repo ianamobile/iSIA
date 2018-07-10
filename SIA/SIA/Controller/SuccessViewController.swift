@@ -10,13 +10,22 @@ import UIKit
 
 class SuccessViewController: UIViewController,UITabBarDelegate {
 
-    @IBOutlet weak var lblMessage: UILabel!
+    // variables which are necessory for all the controllers
+    typealias au = ApplicationUtils
+    typealias vu = ValidationUtils
+    let ac :AppConstants  = AppConstants()
+    
     var originFrom: String?
     var message :String?
+    var isStreetInterchangeInitiatedByMCA :String?
     
+    @IBOutlet weak var lblMessage: UILabel!
     @IBOutlet weak var addNewTab: UITabBarItem!
     @IBOutlet weak var homeTab: UITabBar!
     @IBOutlet weak var successViewTabBar: UITabBar!
+    
+    @IBOutlet weak var lblNote: UILabel!
+    @IBOutlet weak var lblNoteDesc: UILabel!
     
     override func viewDidLoad() {
         
@@ -40,6 +49,16 @@ class SuccessViewController: UIViewController,UITabBarDelegate {
         lblMessage.text = message
         lblMessage.numberOfLines = 0
         lblMessage.sizeToFit()
+        
+        if originFrom == "StreetInterchange" && vu.isNotEmptyString(stringToCheck: isStreetInterchangeInitiatedByMCA!)
+            && isStreetInterchangeInitiatedByMCA! == "N"{
+            lblNote.alpha = 0
+            lblNoteDesc.alpha = 0
+        }else{
+            lblNote.alpha = 1
+            lblNoteDesc.alpha = 1
+        }
+        
     }
     
     func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
@@ -62,7 +81,7 @@ class SuccessViewController: UIViewController,UITabBarDelegate {
             }else{
                 
                 let vc = self.navigationController?.viewControllers[1] as! StreetInterchangeViewController
-                vc.originFrom = self.originFrom
+                vc.originFrom = "AddNewStreetInterchange"
                 self.navigationController?.popToViewController(vc, animated: true)
             }
             
