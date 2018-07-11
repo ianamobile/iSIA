@@ -182,6 +182,7 @@ class DashboardTableViewController: UITableViewController, DashboardTableViewCel
             
             cell.leftLabel.text = ac.menuTitleArr[finalArr[leftIndex]]
             cell.leftCircleViewImage.image = UIImage.init(named: ac.menuIconArr[finalArr[leftIndex]])
+            
             if(rightIndex >=  finalArr.count){
                  cell.hideRightMenu()
             }else{

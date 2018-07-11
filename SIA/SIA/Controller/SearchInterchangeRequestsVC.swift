@@ -198,9 +198,24 @@ class SearchInterchangeRequestsVC: UIViewController,UITextFieldDelegate, UITabBa
             }
            
             
-        }else if item.tag == 2 {
+        }else if item.tag == 3 {
             //cancel button tapped
             self.navigationController?.popViewController(animated: true)
+            
+        }else if item.tag == 2{
+            au.resignAllTextFieldResponder(textFieldsArray: [txtContNum, txtExportBookingNum, txtFromDate, txtToDate, txtStatus, txtScac])
+           
+            //reset form fields
+            txtContNum.text  = ""
+            txtExportBookingNum.text = ""
+            txtScac.text = ""
+            txtStatus.text = ""
+            txtFromDate.text = ""
+            txtToDate.text = ""
+            
+             picker.selectRow(0, inComponent: 0, animated: true)
+            
+            
         }
     }
     
@@ -213,7 +228,11 @@ class SearchInterchangeRequestsVC: UIViewController,UITextFieldDelegate, UITabBa
             vc.exportBookingNum = self.txtExportBookingNum.text
             vc.fromDate = self.txtFromDate.text
             vc.toDate = self.txtToDate.text
-            vc.status = self.txtStatus.text
+            if(self.txtStatus.text != "SELECT STATUS"){
+                 vc.status = self.txtStatus.text
+            }else{
+                 vc.status = ""
+            }
             vc.scac = self.txtScac.text
             vc.originFrom = segue.identifier
             

@@ -40,10 +40,17 @@ public class AppConstants
     let VALIDATE_STREET_INTERCHANGE_REQUEST_URI = "SIA/validateInitiateInterchangeDetails"
     let SAVE_INTERCHANGE_REQUEST_URL        = "SIA/saveInitiateInterchangeDetails"
     let GET_INTERCHANGE_REQUEST_DETAILS     = "SIA/getInterchangeRequestDetails"
-    
+    let INTERCHANGE_REQUEST_OPERATIONS = "SIA/interchangeRequestOperations"
     
     let ORIGINAL_LOCATION = "OriginalLocation"
     let EQUIPMENT_LOCATION = "EquipmentLocation"
+    
+    let OPT_APPROVE = "APPROVE"
+    let OPT_REJECT = "REJECT"
+    let OPT_ONHOLD = "ONHOLD"
+    let OPT_REINSTATE = "REINSTATE"
+    let OPT_CANCEL = "CANCEL"
+    
     
     
     let menuTitleArr :[String]  = [  "Notification of Available Equipment",
@@ -68,7 +75,7 @@ public class AppConstants
                                      "",
                                      "Logout"]
     
-    let menuIconArr :[String]  = ["plus","search","plus","search","plus","search","search","search","","","","","","","","","","","","","logout"]
+    let menuIconArr :[String]  = ["plus","search","plus","search","plus","search","menu","pending_hourglass","","","","","","","","","","","","","logout"]
     let menuSegueArr :[String]  = ["notifAvailSegue","notifAvailSearchSegue", "initiateInterchangeSegue", "searchInterchangeReqSegue", "initiateStreetTurnReqSegue", "workDoneByTPUSegue", "listEPUserSegue" , "pendingInterchangeReqSegue", "", "", "", "", "", "", "", "", "", "", "", "", "logoutSegue"]
 
     let ERROR_MSG = "Opp! An error has occured, please try after some time."

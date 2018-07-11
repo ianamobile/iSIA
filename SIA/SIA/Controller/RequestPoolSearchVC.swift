@@ -111,9 +111,20 @@ class RequestPoolSearchVC: UIViewController,UITextFieldDelegate, UITabBarDelegat
             }
             
             
-        }else if item.tag == 2 {
+        }else if item.tag == 3 {
             //cancel button tapped
             self.navigationController?.popViewController(animated: true)
+        
+        }else if item.tag == 2{
+            au.resignAllTextFieldResponder(textFieldsArray: [txtContNum,  txtMCScac, txtEPScac , txtFromDate, txtToDate])
+            //reset form fields
+            txtContNum.text  = ""
+            txtMCScac.text = ""
+            txtEPScac.text = ""
+            txtFromDate.text = ""
+            txtToDate.text = ""
+            
+            
         }
     }
     

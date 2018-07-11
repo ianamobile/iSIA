@@ -87,6 +87,7 @@ class SearchInterchangeRequestResultVC: UITableViewController {
                 cell.leftView.backgroundColor = #colorLiteral(red: 0.3608, green: 0.7216, blue: 0.3608, alpha: 1) /* #5cb85c */
                 
             }
+            cell.lblCreatedDate.text = searchSIADetailsArray[indexPath.row].createdDate
             cell.lblRequestType.text = searchSIADetailsArray[indexPath.row].requestTypeTitle
             cell.lblStatus.text = searchSIADetailsArray[indexPath.row].status
             cell.lblActionRequired.text = searchSIADetailsArray[indexPath.row].actionRequired

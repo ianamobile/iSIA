@@ -54,6 +54,9 @@ class StreetInterchangeViewController: UIViewController , UITextFieldDelegate, U
     var searchRequestPoolDetails: SearchRequestPoolDetails?
     var naId : Int?
     
+    //very imporant when street interchange/street turn re-initiated the request from the view page.
+    var reInitiatedRequestDetails: InterchangeRequests?
+    
     
     var companyInfoArray  = [CompanyInfo]()
     var typeOfInterchangeArray = [String]()
@@ -218,6 +221,7 @@ class StreetInterchangeViewController: UIViewController , UITextFieldDelegate, U
         nextScreenMessage = ""
         
         //searchRequestPoolDetails = SearchRequestPoolDetails()
+        //reInitiatedRequestDetails = InterchangeRequests()
         
     }
     
@@ -282,7 +286,10 @@ class StreetInterchangeViewController: UIViewController , UITextFieldDelegate, U
                                
                                 //Data Populated from the Notification Avail Search Record -tapped
                                 self.populateDataFromNotifAvailSegueIfAny();
-                               
+                                
+                                //Data Populated from the Reinititate Interchange request -tapped
+                                self.populateDataFromReInitiateInterchagneIfAny()
+                                
                                 applicationUtils.hideActivityIndicator(uiView: self.view)
                                 
                             }
@@ -341,6 +348,55 @@ class StreetInterchangeViewController: UIViewController , UITextFieldDelegate, U
         txtTypeOfInterchange.keyboardToolbar.doneBarButton.setTarget(self, action: #selector(doneButtonClicked))
     }
     
+    
+    //Data Populated from the Reinititate Interchange request -tapped
+    func populateDataFromReInitiateInterchagneIfAny(){
+        if(self.originFrom == "reInitiateInterchangeSegue"){
+            
+            
+            txtEPCompanyName.text = reInitiatedRequestDetails?.epCompanyName
+            txtEPScac.text = reInitiatedRequestDetails?.epScacs
+            txtMCACompanyName.text = reInitiatedRequestDetails?.mcACompanyName
+            txtMCAScac.text = reInitiatedRequestDetails?.mcAScac
+            txtMCBCompanyName.text = reInitiatedRequestDetails?.mcBCompanyName
+            txtMCBScac.text = reInitiatedRequestDetails?.mcBScac
+            
+            txtTypeOfInterchange.text = reInitiatedRequestDetails?.intchgType
+            txtContType.text = reInitiatedRequestDetails?.contType
+            txtContSize.text = reInitiatedRequestDetails?.contSize
+            txtImportBookingNum.text = reInitiatedRequestDetails?.importBookingNum
+            txtExportBookingNum.text = reInitiatedRequestDetails?.bookingNum
+            txtContNum.text = reInitiatedRequestDetails?.contNum
+            txtChassisNum.text = reInitiatedRequestDetails?.chassisNum
+            txtChassisIEPScac.text = reInitiatedRequestDetails?.iepScac
+            
+            txtChassisType.text = reInitiatedRequestDetails?.chassisType
+            txtChassisSize.text = reInitiatedRequestDetails?.chassisSize
+            txtGensetNum.text = reInitiatedRequestDetails?.gensetNum
+            
+            txtEquipZipCode.text = reInitiatedRequestDetails?.equipLocZip
+            txtEquipLocationName.text = reInitiatedRequestDetails?.equipLocNm
+            txtEquipLocationAddress.text = reInitiatedRequestDetails?.equipLocAddr
+            txtEquipCity.text = reInitiatedRequestDetails?.equipLocCity
+            txtEquipState.text = reInitiatedRequestDetails?.equipLocState
+            
+            txtOriginZipCode.text = reInitiatedRequestDetails?.originLocZip
+            txtOriginLocationName.text = reInitiatedRequestDetails?.originLocNm
+            txtOriginLocationAddress.text = reInitiatedRequestDetails?.originLocAddr
+            txtOriginCity.text = reInitiatedRequestDetails?.originLocCity
+            txtOriginState.text = reInitiatedRequestDetails?.originLocState
+            
+            setPickerDefaultValue(self.txtTypeOfInterchange, typeOfInterchangeArray, typeOfInterchangePicker, selectedValue: (reInitiatedRequestDetails?.contType)!)
+            setPickerDefaultValue(self.txtContType, contTypeArray, contTypePicker, selectedValue: (reInitiatedRequestDetails?.contType)!)
+            setPickerDefaultValue(self.txtContSize, contSizeArray, contSizePicker, selectedValue: (reInitiatedRequestDetails?.contSize)!)
+            setPickerDefaultValue(self.txtChassisType, chassisTypeArray, chassisTypePicker, selectedValue: (reInitiatedRequestDetails?.chassisType)!)
+            setPickerDefaultValue(self.txtChassisSize, chassisSizeArray, chassisSizePicker, selectedValue: (reInitiatedRequestDetails?.chassisSize)!)
+            
+            
+        }
+    }
+    
+    
      //Data Populated from the Notification Avail Search Record -tapped
     func populateDataFromNotifAvailSegueIfAny(){
       if(self.originFrom == "initiateInterchangeFromNotifAvailSegue"){
@@ -349,6 +405,16 @@ class StreetInterchangeViewController: UIViewController , UITextFieldDelegate, U
             self.txtEPScac.text = searchRequestPoolDetails?.epScac
             self.txtMCACompanyName.text = searchRequestPoolDetails?.mcCompanyName
             self.txtMCAScac.text = searchRequestPoolDetails?.mcScac
+        
+            // editable mc b value for street interchange request - for MC login only
+            if (role?.uppercased() == "MC".uppercased() ||
+                (role?.uppercased() == "SEC".uppercased() && memType?.uppercased() == "MC".uppercased()) ||
+                role?.uppercased() == "IDD".uppercased()){
+                
+                self.txtMCBCompanyName.text = loggedInUserCompanyName
+                self.txtMCBScac.text = loggedInUserScac
+            }
+        
             self.txtContNum.text = searchRequestPoolDetails?.contNum
             self.txtChassisNum.text = searchRequestPoolDetails?.chassisNum
             self.txtChassisIEPScac.text = searchRequestPoolDetails?.iepScac
@@ -659,31 +725,44 @@ class StreetInterchangeViewController: UIViewController , UITextFieldDelegate, U
         
         if sender == txtMCACompanyName{
             //picker selected row
-            if self.companyInfoArray.count > 0 {
+            if vu.isNotEmptyString(stringToCheck: sender.text!)  && sender.text!.count >= 2 && self.companyInfoArray.count > 0 {
                 let selectedRow: Int  = self.picker.selectedRow(inComponent: 0)
                 if selectedRow >= 0{
                     txtMCACompanyName.text = self.companyInfoArray[selectedRow].companyName
                     txtMCAScac.text = self.companyInfoArray[selectedRow].scac
+                    
+                    //reset the fields
+                    self.companyInfoArray = []
+                    sender.inputView = nil
                 }
             }
             
-        }else if sender == txtMCBCompanyName{
+        }else if vu.isNotEmptyString(stringToCheck: sender.text!) && sender.text!.count >= 2 && sender == txtMCBCompanyName{
             //picker selected row
             if self.companyInfoArray.count > 0 {
                 let selectedRow: Int  = self.picker.selectedRow(inComponent: 0)
                 if selectedRow >= 0{
                     txtMCBCompanyName.text = self.companyInfoArray[selectedRow].companyName
                     txtMCBScac.text = self.companyInfoArray[selectedRow].scac
+                    
+                    //reset the fields
+                    self.companyInfoArray = []
+                    sender.inputView = nil
                 }
             }
             
-        }else if sender == txtEPCompanyName{
+        }else if vu.isNotEmptyString(stringToCheck: sender.text!) && sender.text!.count >= 2 && sender == txtEPCompanyName{
             //picker selected row
             if self.companyInfoArray.count > 0 {
                 let selectedRow: Int  = self.picker.selectedRow(inComponent: 0)
                 if selectedRow >= 0{
                     txtEPCompanyName.text = self.companyInfoArray[selectedRow].companyName
                     txtEPScac.text = self.companyInfoArray[selectedRow].scac
+                    
+                    //reset the fields
+                    self.companyInfoArray = []
+                    sender.inputView = nil
+                    
                 }
             }
             
@@ -993,6 +1072,12 @@ class StreetInterchangeViewController: UIViewController , UITextFieldDelegate, U
         else if segue.identifier == "verifyDetailsSegue"{
             
             var fieldDataArr = [FieldInfo]()
+            // in case of blank chassis number, system will populate ZZZZ999999 to identify MC Provided Chassis.
+            if vu.isEmptyString(stringToCheck: txtChassisNum.text!){
+                txtChassisNum.text = "ZZZZ999999"
+                txtChassisIEPScac.text = ""
+                nextScreenMessage = ""
+            }
             
             /* Note: Please change index if you add in middle of array otherwise next screen will be disturbed */
             fieldDataArr.append(FieldInfo(fieldTitle: "blank", fieldData: "Street Interchange Details")) //0
@@ -1007,20 +1092,20 @@ class StreetInterchangeViewController: UIViewController , UITextFieldDelegate, U
             fieldDataArr.append(FieldInfo(fieldTitle: "CONTAINER TYPE", fieldData: txtContType.text!)) //8
             fieldDataArr.append(FieldInfo(fieldTitle: "CONTAINER SIZE", fieldData: txtContSize.text!)) //9
             
-            fieldDataArr.append(FieldInfo(fieldTitle: "IMPORT B/L", fieldData: txtImportBookingNum.text!))  //10
-            fieldDataArr.append(FieldInfo(fieldTitle: "EXPORT BOOKING#", fieldData: txtExportBookingNum.text!))  //11
-            fieldDataArr.append(FieldInfo(fieldTitle: "CONTAINER #", fieldData: txtContNum.text!)) //12
-            fieldDataArr.append(FieldInfo(fieldTitle: "CHASSIS #", fieldData: txtChassisNum.text!)) //13
+            fieldDataArr.append(FieldInfo(fieldTitle: "IMPORT B/L", fieldData: txtImportBookingNum.text!.uppercased()))  //10
+            fieldDataArr.append(FieldInfo(fieldTitle: "EXPORT BOOKING#", fieldData: txtExportBookingNum.text!.uppercased()))  //11
+            fieldDataArr.append(FieldInfo(fieldTitle: "CONTAINER #", fieldData: txtContNum.text!.uppercased())) //12
+            fieldDataArr.append(FieldInfo(fieldTitle: "CHASSIS #", fieldData: txtChassisNum.text!.uppercased())) //13
             
-            if vu.isNotEmptyString(stringToCheck: nextScreenMessage){
-                fieldDataArr.append(FieldInfo(fieldTitle: "CHASSIS IEP SCAC", fieldData: txtChassisIEPScac.text! + " - " + nextScreenMessage)) //14
+            if vu.isNotEmptyString(stringToCheck: txtChassisIEPScac.text!) && vu.isNotEmptyString(stringToCheck: nextScreenMessage){
+                fieldDataArr.append(FieldInfo(fieldTitle: "CHASSIS IEP SCAC", fieldData: txtChassisIEPScac.text!.uppercased() + " - " + nextScreenMessage)) //14
             }else{
-                fieldDataArr.append(FieldInfo(fieldTitle: "CHASSIS IEP SCAC", fieldData: txtChassisIEPScac.text!)) //14
+                fieldDataArr.append(FieldInfo(fieldTitle: "CHASSIS IEP SCAC", fieldData: txtChassisIEPScac.text!.uppercased())) //14
             }
             
             fieldDataArr.append(FieldInfo(fieldTitle: "CHASSIS TYPE", fieldData: txtChassisType.text!)) //15
             fieldDataArr.append(FieldInfo(fieldTitle: "CHASSIS SIZE", fieldData: txtChassisSize.text!)) //16
-            fieldDataArr.append(FieldInfo(fieldTitle: "GENSET #", fieldData: txtGensetNum.text!)) //17
+            fieldDataArr.append(FieldInfo(fieldTitle: "GENSET #", fieldData: txtGensetNum.text!.uppercased())) //17
             
             fieldDataArr.append(FieldInfo(fieldTitle: "empty", fieldData: "")) //18
             fieldDataArr.append(FieldInfo(fieldTitle: "blank", fieldData: "Equipment Location")) //19
@@ -1260,7 +1345,8 @@ class StreetInterchangeViewController: UIViewController , UITextFieldDelegate, U
                                 
                                 DispatchQueue.main.sync {
                                     applicationUtils.hideActivityIndicator(uiView: self.view)
-                                    if apiResponseMessage.message != nil && vu.isNotEmptyString(stringToCheck: apiResponseMessage.message!){
+                                    //Don't change the order - all data should set before the self.performSegue.....
+                                    if apiResponseMessage.message != nil && vu.isNotEmptyString(stringToCheck: apiResponseMessage.message!) && apiResponseMessage.message! != "SUCCESS"{
                                         self.nextScreenMessage = apiResponseMessage.message!
                                     }
                                     self.performSegue(withIdentifier: "verifyDetailsSegue", sender: self)
@@ -1408,6 +1494,13 @@ class StreetInterchangeViewController: UIViewController , UITextFieldDelegate, U
         {
             textField.resignFirstResponder()
             return false
+        }
+        else if(self.originFrom == "initiateInterchangeFromNotifAvailSegue"){
+            if textField == txtEPCompanyName || textField == txtMCACompanyName || textField == txtContNum || textField == txtChassisNum || textField == txtGensetNum{
+                textField.resignFirstResponder()
+                return false
+            }
+            
         }
         
         return true

@@ -2,25 +2,22 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "if_hourglass-start_1608934.png",
+      "filename" : "if_28_3229645.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "if_hourglass-start_1608934-2.png",
+      "filename" : "if_28_3229645-2.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "if_hourglass-start_1608934-3.png",
+      "filename" : "if_28_3229645-3.png",
       "scale" : "3x"
     }
   ],
   "info" : {
     "version" : 1,
     "author" : "xcode"
-  },
-  "properties" : {
-    "template-rendering-intent" : "template"
   }
 }

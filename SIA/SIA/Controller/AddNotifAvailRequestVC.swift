@@ -399,8 +399,13 @@ class AddNotifAvailRequestVC: UIViewController , UITextFieldDelegate, UITabBarDe
         self.performSegue(withIdentifier: "searchEquipmentLocSegue", sender: self)
     }
     @IBAction func searchButtonTapped(_ sender: Any) {
-        self.performSegue(withIdentifier: "searchOriginalLocSegue", sender: self)
         
+        if vu.isNotEmptyString(stringToCheck: txtEPScac.text!){
+            self.performSegue(withIdentifier: "searchOriginalLocSegue", sender: self)
+        }else{
+            au.showAlert(target: self, alertTitle: self.alertTitle, message: "Please enter Container Provider Name First.",[UIAlertAction(title: "OK", style: .default, handler: nil)], completion: nil)
+        }
+    
     }
     
     @objc func textFieldDidChange(_ textField: UITextField) {
@@ -605,21 +610,29 @@ class AddNotifAvailRequestVC: UIViewController , UITextFieldDelegate, UITabBarDe
         
         if sender == txtMCCompanyName{
             //picker selected row
-            if self.companyInfoArray.count > 0 {
+            if vu.isNotEmptyString(stringToCheck: sender.text!)  && sender.text!.count >= 2 && self.companyInfoArray.count > 0 {
                 let selectedRow: Int  = self.picker.selectedRow(inComponent: 0)
                 if selectedRow >= 0{
                     txtMCCompanyName.text = self.companyInfoArray[selectedRow].companyName
                     txtMCScac.text = self.companyInfoArray[selectedRow].scac
+                    
+                    //reset the fields
+                    self.companyInfoArray = []
+                    sender.inputView = nil
                 }
             }
             
         }else if sender == txtEPCompanyName{
             //picker selected row
-            if self.companyInfoArray.count > 0 {
+            if vu.isNotEmptyString(stringToCheck: sender.text!)  && sender.text!.count >= 2 && self.companyInfoArray.count > 0 {
                 let selectedRow: Int  = self.picker.selectedRow(inComponent: 0)
                 if selectedRow >= 0{
                     txtEPCompanyName.text = self.companyInfoArray[selectedRow].companyName
                     txtEPScac.text = self.companyInfoArray[selectedRow].scac
+                    
+                    //reset the fields
+                    self.companyInfoArray = []
+                    sender.inputView = nil
                 }
             }
             
@@ -899,6 +912,7 @@ class AddNotifAvailRequestVC: UIViewController , UITextFieldDelegate, UITabBarDe
         {
             let vc = segue.destination as! LocationSearchTableViewController
             vc.delegate = self
+            vc.epScac = txtEPScac.text
             vc.originFrom = ac.ORIGINAL_LOCATION
             
         }else if segue.identifier == "searchEquipmentLocSegue"
@@ -911,6 +925,13 @@ class AddNotifAvailRequestVC: UIViewController , UITextFieldDelegate, UITabBarDe
             
             var fieldDataArr = [FieldInfo]()
             
+            // in case of blank chassis number, system will populate ZZZZ999999 to identify MC Provided Chassis.
+            if vu.isEmptyString(stringToCheck: txtChassisNum.text!){
+                txtChassisNum.text = "ZZZZ999999"
+                txtChassisIEPScac.text = ""
+                nextScreenMessage = ""
+            }
+            
             /* Note: Please change index if you add in middle of array otherwise next screen will be disturbed */
             fieldDataArr.append(FieldInfo(fieldTitle: "blank", fieldData: "Notification of Available Equipment Details")) //0
             fieldDataArr.append(FieldInfo(fieldTitle: "CONTAINER PROVIDER NAME", fieldData: txtEPCompanyName.text!)) //1
@@ -918,19 +939,19 @@ class AddNotifAvailRequestVC: UIViewController , UITextFieldDelegate, UITabBarDe
             fieldDataArr.append(FieldInfo(fieldTitle: "MOTOR CARRIER'S NAME", fieldData: txtMCCompanyName.text!)) //3
             fieldDataArr.append(FieldInfo(fieldTitle: "MOTOR CARRIER'S SCAC", fieldData: txtMCScac.text!))  //4
             fieldDataArr.append(FieldInfo(fieldTitle: "LOAD STATUS", fieldData: txtLoadStatus.text!))  //5
-            fieldDataArr.append(FieldInfo(fieldTitle: "CONTAINER #", fieldData: txtContNum.text!)) //6
+            fieldDataArr.append(FieldInfo(fieldTitle: "CONTAINER #", fieldData: txtContNum.text!.uppercased())) //6
             fieldDataArr.append(FieldInfo(fieldTitle: "CONTAINER TYPE", fieldData: txtContType.text!)) //7
             fieldDataArr.append(FieldInfo(fieldTitle: "CONTAINER SIZE", fieldData: txtContSize.text!)) //8
             
-            fieldDataArr.append(FieldInfo(fieldTitle: "CHASSIS #", fieldData: txtChassisNum.text!)) //9
-            if vu.isNotEmptyString(stringToCheck: nextScreenMessage) && nextScreenMessage.count > 0{
-                fieldDataArr.append(FieldInfo(fieldTitle: "CHASSIS IEP SCAC", fieldData: txtChassisIEPScac.text! + nextScreenMessage)) //10
+            fieldDataArr.append(FieldInfo(fieldTitle: "CHASSIS #", fieldData: txtChassisNum.text!.uppercased())) //9
+            if  vu.isNotEmptyString(stringToCheck: txtChassisIEPScac.text!) && vu.isNotEmptyString(stringToCheck: nextScreenMessage) && nextScreenMessage.count > 0{
+                fieldDataArr.append(FieldInfo(fieldTitle: "CHASSIS IEP SCAC", fieldData: txtChassisIEPScac.text!.uppercased() + " - " + nextScreenMessage)) //10
             }else{
-                fieldDataArr.append(FieldInfo(fieldTitle: "CHASSIS IEP SCAC", fieldData: txtChassisIEPScac.text!)) //10
+                fieldDataArr.append(FieldInfo(fieldTitle: "CHASSIS IEP SCAC", fieldData: txtChassisIEPScac.text!.uppercased())) //10
             }
             fieldDataArr.append(FieldInfo(fieldTitle: "CHASSIS TYPE", fieldData: txtChassisType.text!)) //11
             fieldDataArr.append(FieldInfo(fieldTitle: "CHASSIS SIZE", fieldData: txtChassisSize.text!)) //12
-            fieldDataArr.append(FieldInfo(fieldTitle: "GENSET #", fieldData: txtGensetNum.text!)) //13
+            fieldDataArr.append(FieldInfo(fieldTitle: "GENSET #", fieldData: txtGensetNum.text!.uppercased())) //13
             
             fieldDataArr.append(FieldInfo(fieldTitle: "empty", fieldData: "")) //14
             fieldDataArr.append(FieldInfo(fieldTitle: "blank", fieldData: "Equipment Location")) //15
@@ -1144,10 +1165,11 @@ class AddNotifAvailRequestVC: UIViewController , UITextFieldDelegate, UITabBarDe
                                 
                                 DispatchQueue.main.sync {
                                     applicationUtils.hideActivityIndicator(uiView: self.view)
-                                    self.performSegue(withIdentifier: "verifyDetailsSegue", sender: self)
-                                    if apiResponseMessage.message != nil && vu.isNotEmptyString(stringToCheck: apiResponseMessage.message!){
+                                    //Don't change the order - all data should set before the self.performSegue.....
+                                    if apiResponseMessage.message != nil && vu.isNotEmptyString(stringToCheck: apiResponseMessage.message!)  && apiResponseMessage.message! != "SUCCESS"{
                                         self.nextScreenMessage = apiResponseMessage.message!
                                     }
+                                    self.performSegue(withIdentifier: "verifyDetailsSegue", sender: self)
                                     
                                 }
                                 

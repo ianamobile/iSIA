@@ -10,10 +10,10 @@ import Foundation
 
 class GetInterChangeRequestDetails{
     
-    var interchangeRequests : InterchangeRequests?
+    var interchangeRequests : InterchangeRequests = InterchangeRequests()
     var uiiaExhibitDataList = [UIIAExhibitData]()
     var workFlowList = [WorkFlow]()
-    var inProcessWf : WorkFlow?
+    var inProcessWf : WorkFlow = WorkFlow()
     
     var isEPUser  :String?
     var uiiaExhibitInputReq :String?
@@ -23,6 +23,10 @@ class GetInterChangeRequestDetails{
     var showCancelButtons :String?
     var holdButtonShow : String?
     var loggedInUserEligibleForApproval: Bool?
+    
+    init() {
+        
+    }
     
     init(_ data: [String : Any]) {
         
@@ -79,7 +83,7 @@ class GetInterChangeRequestDetails{
 }
 class InterchangeRequests {
    
-    var irId : String?
+    var irId : Int?
     var naId : String?
     var irNum : String?
     var intchgType : String?
@@ -142,7 +146,7 @@ class InterchangeRequests {
     
     init(_ data: [String : Any]) {
         
-        self.irId =  data["irId"] as? String
+        self.irId =  data["irId"] as? Int
         self.irNum =  data["irNum"] as? String
         self.intchgType =  data["intchgType"] as? String
         
@@ -206,32 +210,32 @@ class InterchangeRequests {
 
 class WorkFlow {
     
-    var wfId : String?
-    var irId : String?
+    var wfId : Int?
+    var irId : Int?
     var approvedBy :  String?
-    var wfSeq : String?
+    var wfSeq : Int?
     var wfSeqType :  String?
     var action :  String?
     var status :  String?
     var approvedDate :  String?
     var displayColor :  String?
-    var pid :String?
+    var pid :Int?
    
     init() {
         
     }
     init(_ data: [String : Any]) {
        
-        self.wfId =  data["wfId"] as? String
-        self.irId =  data["irId"] as? String
+        self.wfId =  data["wfId"] as? Int
+        self.irId =  data["irId"] as? Int
         self.approvedBy =  data["approvedBy"] as? String
-        self.wfSeq =  data["wfSeq"] as? String
+        self.wfSeq =  data["wfSeq"] as? Int
         self.wfSeqType =  data["wfSeqType"] as? String
         self.action =  data["action"] as? String
         self.status =  data["status"] as? String
         self.approvedDate =  data["approvedDate"] as? String
         self.displayColor =  data["displayColor"] as? String
-        self.pid =  data["pid"] as? String
+        self.pid =  data["pid"] as? Int
         
     }
     
@@ -239,9 +243,9 @@ class WorkFlow {
 
 class UIIAExhibitData {
     
-    var ueir_id :String?
-    var ir_id : String?
-    var ue_id : String?
+    var ueir_id :Int?
+    var ir_id : Int?
+    var ue_id : Int?
     var created_by : String?
     var created_date : String?
     var item : String?
@@ -253,9 +257,9 @@ class UIIAExhibitData {
     }
     init(_ data: [String : Any]) {
         
-        self.ueir_id =  data["ueir_id"] as? String
-        self.ir_id =  data["ir_id"] as? String
-        self.ue_id =  data["ue_id"] as? String
+        self.ueir_id =  data["ueir_id"] as? Int
+        self.ir_id =  data["ir_id"] as? Int
+        self.ue_id =  data["ue_id"] as? Int
         self.created_by =  data["created_by"] as? String
         self.created_date =  data["created_date"] as? String
         self.item =  data["item"] as? String

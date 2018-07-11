@@ -43,6 +43,8 @@ class StreetTurnRequestViewController: UIViewController,  UITextFieldDelegate, U
     var nextScreenMessage :String = ""
     var tabBarItemImageView: UIImageView!
     
+    //very imporant when street interchange/street turn re-initiated the request from the view page.
+    var reInitiatedRequestDetails: InterchangeRequests?
     
     //logged in users information
     var role :String?
@@ -106,6 +108,35 @@ class StreetTurnRequestViewController: UIViewController,  UITextFieldDelegate, U
             //txtEPScac.text = loggedInUserScac
         }
         
+        //Data Populated from the Reinititate Interchange request -tapped
+        self.populateDataFromReInitiateInterchagneIfAny()
+        
+    }
+    //Data Populated from the Reinititate Interchange request -tapped
+    func populateDataFromReInitiateInterchagneIfAny(){
+        if(self.originFrom == "reInitiateStreetTurnReqSegue"){
+            
+            
+            txtEPCompanyName.text = reInitiatedRequestDetails?.epCompanyName
+            txtEPScac.text = reInitiatedRequestDetails?.epScacs
+            txtMCCompanyName.text = reInitiatedRequestDetails?.mcACompanyName
+            txtMCScac.text = reInitiatedRequestDetails?.mcAScac
+            
+            txtContNum.text = reInitiatedRequestDetails?.contNum
+            txtExportBookingNum.text = reInitiatedRequestDetails?.bookingNum
+            txtImportBookingNum.text = reInitiatedRequestDetails?.importBookingNum
+            
+            txtChassisNum.text = reInitiatedRequestDetails?.chassisNum
+            txtChassisIEPScac.text = reInitiatedRequestDetails?.iepScac
+            
+            txtZipCode.text = reInitiatedRequestDetails?.originLocZip
+            txtLocationName.text = reInitiatedRequestDetails?.originLocNm
+            txtLocationAddress.text = reInitiatedRequestDetails?.originLocAddr
+            txtCity.text = reInitiatedRequestDetails?.originLocCity
+            txtState.text = reInitiatedRequestDetails?.originLocState
+            
+            
+        }
     }
     
     //method that check user has internet connected in mobile or not.
@@ -116,7 +147,7 @@ class StreetTurnRequestViewController: UIViewController,  UITextFieldDelegate, U
             au.redirectToNoInternetConnectionView(target: self)
         }else{
             super.viewDidAppear(animated)
-            if(originFrom != nil && vu.isNotEmptyString(stringToCheck: originFrom!)){
+            if(originFrom != nil && vu.isNotEmptyString(stringToCheck: originFrom!) && originFrom! == "AddNewNotifAvailRequest"){
                 resetFields();
             }
            
@@ -371,21 +402,29 @@ class StreetTurnRequestViewController: UIViewController,  UITextFieldDelegate, U
         
         if sender == txtMCCompanyName{
             //picker selected row
-            if self.companyInfoArray.count > 0 {
+            if vu.isNotEmptyString(stringToCheck: sender.text!)  && sender.text!.count >= 2 && self.companyInfoArray.count > 0 {
                 let selectedRow: Int  = self.picker.selectedRow(inComponent: 0)
                 if selectedRow >= 0{
                     txtMCCompanyName.text = self.companyInfoArray[selectedRow].companyName
                     txtMCScac.text = self.companyInfoArray[selectedRow].scac
+                    
+                    //reset the fields
+                    self.companyInfoArray = []
+                    sender.inputView = nil
                 }
             }
             
         }else if sender == txtEPCompanyName{
             //picker selected row
-            if self.companyInfoArray.count > 0 {
+            if vu.isNotEmptyString(stringToCheck: sender.text!)  && sender.text!.count >= 2 && self.companyInfoArray.count > 0 {
                 let selectedRow: Int  = self.picker.selectedRow(inComponent: 0)
                 if selectedRow >= 0{
                     txtEPCompanyName.text = self.companyInfoArray[selectedRow].companyName
                     txtEPScac.text = self.companyInfoArray[selectedRow].scac
+                    
+                    //reset the fields
+                    self.companyInfoArray = []
+                    sender.inputView = nil
                 }
             }
             
@@ -455,21 +494,28 @@ class StreetTurnRequestViewController: UIViewController,  UITextFieldDelegate, U
         
             var fieldDataArr = [FieldInfo]()
         
+            // in case of blank chassis number, system will populate ZZZZ999999 to identify MC Provided Chassis.
+            if vu.isEmptyString(stringToCheck: txtChassisNum.text!){
+                txtChassisNum.text = "ZZZZ999999"
+                txtChassisIEPScac.text = ""
+                nextScreenMessage = ""
+            }
+        
             /* Note: Please change index if you add in middle of array otherwise next screen will be disturbed */
             fieldDataArr.append(FieldInfo(fieldTitle: "blank", fieldData: "Street Turn Details")) //0
             fieldDataArr.append(FieldInfo(fieldTitle: "CONTAINER PROVIDER NAME", fieldData: txtEPCompanyName.text!)) //1
             fieldDataArr.append(FieldInfo(fieldTitle: "CONTAINER PROVIDER SCAC", fieldData: txtEPScac.text!)) //2
             fieldDataArr.append(FieldInfo(fieldTitle: "MOTOR CARRIER'S NAME", fieldData: txtMCCompanyName.text!)) //3
             fieldDataArr.append(FieldInfo(fieldTitle: "MOTOR CARRIER'S SCAC", fieldData: txtMCScac.text!))  //4
-            fieldDataArr.append(FieldInfo(fieldTitle: "IMPORT B/L", fieldData: txtImportBookingNum.text!))  //5
-            fieldDataArr.append(FieldInfo(fieldTitle: "EXPORT BOOKING#", fieldData: txtExportBookingNum.text!))  //6
-            fieldDataArr.append(FieldInfo(fieldTitle: "CONTAINER #", fieldData: txtContNum.text!)) //7
-            fieldDataArr.append(FieldInfo(fieldTitle: "CHASSIS #", fieldData: txtChassisNum.text!)) //8
+            fieldDataArr.append(FieldInfo(fieldTitle: "IMPORT B/L", fieldData: txtImportBookingNum.text!.uppercased()))  //5
+            fieldDataArr.append(FieldInfo(fieldTitle: "EXPORT BOOKING#", fieldData: txtExportBookingNum.text!.uppercased()))  //6
+            fieldDataArr.append(FieldInfo(fieldTitle: "CONTAINER #", fieldData: txtContNum.text!.uppercased())) //7
+            fieldDataArr.append(FieldInfo(fieldTitle: "CHASSIS #", fieldData: txtChassisNum.text!.uppercased())) //8
         
-            if vu.isNotEmptyString(stringToCheck: nextScreenMessage) && nextScreenMessage.count > 0{
-                fieldDataArr.append(FieldInfo(fieldTitle: "CHASSIS IEP SCAC", fieldData: txtChassisIEPScac.text! + nextScreenMessage)) //9
+            if vu.isNotEmptyString(stringToCheck: txtChassisIEPScac.text!) && vu.isNotEmptyString(stringToCheck: nextScreenMessage) && nextScreenMessage.count > 0{
+                fieldDataArr.append(FieldInfo(fieldTitle: "CHASSIS IEP SCAC", fieldData: txtChassisIEPScac.text!.uppercased() + " - " + nextScreenMessage)) //9
             }else{
-                fieldDataArr.append(FieldInfo(fieldTitle: "CHASSIS IEP SCAC", fieldData: txtChassisIEPScac.text!)) //9
+                fieldDataArr.append(FieldInfo(fieldTitle: "CHASSIS IEP SCAC", fieldData: txtChassisIEPScac.text!.uppercased())) //9
             }
             fieldDataArr.append(FieldInfo(fieldTitle: "empty", fieldData: "")) //10
             fieldDataArr.append(FieldInfo(fieldTitle: "blank", fieldData: "Original Interchange Location")) //11
@@ -718,10 +764,11 @@ class StreetTurnRequestViewController: UIViewController,  UITextFieldDelegate, U
                                 
                                 DispatchQueue.main.sync {
                                     applicationUtils.hideActivityIndicator(uiView: self.view)
-                                    self.performSegue(withIdentifier: "verifyDetailsSegue", sender: self)
-                                    if apiResponseMessage.message != nil && vu.isNotEmptyString(stringToCheck: apiResponseMessage.message!){
+                                    //Don't change the order - all data should set before the self.performSegue.....
+                                    if apiResponseMessage.message != nil && vu.isNotEmptyString(stringToCheck: apiResponseMessage.message!) && apiResponseMessage.message! != "SUCCESS"{
                                         self.nextScreenMessage = apiResponseMessage.message!
                                     }
+                                    self.performSegue(withIdentifier: "verifyDetailsSegue", sender: self)
                                     
                                 }
                                 

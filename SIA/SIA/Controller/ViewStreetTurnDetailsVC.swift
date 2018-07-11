@@ -9,7 +9,7 @@
 import UIKit
 
 class ViewStreetTurnDetailsVC: UIViewController, UITableViewDataSource,
-UITableViewDelegate, UIViewControllerTransitioningDelegate{
+UITableViewDelegate, UIViewControllerTransitioningDelegate, UITextFieldDelegate{
 
     // variables which are necessory for all the controllers
     typealias au = ApplicationUtils
@@ -23,9 +23,11 @@ UITableViewDelegate, UIViewControllerTransitioningDelegate{
     
     var fieldDataArr = [FieldInfo]()
     var alertTitle :String?
+    var fieldDataTitle: String = ""
     var nextScreenMessage :String = ""
     var originFrom :String?
     var searchSIADetails :SearchSIADetails?  //get interchange record from this object.
+    var res: GetInterChangeRequestDetails = GetInterChangeRequestDetails() //stored interchange request response to this variable.
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,8 +36,10 @@ UITableViewDelegate, UIViewControllerTransitioningDelegate{
             if originFrom == "StreetTurn"{
                 
                 alertTitle = "STREET TURN"
+                fieldDataTitle = "Street Turn Details"
             }else{
                 alertTitle = "STREET INTERCHANGE"
+                fieldDataTitle = "Street Interchange Details"
             }
         }
         
@@ -49,45 +53,278 @@ UITableViewDelegate, UIViewControllerTransitioningDelegate{
         //floaty.backgroundColor = UIColor(named: "ED6533")
         floaty.overlayColor = UIColor.white /* #ed6533 */
         
-        floaty.addItem(title: "Approve", handler: {_ in
-           // self.view.layer.backgroundColor = UIColor.blue.cgColor
+        
+        
+    }
+    
+    func createApproveFloatyButton(){
+        
+        let floatyItem : FloatyItem = floaty.addItem(title: "Approve", handler: {_ in
+            self.performOperation(opt: self.ac.OPT_APPROVE)
         })
-        floaty.addItem(title: "Cancel Request")
-        floaty.addItem(title: "Reject")
-        floaty.addItem(title: "On Hold")
-        floaty.addItem(title: "Re-Initiate Request")
         
-        floaty.items[0].buttonColor = #colorLiteral(red: 0.3608, green: 0.7216, blue: 0.3608, alpha: 1) /* #5cb85c */
-        floaty.items[0].iconImageView.image = UIImage(named: "approve")
-        floaty.items[0].iconImageView.tintColor = UIColor.white
-        floaty.items[0].titleColor = UIColor.black
+        floatyItem.buttonColor = #colorLiteral(red: 0.3608, green: 0.7216, blue: 0.3608, alpha: 1) /* #5cb85c */
+        floatyItem.iconImageView.image = UIImage(named: "approve")
+        floatyItem.iconImageView.tintColor = UIColor.white
+        floatyItem.titleColor = UIColor.black
         
-        floaty.items[1].buttonColor = #colorLiteral(red: 0.851, green: 0.3255, blue: 0.3098, alpha: 1) /* #d9534f */
-        floaty.items[1].titleColor = UIColor.black
-        floaty.items[1].iconImageView.image = UIImage(named: "cancel_tab")
-        floaty.items[1].iconImageView.tintColor = UIColor.white
+    }
+    func createCancelFloatyButton(){
         
-        floaty.items[2].buttonColor = #colorLiteral(red: 0.851, green: 0.3255, blue: 0.3098, alpha: 1) /* #d9534f */
-        floaty.items[2].titleColor = UIColor.black
-        floaty.items[2].iconImageView.image = UIImage(named: "reject")
-        floaty.items[2].iconImageView.tintColor = UIColor.white
+        let floatyItem : FloatyItem = floaty.addItem(title: "Cancel Request",handler: {_ in
+            self.performOperation(opt: self.ac.OPT_CANCEL)
+        })
         
         
-        floaty.items[3].buttonColor = #colorLiteral(red: 0.851, green: 0.3255, blue: 0.3098, alpha: 1) /* #d9534f */
-        floaty.items[3].titleColor = UIColor.black
-        floaty.items[3].iconImageView.image = UIImage(named: "onhold")
-        floaty.items[3].iconImageView.tintColor = UIColor.white
+        floatyItem.buttonColor = #colorLiteral(red: 0.851, green: 0.3255, blue: 0.3098, alpha: 1) /* #d9534f */
+        floatyItem.titleColor = UIColor.black
+        floatyItem.iconImageView.image = UIImage(named: "cancel_tab")
+        floatyItem.iconImageView.tintColor = UIColor.white
+        
+    }
+    func createRejectFloatyButton(){
+        
+        let floatyItem : FloatyItem = floaty.addItem(title: "Reject",handler: {_ in
+            self.performOperation(opt: self.ac.OPT_REJECT)
+        })
+       
+        
+        floatyItem.buttonColor = #colorLiteral(red: 0.851, green: 0.3255, blue: 0.3098, alpha: 1) /* #d9534f */
+        floatyItem.titleColor = UIColor.black
+        floatyItem.iconImageView.image = UIImage(named: "reject")
+        floatyItem.iconImageView.tintColor = UIColor.white
+        
+    }
+    
+    func createOnHoldFloatyButton(){
+        
+        let floatyItem : FloatyItem = floaty.addItem(title: "On Hold",handler: {_ in
+            self.performOperation(opt: self.ac.OPT_ONHOLD)
+        })
         
         
-        floaty.items[4].buttonColor = #colorLiteral(red: 0.3569, green: 0.7529, blue: 0.8706, alpha: 1) /* #5bc0de */
-        floaty.items[4].titleColor = UIColor.black
-        floaty.items[4].iconImageView.image = UIImage(named: "reinitiate")
-        floaty.items[4].iconImageView.tintColor = UIColor.white
+        floatyItem.buttonColor = #colorLiteral(red: 0.851, green: 0.3255, blue: 0.3098, alpha: 1) /* #d9534f */
+        floatyItem.titleColor = UIColor.black
+        floatyItem.iconImageView.image = UIImage(named: "onhold")
+        floatyItem.iconImageView.tintColor = UIColor.white
+        
+    }
+    
+    func createReInstateFloatyButton(){
+        
+        let floatyItem : FloatyItem = floaty.addItem(title: "Re-Initiate Request",handler: {_ in
+            self.performOperation(opt: self.ac.OPT_REINSTATE)
+        })
+        
+        floatyItem.buttonColor = #colorLiteral(red: 0.3569, green: 0.7529, blue: 0.8706, alpha: 1) /* #5bc0de */
+        floatyItem.titleColor = UIColor.black
+        floatyItem.iconImageView.image = UIImage(named: "reinitiate")
+        floatyItem.iconImageView.tintColor = UIColor.white
+        
+    }
+    
+    func performOperation(opt :String){
+        self.openRemarksPopup(opt: opt)
+    }
+    
+    func approveRequestHandler(_ opt :String){
+        callInterchangeRequestOperationsAPI(opt: opt)
+    }
+    func cancelRequestHandler(_ opt :String){
+        callInterchangeRequestOperationsAPI(opt: opt)
+    }
+    func onHoldRequestHandler(_ opt :String){
+        callInterchangeRequestOperationsAPI(opt: opt)
+    }
+    
+    func rejectRequestHandler(_ opt :String){
+        callInterchangeRequestOperationsAPI(opt: opt)
+    }
+    
+    func reInitiateRequestHandler(_ opt :String){
+       //re initiate the request and open respectives form based on the irRequestType
+        if(self.res.interchangeRequests.irRequestType == "StreetInterchange"){
+            self.performSegue(withIdentifier: "reInitiateInterchangeSegue", sender: self)
+        }else{
+            self.performSegue(withIdentifier: "reInitiateStreetTurnReqSegue", sender: self)
+        }
+    }
+    
+    func callInterchangeRequestOperationsAPI(opt: String){
+        
+        if !au.isInternetAvailable() {
+            au.redirectToNoInternetConnectionView(target: self)
+        }
+        else if res.interchangeRequests.irId! > 0
+        {
+            
+            let accessToken =  UserDefaults.standard.string(forKey: "accessToken")
+            let applicationUtils : ApplicationUtils = ApplicationUtils()
+            applicationUtils.showActivityIndicator(uiView: view)
+            
+            
+            
+            let jsonRequestObject: [String : Any] =
+                [
+                    "irId": res.interchangeRequests.irId as Any,
+                    "wfId": res.inProcessWf.wfId as Any,
+                    "opt": opt,
+                    "remarks": res.interchangeRequests.remarks as Any,
+                    "accessToken": accessToken!
+                    
+               ]
+            
+            print(jsonRequestObject)
+            
+            if let paramString = try? JSONSerialization.data(withJSONObject: jsonRequestObject)
+            {
+                let urlToRequest = ac.BASE_URL + ac.INTERCHANGE_REQUEST_OPERATIONS
+                let url = URL(string: urlToRequest)!
+                
+                let session = URLSession.shared
+                let request = NSMutableURLRequest(url: url)
+                
+                request.httpMethod = "POST"
+                request.httpBody = paramString
+                request.setValue(ac.CONTENT_TYPE_JSON, forHTTPHeaderField: ac.CONTENT_TYPE_KEY)
+                request.cachePolicy = NSURLRequest.CachePolicy.reloadIgnoringCacheData
+                
+                
+                let task = session.dataTask(with: request as URLRequest) { (data, response, error) in
+                    guard let _: Data = data, let _: URLResponse = response, error == nil else {
+                        print("*****error")
+                        DispatchQueue.main.sync {
+                            applicationUtils.hideActivityIndicator(uiView: self.view)
+                            au.showAlert(target: self, alertTitle: self.alertTitle!, message: self.ac.ERROR_MSG,[UIAlertAction(title: "OK", style: .default, handler: nil)], completion: nil)
+                        }
+                        
+                        
+                        return
+                    }
+                    do{
+                        let nsResponse =  response as! HTTPURLResponse
+                        let parsedData = try JSONSerialization.jsonObject(with: data!)
+                        
+                        print(parsedData)
+                        
+                        if let operationData:[String: Any]   = parsedData as? [String : Any]
+                        {
+                            
+                            if nsResponse.statusCode == 200
+                            {
+                                let apiResponseMessage: APIResponseMessage  = APIResponseMessage(operationData)
+                                
+                                DispatchQueue.main.sync {
+                                    applicationUtils.hideActivityIndicator(uiView: self.view)
+                                    au.showAlert(target: self, alertTitle: self.alertTitle!, message: apiResponseMessage.message!,[UIAlertAction(title: "OK", style: .default, handler: { action in
+                                        switch action.style{
+                                        case .default:
+                                            //refresh the page again
+                                            self.callGetInterchangeRequestAPI()
+                                            break
+                                        case .cancel:
+                                            break
+                                            
+                                        case .destructive:
+                                            break
+                                            
+                                        }})], completion: nil)
+                                }
+                                
+                            }else{
+                                
+                                //handle other response ..
+                                let apiResponseMessage: APIResponseMessage  = APIResponseMessage(operationData)
+                                
+                                DispatchQueue.main.sync {
+                                    applicationUtils.hideActivityIndicator(uiView: self.view)
+                                    au.showAlert(target: self, alertTitle: self.alertTitle!, message: apiResponseMessage.errors.errorMessage!,[UIAlertAction(title: "OK", style: .default, handler: nil)], completion: nil)
+                                    
+                                }
+                                
+                            }
+                            
+                        }
+                        
+                    } catch let error as NSError {
+                        print("NSError ::",error)
+                        DispatchQueue.main.sync {
+                            applicationUtils.hideActivityIndicator(uiView: self.view)
+                            au.showAlert(target: self, alertTitle: self.alertTitle!, message: self.ac.ERROR_MSG,[UIAlertAction(title: "OK", style: .default, handler: nil)], completion: nil)
+                        }
+                        
+                    }
+                    
+                }
+                task.resume()
+                
+            }
+            
+            
+        }
+    }
+    
+    
+    func openRemarksPopup(opt :String){
+        //1. Create the alert controller.
+        let alert = UIAlertController(title: "ADD REMARKS", message: "Would you like to enter remarks?", preferredStyle: .alert)
+        
+        //2. Add the text field. You can configure it however you need.
+        alert.addTextField { (textField) in
+            
+            //let heightConstraint = NSLayoutConstraint(item: textField, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 100)
+            //textField.addConstraint(heightConstraint)
+            textField.placeholder = "Enter remarks here."
+            
+        }
+        
+        // 3. Grab the value from the text field, and print it when the user clicks OK.
+        alert.addAction(UIAlertAction(title: "Continue", style: .default, handler: { [weak alert] (_) in
+            let textField = alert?.textFields![0] // Force unwrapping because we know it exists.
+            if vu.isNotEmptyString(stringToCheck: (textField?.text!)!) &&  (textField?.text!.count)! > 0{
+                self.res.interchangeRequests.remarks = (textField?.text!)!
+            }else{
+                self.res.interchangeRequests.remarks = ""
+            }
+            
+            if(opt == self.ac.OPT_APPROVE){
+                self.approveRequestHandler(opt)
+                
+            }else if(opt == self.ac.OPT_REJECT){
+                self.rejectRequestHandler(opt)
+                
+            }else if(opt == self.ac.OPT_ONHOLD){
+                self.onHoldRequestHandler(opt)
+                
+            }else if(opt == self.ac.OPT_REINSTATE){
+                self.reInitiateRequestHandler(opt)
+                
+            }else if(opt == self.ac.OPT_CANCEL){
+                self.cancelRequestHandler(opt)
+                
+            }
+            
+        }))
+        
+        // 4. Present the alert.
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func resetFloatyButtons(){
+        if floaty.items.count > 0{
+            for floatyItem in floaty.items{
+                floaty.removeItem(item: floatyItem)
+            }
+        }
         
     }
     
     func callGetInterchangeRequestAPI() {
       
+        self.res = GetInterChangeRequestDetails()
+        resetFloatyButtons()
+        fieldDataArr = [FieldInfo]()
+        
         if !au.isInternetAvailable() {
             au.redirectToNoInternetConnectionView(target: self)
         }
@@ -101,11 +338,11 @@ UITableViewDelegate, UIViewControllerTransitioningDelegate{
             
             let jsonRequestObject: [String : Any] =
                 [
-                    "irId" :  162009, //searchSIADetails?.irId!, //274942, //,
+                    "irId" : searchSIADetails?.irId! as Any,
                     "accessToken" : accessToken!
             ]
             
-            //print(jsonRequestObject)
+            print(jsonRequestObject)
             
             if let paramString = try? JSONSerialization.data(withJSONObject: jsonRequestObject)
             {
@@ -143,77 +380,109 @@ UITableViewDelegate, UIViewControllerTransitioningDelegate{
                             
                             if nsResponse.statusCode == 200
                             {
-                                let res: GetInterChangeRequestDetails  = GetInterChangeRequestDetails(data)
+                                self.res  = GetInterChangeRequestDetails(data)
                                
                                 DispatchQueue.main.sync {
                                     applicationUtils.hideActivityIndicator(uiView: self.view)
                                     
                                     /* Note: Please change index if you add in middle of array otherwise next screen will be disturbed */
-                                    self.fieldDataArr.append(FieldInfo(fieldTitle: "blank", fieldData: "Street Interchange Details")) //0
-                                    self.fieldDataArr.append(FieldInfo(fieldTitle: "CONTAINER PROVIDER NAME", fieldData: res.interchangeRequests?.epCompanyName!)) //1
-                                    self.fieldDataArr.append(FieldInfo(fieldTitle: "CONTAINER PROVIDER SCAC", fieldData: res.interchangeRequests?.epScacs!)) //2
-                                    self.fieldDataArr.append(FieldInfo(fieldTitle: "MOTOR CARRIER A'S NAME", fieldData: res.interchangeRequests?.mcACompanyName!)) //3
-                                    self.fieldDataArr.append(FieldInfo(fieldTitle: "MOTOR CARRIER A'S SCAC", fieldData: res.interchangeRequests?.mcAScac!))  //4
-                                    self.fieldDataArr.append(FieldInfo(fieldTitle: "MOTOR CARRIER B'S NAME", fieldData: res.interchangeRequests?.mcBCompanyName!)) //5
-                                    self.fieldDataArr.append(FieldInfo(fieldTitle: "MOTOR CARRIER B'S SCAC", fieldData: res.interchangeRequests?.mcBScac!))  //6
-                                    self.fieldDataArr.append(FieldInfo(fieldTitle: "TYPE OF INTERCHANGE", fieldData: res.interchangeRequests?.intchgType ?? ""))  //7
                                     
-                                    self.fieldDataArr.append(FieldInfo(fieldTitle: "CONTAINER TYPE", fieldData: res.interchangeRequests?.contType ?? "")) //8
-                                    self.fieldDataArr.append(FieldInfo(fieldTitle: "CONTAINER SIZE", fieldData: res.interchangeRequests?.contSize ?? "")) //9
+                                    self.fieldDataArr.append(FieldInfo(fieldTitle: "blank", fieldData: self.fieldDataTitle)) //0
+                                    self.fieldDataArr.append(FieldInfo(fieldTitle: "CONTAINER PROVIDER NAME", fieldData: self.res.interchangeRequests.epCompanyName!)) //1
+                                    self.fieldDataArr.append(FieldInfo(fieldTitle: "CONTAINER PROVIDER SCAC", fieldData: self.res.interchangeRequests.epScacs!)) //2
+                                    self.fieldDataArr.append(FieldInfo(fieldTitle: "MOTOR CARRIER A'S NAME", fieldData: self.res.interchangeRequests.mcACompanyName!)) //3
+                                    self.fieldDataArr.append(FieldInfo(fieldTitle: "MOTOR CARRIER A'S SCAC", fieldData: self.res.interchangeRequests.mcAScac!))  //4
+                                    self.fieldDataArr.append(FieldInfo(fieldTitle: "MOTOR CARRIER B'S NAME", fieldData: self.res.interchangeRequests.mcBCompanyName!)) //5
+                                    self.fieldDataArr.append(FieldInfo(fieldTitle: "MOTOR CARRIER B'S SCAC", fieldData: self.res.interchangeRequests.mcBScac!))  //6
+                                    self.fieldDataArr.append(FieldInfo(fieldTitle: "TYPE OF INTERCHANGE", fieldData: self.res.interchangeRequests.intchgType ?? ""))  //7
                                     
-                                    self.fieldDataArr.append(FieldInfo(fieldTitle: "IMPORT B/L", fieldData: res.interchangeRequests?.importBookingNum  ?? ""))  //10
-                                    self.fieldDataArr.append(FieldInfo(fieldTitle: "EXPORT BOOKING#", fieldData: res.interchangeRequests?.bookingNum!))  //11
-                                    self.fieldDataArr.append(FieldInfo(fieldTitle: "CONTAINER #", fieldData: res.interchangeRequests?.contNum!)) //12
-                                    self.fieldDataArr.append(FieldInfo(fieldTitle: "CHASSIS #", fieldData: res.interchangeRequests?.chassisNum  ?? "")) //13
+                                    self.fieldDataArr.append(FieldInfo(fieldTitle: "CONTAINER TYPE", fieldData: self.res.interchangeRequests.contType ?? "")) //8
+                                    self.fieldDataArr.append(FieldInfo(fieldTitle: "CONTAINER SIZE", fieldData: self.res.interchangeRequests.contSize ?? "")) //9
                                     
-                                    self.fieldDataArr.append(FieldInfo(fieldTitle: "CHASSIS IEP SCAC", fieldData: res.interchangeRequests?.iepScac ?? "")) //14
+                                    self.fieldDataArr.append(FieldInfo(fieldTitle: "IMPORT B/L", fieldData: self.res.interchangeRequests.importBookingNum  ?? ""))  //10
+                                    self.fieldDataArr.append(FieldInfo(fieldTitle: "EXPORT BOOKING#", fieldData: self.res.interchangeRequests.bookingNum!))  //11
+                                    self.fieldDataArr.append(FieldInfo(fieldTitle: "CONTAINER #", fieldData: self.res.interchangeRequests.contNum!)) //12
+                                    self.fieldDataArr.append(FieldInfo(fieldTitle: "CHASSIS #", fieldData: self.res.interchangeRequests.chassisNum  ?? "")) //13
                                     
-                                    self.fieldDataArr.append(FieldInfo(fieldTitle: "CHASSIS TYPE", fieldData: res.interchangeRequests?.chassisType ?? "")) //15
-                                    self.fieldDataArr.append(FieldInfo(fieldTitle: "CHASSIS SIZE", fieldData: res.interchangeRequests?.chassisSize ?? "")) //16
-                                    self.fieldDataArr.append(FieldInfo(fieldTitle: "GENSET #", fieldData: res.interchangeRequests?.gensetNum ?? "")) //17
+                                    self.fieldDataArr.append(FieldInfo(fieldTitle: "CHASSIS IEP SCAC", fieldData: self.res.interchangeRequests.iepScac ?? "")) //14
+                                    
+                                    self.fieldDataArr.append(FieldInfo(fieldTitle: "CHASSIS TYPE", fieldData: self.res.interchangeRequests.chassisType ?? "")) //15
+                                    self.fieldDataArr.append(FieldInfo(fieldTitle: "CHASSIS SIZE", fieldData: self.res.interchangeRequests.chassisSize ?? "")) //16
+                                    self.fieldDataArr.append(FieldInfo(fieldTitle: "GENSET #", fieldData: self.res.interchangeRequests.gensetNum ?? "")) //17
                                     
                                     if self.searchSIADetails?.irRequestType == "StreetInterchange" {
                                         self.fieldDataArr.append(FieldInfo(fieldTitle: "empty", fieldData: "")) //18
                                         self.fieldDataArr.append(FieldInfo(fieldTitle: "blank", fieldData: "Equipment Location")) //19
-                                        self.fieldDataArr.append(FieldInfo(fieldTitle: "LOCATION NAME", fieldData: res.interchangeRequests?.equipLocNm ?? "")) //20
-                                        self.fieldDataArr.append(FieldInfo(fieldTitle: "LOCATION ADDRESS", fieldData: res.interchangeRequests?.equipLocAddr ?? "")) //21
-                                        self.fieldDataArr.append(FieldInfo(fieldTitle: "ZIP CODE", fieldData: res.interchangeRequests?.equipLocZip ?? "")) //22
-                                        self.fieldDataArr.append(FieldInfo(fieldTitle: "CITY", fieldData: res.interchangeRequests?.equipLocCity ?? "")) //23
-                                        self.fieldDataArr.append(FieldInfo(fieldTitle: "STATE", fieldData: res.interchangeRequests?.equipLocState ?? "")) //24
+                                        self.fieldDataArr.append(FieldInfo(fieldTitle: "LOCATION NAME", fieldData: self.res.interchangeRequests.equipLocNm ?? "")) //20
+                                        self.fieldDataArr.append(FieldInfo(fieldTitle: "LOCATION ADDRESS", fieldData: self.res.interchangeRequests.equipLocAddr ?? "")) //21
+                                        self.fieldDataArr.append(FieldInfo(fieldTitle: "ZIP CODE", fieldData: self.res.interchangeRequests.equipLocZip ?? "")) //22
+                                        self.fieldDataArr.append(FieldInfo(fieldTitle: "CITY", fieldData: self.res.interchangeRequests.equipLocCity ?? "")) //23
+                                        self.fieldDataArr.append(FieldInfo(fieldTitle: "STATE", fieldData: self.res.interchangeRequests.equipLocState ?? "")) //24
                                         
                                     
                                     }
                                     
                                     self.fieldDataArr.append(FieldInfo(fieldTitle: "empty", fieldData: "")) //25
                                     self.fieldDataArr.append(FieldInfo(fieldTitle: "blank", fieldData: "Original Interchange Location")) //26
-                                    self.fieldDataArr.append(FieldInfo(fieldTitle: "LOCATION NAME", fieldData: res.interchangeRequests?.originLocNm!)) //27
-                                    self.fieldDataArr.append(FieldInfo(fieldTitle: "LOCATION ADDRESS", fieldData: res.interchangeRequests?.originLocAddr!)) //28
-                                    self.fieldDataArr.append(FieldInfo(fieldTitle: "ZIP CODE", fieldData: res.interchangeRequests?.originLocZip!)) //29
-                                    self.fieldDataArr.append(FieldInfo(fieldTitle: "CITY", fieldData: res.interchangeRequests?.originLocCity!)) //30
-                                    self.fieldDataArr.append(FieldInfo(fieldTitle: "STATE", fieldData: res.interchangeRequests?.originLocState!)) //31
+                                    self.fieldDataArr.append(FieldInfo(fieldTitle: "LOCATION NAME", fieldData: self.res.interchangeRequests.originLocNm!)) //27
+                                    self.fieldDataArr.append(FieldInfo(fieldTitle: "LOCATION ADDRESS", fieldData: self.res.interchangeRequests.originLocAddr!)) //28
+                                    self.fieldDataArr.append(FieldInfo(fieldTitle: "ZIP CODE", fieldData: self.res.interchangeRequests.originLocZip!)) //29
+                                    self.fieldDataArr.append(FieldInfo(fieldTitle: "CITY", fieldData: self.res.interchangeRequests.originLocCity!)) //30
+                                    self.fieldDataArr.append(FieldInfo(fieldTitle: "STATE", fieldData: self.res.interchangeRequests.originLocState!)) //31
                                     
-                                    if self.searchSIADetails?.irRequestType == "StreetInterchange" && res.uiiaExhibitDataList.count > 0{
+                                    if self.searchSIADetails?.irRequestType == "StreetInterchange" && self.res.uiiaExhibitDataList.count > 0{
                                         self.fieldDataArr.append(FieldInfo(fieldTitle: "empty", fieldData: "")) //32
                                         self.fieldDataArr.append(FieldInfo(fieldTitle: "blank", fieldData: "Equipment Condition (per UIIA Exhibit A)")) //33
-                                        for uiiaExhibit in res.uiiaExhibitDataList {
+                                        for uiiaExhibit in self.res.uiiaExhibitDataList {
                                              self.fieldDataArr.append(FieldInfo(fieldTitle: uiiaExhibit.item!, fieldData: uiiaExhibit.item_desc!)) //34
                                         }
                                     }
                                     
-                                    if self.searchSIADetails?.irRequestType == "StreetInterchange" && res.interchangeRequests?.remarks != nil
-                                            && vu.isNotEmptyString(stringToCheck: (res.interchangeRequests?.remarks!)!){
+                                    if self.searchSIADetails?.irRequestType == "StreetInterchange" && self.res.interchangeRequests.remarks != nil
+                                            && vu.isNotEmptyString(stringToCheck: (self.res.interchangeRequests.remarks!)){
                                         
-                                        if let remarksArray =  res.interchangeRequests?.remarks!.components(separatedBy: "|"){
+                                            let remarksArray :[String] =  self.res.interchangeRequests.remarks!.components(separatedBy: "||")
                                             self.fieldDataArr.append(FieldInfo(fieldTitle: "empty", fieldData: "")) //32
                                             self.fieldDataArr.append(FieldInfo(fieldTitle: "blank", fieldData: "Previous Comments")) //33
                                             for remarks in remarksArray {
                                                 self.fieldDataArr.append(FieldInfo(fieldTitle: "REMARKS", fieldData: remarks)) //34
                                             }
-                                        }
                                         
                                         
                                     }
                                     self.siaTableView.reloadData()
+                                    
+                                    //set all action menu options based on the response.
+                                    
+                                    //this button will be shown to all users
+                                    self.createReInstateFloatyButton()
+                                    
+                                    
+                                    if self.res.loggedInUserEligibleForApproval != nil && self.res.loggedInUserEligibleForApproval! && self.res.interchangeRequests.status! == "PENDING"{
+                                        
+                                        if self.res.showCancelButtons != nil && self.res.showCancelButtons == "Y"{
+                                            self.createCancelFloatyButton()
+                                        }
+                                        
+                                        self.createApproveFloatyButton()
+                                        
+                                        if self.res.inProcessWf.wfId != nil && self.res.inProcessWf.wfSeqType == "MCA"{
+                                            self.createOnHoldFloatyButton()
+                                        }
+                                        
+                                        self.createRejectFloatyButton()
+                                    
+                                    }else {
+                                        if self.res.interchangeRequests.status! == "PENDING"{
+                                            if self.res.showCancelButtons != nil && self.res.showCancelButtons == "Y"{
+                                                self.createCancelFloatyButton()
+                                            }
+                                        }
+                                        
+                                    }
+                                    
+                                    self.view.addSubview(self.floaty)
+                                    
                                    
                                 }
                                 
@@ -240,9 +509,6 @@ UITableViewDelegate, UIViewControllerTransitioningDelegate{
                             au.showAlert(target: self, alertTitle: self.alertTitle!, message: self.ac.ERROR_MSG ,[UIAlertAction(title: "OK", style: .default, handler: nil)], completion: nil)
                         }
                         
-                        
-                        
-                        
                     }
                     
                     
@@ -262,10 +528,23 @@ UITableViewDelegate, UIViewControllerTransitioningDelegate{
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let viewWorkFlowDetailsVC = segue.destination as! ViewWorkFlowDetailsVC
-        viewWorkFlowDetailsVC.transitioningDelegate = self
-        viewWorkFlowDetailsVC.modalPresentationStyle = .custom
         
+        if segue.identifier == "viewWorkFlowDetailsSegue"{
+            let viewWorkFlowDetailsVC = segue.destination as! ViewWorkFlowDetailsVC
+            viewWorkFlowDetailsVC.transitioningDelegate = self
+            viewWorkFlowDetailsVC.modalPresentationStyle = .custom
+        
+        }else if segue.identifier == "reInitiateStreetTurnReqSegue" {
+            let vc = segue.destination as! StreetTurnRequestViewController
+             vc.reInitiatedRequestDetails = self.res.interchangeRequests
+             vc.originFrom = segue.identifier
+            
+        }else if segue.identifier == "reInitiateInterchangeSegue" {
+            let vc = segue.destination as! StreetInterchangeViewController
+            vc.reInitiatedRequestDetails = self.res.interchangeRequests
+            vc.originFrom = segue.identifier
+        }
+      
     }
     
     
