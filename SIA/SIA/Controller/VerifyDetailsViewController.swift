@@ -50,15 +50,37 @@ class VerifyDetailsViewController: UIViewController, UITableViewDataSource,
             self.navigationController?.popViewController(animated: true)
             
         }else if item.tag == 2 {
-            //submit button tapped
-            if originFrom == "StreetTurn"{
-                 submitStreetTurnRequest()
-            }else if(originFrom == "AddNotifAvailRequest"){
-                 submitNotifAvailRequest()
-                
-            }else{
-                 submitStreetInterchangeRequest()
-            }
+            
+            au.showAlert(target: self, alertTitle: self.alertTitle!, message: "Are you sure want to submit this request?",
+                     [UIAlertAction(title: "OK", style: .default, handler: { action in
+                        switch action.style{
+                        case .default:
+                            
+                            //submit button tapped
+                            if self.originFrom == "StreetTurn"{
+                                self.submitStreetTurnRequest()
+                            }else if(self.originFrom == "AddNotifAvailRequest"){
+                                self.submitNotifAvailRequest()
+                                
+                            }else{
+                                self.submitStreetInterchangeRequest()
+                            }
+                            
+                            break
+                        case .cancel:
+                            
+                            break
+                            
+                        case .destructive:
+                            
+                            break
+                            
+                        }}),
+                      UIAlertAction(title: "CANCEL", style: .default, handler: nil)
+                        
+            ], completion: nil)
+            
+           
            
         }
     }

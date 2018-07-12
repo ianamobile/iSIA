@@ -19,9 +19,14 @@
 		692E5BB420DD06D400FB3AD4 /* ListEPUsersTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692E5BB320DD06D400FB3AD4 /* ListEPUsersTableVC.swift */; };
 		692E5BB620DD06F600FB3AD4 /* ListEPUsersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692E5BB520DD06F600FB3AD4 /* ListEPUsersTableViewCell.swift */; };
 		692E5BB820DD0A3200FB3AD4 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692E5BB720DD0A3200FB3AD4 /* Profile.swift */; };
+		69305FFE20F747D30066C63F /* UIIAExhibitVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69305FFD20F747D30066C63F /* UIIAExhibitVC.swift */; };
+		6930600020F74BDE0066C63F /* UIIAExhibitResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69305FFF20F74BDE0066C63F /* UIIAExhibitResponse.swift */; };
+		6930600220F758F60066C63F /* UIIAExhibitTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6930600120F758F60066C63F /* UIIAExhibitTableViewCell.swift */; };
+		6930600420F783FE0066C63F /* NotificationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6930600320F783FE0066C63F /* NotificationExtension.swift */; };
 		693CE07320C9466C00736C4E /* SIADetailsDataTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693CE07020C9466C00736C4E /* SIADetailsDataTableViewCell.swift */; };
 		693CE07520C9466C00736C4E /* SIADetailsTitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693CE07220C9466C00736C4E /* SIADetailsTitleTableViewCell.swift */; };
 		694E163B20F35C1C007AB654 /* GetInterChangeRequestDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694E163A20F35C1C007AB654 /* GetInterChangeRequestDetails.swift */; };
+		695E7EAA20F6144600350BEB /* SIAFullDataViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695E7EA920F6144600350BEB /* SIAFullDataViewTableViewCell.swift */; };
 		6972B88720B5A26E009B1BEC /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6972B88520B5A26E009B1BEC /* CircleView.swift */; };
 		699BDAF520A2EB870088E0E9 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699BDAF420A2EB870088E0E9 /* UIViewExtension.swift */; };
 		699BDAF720A2EDEF0088E0E9 /* MCLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699BDAF620A2EDEF0088E0E9 /* MCLoginViewController.swift */; };
@@ -132,9 +137,14 @@
 		692E5BB320DD06D400FB3AD4 /* ListEPUsersTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListEPUsersTableVC.swift; sourceTree = "<group>"; };
 		692E5BB520DD06F600FB3AD4 /* ListEPUsersTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListEPUsersTableViewCell.swift; sourceTree = "<group>"; };
 		692E5BB720DD0A3200FB3AD4 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
+		69305FFD20F747D30066C63F /* UIIAExhibitVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIIAExhibitVC.swift; sourceTree = "<group>"; };
+		69305FFF20F74BDE0066C63F /* UIIAExhibitResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIIAExhibitResponse.swift; sourceTree = "<group>"; };
+		6930600120F758F60066C63F /* UIIAExhibitTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIIAExhibitTableViewCell.swift; sourceTree = "<group>"; };
+		6930600320F783FE0066C63F /* NotificationExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationExtension.swift; sourceTree = "<group>"; };
 		693CE07020C9466C00736C4E /* SIADetailsDataTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SIADetailsDataTableViewCell.swift; sourceTree = "<group>"; };
 		693CE07220C9466C00736C4E /* SIADetailsTitleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SIADetailsTitleTableViewCell.swift; sourceTree = "<group>"; };
 		694E163A20F35C1C007AB654 /* GetInterChangeRequestDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetInterChangeRequestDetails.swift; sourceTree = "<group>"; };
+		695E7EA920F6144600350BEB /* SIAFullDataViewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SIAFullDataViewTableViewCell.swift; sourceTree = "<group>"; };
 		6972B88520B5A26E009B1BEC /* CircleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
 		699BDAF420A2EB870088E0E9 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		699BDAF620A2EDEF0088E0E9 /* MCLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCLoginViewController.swift; sourceTree = "<group>"; };
@@ -390,6 +400,7 @@
 				69FBD17420EC64BD0030FBF1 /* RequestPoolSearchVC.swift */,
 				69FBD17820EC710C0030FBF1 /* RequestPoolSearchResultVC.swift */,
 				69197E1920EDBE8100B05B58 /* AddNotifAvailRequestVC.swift */,
+				69305FFD20F747D30066C63F /* UIIAExhibitVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -400,7 +411,9 @@
 				69BAA55620DBE93E00961BB9 /* CircularTransition.swift */,
 				69293B4620C158B30035E24B /* LocationSearchTableViewCell.swift */,
 				693CE07020C9466C00736C4E /* SIADetailsDataTableViewCell.swift */,
+				6930600120F758F60066C63F /* UIIAExhibitTableViewCell.swift */,
 				693CE07220C9466C00736C4E /* SIADetailsTitleTableViewCell.swift */,
+				695E7EA920F6144600350BEB /* SIAFullDataViewTableViewCell.swift */,
 				69FD8C9020BBEA5800D076E4 /* DashboardTableViewCell.swift */,
 				6972B88520B5A26E009B1BEC /* CircleView.swift */,
 				69BBE915209B0EBE008F1913 /* DesignableUITextField.swift */,
@@ -414,6 +427,7 @@
 				692E5BB520DD06F600FB3AD4 /* ListEPUsersTableViewCell.swift */,
 				69FBD17C20EC7FA80030FBF1 /* SearchRequestPoolTableViewCell.swift */,
 				69FBD17E20ECA69A0030FBF1 /* SearchRequestPoolTableViewCellDelegate.swift */,
+				6930600320F783FE0066C63F /* NotificationExtension.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -433,6 +447,7 @@
 				69FBD17A20EC75B80030FBF1 /* SearchRequestPoolDetailsResponse.swift */,
 				69FBD18020ECC6800030FBF1 /* SetupPageResponse.swift */,
 				694E163A20F35C1C007AB654 /* GetInterChangeRequestDetails.swift */,
+				69305FFF20F74BDE0066C63F /* UIIAExhibitResponse.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -658,6 +673,7 @@
 				69E814FD20A460AB0076A118 /* SECForgotPasswordViewController.swift in Sources */,
 				69C8127620C03E1900A90081 /* LocationSearchTableViewCellDelegate.swift in Sources */,
 				6925E25620D3FFB100886A3E /* FieldInfo.swift in Sources */,
+				695E7EAA20F6144600350BEB /* SIAFullDataViewTableViewCell.swift in Sources */,
 				69BAA55120DBC8CF00961BB9 /* FloatyWindow.swift in Sources */,
 				6911461D20C80DEA00E0D82D /* UISearchBarExtension.swift in Sources */,
 				69BAA54C20DBC8CF00961BB9 /* Floaty.swift in Sources */,
@@ -675,7 +691,9 @@
 				69BBE943209B0F20008F1913 /* UserDetails.swift in Sources */,
 				69BBE94F209B11AF008F1913 /* NoInternetViewController.swift in Sources */,
 				69B374FA20C6C95300D9FB8D /* StreetInterchangeViewController.swift in Sources */,
+				69305FFE20F747D30066C63F /* UIIAExhibitVC.swift in Sources */,
 				69C8127020BFF89E00A90081 /* CardView.swift in Sources */,
+				6930600020F74BDE0066C63F /* UIIAExhibitResponse.swift in Sources */,
 				69BBE94B209B0F34008F1913 /* ValidationUtils.swift in Sources */,
 				69293B4720C158B30035E24B /* LocationSearchTableViewCell.swift in Sources */,
 				699BDAFB20A334130088E0E9 /* SECUserLoginViewController.swift in Sources */,
@@ -694,6 +712,7 @@
 				69BBE942209B0F20008F1913 /* Pagination.swift in Sources */,
 				69E8150120A47C630076A118 /* TPUForgotPasswordViewController.swift in Sources */,
 				699BDAF920A308D00088E0E9 /* EPLoginViewController.swift in Sources */,
+				6930600220F758F60066C63F /* UIIAExhibitTableViewCell.swift in Sources */,
 				69FBD17B20EC75B80030FBF1 /* SearchRequestPoolDetailsResponse.swift in Sources */,
 				69D7DAF120BE9DD100548F5A /* LoginUITabBarController.swift in Sources */,
 				69BBE916209B0EBE008F1913 /* UITextFieldExtension.swift in Sources */,
@@ -715,6 +734,7 @@
 				69FC3F3D20DA579700B31A17 /* SearchInterchangeRequestsVC.swift in Sources */,
 				69BAA55720DBE93F00961BB9 /* CircularTransition.swift in Sources */,
 				69BAA54D20DBC8CF00961BB9 /* FloatyDelegate.swift in Sources */,
+				6930600420F783FE0066C63F /* NotificationExtension.swift in Sources */,
 				69BAA54F20DBC8CF00961BB9 /* FloatyManager.swift in Sources */,
 				69FBD17D20EC7FA80030FBF1 /* SearchRequestPoolTableViewCell.swift in Sources */,
 				69FD8C9720BC381C00D076E4 /* DashboardTableViewCellDelegate.swift in Sources */,

@@ -386,7 +386,7 @@ class StreetInterchangeViewController: UIViewController , UITextFieldDelegate, U
             txtOriginCity.text = reInitiatedRequestDetails?.originLocCity
             txtOriginState.text = reInitiatedRequestDetails?.originLocState
             
-            setPickerDefaultValue(self.txtTypeOfInterchange, typeOfInterchangeArray, typeOfInterchangePicker, selectedValue: (reInitiatedRequestDetails?.contType)!)
+            setPickerDefaultValue(self.txtTypeOfInterchange, typeOfInterchangeArray, typeOfInterchangePicker, selectedValue: (reInitiatedRequestDetails?.intchgType)!)
             setPickerDefaultValue(self.txtContType, contTypeArray, contTypePicker, selectedValue: (reInitiatedRequestDetails?.contType)!)
             setPickerDefaultValue(self.txtContSize, contSizeArray, contSizePicker, selectedValue: (reInitiatedRequestDetails?.contSize)!)
             setPickerDefaultValue(self.txtChassisType, chassisTypeArray, chassisTypePicker, selectedValue: (reInitiatedRequestDetails?.chassisType)!)

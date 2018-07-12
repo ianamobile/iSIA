@@ -28,6 +28,7 @@ UITableViewDelegate, UIViewControllerTransitioningDelegate, UITextFieldDelegate{
     var originFrom :String?
     var searchSIADetails :SearchSIADetails?  //get interchange record from this object.
     var res: GetInterChangeRequestDetails = GetInterChangeRequestDetails() //stored interchange request response to this variable.
+    var uiiaExhibitStr :String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,14 +54,91 @@ UITableViewDelegate, UIViewControllerTransitioningDelegate, UITextFieldDelegate{
         //floaty.backgroundColor = UIColor(named: "ED6533")
         floaty.overlayColor = UIColor.white /* #ed6533 */
         
+
+        NotificationCenter.default.addObserver(self, selector: #selector(handleUIIAExhibitsClosing), name: .selectedUIIAExhibits , object: nil)
         
+    }
+    
+    
+    func getNumbers(array : [Int]) -> String {
+        let stringArray = array.map{ String($0) }
+        return stringArray.joined(separator: ",")
+    }
+    
+    @objc func handleUIIAExhibitsClosing(notification: Notification){
+        print("done..")
         
+        let dataVC = notification.object as! UIIAExhibitVC
+        print(dataVC.selectedUIIAExhibitArray)
+        
+        uiiaExhibitStr = getNumbers(array: dataVC.selectedUIIAExhibitArray)
+        print(uiiaExhibitStr)
+        //performOperation(opt: self.ac.OPT_APPROVE)
+        
+    }
+    
+    func openRemarksPopup(opt :String){
+        //1. Create the alert controller.
+        let alert = UIAlertController(title: "ADD REMARKS", message: "Would you like to enter remarks?", preferredStyle: .alert)
+        
+        //2. Add the text field. You can configure it however you need.
+        alert.addTextField { (textField) in
+            
+            //let heightConstraint = NSLayoutConstraint(item: textField, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 100)
+            //textField.addConstraint(heightConstraint)
+            textField.placeholder = "Enter remarks here."
+            
+        }
+        
+        // 3. Grab the value from the text field, and print it when the user clicks OK.
+        alert.addAction(UIAlertAction(title: "CONTINUE", style: .default, handler: { [weak alert] (_) in
+            let textField = alert?.textFields![0] // Force unwrapping because we know it exists.
+            if vu.isNotEmptyString(stringToCheck: (textField?.text!)!) &&  (textField?.text!.count)! > 0{
+                self.res.interchangeRequests.remarks = (textField?.text!)!
+            }else{
+                self.res.interchangeRequests.remarks = ""
+            }
+            
+            if(opt == self.ac.OPT_APPROVE){
+                self.approveRequestHandler(opt)
+                
+            }else if(opt == self.ac.OPT_REJECT){
+                self.rejectRequestHandler(opt)
+                
+            }else if(opt == self.ac.OPT_ONHOLD){
+                self.onHoldRequestHandler(opt)
+                
+            }else if(opt == self.ac.OPT_REINSTATE){
+                self.reInitiateRequestHandler(opt)
+                
+            }else if(opt == self.ac.OPT_CANCEL){
+                self.cancelRequestHandler(opt)
+                
+            }
+            
+        }))
+        
+        alert.addAction(UIAlertAction(title: "CANCEL", style: .default, handler: { [] (_) in
+            
+        }))
+        
+        // 4. Present the alert.
+        self.present(alert, animated: true, completion: nil)
     }
     
     func createApproveFloatyButton(){
         
         let floatyItem : FloatyItem = floaty.addItem(title: "Approve", handler: {_ in
+            
+            self.performSegue(withIdentifier: "selectUIIAExhibitViewSegue", sender: self)
+            
+            /*if self.res.inProcessWf.wfId != nil && self.res.inProcessWf.wfSeqType != nil && self.res.inProcessWf.wfSeqType == "MCB"{
+                self.performSegue(withIdentifier: "selectUIIAExhibitViewSegue", sender: self)
+                
+            }
+            
             self.performOperation(opt: self.ac.OPT_APPROVE)
+            */
         })
         
         floatyItem.buttonColor = #colorLiteral(red: 0.3608, green: 0.7216, blue: 0.3608, alpha: 1) /* #5cb85c */
@@ -113,7 +191,7 @@ UITableViewDelegate, UIViewControllerTransitioningDelegate, UITextFieldDelegate{
     func createReInstateFloatyButton(){
         
         let floatyItem : FloatyItem = floaty.addItem(title: "Re-Initiate Request",handler: {_ in
-            self.performOperation(opt: self.ac.OPT_REINSTATE)
+            self.reInitiateRequestHandler(self.ac.OPT_REINSTATE)
         })
         
         floatyItem.buttonColor = #colorLiteral(red: 0.3569, green: 0.7529, blue: 0.8706, alpha: 1) /* #5bc0de */
@@ -169,6 +247,7 @@ UITableViewDelegate, UIViewControllerTransitioningDelegate, UITextFieldDelegate{
                     "irId": res.interchangeRequests.irId as Any,
                     "wfId": res.inProcessWf.wfId as Any,
                     "opt": opt,
+                    "uiiaExhibitStr": uiiaExhibitStr,
                     "remarks": res.interchangeRequests.remarks as Any,
                     "accessToken": accessToken!
                     
@@ -265,50 +344,7 @@ UITableViewDelegate, UIViewControllerTransitioningDelegate, UITextFieldDelegate{
     }
     
     
-    func openRemarksPopup(opt :String){
-        //1. Create the alert controller.
-        let alert = UIAlertController(title: "ADD REMARKS", message: "Would you like to enter remarks?", preferredStyle: .alert)
-        
-        //2. Add the text field. You can configure it however you need.
-        alert.addTextField { (textField) in
-            
-            //let heightConstraint = NSLayoutConstraint(item: textField, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 100)
-            //textField.addConstraint(heightConstraint)
-            textField.placeholder = "Enter remarks here."
-            
-        }
-        
-        // 3. Grab the value from the text field, and print it when the user clicks OK.
-        alert.addAction(UIAlertAction(title: "Continue", style: .default, handler: { [weak alert] (_) in
-            let textField = alert?.textFields![0] // Force unwrapping because we know it exists.
-            if vu.isNotEmptyString(stringToCheck: (textField?.text!)!) &&  (textField?.text!.count)! > 0{
-                self.res.interchangeRequests.remarks = (textField?.text!)!
-            }else{
-                self.res.interchangeRequests.remarks = ""
-            }
-            
-            if(opt == self.ac.OPT_APPROVE){
-                self.approveRequestHandler(opt)
-                
-            }else if(opt == self.ac.OPT_REJECT){
-                self.rejectRequestHandler(opt)
-                
-            }else if(opt == self.ac.OPT_ONHOLD){
-                self.onHoldRequestHandler(opt)
-                
-            }else if(opt == self.ac.OPT_REINSTATE){
-                self.reInitiateRequestHandler(opt)
-                
-            }else if(opt == self.ac.OPT_CANCEL){
-                self.cancelRequestHandler(opt)
-                
-            }
-            
-        }))
-        
-        // 4. Present the alert.
-        self.present(alert, animated: true, completion: nil)
-    }
+    
     
     func resetFloatyButtons(){
         if floaty.items.count > 0{
@@ -445,7 +481,7 @@ UITableViewDelegate, UIViewControllerTransitioningDelegate, UITextFieldDelegate{
                                             self.fieldDataArr.append(FieldInfo(fieldTitle: "empty", fieldData: "")) //32
                                             self.fieldDataArr.append(FieldInfo(fieldTitle: "blank", fieldData: "Previous Comments")) //33
                                             for remarks in remarksArray {
-                                                self.fieldDataArr.append(FieldInfo(fieldTitle: "REMARKS", fieldData: remarks)) //34
+                                                self.fieldDataArr.append(FieldInfo(fieldTitle: "fullDataView", fieldData: remarks)) //34
                                             }
                                         
                                         
@@ -482,6 +518,8 @@ UITableViewDelegate, UIViewControllerTransitioningDelegate, UITextFieldDelegate{
                                     }
                                     
                                     self.view.addSubview(self.floaty)
+                                    
+                                    
                                     
                                    
                                 }
@@ -585,6 +623,14 @@ UITableViewDelegate, UIViewControllerTransitioningDelegate, UITextFieldDelegate{
             // Configure the cell...
             
             return cell
+        }else if fieldDataArr[indexPath.row].fieldTitle == "fullDataView" {
+         
+            let cell = tableView.dequeueReusableCell(withIdentifier: "fullDataViewReuseIdentifier") as! SIAFullDataViewTableViewCell
+            cell.lblFieldData.text = fieldDataArr[indexPath.row].fieldData
+            // Configure the cell...
+            
+            return cell
+            
         }else{
             let cell = tableView.dequeueReusableCell(withIdentifier: "dataReuseIdentifier") as! SIADetailsDataTableViewCell
             cell.lblFieldName.text = fieldDataArr[indexPath.row].fieldTitle

@@ -41,6 +41,7 @@ public class AppConstants
     let SAVE_INTERCHANGE_REQUEST_URL        = "SIA/saveInitiateInterchangeDetails"
     let GET_INTERCHANGE_REQUEST_DETAILS     = "SIA/getInterchangeRequestDetails"
     let INTERCHANGE_REQUEST_OPERATIONS = "SIA/interchangeRequestOperations"
+    let GET_UIIA_EXHIBIT_LIST           = "SIA/getUIIAExhibitList"
     
     let ORIGINAL_LOCATION = "OriginalLocation"
     let EQUIPMENT_LOCATION = "EquipmentLocation"

@@ -147,7 +147,7 @@ class StreetTurnRequestViewController: UIViewController,  UITextFieldDelegate, U
             au.redirectToNoInternetConnectionView(target: self)
         }else{
             super.viewDidAppear(animated)
-            if(originFrom != nil && vu.isNotEmptyString(stringToCheck: originFrom!) && originFrom! == "AddNewNotifAvailRequest"){
+            if(originFrom != nil && vu.isNotEmptyString(stringToCheck: originFrom!) && originFrom! == "StreetTurn"){
                 resetFields();
             }
            
@@ -167,11 +167,7 @@ class StreetTurnRequestViewController: UIViewController,  UITextFieldDelegate, U
             txtMCScac.text = ""
             txtMCCompanyName.inputView = nil
         }
-        
-        txtMCCompanyName.text = ""
-        txtMCScac.text = ""
-        txtEPCompanyName.text = ""
-        txtEPScac.text = ""
+ 
         txtContNum.text = ""
         
         txtExportBookingNum.text = ""
@@ -659,9 +655,6 @@ class StreetTurnRequestViewController: UIViewController,  UITextFieldDelegate, U
         }else if txtState.text!.count != 2 {
             retMsg = "State should be 2 characters long."
         
-        }else if vu.isEmptyString(stringToCheck: ianaLocationCode!) || vu.isEmptyString(stringToCheck: splcLocationCode!) {
-            retMsg = "Please select valid location from the list"
-       
         }
         
         return retMsg

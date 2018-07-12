@@ -68,10 +68,17 @@ class SuccessViewController: UIViewController,UITabBarDelegate {
             
             if originFrom == "StreetTurn"{
                 
-                let vc = self.navigationController?.viewControllers[1] as! StreetTurnRequestViewController
-                vc.originFrom = self.originFrom
-                self.navigationController?.popToViewController(vc, animated: true)
-            
+                if self.navigationController != nil && self.navigationController?.viewControllers != nil {
+                    for viewController  in (self.navigationController?.viewControllers)!{
+                        if viewController.isKind(of: StreetTurnRequestViewController.self){
+                          
+                            let vc = viewController as! StreetTurnRequestViewController
+                            vc.originFrom = self.originFrom
+                            self.navigationController?.popToViewController(vc, animated: true)
+                        }
+                    }
+                }
+               
             }else if originFrom == "AddNotifAvailRequest"{
                
                 let vc = self.navigationController?.viewControllers[1] as! AddNotifAvailRequestVC
@@ -80,9 +87,18 @@ class SuccessViewController: UIViewController,UITabBarDelegate {
                 
             }else{
                 
-                let vc = self.navigationController?.viewControllers[1] as! StreetInterchangeViewController
-                vc.originFrom = "AddNewStreetInterchange"
-                self.navigationController?.popToViewController(vc, animated: true)
+                if self.navigationController != nil && self.navigationController?.viewControllers != nil {
+                    for viewController  in (self.navigationController?.viewControllers)!{
+                        if viewController.isKind(of: StreetInterchangeViewController.self){
+                            
+                            let vc = viewController as! StreetInterchangeViewController
+                            vc.originFrom = "AddNewStreetInterchange"
+                            self.navigationController?.popToViewController(vc, animated: true)
+                        }
+                    }
+                }
+                
+                
             }
             
             
