@@ -154,7 +154,7 @@ UITableViewDelegate, UIViewControllerTransitioningDelegate, UITextFieldDelegate{
             
         })
         
-        floatyItem.buttonColor = #colorLiteral(red: 0.3608, green: 0.7216, blue: 0.3608, alpha: 1) /* #5cb85c */
+        floatyItem.buttonColor = #colorLiteral(red: 0, green: 0.3921568627, blue: 0, alpha: 1) /* #006400 */
         floatyItem.iconImageView.image = UIImage(named: "approve")
         floatyItem.iconImageView.tintColor = UIColor.white
         floatyItem.titleColor = UIColor.black

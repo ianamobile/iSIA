@@ -501,8 +501,8 @@ class StreetTurnRequestViewController: UIViewController,  UITextFieldDelegate, U
             fieldDataArr.append(FieldInfo(fieldTitle: "blank", fieldData: "Street Turn Details")) //0
             fieldDataArr.append(FieldInfo(fieldTitle: "CONTAINER PROVIDER NAME", fieldData: txtEPCompanyName.text!)) //1
             fieldDataArr.append(FieldInfo(fieldTitle: "CONTAINER PROVIDER SCAC", fieldData: txtEPScac.text!)) //2
-            fieldDataArr.append(FieldInfo(fieldTitle: "MOTOR CARRIER'S NAME", fieldData: txtMCCompanyName.text!)) //3
-            fieldDataArr.append(FieldInfo(fieldTitle: "MOTOR CARRIER'S SCAC", fieldData: txtMCScac.text!))  //4
+            fieldDataArr.append(FieldInfo(fieldTitle: "MOTOR CARRIER A'S NAME", fieldData: txtMCCompanyName.text!)) //3
+            fieldDataArr.append(FieldInfo(fieldTitle: "MOTOR CARRIER A'S SCAC", fieldData: txtMCScac.text!))  //4
             fieldDataArr.append(FieldInfo(fieldTitle: "IMPORT B/L", fieldData: txtImportBookingNum.text!.uppercased()))  //5
             fieldDataArr.append(FieldInfo(fieldTitle: "EXPORT BOOKING #", fieldData: txtExportBookingNum.text!.uppercased()))  //6
             fieldDataArr.append(FieldInfo(fieldTitle: "CONTAINER #", fieldData: txtContNum.text!.uppercased())) //7

@@ -35,16 +35,13 @@ class SuccessViewController: UIViewController,UITabBarDelegate {
         self.navigationItem.hidesBackButton = true
         self.addNewTab.title = "CREATE NEW REQUEST"
         
-        /*
+        
         if originFrom == "StreetTurn"{
-            self.addNewTab.title = "ADD NEW STREET TURN REQUEST"
-            
-        }else if originFrom == "AddNotifAvailRequest"{
-            self.addNewTab.title = "ADD NEW REQUEST TO POOL"
+            lblNoteDesc.text = "Motor Carrier A (the originating MC) will continue to be the responsible party for the equipment under the terms of the UIIA until the street turn request has been approved and accepted by all parties."
             
         }else{
-            self.addNewTab.title = "ADD NEW STREET INTERCHANGE REQUEST"
-        }*/
+            lblNoteDesc.text = "Motor Carrier A (the originating MC) will continue to be the responsible party for the equipment under the terms of the UIIA until the street interchange request has been approved and accepted by all parties."
+        }
         
         lblMessage.text = message
         lblMessage.numberOfLines = 0

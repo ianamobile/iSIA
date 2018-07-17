@@ -37,7 +37,7 @@ class ViewWorkFlowDetailsVC: UIViewController, UITableViewDataSource, UITableVie
                 if wf.status != nil && (wf.status == "ONHOLD" || wf.status == "REJECTED" || wf.status == "CANCELLED"){
                     wfDisplay.onHoldOrRejectRequestIndex =  String(wfStatusIndex)
                     wfDisplay.cssClassValue = "wf stop"
-                    wfDisplay.statusImage = UIImage.init(named: "reject")
+                    wfDisplay.statusImage = UIImage.init(named: "rejected_wf")
                     wfDisplay.backGroundColor = #colorLiteral(red: 0.851, green: 0.3255, blue: 0.3098, alpha: 1) /* #d9534f */
                     
                 }else if wf.status != nil && wf.wfId != nil && res.inProcessWf.wfId != nil &&  wf.status == "PENDING" && wf.wfId == res.inProcessWf.wfId{
