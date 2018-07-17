@@ -187,7 +187,7 @@ class ListEPUsersTableVC: UITableViewController {
                             au.showAlert(target: self, alertTitle: self.alertTitle, message: apiResponseMessage.errors.errorMessage!,[UIAlertAction(title: "OK", style: .default, handler: { action in
                                 switch action.style{
                                 case .default:
-                                    self.dismiss(animated: true, completion: nil)
+                                    self.navigationController?.popViewController(animated: true)
                                     break
                                     
                                 case .cancel:

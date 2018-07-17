@@ -100,7 +100,7 @@ class StreetTurnRequestViewController: UIViewController,  UITextFieldDelegate, U
             memType =  UserDefaults.standard.string(forKey: "memType")
         }
         
-        if role == "MC" || (role == "SEC" && memType == "MC"){
+        if role == "MC" || (role == "SEC" && memType == "MC" || role == "IDD"){
             txtMCCompanyName.text = loggedInUserCompanyName
             txtMCScac.text = loggedInUserScac
         }else if role == "EP"{
@@ -504,7 +504,7 @@ class StreetTurnRequestViewController: UIViewController,  UITextFieldDelegate, U
             fieldDataArr.append(FieldInfo(fieldTitle: "MOTOR CARRIER'S NAME", fieldData: txtMCCompanyName.text!)) //3
             fieldDataArr.append(FieldInfo(fieldTitle: "MOTOR CARRIER'S SCAC", fieldData: txtMCScac.text!))  //4
             fieldDataArr.append(FieldInfo(fieldTitle: "IMPORT B/L", fieldData: txtImportBookingNum.text!.uppercased()))  //5
-            fieldDataArr.append(FieldInfo(fieldTitle: "EXPORT BOOKING#", fieldData: txtExportBookingNum.text!.uppercased()))  //6
+            fieldDataArr.append(FieldInfo(fieldTitle: "EXPORT BOOKING #", fieldData: txtExportBookingNum.text!.uppercased()))  //6
             fieldDataArr.append(FieldInfo(fieldTitle: "CONTAINER #", fieldData: txtContNum.text!.uppercased())) //7
             fieldDataArr.append(FieldInfo(fieldTitle: "CHASSIS #", fieldData: txtChassisNum.text!.uppercased())) //8
         

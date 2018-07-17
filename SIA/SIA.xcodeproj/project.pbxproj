@@ -28,6 +28,8 @@
 		694E163B20F35C1C007AB654 /* GetInterChangeRequestDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694E163A20F35C1C007AB654 /* GetInterChangeRequestDetails.swift */; };
 		695E7EAA20F6144600350BEB /* SIAFullDataViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695E7EA920F6144600350BEB /* SIAFullDataViewTableViewCell.swift */; };
 		6972B88720B5A26E009B1BEC /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6972B88520B5A26E009B1BEC /* CircleView.swift */; };
+		6981B6F120F8B7930099C626 /* ViewWorkFlowTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6981B6F020F8B7930099C626 /* ViewWorkFlowTableViewCell.swift */; };
+		6981B6F320F8D9250099C626 /* WorkFlowDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6981B6F220F8D9250099C626 /* WorkFlowDisplay.swift */; };
 		699BDAF520A2EB870088E0E9 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699BDAF420A2EB870088E0E9 /* UIViewExtension.swift */; };
 		699BDAF720A2EDEF0088E0E9 /* MCLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699BDAF620A2EDEF0088E0E9 /* MCLoginViewController.swift */; };
 		699BDAF920A308D00088E0E9 /* EPLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699BDAF820A308D00088E0E9 /* EPLoginViewController.swift */; };
@@ -146,6 +148,8 @@
 		694E163A20F35C1C007AB654 /* GetInterChangeRequestDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetInterChangeRequestDetails.swift; sourceTree = "<group>"; };
 		695E7EA920F6144600350BEB /* SIAFullDataViewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SIAFullDataViewTableViewCell.swift; sourceTree = "<group>"; };
 		6972B88520B5A26E009B1BEC /* CircleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
+		6981B6F020F8B7930099C626 /* ViewWorkFlowTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewWorkFlowTableViewCell.swift; sourceTree = "<group>"; };
+		6981B6F220F8D9250099C626 /* WorkFlowDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkFlowDisplay.swift; sourceTree = "<group>"; };
 		699BDAF420A2EB870088E0E9 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		699BDAF620A2EDEF0088E0E9 /* MCLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCLoginViewController.swift; sourceTree = "<group>"; };
 		699BDAF820A308D00088E0E9 /* EPLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EPLoginViewController.swift; sourceTree = "<group>"; };
@@ -428,6 +432,7 @@
 				69FBD17C20EC7FA80030FBF1 /* SearchRequestPoolTableViewCell.swift */,
 				69FBD17E20ECA69A0030FBF1 /* SearchRequestPoolTableViewCellDelegate.swift */,
 				6930600320F783FE0066C63F /* NotificationExtension.swift */,
+				6981B6F020F8B7930099C626 /* ViewWorkFlowTableViewCell.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -448,6 +453,7 @@
 				69FBD18020ECC6800030FBF1 /* SetupPageResponse.swift */,
 				694E163A20F35C1C007AB654 /* GetInterChangeRequestDetails.swift */,
 				69305FFF20F74BDE0066C63F /* UIIAExhibitResponse.swift */,
+				6981B6F220F8D9250099C626 /* WorkFlowDisplay.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -681,6 +687,7 @@
 				6911461F20C81CE700E0D82D /* VerifyDetailsViewController.swift in Sources */,
 				69FBD17520EC64BD0030FBF1 /* RequestPoolSearchVC.swift in Sources */,
 				69BC0AC120AC3D6A00560AB6 /* IDDLogin2ViewController.swift in Sources */,
+				6981B6F320F8D9250099C626 /* WorkFlowDisplay.swift in Sources */,
 				69FD8C9120BBEA5900D076E4 /* DashboardTableViewCell.swift in Sources */,
 				69BAA55020DBC8CF00961BB9 /* FloatyViewController.swift in Sources */,
 				69FD8C9320BBEA6300D076E4 /* DashboardTableViewController.swift in Sources */,
@@ -727,6 +734,7 @@
 				69BBE94C209B0F34008F1913 /* TestMain.swift in Sources */,
 				693CE07320C9466C00736C4E /* SIADetailsDataTableViewCell.swift in Sources */,
 				69FBD17920EC710C0030FBF1 /* RequestPoolSearchResultVC.swift in Sources */,
+				6981B6F120F8B7930099C626 /* ViewWorkFlowTableViewCell.swift in Sources */,
 				692E5BB820DD0A3200FB3AD4 /* Profile.swift in Sources */,
 				699BDAF720A2EDEF0088E0E9 /* MCLoginViewController.swift in Sources */,
 				69BBE8E5209B0A69008F1913 /* SIA.xcdatamodeld in Sources */,

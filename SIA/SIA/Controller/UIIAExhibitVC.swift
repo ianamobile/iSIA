@@ -29,16 +29,12 @@ UITableViewDelegate,UITabBarDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         uiiaExhibitTabBar.delegate = self
+        //Hiding back buttton
+        self.navigationItem.hidesBackButton = true
         self.callGetListUIIAExhibit()
         
     }
-    override func viewDidAppear(_ animated: Bool) {
-        //Added reset code here to solve the back button issue from release screen.
-        uiiaExhibitArray = [UIIAExhibit]()
-        selectedUIIAExhibitArray = [Int]()
-        
-    }
-    
+
     func callGetListUIIAExhibit(){
         
         if !au.isInternetAvailable() {
@@ -70,7 +66,7 @@ UITableViewDelegate,UITabBarDelegate{
                         au.showAlert(target: self, alertTitle: self.alertTitle, message: self.ac.ERROR_MSG,[UIAlertAction(title: "OK", style: .default, handler: { action in
                             switch action.style{
                             case .default:
-                                self.dismiss(animated: true, completion: nil)
+                                self.navigationController?.popViewController(animated: true)
                                 break
                                 
                             case .cancel:
@@ -117,7 +113,7 @@ UITableViewDelegate,UITabBarDelegate{
                             au.showAlert(target: self, alertTitle: self.alertTitle, message: apiResponseMessage.errors.errorMessage!,[UIAlertAction(title: "OK", style: .default, handler: { action in
                                 switch action.style{
                                 case .default:
-                                    self.dismiss(animated: true, completion: nil)
+                                    self.navigationController?.popViewController(animated: true)
                                     break
                                     
                                 case .cancel:
@@ -139,7 +135,7 @@ UITableViewDelegate,UITabBarDelegate{
                         au.showAlert(target: self, alertTitle: self.alertTitle, message: self.ac.ERROR_MSG,[UIAlertAction(title: "OK", style: .default, handler: { action in
                             switch action.style{
                             case .default:
-                                self.dismiss(animated: true, completion: nil)
+                                self.navigationController?.popViewController(animated: true)
                                 break
                                 
                             case .cancel:
@@ -252,15 +248,14 @@ UITableViewDelegate,UITabBarDelegate{
                 
                 au.showAlert(target: self, alertTitle: self.alertTitle, message: "Please select at least one equipment condition or none",[UIAlertAction(title: "OK", style: .default, handler: nil)], completion: nil)
             }else{
-                
+                self.navigationController?.popViewController(animated: true)
                 NotificationCenter.default.post(name: .selectedUIIAExhibits, object: self)
-                self.dismiss(animated: true, completion: nil)
             }
             
             
         }else if item.tag == 2 {
             //cancel button tapped
-            self.dismiss(animated: true, completion: nil)
+            self.navigationController?.popViewController(animated: true)
         }
     }
     

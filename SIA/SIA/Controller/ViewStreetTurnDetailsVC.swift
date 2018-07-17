@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 class ViewStreetTurnDetailsVC: UIViewController, UITableViewDataSource,
 UITableViewDelegate, UIViewControllerTransitioningDelegate, UITextFieldDelegate{
 
@@ -30,8 +31,22 @@ UITableViewDelegate, UIViewControllerTransitioningDelegate, UITextFieldDelegate{
     var res: GetInterChangeRequestDetails = GetInterChangeRequestDetails() //stored interchange request response to this variable.
     var uiiaExhibitStr :String = ""
     
+    //logged in users information
+    var role :String?
+    var loggedInUserCompanyName :String?
+    var loggedInUserScac :String?
+    var memType :String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //if logged in user as MC
+        role =  UserDefaults.standard.string(forKey: "role")
+        loggedInUserCompanyName =  UserDefaults.standard.string(forKey: "companyName")
+        loggedInUserScac =  UserDefaults.standard.string(forKey: "scac")
+        if role == "SEC"{
+            memType =  UserDefaults.standard.string(forKey: "memType")
+        }
         
         if originFrom != nil && vu.isNotEmptyString(stringToCheck: originFrom!){
             if originFrom == "StreetTurn"{
@@ -66,14 +81,14 @@ UITableViewDelegate, UIViewControllerTransitioningDelegate, UITextFieldDelegate{
     }
     
     @objc func handleUIIAExhibitsClosing(notification: Notification){
-        print("done..")
+        print("handleUIIAExhibitsClosing done..")
         
         let dataVC = notification.object as! UIIAExhibitVC
         print(dataVC.selectedUIIAExhibitArray)
         
         uiiaExhibitStr = getNumbers(array: dataVC.selectedUIIAExhibitArray)
         print(uiiaExhibitStr)
-        //performOperation(opt: self.ac.OPT_APPROVE)
+        performOperation(opt: self.ac.OPT_APPROVE)
         
     }
     
@@ -130,15 +145,13 @@ UITableViewDelegate, UIViewControllerTransitioningDelegate, UITextFieldDelegate{
         
         let floatyItem : FloatyItem = floaty.addItem(title: "Approve", handler: {_ in
             
-            self.performSegue(withIdentifier: "selectUIIAExhibitViewSegue", sender: self)
-            
-            /*if self.res.inProcessWf.wfId != nil && self.res.inProcessWf.wfSeqType != nil && self.res.inProcessWf.wfSeqType == "MCB"{
+            if self.res.inProcessWf.wfId != nil && self.res.inProcessWf.wfSeqType != nil && self.res.inProcessWf.wfSeqType == "MCB" && self.res.interchangeRequests.irRequestType == "StreetInterchange"{
                 self.performSegue(withIdentifier: "selectUIIAExhibitViewSegue", sender: self)
                 
+            }else{
+                 self.performOperation(opt: self.ac.OPT_APPROVE)
             }
             
-            self.performOperation(opt: self.ac.OPT_APPROVE)
-            */
         })
         
         floatyItem.buttonColor = #colorLiteral(red: 0.3608, green: 0.7216, blue: 0.3608, alpha: 1) /* #5cb85c */
@@ -428,25 +441,33 @@ UITableViewDelegate, UIViewControllerTransitioningDelegate, UITextFieldDelegate{
                                     self.fieldDataArr.append(FieldInfo(fieldTitle: "CONTAINER PROVIDER SCAC", fieldData: self.res.interchangeRequests.epScacs!)) //2
                                     self.fieldDataArr.append(FieldInfo(fieldTitle: "MOTOR CARRIER A'S NAME", fieldData: self.res.interchangeRequests.mcACompanyName!)) //3
                                     self.fieldDataArr.append(FieldInfo(fieldTitle: "MOTOR CARRIER A'S SCAC", fieldData: self.res.interchangeRequests.mcAScac!))  //4
-                                    self.fieldDataArr.append(FieldInfo(fieldTitle: "MOTOR CARRIER B'S NAME", fieldData: self.res.interchangeRequests.mcBCompanyName!)) //5
-                                    self.fieldDataArr.append(FieldInfo(fieldTitle: "MOTOR CARRIER B'S SCAC", fieldData: self.res.interchangeRequests.mcBScac!))  //6
-                                    self.fieldDataArr.append(FieldInfo(fieldTitle: "TYPE OF INTERCHANGE", fieldData: self.res.interchangeRequests.intchgType ?? ""))  //7
-                                    
-                                    self.fieldDataArr.append(FieldInfo(fieldTitle: "CONTAINER TYPE", fieldData: self.res.interchangeRequests.contType ?? "")) //8
-                                    self.fieldDataArr.append(FieldInfo(fieldTitle: "CONTAINER SIZE", fieldData: self.res.interchangeRequests.contSize ?? "")) //9
+                                    if self.searchSIADetails?.irRequestType == "StreetInterchange" {
+                                        
+                                        self.fieldDataArr.append(FieldInfo(fieldTitle: "MOTOR CARRIER B'S NAME", fieldData: self.res.interchangeRequests.mcBCompanyName!)) //5
+                                        self.fieldDataArr.append(FieldInfo(fieldTitle: "MOTOR CARRIER B'S SCAC", fieldData: self.res.interchangeRequests.mcBScac!))  //6
+                                        self.fieldDataArr.append(FieldInfo(fieldTitle: "TYPE OF INTERCHANGE", fieldData: self.res.interchangeRequests.intchgType ?? ""))  //7
+                                        
+                                        self.fieldDataArr.append(FieldInfo(fieldTitle: "CONTAINER TYPE", fieldData: self.res.interchangeRequests.contType ?? "")) //8
+                                        self.fieldDataArr.append(FieldInfo(fieldTitle: "CONTAINER SIZE", fieldData: self.res.interchangeRequests.contSize ?? "")) //9
+                                        
+                                    }
                                     
                                     self.fieldDataArr.append(FieldInfo(fieldTitle: "IMPORT B/L", fieldData: self.res.interchangeRequests.importBookingNum  ?? ""))  //10
-                                    self.fieldDataArr.append(FieldInfo(fieldTitle: "EXPORT BOOKING#", fieldData: self.res.interchangeRequests.bookingNum!))  //11
+                                    self.fieldDataArr.append(FieldInfo(fieldTitle: "EXPORT BOOKING #", fieldData: self.res.interchangeRequests.bookingNum!))  //11
                                     self.fieldDataArr.append(FieldInfo(fieldTitle: "CONTAINER #", fieldData: self.res.interchangeRequests.contNum!)) //12
                                     self.fieldDataArr.append(FieldInfo(fieldTitle: "CHASSIS #", fieldData: self.res.interchangeRequests.chassisNum  ?? "")) //13
                                     
+                                   
                                     self.fieldDataArr.append(FieldInfo(fieldTitle: "CHASSIS IEP SCAC", fieldData: self.res.interchangeRequests.iepScac ?? "")) //14
                                     
-                                    self.fieldDataArr.append(FieldInfo(fieldTitle: "CHASSIS TYPE", fieldData: self.res.interchangeRequests.chassisType ?? "")) //15
-                                    self.fieldDataArr.append(FieldInfo(fieldTitle: "CHASSIS SIZE", fieldData: self.res.interchangeRequests.chassisSize ?? "")) //16
-                                    self.fieldDataArr.append(FieldInfo(fieldTitle: "GENSET #", fieldData: self.res.interchangeRequests.gensetNum ?? "")) //17
-                                    
                                     if self.searchSIADetails?.irRequestType == "StreetInterchange" {
+                                        
+                                        
+                                        self.fieldDataArr.append(FieldInfo(fieldTitle: "CHASSIS TYPE", fieldData: self.res.interchangeRequests.chassisType ?? "")) //15
+                                        self.fieldDataArr.append(FieldInfo(fieldTitle: "CHASSIS SIZE", fieldData: self.res.interchangeRequests.chassisSize ?? "")) //16
+                                        self.fieldDataArr.append(FieldInfo(fieldTitle: "GENSET #", fieldData: self.res.interchangeRequests.gensetNum ?? "")) //17
+                                        
+                                        
                                         self.fieldDataArr.append(FieldInfo(fieldTitle: "empty", fieldData: "")) //18
                                         self.fieldDataArr.append(FieldInfo(fieldTitle: "blank", fieldData: "Equipment Location")) //19
                                         self.fieldDataArr.append(FieldInfo(fieldTitle: "LOCATION NAME", fieldData: self.res.interchangeRequests.equipLocNm ?? "")) //20
@@ -519,9 +540,6 @@ UITableViewDelegate, UIViewControllerTransitioningDelegate, UITextFieldDelegate{
                                     
                                     self.view.addSubview(self.floaty)
                                     
-                                    
-                                    
-                                   
                                 }
                                 
                             }else{
@@ -571,6 +589,7 @@ UITableViewDelegate, UIViewControllerTransitioningDelegate, UITextFieldDelegate{
             let viewWorkFlowDetailsVC = segue.destination as! ViewWorkFlowDetailsVC
             viewWorkFlowDetailsVC.transitioningDelegate = self
             viewWorkFlowDetailsVC.modalPresentationStyle = .custom
+            viewWorkFlowDetailsVC.res = self.res;
         
         }else if segue.identifier == "reInitiateStreetTurnReqSegue" {
             let vc = segue.destination as! StreetTurnRequestViewController

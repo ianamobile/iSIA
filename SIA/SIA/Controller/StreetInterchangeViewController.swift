@@ -1093,7 +1093,7 @@ class StreetInterchangeViewController: UIViewController , UITextFieldDelegate, U
             fieldDataArr.append(FieldInfo(fieldTitle: "CONTAINER SIZE", fieldData: txtContSize.text!)) //9
             
             fieldDataArr.append(FieldInfo(fieldTitle: "IMPORT B/L", fieldData: txtImportBookingNum.text!.uppercased()))  //10
-            fieldDataArr.append(FieldInfo(fieldTitle: "EXPORT BOOKING#", fieldData: txtExportBookingNum.text!.uppercased()))  //11
+            fieldDataArr.append(FieldInfo(fieldTitle: "EXPORT BOOKING #", fieldData: txtExportBookingNum.text!.uppercased()))  //11
             fieldDataArr.append(FieldInfo(fieldTitle: "CONTAINER #", fieldData: txtContNum.text!.uppercased())) //12
             fieldDataArr.append(FieldInfo(fieldTitle: "CHASSIS #", fieldData: txtChassisNum.text!.uppercased())) //13
             
@@ -1201,10 +1201,10 @@ class StreetInterchangeViewController: UIViewController , UITextFieldDelegate, U
         }else if vu.isNotEmptyString(stringToCheck: txtChassisNum.text!) && !txtChassisNum.text!.isAlphanumeric{
             retMsg = "Chassis Number should contains alphanumeric only."
             
-        }else if vu.isNotEmptyString(stringToCheck: txtChassisNum.text!) && vu.isEmptyString(stringToCheck: txtChassisType.text!){
+        }else if vu.isNotEmptyString(stringToCheck: txtChassisNum.text!) && txtChassisNum.text! != "ZZZZ999999" && vu.isEmptyString(stringToCheck: txtChassisType.text!){
             retMsg = "Please select valid Chassis Type"
             
-        }else if vu.isNotEmptyString(stringToCheck: txtChassisNum.text!) && vu.isEmptyString(stringToCheck: txtChassisSize.text!){
+        }else if vu.isNotEmptyString(stringToCheck: txtChassisNum.text!) && txtChassisNum.text! != "ZZZZ999999" && vu.isEmptyString(stringToCheck: txtChassisSize.text!){
             retMsg = "Please select valid Chassis Size"
             
         }else if vu.isNotEmptyString(stringToCheck: txtGensetNum.text!) && !txtGensetNum.text!.isAlphanumeric{
