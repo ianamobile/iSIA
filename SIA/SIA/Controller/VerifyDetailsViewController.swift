@@ -242,6 +242,8 @@ class VerifyDetailsViewController: UIViewController, UITableViewDataSource,
                 [
                     "irRequestType":"StreetTurn",
                     "epScacs": au.trim(stringToTrim: fieldDataArr[2].fieldData!),
+                    "mcAScac": au.trim(stringToTrim: fieldDataArr[4].fieldData!),
+                    "mcBScac": au.trim(stringToTrim: fieldDataArr[4].fieldData!),
                     "contNum": au.trim(stringToTrim: fieldDataArr[7].fieldData!),
                     "chassisNum": au.trim(stringToTrim: fieldDataArr[8].fieldData!),
                     "importBookingNum": au.trim(stringToTrim: fieldDataArr[5].fieldData!),

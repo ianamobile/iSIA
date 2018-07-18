@@ -219,22 +219,51 @@ class SearchInterchangeRequestsVC: UIViewController,UITextFieldDelegate, UITabBa
         }
     }
     
+    func validateSearchPage() -> String {
+        
+        var retMsg : String = ""
+        
+        if vu.isNotEmptyString(stringToCheck: txtContNum.text!) && !txtContNum.text!.isAlphanumeric{
+            retMsg = "Container Number should contains alphanumeric only."
+            
+        }else if vu.isNotEmptyString(stringToCheck: txtExportBookingNum.text!) &&  !txtExportBookingNum.text!.isAlphanumeric{
+             retMsg = "Export Booking Number should contains alphanumeric only."
+            
+        }else if vu.isNotEmptyString(stringToCheck: txtScac.text!) &&  !txtScac.text!.isCharactersOnly{
+            retMsg = "SCAC should contains characters only."
+            
+        }
+        
+        return retMsg
+        
+    }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "searchResultSegue" || segue.identifier == "searchResultByTPUSegue"
         {
-            let vc = segue.destination as! SearchInterchangeRequestResultVC
             
-            vc.contNum  =  self.txtContNum.text
-            vc.exportBookingNum = self.txtExportBookingNum.text
-            vc.fromDate = self.txtFromDate.text
-            vc.toDate = self.txtToDate.text
-            if(self.txtStatus.text != "SELECT STATUS"){
-                 vc.status = self.txtStatus.text
+            let retMsg = validateSearchPage()
+            
+            if retMsg.isEmpty{
+                let vc = segue.destination as! SearchInterchangeRequestResultVC
+                
+                vc.contNum  =  au.replaceWhiteSpaces(au.trimSpaceAndNewLine(stringToTrimIncludingNewLine: (self.txtContNum.text!)))
+                vc.exportBookingNum = au.replaceWhiteSpaces(au.trimSpaceAndNewLine(stringToTrimIncludingNewLine: (self.txtExportBookingNum.text!)))
+                vc.fromDate = self.txtFromDate.text
+                vc.toDate = self.txtToDate.text
+                if(self.txtStatus.text != "SELECT STATUS"){
+                    vc.status = self.txtStatus.text
+                }else{
+                    vc.status = ""
+                }
+                vc.scac = au.replaceWhiteSpaces(au.trimSpaceAndNewLine(stringToTrimIncludingNewLine: (self.txtScac.text!)))
+                vc.originFrom = segue.identifier
+                
             }else{
-                 vc.status = ""
+                
+                //display toast message to the user.
+                au.showAlert(target: self, alertTitle: "SEARCH", message: retMsg,[UIAlertAction(title: "OK", style: .default, handler: nil)], completion: nil)
             }
-            vc.scac = self.txtScac.text
-            vc.originFrom = segue.identifier
+            
             
         }
         

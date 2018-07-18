@@ -128,17 +128,43 @@ class RequestPoolSearchVC: UIViewController,UITextFieldDelegate, UITabBarDelegat
         }
     }
     
+    func validateSearchPage() -> String {
+        
+        var retMsg : String = ""
+        
+        if vu.isNotEmptyString(stringToCheck: txtContNum.text!) && !txtContNum.text!.isAlphanumeric{
+            retMsg = "Container Number should contains alphanumeric only."
+        
+        }else if vu.isNotEmptyString(stringToCheck: txtMCScac.text!) &&  !txtMCScac.text!.isCharactersOnly{
+            retMsg = "Motor Carrier SCAC should contains characters only."
+            
+        }else if vu.isNotEmptyString(stringToCheck: txtEPScac.text!) &&  !txtEPScac.text!.isCharactersOnly{
+            retMsg = "Container Provider SCAC should contains characters only."
+            
+        }
+        
+        return retMsg
+        
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "searchRequestPoolResultByTPUSegue" || segue.identifier == "searchRequestPoolResultSegue"
         {
-            let vc = segue.destination as! RequestPoolSearchResultVC
-            
-            vc.contNum  =  self.txtContNum.text
-            vc.mcScac = self.txtMCScac.text
-            vc.epScac = self.txtEPScac.text
-            vc.fromDate = self.txtFromDate.text
-            vc.toDate = self.txtToDate.text
-            vc.originFrom = segue.identifier
+            let retMsg = validateSearchPage()
+            if retMsg.isEmpty{
+                let vc = segue.destination as! RequestPoolSearchResultVC
+                
+                vc.contNum  =  au.replaceWhiteSpaces(au.trimSpaceAndNewLine(stringToTrimIncludingNewLine: (self.txtContNum.text!)))
+                vc.mcScac = au.replaceWhiteSpaces(au.trimSpaceAndNewLine(stringToTrimIncludingNewLine: (self.txtMCScac.text!)))
+                vc.epScac = au.replaceWhiteSpaces(au.trimSpaceAndNewLine(stringToTrimIncludingNewLine: (self.txtEPScac.text!)))
+                vc.fromDate = self.txtFromDate.text
+                vc.toDate = self.txtToDate.text
+                vc.originFrom = segue.identifier
+            }else{
+                
+                //display toast message to the user.
+                au.showAlert(target: self, alertTitle: "SEARCH", message: retMsg,[UIAlertAction(title: "OK", style: .default, handler: nil)], completion: nil)
+            }
             
         }
         

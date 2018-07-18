@@ -524,7 +524,35 @@ class StreetInterchangeViewController: UIViewController , UITextFieldDelegate, U
         
         if textField == txtMCACompanyName || textField == txtMCBCompanyName || textField == txtEPCompanyName
         {
-            loadListCompanyNameAndSCACAsInput(textField)
+            if textField.text! != "" && !textField.text!.isAlphanumericWithHyphenAndSpace{
+                
+                au.showAlert(target: self, alertTitle: self.alertTitle, message: "Company name should contains alphanumeric value only.",[UIAlertAction(title: "OK", style: .default, handler: { action in
+                    switch action.style{
+                    case .default:
+                        if textField == self.txtMCACompanyName{
+                            self.txtMCAScac.text = ""
+                            
+                        }else if textField == self.txtMCBCompanyName{
+                            self.txtMCBScac.text = ""
+                            
+                        }else if textField == self.txtEPCompanyName{
+                            self.txtEPScac.text = ""
+                        }
+                        textField.text = ""
+                        break
+                    case .cancel:
+                        
+                        break
+                        
+                    case .destructive:
+                        
+                        break
+                        
+                    }})], completion: nil)
+            }else{
+                 loadListCompanyNameAndSCACAsInput(textField)
+            }
+           
             
         }else if textField == txtChassisNum {
             txtChassisIEPScac.text = ""
@@ -768,9 +796,18 @@ class StreetInterchangeViewController: UIViewController , UITextFieldDelegate, U
             
         }else if sender == txtChassisNum{
             //populate the IEP SCAC details based on chassisText
-            if vu.isNotEmptyString(stringToCheck: sender.text!) && sender.text != "ZZZZ999999"{
-                //API call to set IEP SCAC
-                setIEPSCACBasedOnChassisNum()
+            if (vu.isNotEmptyString(stringToCheck: sender.text!)){
+                
+                if !sender.text!.isAlphanumeric{
+                    
+                    au.showAlert(target: self, alertTitle: self.alertTitle, message: "Chassis Number should contains alphanumeric only.",[UIAlertAction(title: "OK", style: .default, handler: nil)], completion: nil)
+                    sender.text = ""
+                }else if sender.text != "ZZZZ999999"{
+                    
+                    //API call to set IEP SCAC
+                    setIEPSCACBasedOnChassisNum()
+                }
+                
             }
             
             
@@ -1540,6 +1577,10 @@ class StreetInterchangeViewController: UIViewController , UITextFieldDelegate, U
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField ==  txtChassisNum && vu.isNotEmptyString(stringToCheck: textField.text!) && textField.text != "ZZZZ999999"{
+            //API call to set IEP SCAC
+            setIEPSCACBasedOnChassisNum()
+        }
         /*if (textField.returnKeyType==UIReturnKeyType.go)
         {
             textField.resignFirstResponder();

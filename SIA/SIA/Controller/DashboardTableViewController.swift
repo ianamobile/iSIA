@@ -25,10 +25,10 @@ class DashboardTableViewController: UITableViewController, DashboardTableViewCel
     
    
     //EP Section Start
-    let epMenuArr:[Int] = [2, 7, 3, 0, 1, 20]
+    let epMenuArr:[Int] = [2, 4, 7, 3, 0, 1, 20]
     let epSecDefaultRightsMenuArr:[Int] = [20]
-    let epSecSingleRightsMenuArr:[Int] = [2, 0, 1, 20]
-    let epSecFullRightsMenuArr:[Int] = [2, 7, 3, 0, 1, 20]
+    let epSecSingleRightsMenuArr:[Int] = [2, 4, 0, 1, 20]
+    let epSecFullRightsMenuArr:[Int] = [2, 4, 7, 3, 0, 1, 20]
     
     //IDD Section
     let iddMenuArr:[Int] = [4, 2, 7, 3, 0, 1, 20]

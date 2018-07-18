@@ -50,6 +50,7 @@ class LocationSearchTableViewController: UITableViewController, UISearchBarDeleg
                 txtValue = "";
             }
             
+            
             //make a web service call to fetch boes location based on user.
             
             if !au.isInternetAvailable() {
@@ -170,9 +171,34 @@ class LocationSearchTableViewController: UITableViewController, UISearchBarDeleg
  */
    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         print("didchange: \(searchText)")
+    
+    
         if (vu.isNotEmptyString(stringToCheck: searchText)  && searchText.count >= 3)
         {
-            callSearchLocationAPI(searchValue: searchText, originFrom: self.originFrom!)
+            if searchText != "" && !searchText.isAlphanumericWithHyphenAndSpace{
+                
+                au.showAlert(target: self, alertTitle: "SEARCH LOCATION", message: "Location Search should contains alphanumeric value only.",[UIAlertAction(title: "OK", style: .default, handler: { action in
+                    switch action.style{
+                    case .default:
+                        self.searchBar.text = ""
+                        break
+                    case .cancel:
+                        
+                        break
+                        
+                    case .destructive:
+                        
+                        break
+                        
+                    }})], completion: nil)
+                
+                
+                
+            }else{
+                
+               callSearchLocationAPI(searchValue: searchText, originFrom: self.originFrom!)
+            }
+            
             
         }else if vu.isEmptyString(stringToCheck: searchText){
             callSearchLocationAPI(searchValue: "dummy", originFrom: self.originFrom!)

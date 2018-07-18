@@ -48,6 +48,7 @@ class RequestPoolSearchResultVC: UITableViewController, SearchRequestPoolTableVi
         limit = 10
         lastOffsetCalled = 0
         
+        
         loadMore()
         
     }

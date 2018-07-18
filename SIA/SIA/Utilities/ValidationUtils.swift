@@ -17,7 +17,9 @@ extension String {
     var isAlphanumericWithHyphen: Bool {
         return !isEmpty && range(of: "[^a-zA-Z0-9-]", options: .regularExpression) == nil
     }
-    
+    var isAlphanumericWithHyphenAndSpace: Bool {
+        return !isEmpty && range(of: "[^a-zA-Z0-9- ]", options: .regularExpression) == nil
+    }
     var isAlphanumericWithSpace: Bool {
         return !isEmpty && range(of: "[^a-zA-Z0-9 ]", options: .regularExpression) == nil
     }

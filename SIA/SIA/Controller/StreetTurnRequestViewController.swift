@@ -53,7 +53,6 @@ class StreetTurnRequestViewController: UIViewController,  UITextFieldDelegate, U
     var memType :String?
     
     override func viewDidLoad(){
-        
         super.viewDidLoad()
         
         picker.delegate = self
@@ -80,18 +79,6 @@ class StreetTurnRequestViewController: UIViewController,  UITextFieldDelegate, U
         txtCity.delegate = self
         txtState.delegate = self
         
-        //txtMCCompanyName.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
-        //txtMCCompanyName.keyboardToolbar.doneBarButton.setTarget(self, action: #selector(doneButtonClicked))
-        
-        txtEPCompanyName.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
-        txtEPCompanyName.keyboardToolbar.doneBarButton.setTarget(self, action: #selector(doneButtonClicked))
-        
-        txtChassisNum.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
-        txtChassisNum.keyboardToolbar.doneBarButton.setTarget(self, action: #selector(doneButtonClicked))
-        
-        //Go to next field on return key
-        UITextField.connectFields(fields: [txtEPCompanyName, txtContNum, txtExportBookingNum, txtImportBookingNum, txtChassisNum])
-       
         //if logged in user as MC
         role =  UserDefaults.standard.string(forKey: "role")
         loggedInUserCompanyName =  UserDefaults.standard.string(forKey: "companyName")
@@ -101,13 +88,31 @@ class StreetTurnRequestViewController: UIViewController,  UITextFieldDelegate, U
         }
         
         if role == "MC" || (role == "SEC" && memType == "MC" || role == "IDD"){
+            
             txtMCCompanyName.text = loggedInUserCompanyName
             txtMCScac.text = loggedInUserScac
-        }else if role == "EP"{
-            //txtEPCompanyName.text = loggedInUserCompanyName
-            //txtEPScac.text = loggedInUserScac
+            
+            txtEPCompanyName.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+            txtEPCompanyName.keyboardToolbar.doneBarButton.setTarget(self, action: #selector(doneButtonClicked))
+            
+            //Go to next field on return key
+            UITextField.connectFields(fields: [txtEPCompanyName, txtContNum, txtExportBookingNum, txtImportBookingNum, txtChassisNum])
+        }else{
+            
+            txtEPCompanyName.text = loggedInUserCompanyName
+            txtEPScac.text = loggedInUserScac
+            
+            txtMCCompanyName.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+            txtMCCompanyName.keyboardToolbar.doneBarButton.setTarget(self, action: #selector(doneButtonClicked))
+            
+            //Go to next field on return key
+            UITextField.connectFields(fields: [txtMCCompanyName, txtContNum, txtExportBookingNum, txtImportBookingNum, txtChassisNum])
         }
         
+        
+        txtChassisNum.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        txtChassisNum.keyboardToolbar.doneBarButton.setTarget(self, action: #selector(doneButtonClicked))
+       
         //Data Populated from the Reinititate Interchange request -tapped
         self.populateDataFromReInitiateInterchagneIfAny()
         
@@ -198,7 +203,32 @@ class StreetTurnRequestViewController: UIViewController,  UITextFieldDelegate, U
         
         if textField == txtMCCompanyName || textField == txtEPCompanyName
         {
-            loadListCompanyNameAndSCACAsInput(textField)
+            if textField.text! != "" && !textField.text!.isAlphanumericWithHyphenAndSpace{
+                
+                au.showAlert(target: self, alertTitle: self.alertTitle, message: "Company name should contains alphanumeric value only.",[UIAlertAction(title: "OK", style: .default, handler: { action in
+                    switch action.style{
+                    case .default:
+                        if textField == self.txtMCCompanyName{
+                            self.txtMCScac.text = ""
+                            
+                        }else if textField == self.txtEPCompanyName{
+                            self.txtEPScac.text = ""
+                        }
+                        textField.text = ""
+                        break
+                    case .cancel:
+                        
+                        break
+                        
+                    case .destructive:
+                        
+                        break
+                        
+                    }})], completion: nil)
+            }else{
+                loadListCompanyNameAndSCACAsInput(textField)
+            }
+            
             
         }else if textField == txtChassisNum {
             txtChassisIEPScac.text = ""
@@ -426,11 +456,19 @@ class StreetTurnRequestViewController: UIViewController,  UITextFieldDelegate, U
             
         }else if sender == txtChassisNum{
             //populate the IEP SCAC details based on chassisText
-            if vu.isNotEmptyString(stringToCheck: sender.text!) && sender.text != "ZZZZ999999"{
-                //API call to set IEP SCAC
-                setIEPSCACBasedOnChassisNum()
+            if (vu.isNotEmptyString(stringToCheck: sender.text!)){
+                
+                if !sender.text!.isAlphanumeric{
+                    
+                     au.showAlert(target: self, alertTitle: self.alertTitle, message: "Chassis Number should contains alphanumeric only.",[UIAlertAction(title: "OK", style: .default, handler: nil)], completion: nil)
+                     sender.text = ""
+                }else if sender.text != "ZZZZ999999"{
+                
+                    //API call to set IEP SCAC
+                    setIEPSCACBasedOnChassisNum()
+                }
+                
             }
-            
             
         }
     }
@@ -701,6 +739,7 @@ class StreetTurnRequestViewController: UIViewController,  UITextFieldDelegate, U
                 [
                     "irRequestType":"StreetTurn",
                     "epScacs": au.trim(stringToTrim: txtEPScac.text!),
+                    "mcAScac": au.trim(stringToTrim: txtMCScac.text!),
                     "contNum": au.trim(stringToTrim: txtContNum.text!),
                     "chassisNum": au.trim(stringToTrim: txtChassisNum.text!),
                     "importBookingNum": au.trim(stringToTrim: txtImportBookingNum.text!),
@@ -900,9 +939,17 @@ class StreetTurnRequestViewController: UIViewController,  UITextFieldDelegate, U
         if textField == txtZipCode || textField == txtCity  || textField == txtState
                         || textField == txtLocationAddress || textField == txtLocationName
                             || textField == txtChassisIEPScac || textField == txtMCScac
-                                || textField == txtEPScac || textField == txtMCCompanyName
+                                || textField == txtEPScac
             
         {
+            textField.resignFirstResponder()
+            return false
+            
+        }else if ((role == "MC" || (role == "SEC" && memType == "MC") || role == "IDD") && textField == txtMCCompanyName){
+            textField.resignFirstResponder()
+            return false
+            
+        }else  if ((role == "EP" || (role == "SEC" && memType == "EP") || role == "TPU") && textField == txtEPCompanyName){
             textField.resignFirstResponder()
             return false
         }
@@ -944,6 +991,11 @@ class StreetTurnRequestViewController: UIViewController,  UITextFieldDelegate, U
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        if textField ==  txtChassisNum && vu.isNotEmptyString(stringToCheck: textField.text!) && textField.text != "ZZZZ999999"{
+            //API call to set IEP SCAC
+            setIEPSCACBasedOnChassisNum()
+        }
         /*if (textField.returnKeyType==UIReturnKeyType.go)
         {
             textField.resignFirstResponder();
