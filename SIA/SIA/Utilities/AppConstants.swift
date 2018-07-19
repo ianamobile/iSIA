@@ -42,6 +42,7 @@ public class AppConstants
     let GET_INTERCHANGE_REQUEST_DETAILS     = "SIA/getInterchangeRequestDetails"
     let INTERCHANGE_REQUEST_OPERATIONS = "SIA/interchangeRequestOperations"
     let GET_UIIA_EXHIBIT_LIST           = "SIA/getUIIAExhibitList"
+    let GET_TPU_TOKEN_BY_EP_URI         = "SIA/getTPUTokenByEP"
     
     let ORIGINAL_LOCATION = "OriginalLocation"
     let EQUIPMENT_LOCATION = "EquipmentLocation"

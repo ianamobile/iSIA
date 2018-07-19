@@ -35,8 +35,8 @@ class DashboardTableViewController: UITableViewController, DashboardTableViewCel
     
     //TPU Section
     let tpuDefaultRightsMenuArr:[Int] = [5, 6, 20]
-    let tpuSingleRightsMenuArr:[Int] = [2, 0, 1, 5, 6, 20]
-    let tpuFullRightsMenuArr:[Int] = [2, 7, 3, 0, 1, 5, 6, 20]
+    let tpuSingleRightsMenuArr:[Int] = [2, 4, 0, 1, 5, 6, 20]
+    let tpuFullRightsMenuArr:[Int] = [2, 4, 7, 3, 0, 1, 5, 6, 20]
     
     //final array which hold run time value from the rights based login.
     var finalArr:[Int] = [];
@@ -49,6 +49,7 @@ class DashboardTableViewController: UITableViewController, DashboardTableViewCel
         dashboardTableView.separatorColor = UIColor.clear
         
         let role =  UserDefaults.standard.string(forKey: "role")
+        let scac =  UserDefaults.standard.string(forKey: "scac")
         
         if(role == "MC")
         {
@@ -63,7 +64,24 @@ class DashboardTableViewController: UITableViewController, DashboardTableViewCel
             finalArr = iddMenuArr
             
         }else if(role == "TPU"){
-            finalArr = tpuDefaultRightsMenuArr
+            
+            if scac == "" {
+                finalArr = tpuDefaultRightsMenuArr
+            }else{
+                
+                let iniIntrchng =  UserDefaults.standard.string(forKey: "iniIntrchng")
+                let iniIntrchngAndApprove =  UserDefaults.standard.string(forKey: "iniIntrchngAndApprove")
+                
+                if (iniIntrchngAndApprove != nil && iniIntrchngAndApprove != "" && iniIntrchngAndApprove == "Y"){
+                    finalArr = tpuFullRightsMenuArr
+                    
+                }else if (iniIntrchng != nil && iniIntrchng != "" && iniIntrchng == "Y"){
+                    finalArr = tpuSingleRightsMenuArr
+                    
+                }else{
+                    finalArr = tpuDefaultRightsMenuArr
+                }
+            }
             
         }else if(role == "SEC"){
             

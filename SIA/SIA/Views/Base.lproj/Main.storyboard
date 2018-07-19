@@ -7244,6 +7244,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="listEPUsersTableView" destination="Wep-fp-EAn" id="u9l-PS-iGM"/>
+                        <segue destination="1RQ-Bb-X7p" kind="show" identifier="dashboardSegue" id="mHC-ci-Dfe"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H5F-uQ-29L" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -8067,7 +8068,7 @@
         <segue reference="SEO-M7-wu7"/>
         <segue reference="rvT-gK-Tfz"/>
         <segue reference="riM-92-4Pc"/>
-        <segue reference="bbu-oh-et3"/>
+        <segue reference="tqE-L4-b7g"/>
         <segue reference="H6h-Uj-1kV"/>
         <segue reference="AfH-nZ-kYf"/>
         <segue reference="3FF-JX-D0J"/>

@@ -57,7 +57,7 @@ class UserDetails{
             
             self.accessToken = jsonDictionary["accessToken"] as? String
             
-            if( role == "SEC"){
+            if( role == "SEC" ||  (role == "TPU" && scac != "")){
                 let permissions:[String: Any] = (jsonDictionary["permissions"] as? [String: Any])!
                 self.iniIntrchng = permissions["iniIntrchng"] as? String
                 self.iniIntrchngAndApprove =  permissions["iniIntrchngAndApprove"] as? String

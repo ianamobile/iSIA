@@ -89,12 +89,112 @@ class ListEPUsersTableVC: UITableViewController {
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if epUsersArray[indexPath.row].status == "ACTIVE"{
-             print("tapped..")
+            goToEPAccountBySCAC(epScac :epUsersArray[indexPath.row].scac!);
         }
-        //self.performSegue(withIdentifier: "viewStreetTurnDetails", sender: self)
         
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+    }
+    
+    func goToEPAccountBySCAC(epScac :String) {
+        if !au.isInternetAvailable() {
+            au.redirectToNoInternetConnectionView(target: self)
+        }
+        else
+        {
+            let applicationUtils : ApplicationUtils = ApplicationUtils()
+            applicationUtils.showActivityIndicator(uiView: view)
+            
+            let accessToken =  UserDefaults.standard.string(forKey: "accessToken")
+            
+            let urlToRequest = ac.BASE_URL + ac.GET_TPU_TOKEN_BY_EP_URI + "?accessToken=\(accessToken!)&epScac=\(epScac)"
+            
+            print(urlToRequest)
+            
+            let url = URL(string: urlToRequest)!
+            
+            let session = URLSession.shared
+            let request = NSMutableURLRequest(url: url)
+            
+            request.httpMethod = "GET"
+            request.cachePolicy = NSURLRequest.CachePolicy.reloadIgnoringCacheData
+            
+            let task = session.dataTask(with: request as URLRequest) { (data, response, error) in
+                guard let _: Data = data, let _: URLResponse = response, error == nil else {
+                    print("*****error")
+                    DispatchQueue.main.sync {
+                        
+                        applicationUtils.hideActivityIndicator(uiView: self.view)
+                        au.showAlert(target: self, alertTitle: self.alertTitle, message: self.ac.ERROR_MSG,[UIAlertAction(title: "OK", style: .default, handler: nil)], completion: nil)
+                        
+                    }
+                    return
+                }
+                do{
+                    
+                    let nsResponse =  response as! HTTPURLResponse
+                    let parsedData = try JSONSerialization.jsonObject(with: data!)
+                    
+                    print(parsedData)
+                    
+                    if let loginData:[String: Any]   = parsedData as? [String : Any]
+                    {
+                        
+                        if nsResponse.statusCode == 200
+                        {
+                            let userDetails: UserDetails  = UserDetails(loginData)
+                           
+                            DispatchQueue.main.sync {
+                                
+                                UserDefaults.standard.set(userDetails.accessToken!, forKey: "accessToken")
+                                UserDefaults.standard.set(userDetails.companyName!, forKey: "companyName")
+                                UserDefaults.standard.set(userDetails.scac, forKey: "scac")
+                                UserDefaults.standard.set(userDetails.role!, forKey: "originFrom")
+                                
+                                applicationUtils.hideActivityIndicator(uiView: self.view)
+                                self.performSegue(withIdentifier: "dashboardSegue", sender: self)
+                                
+                            }
+                            
+                        }else{
+                            
+                            //handle other response ..
+                            let apiResponseMessage: APIResponseMessage  = APIResponseMessage(loginData)
+                            
+                            DispatchQueue.main.sync {
+                                applicationUtils.hideActivityIndicator(uiView: self.view)
+                                au.showAlert(target: self, alertTitle: self.alertTitle, message: apiResponseMessage.errors.errorMessage!,[UIAlertAction(title: "OK", style: .default, handler: nil)], completion: nil)
+                                
+                            }
+                            
+                        }
+                        
+                    }
+                    
+                    
+                    
+                } catch let error as NSError {
+                    print("NSError ::",error)
+                    DispatchQueue.main.sync {
+                        
+                        applicationUtils.hideActivityIndicator(uiView: self.view)
+                        au.showAlert(target: self, alertTitle: self.alertTitle, message: self.ac.ERROR_MSG,[UIAlertAction(title: "OK", style: .default, handler: nil)], completion: nil)
+                        
+                    }
+                    
+                }
+                
+                
+            }
+            task.resume()
+       
+        }
+    }
+    
     func loadMore(){
+        
         self.lastOffsetCalled = self.offset
         
         if !au.isInternetAvailable() {
