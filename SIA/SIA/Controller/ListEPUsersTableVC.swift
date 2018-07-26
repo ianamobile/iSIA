@@ -84,9 +84,7 @@ class ListEPUsersTableVC: UITableViewController {
             cell.actionImageView.image = UIImage(named: "rejected_wf_black")
             cell.actionImageView.tintColor =   #colorLiteral(red: 0.851, green: 0.3255, blue: 0.3098, alpha: 1) /* #d9534f */
             cell.leftView.backgroundColor =  #colorLiteral(red: 0.851, green: 0.3255, blue: 0.3098, alpha: 1) /* #d9534f */
-        }else{
-            cell.actionImageView.tintColor = #colorLiteral(red: 0.2745, green: 0.6941, blue: 0.3882, alpha: 1) /* #46b163 */
-         }
+        }
             
             
         if offset > lastOffsetCalled && indexPath.row == epUsersArray.count - 1 && totalPages >= offset
