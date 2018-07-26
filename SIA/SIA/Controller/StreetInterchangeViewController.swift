@@ -17,6 +17,9 @@ class StreetInterchangeViewController: UIViewController , UITextFieldDelegate, U
     
     @IBOutlet weak var streetInterchangeTabBar: UITabBar!
     
+    @IBOutlet weak var lblTypeOfInterchange: UILabel!
+    @IBOutlet weak var lblExportBookingNum: UILabel!
+    
     @IBOutlet weak var txtEPCompanyName: DesignableUITextField!
     @IBOutlet weak var txtEPScac: DesignableUITextField!
     @IBOutlet weak var txtMCACompanyName: DesignableUITextField!
@@ -413,6 +416,7 @@ class StreetInterchangeViewController: UIViewController , UITextFieldDelegate, U
                 
                 self.txtMCBCompanyName.text = loggedInUserCompanyName
                 self.txtMCBScac.text = loggedInUserScac
+            
             }
         
             self.txtContNum.text = searchRequestPoolDetails?.contNum
@@ -442,7 +446,8 @@ class StreetInterchangeViewController: UIViewController , UITextFieldDelegate, U
             setPickerDefaultValue(self.txtChassisType, chassisTypeArray, chassisTypePicker, selectedValue: (searchRequestPoolDetails?.chassisType)!)
             setPickerDefaultValue(self.txtChassisSize, chassisSizeArray, chassisSizePicker, selectedValue: (searchRequestPoolDetails?.chassisSize)!)
         
-        
+            self.lblTypeOfInterchange.textColor = #colorLiteral(red: 0.9294, green: 0.3961, blue: 0.2, alpha: 1) /* #ed6533 */
+            self.lblExportBookingNum.textColor = #colorLiteral(red: 0.9294, green: 0.3961, blue: 0.2, alpha: 1) /* #ed6533 */
       }
     }
     func setPickerDefaultValue(_ textField: DesignableUITextField, _ arrayValue :[String], _ pickerView: UIPickerView, selectedValue: String){

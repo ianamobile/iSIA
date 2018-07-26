@@ -10,6 +10,7 @@ import Foundation
 
 protocol SearchRequestPoolTableViewCellDelegate: class {
     func deleteNotificationAvailRecord(sender: SearchRequestPoolTableViewCell, originFrom: String)
+    func initiateStreetInterchangeFromDelegate(sender: SearchRequestPoolTableViewCell, originFrom: String)
 }
 
 

@@ -11,6 +11,8 @@ import UIKit
 class SearchInterchangeRequestTableViewCell: UITableViewCell {
 
    
+    @IBOutlet weak var statusBackView: CardView!
+    @IBOutlet weak var nextImageView: UIImageView!
     @IBOutlet weak var leftView: UIView!
     @IBOutlet weak var lblRequestType: UILabel!
     @IBOutlet weak var lblStatus: UILabel!

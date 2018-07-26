@@ -30,6 +30,11 @@ class ForgotPasswordViewController: UIViewController, UITextFieldDelegate {
         
         self.backViewLeadingConstraint.constant = -self.backView.frame.width
         
+        if role == "MC" {
+            txtScac.placeholder = "ENTER MC SCAC"
+        }else{
+            txtScac.placeholder = "ENTER EP SCAC"
+        }
         
         //Go to next field on return key
         UITextField.connectFields(fields: [txtScac])

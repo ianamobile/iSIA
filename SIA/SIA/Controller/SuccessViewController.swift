@@ -47,7 +47,7 @@ class SuccessViewController: UIViewController,UITabBarDelegate {
         lblMessage.numberOfLines = 0
         lblMessage.sizeToFit()
         
-        if originFrom == "StreetInterchange" && vu.isNotEmptyString(stringToCheck: isStreetInterchangeInitiatedByMCA!)
+        if (originFrom == "StreetInterchange" || originFrom == "StreetTurn") && vu.isNotEmptyString(stringToCheck: isStreetInterchangeInitiatedByMCA!)
             && isStreetInterchangeInitiatedByMCA! == "N"{
             lblNote.alpha = 0
             lblNoteDesc.alpha = 0

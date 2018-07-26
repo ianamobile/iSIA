@@ -202,6 +202,8 @@ open class Floaty: UIView {
      */
     fileprivate var buttonImageView: UIImageView = UIImageView()
     
+    fileprivate var menuTitleLabel : UILabel = UILabel()
+    
     /**
      If you keeping touch inside button, button overlaid with tint layer.
      */
@@ -324,6 +326,13 @@ open class Floaty: UIView {
                            options: UIViewAnimationOptions(), animations: { () -> Void in
                             self.plusLayer.transform = CATransform3DMakeRotation(self.degreesToRadians(self.rotationDegrees), 0.0, 0.0, 1.0)
                             self.buttonImageView.image = UIImage(named: "add_tab")
+                            self.buttonImageView.frame = CGRect(
+                                x: self.circleLayer.frame.origin.x + (self.size / 2 - self.buttonImageView.frame.size.width / 2),
+                                y: self.circleLayer.frame.origin.y + (self.size / 2 - self.buttonImageView.frame.size.height / 2),
+                                width: self.buttonImageView.frame.size.width,
+                                height: self.buttonImageView.frame.size.height
+                            )
+                            self.menuTitleLabel.alpha = 0
                             self.buttonImageView.transform = CGAffineTransform(rotationAngle: self.degreesToRadians(self.rotationDegrees))
                             self.overlayView.alpha = 1
             }, completion: {(f) -> Void in
@@ -373,6 +382,13 @@ open class Floaty: UIView {
                             self.plusLayer.transform = CATransform3DMakeRotation(self.degreesToRadians(0), 0.0, 0.0, 1.0)
                             self.buttonImageView.transform = CGAffineTransform(rotationAngle: self.degreesToRadians(0))
                             self.buttonImageView.image = UIImage(named: "menu")
+                            self.buttonImageView.frame = CGRect(
+                                x: self.circleLayer.frame.origin.x + (self.size / 2 - self.buttonImageView.frame.size.width / 2),
+                                y: self.circleLayer.frame.origin.y + (self.size / 2 - self.buttonImageView.frame.size.height / 2) - 6,
+                                width: self.buttonImageView.frame.size.width,
+                                height: self.buttonImageView.frame.size.height
+                            )
+                            self.menuTitleLabel.alpha = 1
                             self.overlayView.alpha = 0
             }, completion: {(f) -> Void in
                 if self.overlayViewDidCompleteOpenAnimation {
@@ -647,16 +663,30 @@ open class Floaty: UIView {
     
     fileprivate func setButtonImage() {
         buttonImageView.removeFromSuperview()
+        menuTitleLabel.removeFromSuperview()
+        
         buttonImageView = UIImageView(image: buttonImage)
         buttonImageView.tintColor = plusColor
         buttonImageView.frame = CGRect(
             x: circleLayer.frame.origin.x + (size / 2 - buttonImageView.frame.size.width / 2),
-            y: circleLayer.frame.origin.y + (size / 2 - buttonImageView.frame.size.height / 2),
+            y: circleLayer.frame.origin.y + (size / 2 - buttonImageView.frame.size.height / 2) - 6,
             width: buttonImageView.frame.size.width,
             height: buttonImageView.frame.size.height
         )
         
+        menuTitleLabel.font = UIFont(name: "Roboto-Bold", size: 9)
+        menuTitleLabel.textColor = UIColor.white
+        menuTitleLabel.text = "ACTIONS"
+        
+        menuTitleLabel.frame = CGRect(
+            x: buttonImageView.frame.origin.x - 5 ,
+            y: buttonImageView.frame.origin.y + 20,
+            width: 100,
+            height: 15
+        )
+        
         addSubview(buttonImageView)
+        addSubview(menuTitleLabel)
     }
     
     fileprivate func setTintLayer() {

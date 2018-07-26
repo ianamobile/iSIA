@@ -25,6 +25,7 @@ class SearchRequestPoolTableViewCell: UITableViewCell {
     @IBOutlet weak var lblIEPScac: UILabel!
     @IBOutlet weak var lblCreatedDate: UILabel!
     @IBOutlet weak var btnDelete: UIButton!
+    @IBOutlet weak var btnInitiateStreetInterchange: UIButton!
     
     weak var delegate: SearchRequestPoolTableViewCellDelegate?
     
@@ -38,6 +39,10 @@ class SearchRequestPoolTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+    @IBAction func initiateStreetInterchangeButtonTapped(_ sender: Any) {
+         delegate?.initiateStreetInterchangeFromDelegate(sender: self, originFrom: "");
+    }
+    
     @IBAction func deleteButtonTapped(_ sender: Any) {
         delegate?.deleteNotificationAvailRecord(sender: self, originFrom: "");
     }

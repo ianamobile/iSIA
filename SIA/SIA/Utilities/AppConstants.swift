@@ -43,6 +43,7 @@ public class AppConstants
     let INTERCHANGE_REQUEST_OPERATIONS = "SIA/interchangeRequestOperations"
     let GET_UIIA_EXHIBIT_LIST           = "SIA/getUIIAExhibitList"
     let GET_TPU_TOKEN_BY_EP_URI         = "SIA/getTPUTokenByEP"
+    let GET_LIST_WORK_DONE_BY_TPU       = "SIA/getListWorkDoneByTPU"
     
     let ORIGINAL_LOCATION = "OriginalLocation"
     let EQUIPMENT_LOCATION = "EquipmentLocation"
@@ -60,9 +61,9 @@ public class AppConstants
                                      "Initiate Street Interchange",
                                      "Search Interchange Requests",
                                      "Initiate Street Turn",
-                                     "Search Interchange Requests Submitted By you",
+                                     "Search Interchange Requests Submitted By You",
                                      "List EP Users",
-                                     "Pending Interchange Requests",
+                                     "Pending Requests Action Required",
                                      "",
                                      "",
                                      "",

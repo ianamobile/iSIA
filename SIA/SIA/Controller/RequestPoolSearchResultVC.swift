@@ -77,6 +77,7 @@ class RequestPoolSearchResultVC: UITableViewController, SearchRequestPoolTableVi
         if(searchRequestPoolDetailsArray.count != 0){
             
             cell.leftView.tag = searchRequestPoolDetailsArray[indexPath.row].naId
+            cell.btnInitiateStreetInterchange.tag = indexPath.row
             
             cell.lblCreatedDate.text = searchRequestPoolDetailsArray[indexPath.row].createdDate
             cell.lblMCCompanyName.text = searchRequestPoolDetailsArray[indexPath.row].mcCompanyName
@@ -92,10 +93,10 @@ class RequestPoolSearchResultVC: UITableViewController, SearchRequestPoolTableVi
             cell.lblChasisNum.text = searchRequestPoolDetailsArray[indexPath.row].chassisNum
             cell.lblIEPScac.text = searchRequestPoolDetailsArray[indexPath.row].iepScac
             
-            if(searchRequestPoolDetailsArray[indexPath.row].showDeleteBtn != "Y" ){
-                cell.btnDelete.alpha = 0
-            }else{
+            if(searchRequestPoolDetailsArray[indexPath.row].showDeleteBtn == "Y" ){
                 cell.btnDelete.alpha = 1
+            }else{
+                cell.btnDelete.alpha = 0
             }
             
             if offset > lastOffsetCalled && indexPath.row == searchRequestPoolDetailsArray.count - 1 && totalPages >= offset
@@ -112,13 +113,9 @@ class RequestPoolSearchResultVC: UITableViewController, SearchRequestPoolTableVi
         // Return false if you do not want the specified item to be editable.
         return false
     }
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("tapped..")
-        self.performSegue(withIdentifier: "initiateInterchangeFromNotifAvailSegue", sender: searchRequestPoolDetailsArray[indexPath.row])
-        
-    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
         if segue.identifier == "initiateInterchangeFromNotifAvailSegue"
         {
             
@@ -128,6 +125,10 @@ class RequestPoolSearchResultVC: UITableViewController, SearchRequestPoolTableVi
             vc.originFrom = segue.identifier
             
         }
+    }
+    func initiateStreetInterchangeFromDelegate(sender: SearchRequestPoolTableViewCell, originFrom: String){
+        let currentRow = sender.btnInitiateStreetInterchange.tag
+        self.performSegue(withIdentifier: "initiateInterchangeFromNotifAvailSegue", sender: searchRequestPoolDetailsArray[currentRow])
     }
     
     func deleteNotificationAvailRecord(sender: SearchRequestPoolTableViewCell, originFrom: String) {

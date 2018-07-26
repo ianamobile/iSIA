@@ -29,6 +29,7 @@ class SearchInterchangeRequestsVC: UIViewController,UITextFieldDelegate, UITabBa
     var tabBarItemImageView: UIImageView!
     var picker = UIPickerView()
     var statusArray  = [String]()
+    var originFrom :String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,7 +66,7 @@ class SearchInterchangeRequestsVC: UIViewController,UITextFieldDelegate, UITabBa
         }
         
         txtScac.placeholder = "SEARCH BY SCAC"
-        if role == "MC" || (role == "SEC" && memType == "MC"){
+        if role == "MC" || (role == "SEC" && memType == "MC") || role == "IDD"{
             lblScac.text = "CONTAINER PROVIDER SCAC"
            
         }else if role == "EP" || (role == "SEC" && memType == "EP") || role == "TPU" {
@@ -189,9 +190,9 @@ class SearchInterchangeRequestsVC: UIViewController,UITextFieldDelegate, UITabBa
         if item.tag == 1 {
             //next button tapped
             let role =  UserDefaults.standard.string(forKey: "role")
-            let epScac =  UserDefaults.standard.string(forKey: "epSCAC")
+            let epScac =  UserDefaults.standard.string(forKey: "scac")
             
-            if role == "TPU" && epScac == nil{
+            if role == "TPU" && (self.originFrom == "workDoneByTPUSegue" || epScac == ""){
                 self.performSegue(withIdentifier: "searchResultByTPUSegue", sender: self)
             }else{
                 self.performSegue(withIdentifier: "searchResultSegue", sender: self)

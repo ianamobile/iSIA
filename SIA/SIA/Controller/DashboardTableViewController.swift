@@ -124,6 +124,11 @@ class DashboardTableViewController: UITableViewController, DashboardTableViewCel
             vc.actionRequired =  "Y"
             
             
+        }else if segue.identifier == "workDoneByTPUSegue"{
+            
+            let vc = segue.destination as! SearchInterchangeRequestsVC
+            vc.originFrom =  "workDoneByTPUSegue"
+            
         }
     }
   func findAndNavigateToTappedView(sender: DashboardTableViewCell, originFrom: String) {
@@ -162,7 +167,12 @@ class DashboardTableViewController: UITableViewController, DashboardTableViewCel
             UserDefaults.standard.removeObject(forKey: "driverLicenseNumber")
             UserDefaults.standard.removeObject(forKey: "driverLicenseState")
             
+        }else{
+            
+            UserDefaults.standard.removeObject(forKey: "iniIntrchng")
+            UserDefaults.standard.removeObject(forKey: "iniIntrchngAndApprove")
         }
+        
         UserDefaults.standard.removeObject(forKey: "originFrom")
         
         let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)

@@ -308,19 +308,9 @@ UITableViewDelegate, UIViewControllerTransitioningDelegate, UITextFieldDelegate{
                                 
                                 DispatchQueue.main.sync {
                                     applicationUtils.hideActivityIndicator(uiView: self.view)
-                                    au.showAlert(target: self, alertTitle: self.alertTitle!, message: apiResponseMessage.message!,[UIAlertAction(title: "OK", style: .default, handler: { action in
-                                        switch action.style{
-                                        case .default:
-                                            //refresh the page again
-                                            self.callGetInterchangeRequestAPI()
-                                            break
-                                        case .cancel:
-                                            break
-                                            
-                                        case .destructive:
-                                            break
-                                            
-                                        }})], completion: nil)
+                                    
+                                    self.performSegue(withIdentifier: "operationSuccessViewSegue", sender: apiResponseMessage.message!)
+                                    
                                 }
                                 
                             }else{
@@ -599,6 +589,11 @@ UITableViewDelegate, UIViewControllerTransitioningDelegate, UITextFieldDelegate{
         }else if segue.identifier == "reInitiateInterchangeSegue" {
             let vc = segue.destination as! StreetInterchangeViewController
             vc.reInitiatedRequestDetails = self.res.interchangeRequests
+            vc.originFrom = segue.identifier
+        }else if segue.identifier == "operationSuccessViewSegue"{
+            
+            let vc = segue.destination as! OperationSuccessViewController
+            vc.message = sender as? String
             vc.originFrom = segue.identifier
         }
       

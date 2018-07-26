@@ -72,8 +72,23 @@ class ListEPUsersTableVC: UITableViewController {
         
         if epUsersArray[indexPath.row].status == "PENDING"{
             cell.actionImageView.image = UIImage(named: "pending_hourglass")
+            cell.actionImageView.tintColor =  #colorLiteral(red: 0.9137, green: 0.549, blue: 0.1137, alpha: 1) /* #e98c1d */
             cell.leftView.backgroundColor = #colorLiteral(red: 0.9137, green: 0.549, blue: 0.1137, alpha: 1) /* #e98c1d */
-        }
+        }else if epUsersArray[indexPath.row].status == "DISABLED"{
+            
+            cell.actionImageView.image = UIImage(named: "rejected_wf_black")
+            cell.actionImageView.tintColor =  #colorLiteral(red: 0.502, green: 0.502, blue: 0.502, alpha: 1) /* #808080 */
+            cell.leftView.backgroundColor =   #colorLiteral(red: 0.502, green: 0.502, blue: 0.502, alpha: 1) /* #808080 */
+            
+        }else if epUsersArray[indexPath.row].status == "REJECTED"{
+            cell.actionImageView.image = UIImage(named: "rejected_wf_black")
+            cell.actionImageView.tintColor =   #colorLiteral(red: 0.851, green: 0.3255, blue: 0.3098, alpha: 1) /* #d9534f */
+            cell.leftView.backgroundColor =  #colorLiteral(red: 0.851, green: 0.3255, blue: 0.3098, alpha: 1) /* #d9534f */
+        }else{
+            cell.actionImageView.tintColor = #colorLiteral(red: 0.2745, green: 0.6941, blue: 0.3882, alpha: 1) /* #46b163 */
+         }
+            
+            
         if offset > lastOffsetCalled && indexPath.row == epUsersArray.count - 1 && totalPages >= offset
         {
           self.loadMore()
@@ -152,6 +167,9 @@ class ListEPUsersTableVC: UITableViewController {
                                 UserDefaults.standard.set(userDetails.companyName!, forKey: "companyName")
                                 UserDefaults.standard.set(userDetails.scac, forKey: "scac")
                                 UserDefaults.standard.set(userDetails.role!, forKey: "originFrom")
+                                
+                                UserDefaults.standard.set(userDetails.iniIntrchng, forKey: "iniIntrchng")
+                                UserDefaults.standard.set(userDetails.iniIntrchngAndApprove, forKey: "iniIntrchngAndApprove")
                                 
                                 applicationUtils.hideActivityIndicator(uiView: self.view)
                                 self.performSegue(withIdentifier: "dashboardSegue", sender: self)

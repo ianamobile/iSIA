@@ -102,7 +102,7 @@ class RequestPoolSearchVC: UIViewController,UITextFieldDelegate, UITabBarDelegat
         if item.tag == 1 {
             //next button tapped
             let role =  UserDefaults.standard.string(forKey: "role")
-            let epScac =  UserDefaults.standard.string(forKey: "epSCAC")
+            let epScac =  UserDefaults.standard.string(forKey: "scac")
             
             if role == "TPU" && epScac != nil && vu.isNotEmptyString(stringToCheck: epScac!){
                 self.performSegue(withIdentifier: "searchRequestPoolResultByTPUSegue", sender: self)

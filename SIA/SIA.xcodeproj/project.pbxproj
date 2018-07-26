@@ -28,6 +28,7 @@
 		694E163B20F35C1C007AB654 /* GetInterChangeRequestDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694E163A20F35C1C007AB654 /* GetInterChangeRequestDetails.swift */; };
 		695E7EAA20F6144600350BEB /* SIAFullDataViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695E7EA920F6144600350BEB /* SIAFullDataViewTableViewCell.swift */; };
 		6972B88720B5A26E009B1BEC /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6972B88520B5A26E009B1BEC /* CircleView.swift */; };
+		697E76C52101CEC600F3CE04 /* OperationSuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697E76C42101CEC600F3CE04 /* OperationSuccessViewController.swift */; };
 		6981B6F120F8B7930099C626 /* ViewWorkFlowTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6981B6F020F8B7930099C626 /* ViewWorkFlowTableViewCell.swift */; };
 		6981B6F320F8D9250099C626 /* WorkFlowDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6981B6F220F8D9250099C626 /* WorkFlowDisplay.swift */; };
 		699BDAF520A2EB870088E0E9 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699BDAF420A2EB870088E0E9 /* UIViewExtension.swift */; };
@@ -148,6 +149,7 @@
 		694E163A20F35C1C007AB654 /* GetInterChangeRequestDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetInterChangeRequestDetails.swift; sourceTree = "<group>"; };
 		695E7EA920F6144600350BEB /* SIAFullDataViewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SIAFullDataViewTableViewCell.swift; sourceTree = "<group>"; };
 		6972B88520B5A26E009B1BEC /* CircleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
+		697E76C42101CEC600F3CE04 /* OperationSuccessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationSuccessViewController.swift; sourceTree = "<group>"; };
 		6981B6F020F8B7930099C626 /* ViewWorkFlowTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewWorkFlowTableViewCell.swift; sourceTree = "<group>"; };
 		6981B6F220F8D9250099C626 /* WorkFlowDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkFlowDisplay.swift; sourceTree = "<group>"; };
 		699BDAF420A2EB870088E0E9 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
@@ -405,6 +407,7 @@
 				69FBD17820EC710C0030FBF1 /* RequestPoolSearchResultVC.swift */,
 				69197E1920EDBE8100B05B58 /* AddNotifAvailRequestVC.swift */,
 				69305FFD20F747D30066C63F /* UIIAExhibitVC.swift */,
+				697E76C42101CEC600F3CE04 /* OperationSuccessViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -745,6 +748,7 @@
 				6930600420F783FE0066C63F /* NotificationExtension.swift in Sources */,
 				69BAA54F20DBC8CF00961BB9 /* FloatyManager.swift in Sources */,
 				69FBD17D20EC7FA80030FBF1 /* SearchRequestPoolTableViewCell.swift in Sources */,
+				697E76C52101CEC600F3CE04 /* OperationSuccessViewController.swift in Sources */,
 				69FD8C9720BC381C00D076E4 /* DashboardTableViewCellDelegate.swift in Sources */,
 				69FBD17F20ECA69A0030FBF1 /* SearchRequestPoolTableViewCellDelegate.swift in Sources */,
 				6925E25820D40F4800886A3E /* SuccessViewController.swift in Sources */,

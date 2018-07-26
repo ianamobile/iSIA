@@ -563,9 +563,33 @@ class StreetTurnRequestViewController: UIViewController,  UITextFieldDelegate, U
             let vc = segue.destination as! VerifyDetailsViewController
             vc.fieldDataArr = fieldDataArr
             vc.originFrom = "StreetTurn"
+            if findInitiater() == "MCA"{
+                vc.isStreetInterchangeInitiatedByMCA = "Y"
+            }else{
+                vc.isStreetInterchangeInitiatedByMCA = "N"
+            }
         
-        }
+            }
       
+    }
+    func findInitiater() -> String {
+        if (role?.uppercased() == "MC".uppercased() ||
+            (role?.uppercased() == "SEC".uppercased() && memType?.uppercased() == "MC".uppercased()) ||
+            role?.uppercased() == "IDD".uppercased()) && loggedInUserScac?.uppercased() == txtMCScac.text?.uppercased(){
+            
+            return "MCB"
+            
+        }else if(role?.uppercased() == "EP".uppercased() ||
+            (role?.uppercased() == "SEC".uppercased() && memType?.uppercased() == "EP".uppercased()) ||
+            role?.uppercased() == "TPU".uppercased()){
+            return "EP"
+        }else if(role?.uppercased() == "MC".uppercased() ||
+            (role?.uppercased() == "SEC".uppercased() && memType?.uppercased() == "MC".uppercased()) ||
+            role?.uppercased() == "IDD".uppercased()){
+            return "MCA"
+        }
+        
+        return ""
     }
     func findAndNavigateToTappedView(selectedLocation: IANALocationInfo, originFrom: String) {
         

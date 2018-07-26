@@ -77,19 +77,21 @@ class SearchInterchangeRequestResultVC: UITableViewController {
             
             if searchSIADetailsArray[indexPath.row].status == "PENDING"{
                 cell.leftView.backgroundColor = #colorLiteral(red: 0.9137, green: 0.549, blue: 0.1137, alpha: 1) /* #e98c1d */
+                cell.statusBackView.backgroundColor = #colorLiteral(red: 0.9137, green: 0.549, blue: 0.1137, alpha: 1) /* #e98c1d */
                 
             }else if searchSIADetailsArray[indexPath.row].status == "ONHOLD" ||
                 searchSIADetailsArray[indexPath.row].status == "REJECTED" ||
                 searchSIADetailsArray[indexPath.row].status == "CANCELLED" {
                 cell.leftView.backgroundColor = #colorLiteral(red: 0.851, green: 0.3255, blue: 0.3098, alpha: 1) /* #d9534f */
+                cell.statusBackView.backgroundColor = #colorLiteral(red: 0.851, green: 0.3255, blue: 0.3098, alpha: 1) /* #d9534f */
                 
             }else if searchSIADetailsArray[indexPath.row].status == "APPROVED"{
                 cell.leftView.backgroundColor = #colorLiteral(red: 0.3608, green: 0.7216, blue: 0.3608, alpha: 1) /* #5cb85c */
-                
+                cell.statusBackView.backgroundColor =  #colorLiteral(red: 0.3608, green: 0.7216, blue: 0.3608, alpha: 1) /* #5cb85c */
             }
             cell.lblCreatedDate.text = searchSIADetailsArray[indexPath.row].createdDate
             cell.lblRequestType.text = searchSIADetailsArray[indexPath.row].requestTypeTitle
-            cell.lblStatus.text = searchSIADetailsArray[indexPath.row].status
+            cell.lblStatus.text = "STATUS: " + searchSIADetailsArray[indexPath.row].status!
             cell.lblActionRequired.text = searchSIADetailsArray[indexPath.row].actionRequired
             cell.lblContNum.text = searchSIADetailsArray[indexPath.row].contNum
             cell.lblExportBookingNum.text = searchSIADetailsArray[indexPath.row].bookingNum
@@ -99,7 +101,21 @@ class SearchInterchangeRequestResultVC: UITableViewController {
             cell.lblMCAScac.text = searchSIADetailsArray[indexPath.row].mcAScac
             cell.lblMCBName.text = searchSIADetailsArray[indexPath.row].mcBCompanyName
             cell.lblMCBScac.text = searchSIADetailsArray[indexPath.row].mcBScac
-            cell.lblActionDate.text = searchSIADetailsArray[indexPath.row].actionDate
+            
+            if searchSIADetailsArray[indexPath.row].status == "PENDING"{
+                cell.lblActionDate.text = ""
+            }else{
+                cell.lblActionDate.text = searchSIADetailsArray[indexPath.row].actionDate
+            }
+            
+            let role =  UserDefaults.standard.string(forKey: "role")
+            let epScac =  UserDefaults.standard.string(forKey: "scac")
+            
+            if role == "TPU" && (self.originFrom == "searchResultByTPUSegue" || epScac == ""){
+                cell.nextImageView.alpha = 0 ;
+            }else{
+                cell.nextImageView.alpha = 1
+            }
             
             if searchSIADetailsArray[indexPath.row].status == "PENDING" || searchSIADetailsArray[indexPath.row].status == "APPROVED"{
                cell.lblActionDateTitle.text = "APPROVAL DATE"
@@ -174,8 +190,17 @@ class SearchInterchangeRequestResultVC: UITableViewController {
                 memType =  UserDefaults.standard.string(forKey: "memType")
             }
             
-            var urlToRequest = ac.BASE_URL + ac.SIA_LOOKUP_URI + "?accessToken=\(accessToken!)&containerNo=\(contNum ?? "")&bookingNo=\(exportBookingNum ?? "")&startDate=\(fromDate ?? "")&endDate=\(toDate ?? "")&status=\(status ?? "")&offset=\(offset)&limit=\(limit)"
+            var urlToRequest = ""
+            if self.originFrom == "searchResultByTPUSegue" {
+                
+                urlToRequest = ac.BASE_URL + ac.GET_LIST_WORK_DONE_BY_TPU + "?accessToken=\(accessToken!)&containerNo=\(contNum ?? "")&bookingNo=\(exportBookingNum ?? "")&startDate=\(fromDate ?? "")&endDate=\(toDate ?? "")&status=\(status ?? "")&offset=\(offset)&limit=\(limit)"
+                
+            }else{
             
+                
+                urlToRequest = ac.BASE_URL + ac.SIA_LOOKUP_URI + "?accessToken=\(accessToken!)&containerNo=\(contNum ?? "")&bookingNo=\(exportBookingNum ?? "")&startDate=\(fromDate ?? "")&endDate=\(toDate ?? "")&status=\(status ?? "")&offset=\(offset)&limit=\(limit)"
+            }
+          
             if role == "MC" || (role == "SEC" && memType == "MC") || role == "IDD"{
                 urlToRequest = urlToRequest + "&epSCAC=\(scac ?? "")"
             }else{

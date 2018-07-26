@@ -91,7 +91,7 @@ class VerifyDetailsViewController: UIViewController, UITableViewDataSource,
             let vc = segue.destination as! SuccessViewController
             vc.message =  self.nextScreenMessage
             vc.originFrom = self.originFrom
-            if originFrom == "StreetInterchange"{
+            if originFrom == "StreetInterchange" || originFrom == "StreetTurn"{
                 vc.isStreetInterchangeInitiatedByMCA = self.isStreetInterchangeInitiatedByMCA!
             }
             

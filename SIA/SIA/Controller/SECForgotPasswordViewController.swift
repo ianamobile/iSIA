@@ -30,6 +30,12 @@ class SECForgotPasswordViewController: UIViewController, UITextFieldDelegate {
         txtScac.delegate = self
         txtUsername.delegate = self
         
+        if memType == "MC" {
+            txtScac.placeholder = "ENTER MC SCAC"
+        }else{
+            txtScac.placeholder = "ENTER EP SCAC"
+        }
+        
         self.backViewLeadingConstraint.constant = -self.backView.frame.width
         
         //Go to next field on return key
@@ -43,6 +49,7 @@ class SECForgotPasswordViewController: UIViewController, UITextFieldDelegate {
         
         print("mem type in SECForgotPasswordViewController \(memType ?? "blank")")
         
+  
     }
     
     func validateForgotPasswordFields() -> String {

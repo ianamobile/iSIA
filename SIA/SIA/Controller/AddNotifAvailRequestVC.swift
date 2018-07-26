@@ -141,7 +141,7 @@ class AddNotifAvailRequestVC: UIViewController , UITextFieldDelegate, UITabBarDe
             txtEPCompanyName.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
             txtEPCompanyName.keyboardToolbar.doneBarButton.setTarget(self, action: #selector(doneButtonClicked))
             
-        }else if role == "EP" || (role == "SEC" && memType == "EP"){
+        }else if role == "EP" || (role == "SEC" && memType == "EP") || role == "TPU"{
             txtEPCompanyName.text = loggedInUserCompanyName
             txtEPScac.text = loggedInUserScac
             
