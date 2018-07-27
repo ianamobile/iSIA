@@ -78,7 +78,7 @@ public class AppConstants
                                      "",
                                      "Logout"]
     
-    let menuIconArr :[String]  = ["plus","search","plus","search","plus","search","menu","pending_hourglass","","","","","","","","","","","","","logout"]
+    let menuIconArr :[String]  = ["plus","search_menu","streetinterchange","search_menu","streetturn","search_menu","menu","pending_hourglass","","","","","","","","","","","","","logout"]
     let menuSegueArr :[String]  = ["notifAvailSegue","notifAvailSearchSegue", "initiateInterchangeSegue", "searchInterchangeReqSegue", "initiateStreetTurnReqSegue", "workDoneByTPUSegue", "listEPUserSegue" , "pendingInterchangeReqSegue", "", "", "", "", "", "", "", "", "", "", "", "", "logoutSegue"]
 
     let ERROR_MSG = "Opp! An error has occured, please try after some time."

@@ -2,25 +2,22 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "if_More_372914.png",
+      "filename" : "import_booking_num.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "if_More_372914-2.png",
+      "filename" : "if_Download_2202271-2.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "if_More_372914-3.png",
+      "filename" : "if_Download_2202271-3.png",
       "scale" : "3x"
     }
   ],
   "info" : {
     "version" : 1,
     "author" : "xcode"
-  },
-  "properties" : {
-    "template-rendering-intent" : "template"
   }
 }
