@@ -5876,6 +5876,9 @@
                             <tabBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KlZ-Wx-1TB">
                                 <rect key="frame" x="0.0" y="614" width="320" height="49"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="49" id="Xse-0E-wgb"/>
+                                </constraints>
                                 <items>
                                     <tabBarItem tag="1" title="SEARCH" image="search_tab" id="28a-fa-CL7"/>
                                     <tabBarItem tag="2" title="RESET" image="reset" id="bzP-Qz-RoA"/>
@@ -6158,16 +6161,12 @@
                         </subviews>
                         <color key="backgroundColor" red="0.94509803920000002" green="0.96078431369999995" blue="0.97254901959999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="KlZ-Wx-1TB" firstAttribute="bottom" secondItem="gk9-lx-svT" secondAttribute="bottom" id="F32-sC-aIV"/>
-                            <constraint firstItem="KlZ-Wx-1TB" firstAttribute="leading" secondItem="gk9-lx-svT" secondAttribute="leading" id="Mj5-dF-puH"/>
+                            <constraint firstItem="KlZ-Wx-1TB" firstAttribute="bottom" secondItem="gk9-lx-svT" secondAttribute="bottom" id="DkA-Bp-e9g"/>
+                            <constraint firstItem="KlZ-Wx-1TB" firstAttribute="top" secondItem="mV4-Kw-4cC" secondAttribute="bottom" id="LD0-ae-EiH"/>
                             <constraint firstItem="mV4-Kw-4cC" firstAttribute="top" secondItem="gk9-lx-svT" secondAttribute="top" id="PM6-cN-2tY"/>
-                            <constraint firstItem="KlZ-Wx-1TB" firstAttribute="leading" secondItem="gk9-lx-svT" secondAttribute="leading" id="PTE-Tn-0HH"/>
-                            <constraint firstItem="KlZ-Wx-1TB" firstAttribute="trailing" secondItem="gk9-lx-svT" secondAttribute="trailing" id="QtY-20-ooM"/>
                             <constraint firstItem="mV4-Kw-4cC" firstAttribute="leading" secondItem="gk9-lx-svT" secondAttribute="leading" id="TVv-Jb-1Lr"/>
-                            <constraint firstItem="KlZ-Wx-1TB" firstAttribute="top" secondItem="mV4-Kw-4cC" secondAttribute="bottom" id="iq9-QB-jRv"/>
-                            <constraint firstItem="KlZ-Wx-1TB" firstAttribute="bottom" secondItem="gk9-lx-svT" secondAttribute="bottom" id="nTx-KG-p0S"/>
-                            <constraint firstItem="KlZ-Wx-1TB" firstAttribute="top" secondItem="mV4-Kw-4cC" secondAttribute="bottom" id="vM9-b1-Ou3"/>
-                            <constraint firstItem="KlZ-Wx-1TB" firstAttribute="trailing" secondItem="gk9-lx-svT" secondAttribute="trailing" id="xLQ-mc-SJH"/>
+                            <constraint firstItem="KlZ-Wx-1TB" firstAttribute="trailing" secondItem="gk9-lx-svT" secondAttribute="trailing" id="Xbd-Mn-3bC"/>
+                            <constraint firstItem="KlZ-Wx-1TB" firstAttribute="leading" secondItem="gk9-lx-svT" secondAttribute="leading" id="xew-zQ-vxS"/>
                             <constraint firstItem="mV4-Kw-4cC" firstAttribute="trailing" secondItem="gk9-lx-svT" secondAttribute="trailing" id="xru-vg-Uj6"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="gk9-lx-svT"/>
@@ -7300,6 +7299,9 @@
                             <tabBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JfS-9G-IMv">
                                 <rect key="frame" x="0.0" y="614" width="320" height="49"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="49" id="5bP-em-MXe"/>
+                                </constraints>
                                 <items>
                                     <tabBarItem tag="1" title="SEARCH" image="search_tab" id="DaI-h1-KiC"/>
                                     <tabBarItem tag="2" title="RESET" image="reset" id="USH-2A-Fw1"/>
@@ -7542,17 +7544,13 @@
                         </subviews>
                         <color key="backgroundColor" red="0.94509803920000002" green="0.96078431369999995" blue="0.97254901959999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="JfS-9G-IMv" firstAttribute="trailing" secondItem="PRA-Yg-6ih" secondAttribute="trailing" id="2Ln-QH-jBf"/>
-                            <constraint firstItem="JfS-9G-IMv" firstAttribute="leading" secondItem="PRA-Yg-6ih" secondAttribute="leading" id="BKR-gX-rJF"/>
+                            <constraint firstItem="JfS-9G-IMv" firstAttribute="leading" secondItem="PRA-Yg-6ih" secondAttribute="leading" id="3e6-B9-upp"/>
+                            <constraint firstItem="JfS-9G-IMv" firstAttribute="bottom" secondItem="PRA-Yg-6ih" secondAttribute="bottom" id="4Z8-Qb-EdT"/>
                             <constraint firstItem="ycW-GQ-yg6" firstAttribute="trailing" secondItem="PRA-Yg-6ih" secondAttribute="trailing" id="CkG-3t-cTu"/>
-                            <constraint firstItem="JfS-9G-IMv" firstAttribute="trailing" secondItem="PRA-Yg-6ih" secondAttribute="trailing" id="Lp8-r1-XwV"/>
                             <constraint firstItem="ycW-GQ-yg6" firstAttribute="leading" secondItem="PRA-Yg-6ih" secondAttribute="leading" id="T7s-Ul-YNw"/>
-                            <constraint firstItem="JfS-9G-IMv" firstAttribute="bottom" secondItem="PRA-Yg-6ih" secondAttribute="bottom" id="VTw-dX-K8A"/>
-                            <constraint firstItem="JfS-9G-IMv" firstAttribute="top" secondItem="ycW-GQ-yg6" secondAttribute="bottom" id="XOK-Ke-Oeb"/>
                             <constraint firstItem="ycW-GQ-yg6" firstAttribute="top" secondItem="PRA-Yg-6ih" secondAttribute="top" id="aUE-av-STC"/>
-                            <constraint firstItem="JfS-9G-IMv" firstAttribute="bottom" secondItem="PRA-Yg-6ih" secondAttribute="bottom" id="kJf-Kv-QSw"/>
-                            <constraint firstItem="JfS-9G-IMv" firstAttribute="leading" secondItem="PRA-Yg-6ih" secondAttribute="leading" id="qFr-f5-oPF"/>
-                            <constraint firstItem="JfS-9G-IMv" firstAttribute="top" secondItem="ycW-GQ-yg6" secondAttribute="bottom" id="tJu-rG-ATi"/>
+                            <constraint firstItem="JfS-9G-IMv" firstAttribute="top" secondItem="ycW-GQ-yg6" secondAttribute="bottom" id="gSY-rR-65r"/>
+                            <constraint firstItem="JfS-9G-IMv" firstAttribute="trailing" secondItem="PRA-Yg-6ih" secondAttribute="trailing" id="uQr-wW-ybl"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="PRA-Yg-6ih"/>
                     </view>
@@ -8203,7 +8201,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="W6h-ga-Cas"/>
-        <segue reference="VKc-ZU-m58"/>
+        <segue reference="SWU-4I-Jpv"/>
         <segue reference="4Oc-um-flX"/>
         <segue reference="nId-5q-G1a"/>
         <segue reference="ldH-eP-wn6"/>
