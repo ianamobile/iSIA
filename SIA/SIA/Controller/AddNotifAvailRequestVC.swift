@@ -666,7 +666,7 @@ class AddNotifAvailRequestVC: UIViewController , UITextFieldDelegate, UITabBarDe
                 
                 if !sender.text!.isAlphanumeric{
                     
-                    au.showAlert(target: self, alertTitle: self.alertTitle, message: "Chassis Number should contains alphanumeric only.",[UIAlertAction(title: "OK", style: .default, handler: nil)], completion: nil)
+                    au.showAlert(target: self, alertTitle: self.alertTitle, message: "Chassis ID should contains alphanumeric only.",[UIAlertAction(title: "OK", style: .default, handler: nil)], completion: nil)
                     sender.text = ""
                 }else if sender.text != "ZZZZ999999"{
                     
@@ -958,7 +958,7 @@ class AddNotifAvailRequestVC: UIViewController , UITextFieldDelegate, UITabBarDe
             
             var fieldDataArr = [FieldInfo]()
             
-            // in case of blank chassis number, system will populate ZZZZ999999 to identify MC Provided Chassis.
+            // in case of blank chassis ID, system will populate ZZZZ999999 to identify MC Provided Chassis.
             if vu.isEmptyString(stringToCheck: txtChassisNum.text!){
                 txtChassisNum.text = "ZZZZ999999"
                 txtChassisIEPScac.text = ""
@@ -976,7 +976,7 @@ class AddNotifAvailRequestVC: UIViewController , UITextFieldDelegate, UITabBarDe
             fieldDataArr.append(FieldInfo(fieldTitle: "CONTAINER TYPE", fieldData: txtContType.text!)) //7
             fieldDataArr.append(FieldInfo(fieldTitle: "CONTAINER SIZE", fieldData: txtContSize.text!)) //8
             
-            fieldDataArr.append(FieldInfo(fieldTitle: "CHASSIS #", fieldData: txtChassisNum.text!.uppercased())) //9
+            fieldDataArr.append(FieldInfo(fieldTitle: "CHASSIS ID", fieldData: txtChassisNum.text!.uppercased())) //9
             if  vu.isNotEmptyString(stringToCheck: txtChassisIEPScac.text!) && vu.isNotEmptyString(stringToCheck: nextScreenMessage) && nextScreenMessage.count > 0{
                 fieldDataArr.append(FieldInfo(fieldTitle: "CHASSIS IEP SCAC", fieldData: txtChassisIEPScac.text!.uppercased() + " - " + nextScreenMessage)) //10
             }else{
@@ -1056,7 +1056,7 @@ class AddNotifAvailRequestVC: UIViewController , UITextFieldDelegate, UITabBarDe
             retMsg = "Please select valid Container Size"
             
         }else if vu.isNotEmptyString(stringToCheck: txtChassisNum.text!) && !txtChassisNum.text!.isAlphanumeric{
-            retMsg = "Chassis Number should contains alphanumeric only."
+            retMsg = "Chassis ID should contains alphanumeric only."
             
         }else if vu.isNotEmptyString(stringToCheck: txtChassisNum.text!) && vu.isEmptyString(stringToCheck: txtChassisType.text!){
             retMsg = "Please select valid Chassis Type"
@@ -1247,7 +1247,7 @@ class AddNotifAvailRequestVC: UIViewController , UITextFieldDelegate, UITabBarDe
     }
     
     
-    //Find GIER IEP from the chassis Number provided by User
+    //Find GIER IEP from the chassis ID provided by User
     func setIEPSCACBasedOnChassisNum() {
         //make a web service call to fetch boes location based on user.
         if !au.isInternetAvailable() {

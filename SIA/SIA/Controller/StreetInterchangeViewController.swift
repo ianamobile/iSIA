@@ -805,7 +805,7 @@ class StreetInterchangeViewController: UIViewController , UITextFieldDelegate, U
                 
                 if !sender.text!.isAlphanumeric{
                     
-                    au.showAlert(target: self, alertTitle: self.alertTitle, message: "Chassis Number should contains alphanumeric only.",[UIAlertAction(title: "OK", style: .default, handler: nil)], completion: nil)
+                    au.showAlert(target: self, alertTitle: self.alertTitle, message: "Chassis ID should contains alphanumeric only.",[UIAlertAction(title: "OK", style: .default, handler: nil)], completion: nil)
                     sender.text = ""
                 }else if sender.text != "ZZZZ999999"{
                     
@@ -1114,7 +1114,7 @@ class StreetInterchangeViewController: UIViewController , UITextFieldDelegate, U
         else if segue.identifier == "verifyDetailsSegue"{
             
             var fieldDataArr = [FieldInfo]()
-            // in case of blank chassis number, system will populate ZZZZ999999 to identify MC Provided Chassis.
+            // in case of blank chassis id, system will populate ZZZZ999999 to identify MC Provided Chassis.
             if vu.isEmptyString(stringToCheck: txtChassisNum.text!){
                 txtChassisNum.text = "ZZZZ999999"
                 txtChassisIEPScac.text = ""
@@ -1137,7 +1137,7 @@ class StreetInterchangeViewController: UIViewController , UITextFieldDelegate, U
             fieldDataArr.append(FieldInfo(fieldTitle: "IMPORT B/L", fieldData: txtImportBookingNum.text!.uppercased()))  //10
             fieldDataArr.append(FieldInfo(fieldTitle: "EXPORT BOOKING #", fieldData: txtExportBookingNum.text!.uppercased()))  //11
             fieldDataArr.append(FieldInfo(fieldTitle: "CONTAINER #", fieldData: txtContNum.text!.uppercased())) //12
-            fieldDataArr.append(FieldInfo(fieldTitle: "CHASSIS #", fieldData: txtChassisNum.text!.uppercased())) //13
+            fieldDataArr.append(FieldInfo(fieldTitle: "CHASSIS ID", fieldData: txtChassisNum.text!.uppercased())) //13
             
             if vu.isNotEmptyString(stringToCheck: txtChassisIEPScac.text!) && vu.isNotEmptyString(stringToCheck: nextScreenMessage){
                 fieldDataArr.append(FieldInfo(fieldTitle: "CHASSIS IEP SCAC", fieldData: txtChassisIEPScac.text!.uppercased() + " - " + nextScreenMessage)) //14
@@ -1241,7 +1241,7 @@ class StreetInterchangeViewController: UIViewController , UITextFieldDelegate, U
             retMsg = "Container Number should contains alphanumeric only."
             
         }else if vu.isNotEmptyString(stringToCheck: txtChassisNum.text!) && !txtChassisNum.text!.isAlphanumeric{
-            retMsg = "Chassis Number should contains alphanumeric only."
+            retMsg = "Chassis ID should contains alphanumeric only."
             
         }else if vu.isNotEmptyString(stringToCheck: txtChassisNum.text!) && txtChassisNum.text! != "ZZZZ999999" && vu.isEmptyString(stringToCheck: txtChassisType.text!){
             retMsg = "Please select valid Chassis Type"
@@ -1435,7 +1435,7 @@ class StreetInterchangeViewController: UIViewController , UITextFieldDelegate, U
         
     }
     
-    //Find GIER IEP from the chassis Number provided by User
+    //Find GIER IEP from the chassis ID provided by User
     func setIEPSCACBasedOnChassisNum() {
         //make a web service call to fetch boes location based on user.
         if !au.isInternetAvailable() {

@@ -445,7 +445,7 @@ UITableViewDelegate, UIViewControllerTransitioningDelegate, UITextFieldDelegate{
                                     self.fieldDataArr.append(FieldInfo(fieldTitle: "IMPORT B/L", fieldData: self.res.interchangeRequests.importBookingNum  ?? ""))  //10
                                     self.fieldDataArr.append(FieldInfo(fieldTitle: "EXPORT BOOKING #", fieldData: self.res.interchangeRequests.bookingNum!))  //11
                                     self.fieldDataArr.append(FieldInfo(fieldTitle: "CONTAINER #", fieldData: self.res.interchangeRequests.contNum!)) //12
-                                    self.fieldDataArr.append(FieldInfo(fieldTitle: "CHASSIS #", fieldData: self.res.interchangeRequests.chassisNum  ?? "")) //13
+                                    self.fieldDataArr.append(FieldInfo(fieldTitle: "CHASSIS ID", fieldData: self.res.interchangeRequests.chassisNum  ?? "")) //13
                                     
                                    
                                     self.fieldDataArr.append(FieldInfo(fieldTitle: "CHASSIS IEP SCAC", fieldData: self.res.interchangeRequests.iepScac ?? "")) //14

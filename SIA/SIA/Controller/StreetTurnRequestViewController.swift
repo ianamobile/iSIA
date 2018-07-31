@@ -460,7 +460,7 @@ class StreetTurnRequestViewController: UIViewController,  UITextFieldDelegate, U
                 
                 if !sender.text!.isAlphanumeric{
                     
-                     au.showAlert(target: self, alertTitle: self.alertTitle, message: "Chassis Number should contains alphanumeric only.",[UIAlertAction(title: "OK", style: .default, handler: nil)], completion: nil)
+                     au.showAlert(target: self, alertTitle: self.alertTitle, message: "Chassis ID should contains alphanumeric only.",[UIAlertAction(title: "OK", style: .default, handler: nil)], completion: nil)
                      sender.text = ""
                 }else if sender.text != "ZZZZ999999"{
                 
@@ -528,7 +528,7 @@ class StreetTurnRequestViewController: UIViewController,  UITextFieldDelegate, U
         
             var fieldDataArr = [FieldInfo]()
         
-            // in case of blank chassis number, system will populate ZZZZ999999 to identify MC Provided Chassis.
+            // in case of blank chassis id, system will populate ZZZZ999999 to identify MC Provided Chassis.
             if vu.isEmptyString(stringToCheck: txtChassisNum.text!){
                 txtChassisNum.text = "ZZZZ999999"
                 txtChassisIEPScac.text = ""
@@ -544,7 +544,7 @@ class StreetTurnRequestViewController: UIViewController,  UITextFieldDelegate, U
             fieldDataArr.append(FieldInfo(fieldTitle: "IMPORT B/L", fieldData: txtImportBookingNum.text!.uppercased()))  //5
             fieldDataArr.append(FieldInfo(fieldTitle: "EXPORT BOOKING #", fieldData: txtExportBookingNum.text!.uppercased()))  //6
             fieldDataArr.append(FieldInfo(fieldTitle: "CONTAINER #", fieldData: txtContNum.text!.uppercased())) //7
-            fieldDataArr.append(FieldInfo(fieldTitle: "CHASSIS #", fieldData: txtChassisNum.text!.uppercased())) //8
+            fieldDataArr.append(FieldInfo(fieldTitle: "CHASSIS ID", fieldData: txtChassisNum.text!.uppercased())) //8
         
             if vu.isNotEmptyString(stringToCheck: txtChassisIEPScac.text!) && vu.isNotEmptyString(stringToCheck: nextScreenMessage) && nextScreenMessage.count > 0{
                 fieldDataArr.append(FieldInfo(fieldTitle: "CHASSIS IEP SCAC", fieldData: txtChassisIEPScac.text!.uppercased() + " - " + nextScreenMessage)) //9
@@ -697,7 +697,7 @@ class StreetTurnRequestViewController: UIViewController,  UITextFieldDelegate, U
             retMsg = "Import Booking Number should contains alphanumeric only."
             
         }else if vu.isNotEmptyString(stringToCheck: txtChassisNum.text!) && !txtChassisNum.text!.isAlphanumeric{
-            retMsg = "Chassis Number should contains alphanumeric only."
+            retMsg = "Chassis ID should contains alphanumeric only."
             
         }else if vu.isEmptyString(stringToCheck: txtZipCode.text!){
             retMsg = "Zip Code should not be blank."
